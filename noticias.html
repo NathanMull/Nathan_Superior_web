@@ -1,0 +1,1138 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nathan Superior Web - Notícias</title>
+
+    <style>
+        /* Adicionando zoom de 110% para todo o documento */
+        body {
+            zoom: 110%;
+            -moz-transform: scale(1.1);
+            -moz-transform-origin: 0 0;
+        }
+        
+        @media all and (-webkit-min-device-pixel-ratio:0) {
+            body {
+                zoom: 110%;
+            }
+        }
+    </style>
+
+    <style>
+        /* === VARIÁVEIS DE COR === */
+        :root {
+            --verde: #27ae60;
+            --azul: #3498db;
+            --vermelho: #e74c3c;
+            --amarelo: #f1c40f;
+            --texto: #f0f0f0;
+            --fundo: #000000;
+            --card: #0a0a0a;
+            --borda: #222;
+            --neon-ciano: #0ff;
+            --neon-azul: #00f;
+            --neon-marinho: #0077be;
+        }
+
+        .dark-mode {
+            --verde: #1e8449;
+            --azul: #2980b9;
+            --vermelho: #ff6b6b;
+            --amarelo: #f39c12;
+            --texto: #f0f0f0;
+            --fundo: #000000;
+            --card: #0a0a0a;
+            --borda: #222;
+            --neon-ciano: #0ff;
+            --neon-azul: #00f;
+            --neon-marinho: #0077be;
+        }
+
+        /* === ESTILOS GERAIS === */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            transition: all 0.3s;
+        }
+
+        body {
+            background: var(--fundo);
+            color: var(--texto);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* === NAVBAR === */
+        .navbar {
+            background: rgba(10, 10, 10, 0.9);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 30px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 2px solid var(--neon-ciano);
+            box-shadow: 0 0 10px var(--neon-ciano), 0 0 20px var(--neon-azul);
+        }
+
+        .logo {
+            color: white;
+            font-weight: bold;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-shadow: 0 0 5px var(--neon-ciano), 0 0 10px var(--neon-ciano);
+        }
+
+        .logo small {
+            font-size: 0.8rem;
+            opacity: 0.9;
+            font-weight: normal;
+        }
+
+        #theme-toggle {
+            color: var(--neon-ciano);
+            cursor: pointer;
+            font-size: 1.3rem;
+            transition: all 0.3s;
+            text-shadow: 0 0 5px var(--neon-ciano);
+        }
+
+        #theme-toggle:hover {
+            transform: scale(1.2);
+            text-shadow: 0 0 10px var(--neon-ciano), 0 0 20px var(--neon-ciano);
+        }
+
+        .search-bar {
+            flex-grow: 1;
+            max-width: 500px;
+            margin: 0 20px;
+        }
+
+        .search-bar input {
+            width: 100%;
+            padding: 8px 15px;
+            border: 1px solid var(--neon-ciano);
+            border-radius: 20px;
+            font-size: 0.9rem;
+            background: rgba(0, 0, 0, 0.7);
+            color: var(--texto);
+            box-shadow: 0 0 5px var(--neon-ciano);
+        }
+
+        .search-bar input:focus {
+            outline: none;
+            box-shadow: 0 0 10px var(--neon-ciano), 0 0 20px var(--neon-azul);
+        }
+
+        .nav-icons {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-icon {
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: transform 0.2s;
+            text-shadow: 0 0 5px var(--neon-ciano);
+        }
+
+        .nav-icon:hover {
+            transform: translateY(-2px);
+            text-shadow: 0 0 10px var(--neon-ciano), 0 0 20px var(--neon-ciano);
+        }
+
+        .user-info {
+            display: none;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .user-avatar {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background-color: var(--neon-ciano);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: black;
+            font-weight: bold;
+            box-shadow: 0 0 5px var(--neon-ciano);
+        }
+
+        .logout-btn {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            font-size: 0.9rem;
+            text-shadow: 0 0 5px var(--neon-ciano);
+        }
+
+        body.logged-in .user-info {
+            display: flex;
+        }
+
+        body.logged-in .login-btn-nav {
+            display: none;
+        }
+
+        /* === HERO SECTION === */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
+                        url('https://i.ibb.co/MvL13Zk/Novo-Projeto-16.png') no-repeat center center/cover;
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            padding: 0 20px;
+        }
+
+        .hero-content h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: var(--neon-ciano);
+            text-shadow: 0 0 5px var(--neon-ciano);
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            max-width: 800px;
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--neon-marinho);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s;
+            box-shadow: 0 0 5px var(--neon-marinho);
+        }
+
+        .btn:hover {
+            background: #0066aa;
+            transform: translateY(-3px);
+            box-shadow: 0 0 10px var(--neon-marinho), 0 0 20px var(--neon-azul);
+        }
+
+        /* === CONTEÚDO PRINCIPAL === */
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 30px;
+        }
+
+        /* === SEÇÃO DE NOTÍCIAS === */
+        .noticias-section {
+            background: var(--card);
+            border-radius: 10px;
+            border: 1px solid var(--neon-ciano);
+            box-shadow: 0 0 10px var(--neon-ciano);
+            overflow: hidden;
+        }
+
+        .noticias-title {
+            background: var(--neon-ciano);
+            color: black;
+            padding: 15px;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            font-weight: bold;
+            text-shadow: 0 0 3px var(--neon-azul);
+        }
+
+        .noticias-title i {
+            margin-right: 10px;
+        }
+
+        .noticias-content {
+            padding: 20px;
+        }
+
+        .news-card {
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--borda);
+        }
+
+        .news-card:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .news-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+            color: var(--neon-ciano);
+            text-shadow: 0 0 3px var(--neon-ciano);
+        }
+
+        .news-meta {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            color: var(--texto);
+            opacity: 0.8;
+            font-size: 0.9rem;
+        }
+
+        .news-meta span {
+            margin-right: 15px;
+            display: flex;
+            align-items: center;
+        }
+
+        .news-meta i {
+            margin-right: 5px;
+            color: var(--neon-ciano);
+        }
+
+        .news-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            border: 2px solid var(--neon-ciano);
+            box-shadow: 0 0 8px var(--neon-ciano);
+        }
+
+        .news-card p {
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        .read-more {
+            color: var(--neon-ciano);
+            text-decoration: none;
+            font-weight: bold;
+            display: inline-flex;
+            align-items: center;
+            text-shadow: 0 0 3px var(--neon-ciano);
+        }
+
+        .read-more i {
+            margin-left: 5px;
+            transition: transform 0.3s;
+        }
+
+        .read-more:hover i {
+            transform: translateX(5px);
+            text-shadow: 0 0 8px var(--neon-ciano);
+        }
+
+        /* === SIDEBAR === */
+        .sidebar-widget {
+            background: var(--card);
+            border-radius: 10px;
+            border: 1px solid var(--neon-ciano);
+            box-shadow: 0 0 10px var(--neon-ciano);
+            margin-bottom: 30px;
+            overflow: hidden;
+        }
+
+        .widget-title {
+            background: var(--neon-ciano);
+            color: black;
+            padding: 15px;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            font-weight: bold;
+            text-shadow: 0 0 3px var(--neon-azul);
+        }
+
+        .widget-title i {
+            margin-right: 10px;
+        }
+
+        .widget-content {
+            padding: 20px;
+        }
+
+        .popular-news {
+            list-style: none;
+        }
+
+        .popular-news li {
+            padding: 10px 0;
+            border-bottom: 1px solid var(--borda);
+        }
+
+        .popular-news li:last-child {
+            border-bottom: none;
+        }
+
+        .popular-news a {
+            color: var(--texto);
+            text-decoration: none;
+            transition: all 0.3s;
+            display: block;
+        }
+
+        .popular-news a:hover {
+            color: var(--neon-ciano);
+            text-shadow: 0 0 5px var(--neon-ciano);
+        }
+
+        .categories {
+            list-style: none;
+        }
+
+        .categories li {
+            margin-bottom: 10px;
+        }
+
+        .categories a {
+            display: block;
+            padding: 8px;
+            color: var(--texto);
+            text-decoration: none;
+            border-radius: 5px;
+            transition: all 0.3s;
+        }
+
+        .categories a:hover {
+            background: rgba(0, 255, 255, 0.1);
+            padding-left: 15px;
+            color: var(--neon-ciano);
+            text-shadow: 0 0 5px var(--neon-ciano);
+        }
+
+        .categories a i {
+            margin-right: 10px;
+            color: var(--neon-ciano);
+        }
+
+        .newsletter-form input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid var(--neon-ciano);
+            border-radius: 5px;
+            background: rgba(0, 0, 0, 0.7);
+            color: var(--texto);
+            box-shadow: 0 0 5px var(--neon-ciano);
+        }
+
+        .newsletter-form input:focus {
+            outline: none;
+            box-shadow: 0 0 10px var(--neon-ciano);
+        }
+
+        .newsletter-form button {
+            width: 100%;
+            padding: 10px;
+            background: var(--neon-marinho);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 0 5px var(--neon-marinho);
+        }
+
+        .newsletter-form button:hover {
+            background: #0066aa;
+            box-shadow: 0 0 10px var(--neon-marinho), 0 0 20px var(--neon-azul);
+        }
+
+        /* === RODAPÉ === */
+        footer {
+            background: var(--card);
+            color: var(--neon-ciano);
+            padding: 40px 0 20px;
+            margin-top: 50px;
+            border-top: 1px solid var(--neon-ciano);
+            box-shadow: inset 0 1px 0 var(--neon-ciano);
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .footer-widget h3 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+            text-shadow: 0 0 3px var(--neon-ciano);
+        }
+
+        .footer-widget h3::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--neon-ciano);
+            box-shadow: 0 0 5px var(--neon-ciano);
+        }
+
+        .footer-widget p {
+            margin-bottom: 15px;
+            opacity: 0.9;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(0, 255, 255, 0.1);
+            border: 1px solid var(--neon-ciano);
+            border-radius: 50%;
+            color: var(--neon-ciano);
+            text-decoration: none;
+            transition: all 0.3s;
+            box-shadow: 0 0 5px var(--neon-ciano);
+        }
+
+        .social-links a:hover {
+            background: var(--neon-ciano);
+            color: black;
+            transform: translateY(-3px);
+            box-shadow: 0 0 10px var(--neon-ciano), 0 0 20px var(--neon-azul);
+        }
+
+        .quick-links {
+            list-style: none;
+        }
+
+        .quick-links li {
+            margin-bottom: 10px;
+        }
+
+        .quick-links a {
+            color: var(--neon-ciano);
+            opacity: 0.9;
+            text-decoration: none;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            text-shadow: 0 0 3px var(--neon-ciano);
+        }
+
+        .quick-links a:hover {
+            opacity: 1;
+            text-shadow: 0 0 8px var(--neon-ciano);
+        }
+
+        .quick-links a i {
+            margin-right: 10px;
+            color: var(--neon-ciano);
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(0, 255, 255, 0.2);
+            opacity: 0.8;
+            font-size: 0.9rem;
+            color: var(--neon-ciano);
+            text-shadow: 0 0 3px var(--neon-ciano);
+        }
+
+        /* === MODAL DE LOGIN === */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.8);
+        }
+
+        .modal-content {
+            background-color: var(--card);
+            margin: 10% auto;
+            padding: 30px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 400px;
+            box-shadow: 0 0 15px var(--neon-ciano), 0 0 30px var(--neon-azul);
+            position: relative;
+            border: 1px solid var(--neon-ciano);
+        }
+
+        .close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--vermelho);
+            text-shadow: 0 0 5px var(--vermelho);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--neon-ciano);
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--neon-ciano);
+            border-radius: 5px;
+            font-size: 1rem;
+            background: rgba(0, 0, 0, 0.7);
+            color: var(--texto);
+            box-shadow: 0 0 5px var(--neon-ciano);
+        }
+
+        .form-group input:focus {
+            outline: none;
+            box-shadow: 0 0 10px var(--neon-ciano);
+        }
+
+        .login-btn {
+            background: var(--neon-marinho);
+            color: white;
+            border: none;
+            padding: 12px;
+            width: 100%;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            margin-top: 10px;
+            box-shadow: 0 0 5px var(--neon-marinho);
+            transition: all 0.3s;
+        }
+
+        .login-btn:hover {
+            background: #0066aa;
+            box-shadow: 0 0 10px var(--neon-marinho), 0 0 20px var(--neon-azul);
+        }
+
+        .switch-form {
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        .switch-btn {
+            background: none;
+            border: none;
+            color: var(--neon-ciano);
+            cursor: pointer;
+            text-decoration: underline;
+            text-shadow: 0 0 5px var(--neon-ciano);
+        }
+
+        .status-message {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        .success {
+            background-color: rgba(39, 174, 96, 0.2);
+            color: var(--verde);
+            border: 1px solid var(--verde);
+            box-shadow: 0 0 5px var(--verde);
+        }
+
+        .error {
+            background-color: rgba(231, 76, 60, 0.2);
+            color: var(--vermelho);
+            border: 1px solid var(--vermelho);
+            box-shadow: 0 0 5px var(--vermelho);
+        }
+
+        /* === RESPONSIVO === */
+        @media (max-width: 992px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .navbar {
+                flex-wrap: wrap;
+                padding: 15px;
+            }
+            
+            .search-bar {
+                order: 3;
+                width: 100%;
+                margin: 15px 0 0 0;
+            }
+            
+            .hero {
+                height: 250px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .hero-content h1 {
+                font-size: 1.8rem;
+            }
+            
+            .news-card img {
+                height: 150px;
+            }
+        }
+    </style>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <!-- Script para evitar flash de tema -->
+    <script>
+        (function () {
+            const isDark = localStorage.getItem('darkMode') === 'true';
+            if (isDark) {
+                document.documentElement.classList.add('dark-mode');
+            }
+            
+            const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+            if (isLoggedIn) {
+                document.body.classList.add('logged-in');
+            }
+        })();
+    </script>
+</head>
+
+<body>
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="logo">
+            <i id="theme-toggle" class="fas fa-star" title="Mudar tema"></i>
+            <span>Nathan Superior Web <small>- Notícias</small></span>
+        </div>
+
+        <div class="search-bar">
+            <input type="text" placeholder="Pesquisar notícias...">
+        </div>
+
+        <div class="nav-icons">
+            <a href="index.html" class="nav-icon" title="Início">
+                <i class="fas fa-home"></i>
+            </a>
+            <a href="favoritos.html" class="nav-icon" title="Favoritos">
+                <i class="fas fa-heart"></i>
+            </a>
+            <div class="user-info">
+                <div class="user-avatar" id="userAvatar"></div>
+                <button class="logout-btn" id="logoutBtn">Sair</button>
+            </div>
+            <button class="nav-icon login-btn-nav" id="loginBtnNav" title="Login">
+                <i class="fas fa-user"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Modal de Login -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            
+            <div id="loginForm">
+                <h2 style="color: var(--neon-ciano); margin-bottom: 20px; text-align: center; text-shadow: 0 0 5px var(--neon-ciano);">Entrar</h2>
+                
+                <form id="login">
+                    <div class="form-group">
+                        <label for="loginUsername"><i class="fas fa-user"></i> Nome de Usuário</label>
+                        <input type="text" id="loginUsername" placeholder="Seu nome de usuário" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="loginPassword"><i class="fas fa-lock"></i> Senha</label>
+                        <input type="password" id="loginPassword" placeholder="Sua senha" required>
+                    </div>
+                    
+                    <button type="submit" class="login-btn"><i class="fas fa-sign-in-alt"></i> Entrar</button>
+                    
+                    <div id="loginMessage" class="status-message" style="display: none;"></div>
+                </form>
+                
+                <div class="switch-form">
+                    <span>Não tem uma conta? </span>
+                    <button class="switch-btn" id="showRegister">Registre-se</button>
+                </div>
+            </div>
+            
+            <div id="registerForm" style="display: none;">
+                <h2 style="color: var(--neon-ciano); margin-bottom: 20px; text-align: center; text-shadow: 0 0 5px var(--neon-ciano);">Criar Conta</h2>
+                
+                <form id="register">
+                    <div class="form-group">
+                        <label for="registerUsername"><i class="fas fa-user-edit"></i> Nome de Usuário</label>
+                        <input type="text" id="registerUsername" placeholder="Escolha um nome de usuário" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="registerPassword"><i class="fas fa-key"></i> Senha</label>
+                        <input type="password" id="registerPassword" placeholder="Crie uma senha" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="confirmPassword"><i class="fas fa-check-circle"></i> Confirmar Senha</label>
+                        <input type="password" id="confirmPassword" placeholder="Digite a senha novamente" required>
+                    </div>
+                    
+                    <button type="submit" class="login-btn"><i class="fas fa-user-plus"></i> Registrar</button>
+                    
+                    <div id="registerMessage" class="status-message" style="display: none;"></div>
+                </form>
+                
+                <div class="switch-form">
+                    <span>Já tem uma conta? </span>
+                    <button class="switch-btn" id="showLogin">Faça login</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- HERO SECTION -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Últimas Notícias</h1>
+            <p>Fique por dentro das novidades e atualizações do mundo digital</p>
+            <a href="#noticias" class="btn">Ver Notícias</a>
+        </div>
+    </section>
+
+    <!-- CONTEÚDO PRINCIPAL -->
+    <main class="container">
+        <!-- SEÇÃO DE NOTÍCIAS -->
+        <section class="noticias-section" id="noticias">
+            <div class="noticias-title">
+                <i class="fas fa-newspaper"></i>
+                <span>ÚLTIMAS NOTÍCIAS</span>
+            </div>
+            <div class="noticias-content">
+                <article class="news-card">
+                    <div class="news-meta">
+                        <span><i class="far fa-calendar-alt"></i> 15/06/2023</span>
+                        <span><i class="far fa-user"></i> Nathan Superior</span>
+                    </div>
+                    <h3>Novidades no canal Nathan Superior Web</h3>
+                    <img src="https://i.ibb.co/MvL13Zk/Novo-Projeto-16.png" alt="Novidades no canal">
+                    <p>Confira as últimas atualizações e novidades que preparamos para você em nosso canal. Novos vídeos, séries exclusivas e muito mais!</p>
+                    <a href="#" class="read-more">Leia mais <i class="fas fa-arrow-right"></i></a>
+                </article>
+                
+                <article class="news-card">
+                    <div class="news-meta">
+                        <span><i class="far fa-calendar-alt"></i> 10/06/2023</span>
+                        <span><i class="far fa-user"></i> Nathan Superior</span>
+                    </div>
+                    <h3>Próximos lançamentos de conteúdo</h3>
+                    <img src="https://i.ibb.co/MvL13Zk/Novo-Projeto-16.png" alt="Próximos lançamentos">
+                    <p>Estamos preparando conteúdos incríveis para as próximas semanas. Fique ligado para não perder nenhuma novidade!</p>
+                    <a href="#" class="read-more">Leia mais <i class="fas fa-arrow-right"></i></a>
+                </article>
+                
+                <article class="news-card">
+                    <div class="news-meta">
+                        <span><i class="far fa-calendar-alt"></i> 05/06/2023</span>
+                        <span><i class="far fa-user"></i> Nathan Superior</span>
+                    </div>
+                    <h3>Atualizações no site oficial</h3>
+                    <img src="https://i.ibb.co/MvL13Zk/Novo-Projeto-16.png" alt="Atualizações no site">
+                    <p>Implementamos novas funcionalidades no site para melhorar sua experiência. Confira todas as melhorias!</p>
+                    <a href="#" class="read-more">Leia mais <i class="fas fa-arrow-right"></i></a>
+                </article>
+            </div>
+        </section>
+        
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+            <div class="sidebar-widget">
+                <div class="widget-title">
+                    <i class="fas fa-fire"></i>
+                    <span>NOTÍCIAS POPULARES</span>
+                </div>
+                <div class="widget-content">
+                    <ul class="popular-news">
+                        <li><a href="#">Lançamento da nova série no canal</a></li>
+                        <li><a href="#">Entrevista exclusiva com Nathan</a></li>
+                        <li><a href="#">Making of dos últimos vídeos</a></li>
+                        <li><a href="#">Por trás das câmeras</a></li>
+                        <li><a href="#">Novos projetos anunciados</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="sidebar-widget">
+                <div class="widget-title">
+                    <i class="fas fa-folder"></i>
+                    <span>CATEGORIAS</span>
+                </div>
+                <div class="widget-content">
+                    <ul class="categories">
+                        <li><a href="#"><i class="fas fa-video"></i> Vídeos</a></li>
+                        <li><a href="#"><i class="fas fa-gamepad"></i> Jogos</a></li>
+                        <li><a href="#"><i class="fas fa-code"></i> Programação</a></li>
+                        <li><a href="#"><i class="fas fa-microphone"></i> Entrevistas</a></li>
+                        <li><a href="#"><i class="fas fa-calendar"></i> Eventos</a></li>
+                        <li><a href="#"><i class="fas fa-users"></i> Comunidade</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="sidebar-widget">
+                <div class="widget-title">
+                    <i class="fas fa-envelope"></i>
+                    <span>NEWSLETTER</span>
+                </div>
+                <div class="widget-content">
+                    <p>Assine para receber as últimas notícias por email</p>
+                    <form class="newsletter-form">
+                        <input type="text" placeholder="Seu nome">
+                        <input type="email" placeholder="Seu email">
+                        <button type="submit">Assinar</button>
+                    </form>
+                </div>
+            </div>
+        </aside>
+    </main>
+
+    <!-- RODAPÉ -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-widget">
+                <h3>Sobre Nós</h3>
+                <p>Nathan Superior Web é o portal oficial de notícias do canal, trazendo as últimas novidades, atualizações e conteúdos exclusivos.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-widget">
+                <h3>Links Rápidos</h3>
+                <ul class="quick-links">
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Início</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Notícias</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Vídeos</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Sobre</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Contato</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-widget">
+                <h3>Contato</h3>
+                <p><i class="fas fa-envelope"></i> contato@nathansuperiorweb.com</p>
+                <p><i class="fas fa-clock"></i> Seg-Sex: 18:00 - 22:00</p>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            <p>&copy; 2023 Nathan Superior Web. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT -->
+    <script>
+        // Elementos do DOM
+        const themeToggle = document.getElementById('theme-toggle');
+        const loginModal = document.getElementById('loginModal');
+        const loginBtnNav = document.getElementById('loginBtnNav');
+        const closeBtn = document.querySelector('.close');
+        const showRegister = document.getElementById('showRegister');
+        const showLogin = document.getElementById('showLogin');
+        const loginForm = document.getElementById('loginForm');
+        const registerForm = document.getElementById('registerForm');
+        const loginSubmit = document.getElementById('login');
+        const registerSubmit = document.getElementById('register');
+        const loginMessage = document.getElementById('loginMessage');
+        const registerMessage = document.getElementById('registerMessage');
+        const logoutBtn = document.getElementById('logoutBtn');
+        const userAvatar = document.getElementById('userAvatar');
+
+        // Verifica se o usuário está logado ao carregar a página
+        function checkLoginStatus() {
+            const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+            const username = localStorage.getItem('currentUser');
+            
+            if (isLoggedIn && username) {
+                document.body.classList.add('logged-in');
+                userAvatar.textContent = username.charAt(0).toUpperCase();
+            }
+        }
+
+        // Aplica o tema salvo no localStorage
+        function applyTheme() {
+            const isDark = localStorage.getItem('darkMode') === 'true';
+            document.documentElement.classList.toggle('dark-mode', isDark);
+            themeToggle.style.color = isDark ? '#f39c12' : '#f1c40f';
+        }
+        
+        // Evento de clique no botão de tema
+        themeToggle.addEventListener('click', () => {
+            const isDark = !document.documentElement.classList.contains('dark-mode');
+            localStorage.setItem('darkMode', isDark);
+            
+            // Efeito visual ao clicar
+            themeToggle.style.transform = 'rotate(360deg) scale(1.2)';
+            setTimeout(() => {
+                themeToggle.style.transform = '';
+            }, 300);
+            
+            // Aplica o tema imediatamente
+            applyTheme();
+        });
+
+        // Abrir modal de login
+        loginBtnNav.addEventListener('click', () => {
+            loginModal.style.display = 'block';
+        });
+
+        // Fechar modal de login
+        closeBtn.addEventListener('click', () => {
+            loginModal.style.display = 'none';
+        });
+
+        // Fechar modal ao clicar fora
+        window.addEventListener('click', (e) => {
+            if (e.target === loginModal) {
+                loginModal.style.display = 'none';
+            }
+        });
+
+        // Alternar entre login e registro
+        showRegister.addEventListener('click', () => {
+            loginForm.style.display = 'none';
+            registerForm.style.display = 'block';
+        });
+
+        showLogin.addEventListener('click', () => {
+            registerForm.style.display = 'none';
+            loginForm.style.display = 'block';
+        });
+
+        // Sistema de registro
+        registerSubmit.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const username = document.getElementById('registerUsername').value;
+            const password = document.getElementById('registerPassword').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            
+            // Validações
+            if (password !== confirmPassword) {
+                showMessage(registerMessage, "As senhas não coincidem!", 'error');
+                return;
+            }
+            
+            if (password.length < 4) {
+                showMessage(registerMessage, "A senha deve ter pelo menos 4 caracteres!", 'error');
+                return;
+            }
+            
+            // Salva no localStorage
+            localStorage.setItem('nathan_username', username);
+            localStorage.setItem('nathan_password', password);
+            
+            // Mensagem de sucesso
+            showMessage(registerMessage, "Conta criada com sucesso! Faça login.", 'success');
+            
+            // Limpa o formulário
+            this.reset();
+            
+            // Mostra o formulário de login
+            setTimeout(() => {
+                registerForm.style.display = 'none';
+                loginForm.style.display = 'block';
+                registerMessage.style.display = 'none';
+            }, 2000);
+        });
+
+        // Sistema de login
+        loginSubmit.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const username = document.getElementById('loginUsername').value;
+            const password = document.getElementById('loginPassword').value;
+            
+            // Recupera credenciais salvas
+            const savedUsername = localStorage.getItem('nathan_username');
+            const savedPassword = localStorage.getItem('nathan_password');
+            
+            // Verifica credenciais
+            if (username === savedUsername && password === savedPassword) {
+                showMessage(loginMessage, "Login bem-sucedido! Redirecionando...", 'success');
+                
+                // Salva o estado de login
+                localStorage.setItem('isLoggedIn', 'true');
+                localStorage.setItem('currentUser', username);
+                
+                // Atualiza a interface
+                setTimeout(() => {
+                    loginModal.style.display = 'none';
+                    checkLoginStatus();
+                }, 1000);
+            } else {
+                showMessage(loginMessage, "Usuário ou senha incorretos!", 'error');
+            }
+        });
+
+        // Logout
+        logoutBtn.addEventListener('click', () => {
+            localStorage.setItem('isLoggedIn', 'false');
+            localStorage.removeItem('currentUser');
+            document.body.classList.remove('logged-in');
+        });
+
+        // Função para mostrar mensagens
+        function showMessage(element, text, type) {
+            element.textContent = text;
+            element.style.display = 'block';
+            element.className = `status-message ${type}`;
+        }
+
+        // Inicializa a página
+        applyTheme();
+        checkLoginStatus();
+    </script>
+</body>
+</html>

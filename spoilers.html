@@ -1,0 +1,1118 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spoilers - Nathan Superior Web</title>
+
+    <style>
+        /* Adicionando zoom de 110% para todo o documento */
+        body {
+            zoom: 110%;
+            -moz-transform: scale(1.1);
+            -moz-transform-origin: 0 0;
+        }
+        
+        @media all and (-webkit-min-device-pixel-ratio:0) {
+            body {
+                zoom: 110%;
+            }
+        }
+    </style>
+
+    <style>
+        /* === VARIÁVEIS DE COR === */
+        :root {
+            --verde: #27ae60;
+            --azul: #3498db;
+            --vermelho: #e74c3c;
+            --amarelo: #f1c40f;
+            --texto: #f0f0f0;
+            --fundo: #000000;
+            --card: #0a0a0a;
+            --borda: #222;
+            --neon-ciano: #0ff;
+            --neon-azul: #00f;
+            --neon-marinho: #0077be;
+        }
+
+        .dark-mode {
+            --verde: #1e8449;
+            --azul: #2980b9;
+            --vermelho: #ff6b6b;
+            --amarelo: #f39c12;
+            --texto: #f0f0f0;
+            --fundo: #000000;
+            --card: #0a0a0a;
+            --borda: #222;
+            --neon-ciano: #0ff;
+            --neon-azul: #00f;
+            --neon-marinho: #0077be;
+        }
+
+        /* === ESTILOS GERAIS === */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            transition: all 0.3s;
+        }
+
+        body {
+            background: var(--fundo);
+            color: var(--texto);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* === NAVBAR === */
+        .navbar {
+            background: rgba(10, 10, 10, 0.9);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 30px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 2px solid var(--neon-ciano);
+            box-shadow: 0 0 10px var(--neon-ciano), 0 0 20px var(--neon-azul);
+        }
+
+        .logo {
+            color: white;
+            font-weight: bold;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-shadow: 0 0 5px var(--neon-ciano), 0 0 10px var(--neon-ciano);
+        }
+
+        .logo small {
+            font-size: 0.8rem;
+            opacity: 0.9;
+            font-weight: normal;
+        }
+
+        #theme-toggle {
+            color: var(--neon-ciano);
+            cursor: pointer;
+            font-size: 1.3rem;
+            transition: all 0.3s;
+            text-shadow: 0 0 5px var(--neon-ciano);
+        }
+
+        #theme-toggle:hover {
+            transform: scale(1.2);
+            text-shadow: 0 0 10px var(--neon-ciano), 0 0 20px var(--neon-ciano);
+        }
+
+        .search-bar {
+            flex-grow: 1;
+            max-width: 500px;
+            margin: 0 20px;
+        }
+
+        .search-bar input {
+            width: 100%;
+            padding: 8px 15px;
+            border: 1px solid var(--neon-ciano);
+            border-radius: 20px;
+            font-size: 0.9rem;
+            background: rgba(0, 0, 0, 0.7);
+            color: var(--texto);
+            box-shadow: 0 0 5px var(--neon-ciano);
+        }
+
+        .search-bar input:focus {
+            outline: none;
+            box-shadow: 0 0 10px var(--neon-ciano), 0 0 20px var(--neon-azul);
+        }
+
+        .nav-icons {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-icon {
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: transform 0.2s;
+            text-shadow: 0 0 5px var(--neon-ciano);
+        }
+
+        .nav-icon:hover {
+            transform: translateY(-2px);
+            text-shadow: 0 0 10px var(--neon-ciano), 0 0 20px var(--neon-ciano);
+        }
+
+        .user-info {
+            display: none;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .user-avatar {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background-color: var(--neon-ciano);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: black;
+            font-weight: bold;
+            box-shadow: 0 0 5px var(--neon-ciano);
+        }
+
+        .logout-btn {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            font-size: 0.9rem;
+            text-shadow: 0 0 5px var(--neon-ciano);
+        }
+
+        body.logged-in .user-info {
+            display: flex;
+        }
+
+        body.logged-in .login-btn-nav {
+            display: none;
+        }
+
+        /* === CONTAINER PRINCIPAL === */
+        .container {
+            display: flex;
+            min-height: calc(100vh - 68px);
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* === SIDEBAR === */
+        .sidebar {
+            background: var(--card);
+            width: 35%;
+            padding: 30px;
+            border-right: 1px solid var(--neon-ciano);
+            box-shadow: 2px 0 10px rgba(0, 255, 255, 0.1);
+        }
+
+        .sidebar h2 {
+            color: var(--neon-ciano);
+            margin-bottom: 15px;
+            border-bottom: 2px solid var(--neon-ciano);
+            display: inline-block;
+            padding-bottom: 5px;
+            font-size: 1.4rem;
+            text-shadow: 0 0 3px var(--neon-ciano);
+        }
+
+        .sidebar p {
+            margin-bottom: 25px;
+            font-size: 1.05rem;
+        }
+
+        .destaque {
+            color: var(--vermelho);
+            font-weight: bold;
+            text-shadow: 0 0 5px var(--vermelho);
+        }
+
+        /* === CONTEÚDO PRINCIPAL === */
+        .content {
+            width: 65%;
+            padding: 30px;
+        }
+
+        .spoiler-warning {
+            background: var(--vermelho);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            border: 2px solid #ff3333;
+            box-shadow: 0 0 10px var(--vermelho);
+            font-weight: bold;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 10px var(--vermelho); }
+            50% { box-shadow: 0 0 20px var(--vermelho), 0 0 30px #ff3333; }
+            100% { box-shadow: 0 0 10px var(--vermelho); }
+        }
+
+        .spoiler-box {
+            background: var(--fundo);
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 30px;
+            border: 1px solid var(--neon-ciano);
+            box-shadow: 0 0 10px var(--neon-ciano);
+            transition: all 0.3s;
+        }
+
+        .spoiler-box:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 15px var(--neon-ciano), 0 0 25px var(--neon-azul);
+        }
+
+        .spoiler-title {
+            color: var(--neon-ciano);
+            font-size: 1.4rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-shadow: 0 0 5px var(--neon-ciano);
+        }
+
+        .spoiler-date {
+            font-size: 0.9rem;
+            color: var(--neon-ciano);
+            opacity: 0.8;
+            margin-top: 20px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-shadow: 0 0 3px var(--neon-ciano);
+        }
+
+        .spoiler-media {
+            margin: 20px 0;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 0 15px var(--neon-ciano);
+            border: 2px solid var(--neon-ciano);
+        }
+
+        .spoiler-media img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 8px;
+        }
+
+        .spoiler-media iframe {
+            width: 100%;
+            height: 400px;
+            border: none;
+            border-radius: 8px;
+        }
+
+        .media-caption {
+            font-size: 0.95rem;
+            text-align: center;
+            margin-top: 10px;
+            color: var(--neon-ciano);
+            opacity: 0.8;
+            font-style: italic;
+            text-shadow: 0 0 3px var(--neon-ciano);
+        }
+
+        .btn {
+            background: var(--neon-marinho);
+            color: white;
+            border: none;
+            padding: 15px 20px;
+            margin: 12px 0;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            text-align: left;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: all 0.3s;
+            box-shadow: 0 0 5px var(--neon-marinho);
+            text-decoration: none;
+        }
+
+        .btn:hover {
+            opacity: 0.9;
+            transform: translateX(8px);
+            box-shadow: 0 0 10px var(--neon-marinho), 0 0 20px var(--neon-azul);
+        }
+
+        /* === FOOTER === */
+        .footer {
+            text-align: center;
+            padding: 25px;
+            font-size: 0.95rem;
+            color: var(--neon-ciano);
+            background: var(--card);
+            border-top: 1px solid var(--neon-ciano);
+            box-shadow: inset 0 1px 0 var(--neon-ciano);
+            margin-top: 40px;
+        }
+
+        /* === MODAL DE LOGIN === */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.8);
+        }
+
+        .modal-content {
+            background-color: var(--card);
+            margin: 10% auto;
+            padding: 30px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 400px;
+            box-shadow: 0 0 15px var(--neon-ciano), 0 0 30px var(--neon-azul);
+            position: relative;
+            border: 1px solid var(--neon-ciano);
+        }
+
+        .close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--vermelho);
+            text-shadow: 0 0 5px var(--vermelho);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--neon-ciano);
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--neon-ciano);
+            border-radius: 5px;
+            font-size: 1rem;
+            background: rgba(0, 0, 0, 0.7);
+            color: var(--texto);
+            box-shadow: 0 0 5px var(--neon-ciano);
+        }
+
+        .form-group input:focus {
+            outline: none;
+            box-shadow: 0 0 10px var(--neon-ciano);
+        }
+
+        .login-btn {
+            background: var(--neon-marinho);
+            color: white;
+            border: none;
+            padding: 12px;
+            width: 100%;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            margin-top: 10px;
+            box-shadow: 0 0 5px var(--neon-marinho);
+            transition: all 0.3s;
+        }
+
+        .login-btn:hover {
+            background: #0066aa;
+            box-shadow: 0 0 10px var(--neon-marinho), 0 0 20px var(--neon-azul);
+        }
+
+        .switch-form {
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        .switch-btn {
+            background: none;
+            border: none;
+            color: var(--neon-ciano);
+            cursor: pointer;
+            text-decoration: underline;
+            text-shadow: 0 0 5px var(--neon-ciano);
+        }
+
+        .status-message {
+            padding: 12px;
+            margin: 12px 0;
+            border-radius: 5px;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        .success {
+            background-color: rgba(39, 174, 96, 0.2);
+            color: var(--verde);
+            border: 1px solid var(--verde);
+            box-shadow: 0 0 5px var(--verde);
+        }
+
+        .error {
+            background-color: rgba(231, 76, 60, 0.2);
+            color: var(--vermelho);
+            border: 1px solid var(--vermelho);
+            box-shadow: 0 0 5px var(--vermelho);
+        }
+
+        /* === PERFIL === */
+        .profile-section {
+            display: none;
+            padding: 25px;
+            background: var(--fundo);
+            border-radius: 10px;
+            margin-bottom: 25px;
+            border: 1px solid var(--neon-ciano);
+            box-shadow: 0 0 10px var(--neon-ciano);
+        }
+
+        body.logged-in .profile-section {
+            display: block;
+        }
+
+        .profile-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .profile-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background-color: var(--neon-ciano);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: black;
+            font-size: 2rem;
+            font-weight: bold;
+            margin-right: 20px;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            border: 3px solid var(--neon-ciano);
+            box-shadow: 0 0 10px var(--neon-ciano);
+        }
+
+        .profile-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: none;
+        }
+
+        .avatar-edit {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0,0,0,0.7);
+            color: white;
+            text-align: center;
+            padding: 5px;
+            font-size: 0.8rem;
+            display: none;
+        }
+
+        .profile-avatar:hover .avatar-edit {
+            display: block;
+        }
+
+        .profile-info h3 {
+            margin: 0;
+            color: var(--neon-ciano);
+            font-size: 1.5rem;
+            text-shadow: 0 0 3px var(--neon-ciano);
+        }
+
+        .profile-info p {
+            margin: 5px 0 0;
+            color: var(--texto);
+            opacity: 0.8;
+        }
+
+        /* === MODAL DE AVATAR === */
+        .avatar-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .avatar-modal-content {
+            background: var(--card);
+            padding: 30px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 450px;
+            text-align: center;
+            border: 1px solid var(--neon-ciano);
+            box-shadow: 0 0 15px var(--neon-ciano), 0 0 30px var(--neon-azul);
+        }
+
+        .avatar-options {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin: 25px 0;
+        }
+
+        .avatar-option {
+            width: 100%;
+            aspect-ratio: 1;
+            border-radius: 50%;
+            overflow: hidden;
+            cursor: pointer;
+            border: 3px solid transparent;
+            box-shadow: 0 0 5px rgba(0, 255, 255, 0.3);
+            transition: all 0.3s;
+        }
+
+        .avatar-option:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 10px var(--neon-ciano);
+        }
+
+        .avatar-option.selected {
+            border-color: var(--neon-ciano);
+            box-shadow: 0 0 10px var(--neon-ciano), 0 0 20px var(--neon-azul);
+        }
+
+        .avatar-option img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* === RESPONSIVO === */
+        @media (max-width: 768px) {
+            .navbar {
+                flex-wrap: wrap;
+                padding: 15px;
+            }
+            .search-bar {
+                order: 3;
+                width: 100%;
+                margin: 15px 0 0 0;
+            }
+            .container {
+                flex-direction: column;
+            }
+            .sidebar, .content {
+                width: 100%;
+            }
+            .spoiler-media iframe {
+                height: 250px;
+            }
+            .profile-header {
+                flex-direction: column;
+                text-align: center;
+            }
+            .profile-avatar {
+                margin-right: 0;
+                margin-bottom: 15px;
+            }
+        }
+    </style>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <!-- Script para evitar flash de tema -->
+    <script>
+        (function() {
+            const isDark = localStorage.getItem('darkMode') === 'true';
+            if (isDark) {
+                document.documentElement.classList.add('dark-mode');
+            }
+            
+            const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+            if (isLoggedIn) {
+                document.body.classList.add('logged-in');
+                loadUserProfile();
+            }
+        })();
+    </script>
+</head>
+
+<body>
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="logo">
+            <i id="theme-toggle" class="fas fa-star" title="Mudar tema"></i>
+            <span>Nathan Superior Web <small>- Site Oficial</small></span>
+        </div>
+        
+        <div class="search-bar">
+            <input type="text" placeholder="Pesquise spoilers...">
+        </div>
+        
+        <div class="nav-icons">
+            <a href="index.html" class="nav-icon" title="Início">
+                <i class="fas fa-home"></i>
+            </a>
+            <a href="favoritos.html" class="nav-icon" title="Favoritos">
+                <i class="fas fa-heart"></i>
+            </a>
+            <div class="user-info">
+                <div class="user-avatar" id="userAvatar"></div>
+                <button class="logout-btn" id="logoutBtn">Sair</button>
+            </div>
+            <button class="nav-icon login-btn-nav" id="loginBtnNav" title="Login">
+                <i class="fas fa-user"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Modal de Login/Registro -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            
+            <div id="loginForm">
+                <h2 style="color: var(--neon-ciano); margin-bottom: 20px; text-align: center; text-shadow: 0 0 5px var(--neon-ciano);">Entrar</h2>
+                
+                <form id="login">
+                    <div class="form-group">
+                        <label for="loginUsername"><i class="fas fa-user"></i> Nome de Usuário</label>
+                        <input type="text" id="loginUsername" placeholder="Seu nome de usuário" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="loginPassword"><i class="fas fa-lock"></i> Senha</label>
+                        <input type="password" id="loginPassword" placeholder="Sua senha" required>
+                    </div>
+                    
+                    <button type="submit" class="login-btn"><i class="fas fa-sign-in-alt"></i> Entrar</button>
+                    
+                    <div id="loginMessage" class="status-message" style="display: none;"></div>
+                </form>
+                
+                <div class="switch-form">
+                    <span>Não tem uma conta? </span>
+                    <button class="switch-btn" id="showRegister">Registre-se</button>
+                </div>
+            </div>
+            
+            <div id="registerForm" style="display: none;">
+                <h2 style="color: var(--neon-ciano); margin-bottom: 20px; text-align: center; text-shadow: 0 0 5px var(--neon-ciano);">Criar Conta</h2>
+                
+                <form id="register">
+                    <div class="form-group">
+                        <label for="registerUsername"><i class="fas fa-user-edit"></i> Nome de Usuário</label>
+                        <input type="text" id="registerUsername" placeholder="Escolha um nome de usuário" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="registerPassword"><i class="fas fa-key"></i> Senha</label>
+                        <input type="password" id="registerPassword" placeholder="Crie uma senha" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="confirmPassword"><i class="fas fa-check-circle"></i> Confirmar Senha</label>
+                        <input type="password" id="confirmPassword" placeholder="Digite a senha novamente" required>
+                    </div>
+                    
+                    <button type="submit" class="login-btn"><i class="fas fa-user-plus"></i> Registrar</button>
+                    
+                    <div id="registerMessage" class="status-message" style="display: none;"></div>
+                </form>
+                
+                <div class="switch-form">
+                    <span>Já tem uma conta? </span>
+                    <button class="switch-btn" id="showLogin">Faça login</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="sidebar">
+            <!-- Seção de Perfil (visível apenas quando logado) -->
+            <div class="profile-section" id="profileSection">
+                <div class="profile-header">
+                    <div class="profile-avatar" id="profileAvatar">
+                        <span id="avatarInitial"></span>
+                        <img id="avatarImage" src="" alt="Avatar">
+                    </div>
+                    <div class="profile-info">
+                        <h3 id="profileUsername"></h3>
+                        <p id="profileSince"></p>
+                    </div>
+                </div>
+            </div>
+            
+            <h2>Bem-vindo aos Spoilers!</h2>
+            <p id="welcomeMessage">Este é o <strong>espaço secreto</strong> do site oficial de Nathan, onde você encontra <span class="destaque">revelações exclusivas</span> e <span class="destaque">segredos</span>.</p>
+            
+            <h2>Aviso Importante:</h2>
+            <p>Esta área contém <span class="destaque">spoilers</span> que podem arruinar sua experiência. Continue por sua conta e risco!</p>
+            
+            <h2>Mensagem de Nathan:</h2>
+            <p>"Cuidado com o que procura aqui! Algumas surpresas são melhores quando descobertas no momento certo." <i class="fas fa-eye-slash" style="color: var(--vermelho); text-shadow: 0 0 5px var(--vermelho);"></i></p>
+        </div>
+        
+        <div class="content">
+            <div class="spoiler-warning">
+                <i class="fas fa-exclamation-triangle"></i> ATENÇÃO: ESTA PÁGINA CONTÉM SPOILERS
+            </div>
+            
+            <!-- Spoiler 1 -->
+            <div class="spoiler-box">
+                <div class="spoiler-title">
+                    <i class="fas fa-user-secret"></i> Revelação do Novo Personagem
+                </div>
+                <p>O próximo vilão será revelado como Vicktor O Falso Profeta que prometeu glória ao seu povo, mas antes de terminar o seu discurso lunarianos invadiram a cerimônia e ele jurou vingança. Mesmo restando só Nathan, Vicktor é um personagem falso e manipulador que só pensa em si.</p>
+                
+                <div class="spoiler-media">
+                    <img src="https://i.ibb.co/h1h10wjb/384-Sem-Titulo-20250803205738.webp" alt="Conceito do personagem Vicktor">
+                    <div class="media-caption">Primeiro conceito visual do personagem Vicktor</div>
+                </div>
+                
+                <div class="spoiler-date">
+                    <i class="far fa-calendar-alt"></i> Postado em: 30/07/2025
+                </div>
+            </div>
+            
+            <!-- Spoiler 2 -->
+            <div class="spoiler-box">
+                <div class="spoiler-title">
+                    <i class="fas fa-book-dead"></i> Atraso Não Previsto do Filme
+                </div>
+                <p>Originalmente, o filme "Nathan O Superior" seria postado em julho, mas por atrasos e motivos internos da equipe, Nathan decidiu deixar em anônimo a data prevista.</p>
+                
+                <div class="spoiler-media">
+                    <iframe src="https://www.youtube.com/embed/ybEu4MYKnoA" title="Teaser do filme Nathan O Superior" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    <div class="media-caption">Teaser do filme "Nathan O Superior"</div>
+                </div>
+                
+                <div class="spoiler-date">
+                    <i class="far fa-calendar-alt"></i> Postado em: 30/07/2025
+                </div>
+            </div>
+            
+            <!-- Spoiler 3 -->
+            <div class="spoiler-box">
+                <div class="spoiler-title">
+                    <i class="fas fa-microphone"></i> Musicas Autorais Divulgadas :0
+                </div>
+                <p>Todas as músicas usadas no canal Nathan Superior vão ser postadas em seu canal de músicas, ainda é uma ideia, mas quem sabe ela sai do papel 0w0.</p>
+                
+                <div class="spoiler-media">
+                    <img src="https://i.imgur.com/WxNkK7J.png" alt="Playlist de músicas autorais">
+                    <div class="media-caption">Preview da futura playlist no Spotify</div>
+                </div>
+                
+                <div class="spoiler-date">
+                    <i class="far fa-calendar-alt"></i> Postado em: 31/07/2025
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Avatar -->
+    <div class="avatar-modal" id="avatarModal">
+        <div class="avatar-modal-content">
+            <h3>Escolha seu Avatar</h3>
+            <p>Selecione uma imagem para representar seu perfil</p>
+            
+            <div class="avatar-options">
+                <div class="avatar-option" data-avatar="default">
+                    <div style="width:100%;height:100%;background:var(--neon-ciano);display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:bold;color:black;" id="defaultAvatar"></div>
+                </div>
+                <div class="avatar-option" data-avatar="avatar1">
+                    <img src="https://i.imgur.com/JqYeYn0.png" alt="Avatar 1">
+                </div>
+                <div class="avatar-option" data-avatar="avatar2">
+                    <img src="https://i.imgur.com/L7hFD8X.png" alt="Avatar 2">
+                </div>
+                <div class="avatar-option" data-avatar="avatar3">
+                    <img src="https://i.imgur.com/Q5ZzmfY.png" alt="Avatar 3">
+                </div>
+                <div class="avatar-option" data-avatar="avatar4">
+                    <img src="https://i.imgur.com/WxNkK7J.png" alt="Avatar 4">
+                </div>
+                <div class="avatar-option" data-avatar="avatar5">
+                    <img src="https://i.imgur.com/3Gm7DGO.png" alt="Avatar 5">
+                </div>
+            </div>
+            
+            <button class="login-btn" id="saveAvatarBtn">Salvar Avatar</button>
+            <button class="logout-btn" style="margin-top:10px;" id="cancelAvatarBtn">Cancelar</button>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>Site oficial desenvolvido por Nathan • Todos os direitos reservados • Atualizado regularmente</p>
+    </div>
+
+    <!-- JAVASCRIPT -->
+    <script>
+        // Elementos do DOM
+        const themeToggle = document.getElementById('theme-toggle');
+        const loginModal = document.getElementById('loginModal');
+        const loginBtnNav = document.getElementById('loginBtnNav');
+        const closeBtn = document.querySelector('.close');
+        const showRegister = document.getElementById('showRegister');
+        const showLogin = document.getElementById('showLogin');
+        const loginForm = document.getElementById('loginForm');
+        const registerForm = document.getElementById('registerForm');
+        const loginSubmit = document.getElementById('login');
+        const registerSubmit = document.getElementById('register');
+        const loginMessage = document.getElementById('loginMessage');
+        const registerMessage = document.getElementById('registerMessage');
+        const logoutBtn = document.getElementById('logoutBtn');
+        const userAvatar = document.getElementById('userAvatar');
+        const welcomeMessage = document.getElementById('welcomeMessage');
+        
+        // Elementos do sistema de perfil
+        const profileSection = document.getElementById('profileSection');
+        const profileAvatar = document.getElementById('profileAvatar');
+        const avatarInitial = document.getElementById('avatarInitial');
+        const avatarImage = document.getElementById('avatarImage');
+        const profileUsername = document.getElementById('profileUsername');
+        const profileSince = document.getElementById('profileSince');
+        const defaultAvatar = document.getElementById('defaultAvatar');
+        const avatarModal = document.getElementById('avatarModal');
+        const saveAvatarBtn = document.getElementById('saveAvatarBtn');
+        const cancelAvatarBtn = document.getElementById('cancelAvatarBtn');
+
+        // Verifica se o usuário está logado ao carregar a página
+        function checkLoginStatus() {
+            const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+            const username = localStorage.getItem('currentUser');
+            
+            if (isLoggedIn && username) {
+                document.body.classList.add('logged-in');
+                userAvatar.textContent = username.charAt(0).toUpperCase();
+                welcomeMessage.innerHTML = `Bem-vindo de volta, <strong>${username}</strong>! Este é o <strong>espaço secreto</strong> do site oficial de Nathan, onde você encontra <span class="destaque">revelações exclusivas</span> e <span class="destaque">segredos</span>.`;
+            }
+        }
+
+        // Carrega o perfil do usuário
+        function loadUserProfile() {
+            const username = localStorage.getItem('currentUser');
+            const userData = JSON.parse(localStorage.getItem('userProfile_' + username)) || {
+                username: username,
+                joinDate: new Date().toISOString(),
+                color: 'azul',
+                theme: 'auto',
+                avatar: 'default'
+            };
+
+            // Atualizar informações do perfil
+            profileUsername.textContent = username;
+            profileSince.textContent = `Membro desde ${new Date(userData.joinDate).toLocaleDateString()}`;
+            
+            // Avatar
+            const initial = username.charAt(0).toUpperCase();
+            avatarInitial.textContent = initial;
+            defaultAvatar.textContent = initial;
+            
+            if (userData.avatar && userData.avatar !== 'default') {
+                avatarImage.style.display = 'block';
+                avatarImage.src = document.querySelector(`.avatar-option[data-avatar="${userData.avatar}"] img`).src;
+                avatarInitial.style.display = 'none';
+            }
+            
+            // Salvar dados atualizados
+            localStorage.setItem('userProfile_' + username, JSON.stringify(userData));
+        }
+
+        // Aplica o tema salvo no localStorage
+        function applyTheme() {
+            const isDark = localStorage.getItem('darkMode') === 'true';
+            document.documentElement.classList.toggle('dark-mode', isDark);
+            themeToggle.style.color = isDark ? '#f39c12' : '#f1c40f';
+        }
+        
+        // Evento de clique no botão de tema
+        themeToggle.addEventListener('click', () => {
+            const isDark = !document.documentElement.classList.contains('dark-mode');
+            localStorage.setItem('darkMode', isDark);
+            
+            themeToggle.style.transform = 'rotate(360deg) scale(1.2)';
+            setTimeout(() => {
+                themeToggle.style.transform = '';
+            }, 300);
+            
+            applyTheme();
+        });
+
+        // Eventos do modal de login
+        loginBtnNav.addEventListener('click', () => {
+            loginModal.style.display = 'block';
+        });
+
+        closeBtn.addEventListener('click', () => {
+            loginModal.style.display = 'none';
+        });
+
+        window.addEventListener('click', (e) => {
+            if (e.target === loginModal) {
+                loginModal.style.display = 'none';
+            }
+        });
+
+        // Alternar entre login e registro
+        showRegister.addEventListener('click', () => {
+            loginForm.style.display = 'none';
+            registerForm.style.display = 'block';
+        });
+
+        showLogin.addEventListener('click', () => {
+            registerForm.style.display = 'none';
+            loginForm.style.display = 'block';
+        });
+
+        // Função para exibir mensagens
+        function showMessage(element, text, type) {
+            element.textContent = text;
+            element.style.display = 'block';
+            element.className = `status-message ${type}`;
+        }
+
+        // Função para hash simples (apenas para demonstração)
+        function simpleHash(password) {
+            let hash = 0;
+            for (let i = 0; i < password.length; i++) {
+                const char = password.charCodeAt(i);
+                hash = ((hash << 5) - hash) + char;
+                hash = hash & hash; // Convert to 32bit integer
+            }
+            return hash.toString();
+        }
+
+        // Registrar novo usuário
+        registerSubmit.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const username = document.getElementById('registerUsername').value.trim();
+            const password = document.getElementById('registerPassword').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+
+            // Validações
+            if (password !== confirmPassword) {
+                showMessage(registerMessage, "As senhas não coincidem!", 'error');
+                return;
+            }
+
+            if (password.length < 6) {
+                showMessage(registerMessage, "A senha deve ter pelo menos 6 caracteres!", 'error');
+                return;
+            }
+
+            if (username.length < 3) {
+                showMessage(registerMessage, "O nome de usuário deve ter pelo menos 3 caracteres!", 'error');
+                return;
+            }
+
+            // Obter usuários existentes ou criar array vazio
+            const usuarios = JSON.parse(localStorage.getItem('usuarios_magicos') || '[]');
+            
+            // Verificar se usuário já existe
+            if (usuarios.some(u => u.username === username)) {
+                showMessage(registerMessage, "Este usuário já existe!", 'error');
+                return;
+            }
+            
+            // Criar hash da senha (simplificado para exemplo)
+            const hashedPassword = simpleHash(password);
+            
+            // Adicionar novo usuário
+            usuarios.push({ 
+                username, 
+                password: hashedPassword // Na prática, use um método mais seguro!
+            });
+            
+            localStorage.setItem('usuarios_magicos', JSON.stringify(usuarios));
+            
+            // Criar perfil do usuário
+            const userProfile = {
+                username: username,
+                joinDate: new Date().toISOString(),
+                color: 'azul',
+                theme: 'auto',
+                avatar: 'default'
+            };
+            localStorage.setItem('userProfile_' + username, JSON.stringify(userProfile));
+            
+            showMessage(registerMessage, "Conta criada com sucesso!", 'success');
+            
+            // Resetar formulário e mostrar login
+            this.reset();
+            
+            setTimeout(() => {
+                registerForm.style.display = 'none';
+                loginForm.style.display = 'block';
+                registerMessage.style.display = 'none';
+            }, 2000);
+        });
+
+        // Login de usuário
+        loginSubmit.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const username = document.getElementById('loginUsername').value.trim();
+            const password = document.getElementById('loginPassword').value;
+            
+            // Obter usuários
+            const usuarios = JSON.parse(localStorage.getItem('usuarios_magicos') || '[]');
+            
+            // Criar hash da senha para comparação
+            const hashedPassword = simpleHash(password);
+            
+            // Verificar credenciais
+            const user = usuarios.find(u => u.username === username && u.password === hashedPassword);
+            
+            if (user) {
+                showMessage(loginMessage, "Login bem-sucedido!", 'success');
+                localStorage.setItem('isLoggedIn', 'true');
+                localStorage.setItem('currentUser', username);
+                
+                // Fechar modal e atualizar interface
+                setTimeout(() => {
+                    loginModal.style.display = 'none';
+                    checkLoginStatus();
+                    loadUserProfile();
+                    this.reset();
+                    loginMessage.style.display = 'none';
+                }, 1000);
+            } else {
+                showMessage(loginMessage, "Usuário ou senha incorretos!", 'error');
+            }
+        });
+
+        // Logout
+        logoutBtn.addEventListener('click', () => {
+            localStorage.setItem('isLoggedIn', 'false');
+            localStorage.removeItem('currentUser');
+            document.body.classList.remove('logged-in');
+            welcomeMessage.innerHTML = 'Este é o <strong>espaço secreto</strong> do site oficial de Nathan, onde você encontra <span class="destaque">revelações exclusivas</span> e <span class="destaque">segredos</span>.';
+        });
+
+        // Inicializa a página
+        applyTheme();
+        checkLoginStatus();
+    </script>
+</body>
+</html>
