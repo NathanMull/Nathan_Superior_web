@@ -1,0 +1,1063 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leonidas - A Maldição Eterna | Nathan Superior Web</title>
+    
+    <style>
+        /* Adicionando zoom de 110% para todo o documento */
+        body {
+            zoom: 110%;
+            -moz-transform: scale(1.1);
+            -moz-transform-origin: 0 0;
+        }
+        
+        /* Para outros navegadores */
+        @media all and (-webkit-min-device-pixel-ratio:0) {
+            body {
+                zoom: 110%;
+            }
+        }
+    </style>
+    
+    <script>
+        (function() {
+            const isDark = localStorage.getItem('darkMode') === 'true';
+            if (isDark) {
+                document.documentElement.classList.add('dark-mode');
+            }
+            
+            const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+            if (isLoggedIn) {
+                document.body.classList.add('logged-in');
+            }
+        })();
+    </script>
+    
+    <style>
+        :root {
+            --verde: #27ae60;
+            --azul: #3498db;
+            --vermelho: #e74c3c;
+            --amarelo: #f1c40f;
+            --texto: #f0f0f0;
+            --fundo: #000000;
+            --card: #0a0a0a;
+            --borda: #222;
+            --neon-ciano: #0ff;
+            --neon-azul: #00f;
+            --neon-marinho: #0077be;
+            --roxo-lunar: #8e44ad;
+            --verde-esmeralda: #2ecc71;
+        }
+
+        .dark-mode {
+            --verde: #1e8449;
+            --azul: #2980b9;
+            --vermelho: #ff6b6b;
+            --amarelo: #f39c12;
+            --texto: #f0f0f0;
+            --fundo: #000000;
+            --card: #0a0a0a;
+            --borda: #222;
+            --neon-ciano: #0ff;
+            --neon-azul: #00f;
+            --neon-marinho: #0077be;
+            --roxo-lunar: #9b59b6;
+            --verde-esmeralda: #27ae60;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        body {
+            background: var(--fundo);
+            color: var(--texto);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* NAVBAR COM TEMA NEON */
+        .navbar {
+            background: rgba(10, 10, 10, 0.9);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 30px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 2px solid var(--neon-ciano);
+            box-shadow: 0 0 10px var(--neon-ciano), 0 0 20px var(--neon-azul);
+        }
+
+        .logo {
+            color: white;
+            font-weight: bold;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-shadow: 0 0 5px var(--neon-ciano), 0 0 10px var(--neon-ciano);
+        }
+
+        .logo small {
+            font-size: 0.8rem;
+            opacity: 0.9;
+            font-weight: normal;
+        }
+
+        #theme-toggle {
+            color: var(--neon-ciano);
+            cursor: pointer;
+            font-size: 1.3rem;
+            transition: all 0.3s;
+            text-shadow: 0 0 5px var(--neon-ciano);
+        }
+
+        #theme-toggle:hover {
+            transform: scale(1.2);
+            text-shadow: 0 0 10px var(--neon-ciano), 0 0 20px var(--neon-ciano);
+        }
+
+        .search-bar {
+            flex-grow: 1;
+            max-width: 500px;
+            margin: 0 20px;
+        }
+
+        .search-bar input {
+            width: 100%;
+            padding: 8px 15px;
+            border: 1px solid var(--neon-ciano);
+            border-radius: 20px;
+            font-size: 0.9rem;
+            background: rgba(0, 0, 0, 0.7);
+            color: var(--texto);
+            box-shadow: 0 0 5px var(--neon-ciano);
+        }
+
+        .search-bar input:focus {
+            outline: none;
+            box-shadow: 0 0 10px var(--neon-ciano), 0 0 20px var(--neon-azul);
+        }
+
+        .nav-icons {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-icon {
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: transform 0.2s;
+            text-decoration: none;
+            text-shadow: 0 0 5px var(--neon-ciano);
+        }
+
+        .nav-icon:hover {
+            transform: translateY(-2px);
+            text-shadow: 0 0 10px var(--neon-ciano), 0 0 20px var(--neon-ciano);
+        }
+
+        .user-info {
+            display: none;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .user-avatar {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background-color: var(--neon-ciano);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: black;
+            font-weight: bold;
+            box-shadow: 0 0 5px var(--neon-ciano);
+        }
+
+        .logout-btn {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            font-size: 0.9rem;
+            text-shadow: 0 0 5px var(--neon-ciano);
+        }
+
+        body.logged-in .user-info {
+            display: flex;
+        }
+
+        body.logged-in .login-btn-nav {
+            display: none;
+        }
+
+        /* CONTEÚDO DA PÁGINA DO LIVRO */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 30px;
+        }
+
+        .book-header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 20px;
+            background: var(--card);
+            border-radius: 12px;
+            border: 1px solid var(--roxo-lunar);
+            box-shadow: 0 0 15px var(--roxo-lunar);
+        }
+
+        .book-title {
+            color: var(--roxo-lunar);
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+            text-shadow: 0 0 10px var(--roxo-lunar);
+        }
+
+        .book-subtitle {
+            color: var(--verde-esmeralda);
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+
+        .book-cover {
+            max-width: 300px;
+            margin: 20px auto;
+            border-radius: 8px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+        }
+
+        .book-info {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .book-meta {
+            background: rgba(0,0,0,0.5);
+            padding: 10px 20px;
+            border-radius: 8px;
+            border: 1px solid var(--neon-ciano);
+        }
+
+        .book-meta h4 {
+            color: var(--neon-ciano);
+            margin-bottom: 5px;
+        }
+
+        .reading-container {
+            display: flex;
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .chapter-nav {
+            width: 250px;
+            background: var(--card);
+            border-radius: 12px;
+            padding: 20px;
+            border: 1px solid var(--roxo-lunar);
+            box-shadow: 0 0 10px var(--roxo-lunar);
+            height: fit-content;
+            position: sticky;
+            top: 100px;
+        }
+
+        .chapter-nav h3 {
+            color: var(--roxo-lunar);
+            margin-bottom: 15px;
+            text-align: center;
+            text-shadow: 0 0 5px var(--roxo-lunar);
+        }
+
+        .chapter-list {
+            list-style: none;
+        }
+
+        .chapter-item {
+            padding: 12px 15px;
+            margin-bottom: 8px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 1px solid transparent;
+        }
+
+        .chapter-item:hover {
+            background: rgba(142, 68, 173, 0.2);
+            border: 1px solid var(--roxo-lunar);
+        }
+
+        .chapter-item.active {
+            background: rgba(142, 68, 173, 0.3);
+            border: 1px solid var(--roxo-lunar);
+            box-shadow: 0 0 8px var(--roxo-lunar);
+        }
+
+        .reading-content {
+            flex: 1;
+            background: var(--card);
+            border-radius: 12px;
+            padding: 40px;
+            border: 1px solid var(--roxo-lunar);
+            box-shadow: 0 0 15px var(--roxo-lunar);
+            min-height: 800px;
+        }
+
+        .chapter-title {
+            color: var(--roxo-lunar);
+            font-size: 2.2rem;
+            margin-bottom: 30px;
+            text-align: center;
+            text-shadow: 0 0 8px var(--roxo-lunar);
+            border-bottom: 2px solid var(--roxo-lunar);
+            padding-bottom: 15px;
+        }
+
+        .story-content {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .story-content p {
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+
+        .story-content .dialogue {
+            margin-left: 30px;
+            font-style: italic;
+            color: var(--verde-esmeralda);
+            border-left: 2px solid var(--verde-esmeralda);
+            padding-left: 15px;
+            margin-bottom: 15px;
+        }
+
+        .story-content .thought {
+            margin-left: 20px;
+            color: var(--neon-ciano);
+            font-style: italic;
+            margin-bottom: 15px;
+        }
+
+        .story-content .action {
+            margin-left: 10px;
+            color: var(--amarelo);
+            margin-bottom: 15px;
+        }
+
+        .reading-controls {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid var(--borda);
+        }
+
+        .nav-btn {
+            background: var(--roxo-lunar);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 6px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s;
+            box-shadow: 0 0 5px var(--roxo-lunar);
+        }
+
+        .nav-btn:hover {
+            background: #7d3c98;
+            box-shadow: 0 0 10px var(--roxo-lunar);
+            transform: translateY(-2px);
+        }
+
+        .nav-btn:disabled {
+            background: #555;
+            cursor: not-allowed;
+            box-shadow: none;
+            transform: none;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 20px;
+            font-size: 0.9rem;
+            color: var(--texto);
+            opacity: 0.8;
+            background: var(--card);
+            border-top: 1px solid var(--borda);
+            margin-top: 50px;
+        }
+
+        /* MODAL DE LOGIN */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.8);
+        }
+
+        .modal-content {
+            background-color: var(--card);
+            margin: 10% auto;
+            padding: 30px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 400px;
+            box-shadow: 0 0 15px var(--neon-ciano), 0 0 30px var(--neon-azul);
+            position: relative;
+            border: 1px solid var(--neon-ciano);
+        }
+
+        .close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--vermelho);
+            text-shadow: 0 0 5px var(--vermelho);
+        }
+
+        .modal-btn {
+            background: var(--neon-marinho);
+            color: white;
+            border: none;
+            padding: 12px;
+            width: 100%;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            margin-top: 10px;
+            box-shadow: 0 0 5px var(--neon-marinho);
+            transition: all 0.3s;
+        }
+
+        .modal-btn:hover {
+            background: #0066aa;
+            box-shadow: 0 0 10px var(--neon-marinho), 0 0 20px var(--neon-azul);
+        }
+
+        .switch-form {
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        .switch-btn {
+            background: none;
+            border: none;
+            color: var(--neon-ciano);
+            cursor: pointer;
+            text-decoration: underline;
+            text-shadow: 0 0 5px var(--neon-ciano);
+        }
+
+        .status-message {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            text-align: center;
+        }
+        
+        .success {
+            background-color: rgba(39, 174, 96, 0.2);
+            color: var(--verde);
+            border: 1px solid var(--verde);
+            box-shadow: 0 0 5px var(--verde);
+        }
+        
+        .error {
+            background-color: rgba(231, 76, 60, 0.2);
+            color: var(--vermelho);
+            border: 1px solid var(--vermelho);
+            box-shadow: 0 0 5px var(--vermelho);
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                flex-wrap: wrap;
+                padding: 15px;
+            }
+            .search-bar {
+                order: 3;
+                width: 100%;
+                margin: 15px 0 0 0;
+            }
+            .container {
+                padding: 15px;
+            }
+            .reading-container {
+                flex-direction: column;
+            }
+            .chapter-nav {
+                width: 100%;
+                position: static;
+                margin-bottom: 20px;
+            }
+            .book-title {
+                font-size: 2.2rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Modal de Login -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            
+            <div id="loginForm">
+                <h2 style="color: var(--neon-ciano); margin-bottom: 20px; text-align: center; text-shadow: 0 0 5px var(--neon-ciano);">Entrar</h2>
+                
+                <form id="login">
+                    <div class="form-group">
+                        <label for="loginUsername"><i class="fas fa-user"></i> Nome de Usuário</label>
+                        <input type="text" id="loginUsername" placeholder="Seu nome de usuário" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="loginPassword"><i class="fas fa-lock"></i> Senha</label>
+                        <input type="password" id="loginPassword" placeholder="Sua senha" required>
+                    </div>
+                    
+                    <button type="submit" class="modal-btn"><i class="fas fa-sign-in-alt"></i> Entrar</button>
+                    
+                    <div id="loginMessage" class="status-message" style="display: none;"></div>
+                </form>
+                
+                <div class="switch-form">
+                    <span>Não tem uma conta? </span>
+                    <button class="switch-btn" id="showRegister">Registre-se</button>
+                </div>
+            </div>
+            
+            <div id="registerForm" style="display: none;">
+                <h2 style="color: var(--neon-ciano); margin-bottom: 20px; text-align: center; text-shadow: 0 0 5px var(--neon-ciano);">Criar Conta</h2>
+                
+                <form id="register">
+                    <div class="form-group">
+                        <label for="registerUsername"><i class="fas fa-user-edit"></i> Nome de Usuário</label>
+                        <input type="text" id="registerUsername" placeholder="Escolha um nome de usuário" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="registerPassword"><i class="fas fa-key"></i> Senha</label>
+                        <input type="password" id="registerPassword" placeholder="Crie uma senha" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="confirmPassword"><i class="fas fa-check-circle"></i> Confirmar Senha</label>
+                        <input type="password" id="confirmPassword" placeholder="Digite a senha novamente" required>
+                    </div>
+                    
+                    <button type="submit" class="modal-btn"><i class="fas fa-user-plus"></i> Registrar</button>
+                    
+                    <div id="registerMessage" class="status-message" style="display: none;"></div>
+                </form>
+                
+                <div class="switch-form">
+                    <span>Já tem uma conta? </span>
+                    <button class="switch-btn" id="showLogin">Faça login</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="logo">
+            <i id="theme-toggle" class="fas fa-star" title="Mudar tema"></i>
+            <span>Nathan Superior Web <small>- Biblioteca</small></span>
+        </div>
+        
+        <div class="search-bar">
+            <input type="text" placeholder="Pesquise...">
+        </div>
+        
+        <div class="nav-icons">
+            <a href="index.html" class="nav-icon" title="Início">
+                <i class="fas fa-home"></i>
+            </a>
+            <a href="favoritos.html" class="nav-icon" title="Favoritos">
+                <i class="fas fa-heart"></i>
+            </a>
+            <div class="user-info">
+                <div class="user-avatar" id="userAvatar"></div>
+                <button class="logout-btn" id="logoutBtn">Sair</button>
+            </div>
+            <button class="nav-icon login-btn-nav" id="loginBtnNav" title="Login">
+                <i class="fas fa-user"></i>
+            </button>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="book-header">
+            <h1 class="book-title">Leonidas</h1>
+            <h2 class="book-subtitle">A Maldição Eterna</h2>
+            
+            <div class="book-info">
+                <div class="book-meta">
+                    <h4>Autor</h4>
+                    <p>Nathan</p>
+                </div>
+                <div class="book-meta">
+                    <h4>Gênero</h4>
+                    <p>Fantasia Épica</p>
+                </div>
+                <div class="book-meta">
+                    <h4>Capítulos</h4>
+                    <p>1</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="reading-container">
+            <div class="chapter-nav">
+                <h3>Capítulos</h3>
+                <ul class="chapter-list">
+                    <li class="chapter-item active" data-chapter="1">Capítulo 1: A Maldição Eterna</li>
+                    <!-- Mais capítulos podem ser adicionados aqui -->
+                </ul>
+            </div>
+            
+            <div class="reading-content">
+                <h2 class="chapter-title">Capítulo 1: A Maldição Eterna</h2>
+                
+                <div class="story-content">
+                    <!-- Continuação da história a partir do ponto indicado -->
+                    <p class="action">*No dia seguinte, Leonidas apareceu pronto. Em suas mãos, as adagas únicas forjadas especialmente para ele, conhecidas como As Lâminas de Loki. Ele venceu todos os oponentes com uma frieza mecânica, até chegar à rodada final. Lá estava Hermes, com sua expressão convencida e punhais gastos por uso inadequado.*</p>
+                    
+                    <p class="dialogue">Hermes- Olha, se não é o monstro, filho do capitão! Se eu te derrotar, será que seu pai me torna o novo filho dele?</p>
+                    
+                    <p class="action">*Leonidas não proferiu uma única palavra. Apenas empunhou suas adagas, assumindo uma posição de combate. Suas lâminas, ao contrário das de Hermes, estavam impecáveis - honradas por um uso de alta maestria.*</p>
+                    
+                    <p class="action">*Hermes riu e se preparou para a luta. O embate foi intenso, embora breve. Em um movimento preciso, as adagas de Hermes se quebraram contra as Lâminas de Loki de Leonidas. No golpe final, Leonidas desferiu um corte perfeito no rosto do rival, deixando-o cego de um olho. A cena sangrenta ecoou por toda a arquibancada, um silêncio chocante tomando conta de todos, seguido por uma onda de admiração pela maestria brutal de Leonidas.*</p>
+                    
+                    <p class="dialogue">Hermes- SEU MALDITO!</p>
+                    
+                    <p class="dialogue">Leonidas- *Com uma frieza que ecoou pelo estádio* Respondendo sua pergunta anterior... meu pai nunca teria um filho inútil como você.</p>
+                    
+                    <p class="action">*A frase pairou no ar enquanto a vitória era consolidada. Seu pai, da arquibancada, dirigiu a ele um raro e aprovador sorriso.*</p>
+                    
+                    <p class="action">*Após a luta, com o coração ainda acelerado pela adrenalina e por uma frágil esperança, Leonidas procurou Aurora. Quando a encontrou, porém, não viu o sorriso que esperava. Em seu lugar, um olhar de pura decepção.*</p>
+                    
+                    <p class="dialogue">Leonidas- Oi, Aurora!</p>
+                    
+                    <p class="dialogue">Aurora- O que você quer, Leonidas?</p>
+                    
+                    <p class="action">*A frase cortou Leonidas como uma lâmina invisível, mais afiada que qualquer uma que ele havia manuseado na arena.*</p>
+                    
+                    <p class="dialogue">Leonidas- Ué, não posso querer falar com minha melhor amiga?</p>
+                    
+                    <p class="dialogue">Aurora- Eu não poderia ser amiga de alguém tão sanguinário e invejoso!</p>
+                    
+                    <p class="action">*Sem dar chance para uma resposta, Aurora virou-se e saiu, carregando toda a luz que restava no mundo dele. Sozinho no corredor, Leonidas caiu de joelhos mais uma vez. O sangue de Hermes ainda manchava suas mãos. Ele se arrastou até o banheiro e, sob a água gelada, esfregou a pele até ficar vermelha, tentando em vão lavar não apenas as mãos, mas as palavras que agora o definiam.*</p>
+                    
+                    <p class="thought">Leonidas- *sussurra para si mesmo* É... eu.. pelo visto sou um monstro...</p>
+                    
+                    <p class="action" style="text-align: center; margin: 30px 0; font-weight: bold;">4 anos se passaram...</p>
+                    
+                    <p class="action">*Leonidas já estava com olheiras grandes pois por 4 anos viera noites mal dormidas, naquele dia fatídico ele estava almoçando com sua mãe e seu irmão até o nathan jogar a faca para cima brincando com a faca até sua mãe o reprender*</p>
+                    
+                    <p class="dialogue">Mãe- Nathan para de brincar com essa faca você vai acabar se cortando</p>
+                    
+                    <p class="dialogue">Nathan- *Em um tom mais bobo* Ahh eu já me cortei tantas vezes que nem sinto mais... Sangue verde não deve doer tanto quanto o roxo de vocês</p>
+                    
+                    <p class="action">*Leonidas ao escutar aquilo dá um soco na mesa e reprende o irmão*</p>
+                    
+                    <p class="dialogue">Leonidas- Pare com isso! Você sabe muito bem que seu sangue é tão lunariano quanto o nosso</p>
+                    
+                    <p class="action">*depois dessa cena o pai de leonidas entra pela porta e olha para ele em um tom sério e fala com ele*</p>
+                    
+                    <p class="dialogue">Pai- Leonidas venha! Os mensageiros do clã das serpentes chegaram e eles trouxeram notícias</p>
+                    
+                    <p class="action">*Leonidas se levanta e vai até o nathan antes de sair e sussurra para ele*</p>
+                    
+                    <p class="dialogue">Leonidas- Olha fique longe das janelas hoje a noite ok?</p>
+                    
+                    <p class="dialogue">Nathan- *rindo meio nervoso* Ué por quê? Vai ter festinha e não me convidaram?</p>
+                    
+                    <p class="action">*Ele sai junto com seu pai até o quartel e acha os mensageiros la e começam um dialogo breve*</p>
+                    
+                    <p class="dialogue">Leonidas- O que querem aqui hoje rapazes?</p>
+                    
+                    <p class="dialogue">Soldado 1- Boa tarde desculpa mesmo se estamos incomodando mais temos uma informação não muito boa...</p>
+                    
+                    <p class="dialogue">Soldado 2- Vimos caras encapuzados rondando a vila de vocês e a nossa também, viemos avisar que caso essas pessoas queiram arrumar problemas estaremos dispostos a ajudar vocês</p>
+                    
+                    <p class="action">*Leonidas assentiu com a cabeça antes deles irem embora, e bem o pai de Leonidas vai fazer a patrulha no salão, mais as pessoas da vila decidiram fazer uma festa pois o Leonidas iria se tornar o novo chefe em breve, Leonidas vai até o salão e a maioria o recebe bem com alegria e ficam conversando até Leonidas sair e ver a Aurora lá fora e ele tenta puxar uma conversa com ela*</p>
+                    
+                    <p class="dialogue">Leonidas- Ei Aurora...</p>
+                    
+                    <p class="dialogue">Aurora- *vira o rosto* O que foi?</p>
+                    
+                    <p class="dialogue">Leonidas- Nada só queria saber se você estava bem ja fazem 4 anos...</p>
+                    
+                    <p class="dialogue">Aurora- 4 anos não apagam o que você é</p>
+                    
+                    <p class="dialogue">Leonidas- Olha... eu peço perd~</p>
+                    
+                    <p class="action">*antes de ele terminar a frase uma adaga perfura o peito de Aurora e ele fica em choque e uma explosão acontece onde estavam as pessoas no salão aonde muitos saíram feridos mais não aguentaram aos ferimentos e leonidas corre para dentro do salão e vê seu pai e sua mãe mortos no chão e um rapaz encapuzado com um machado branco o confronta e leonidas só acha uma espada ao chão e começa a lutar com ele a luta se baseia em leonidas se defendendo com tudo que tem*</p>
+                    
+                    <p class="dialogue">Encapuzado- O que foi? Achei que o filho do capitão dos lunarianos era um sanguinário e um ótimo lutador</p>
+                    
+                    <p class="dialogue">Leonidas- CALA ESSA SUA BOCA IMUNDA!</p>
+                    
+                    <p class="dialogue">Encapuzado- Onww desculpa agora papai e mamãe não estão mais aqui para cuidar de você, não é?</p>
+                    
+                    <p class="dialogue">Leonidas- *Olhar fulminante com ódio puro a quela pessoa* Quem é você afinal seu maldito!</p>
+                    
+                    <p class="dialogue">Encapuzado- Hahaha! Sou um ex-comandante do exército do seu pai mais depois que você e o estranho do seu irmão nasceram ele desfez o exército</p>
+                    
+                    <p class="dialogue">Leonidas- *Segura a espada com força* LAVE A SUA BOCA PARA FALAR DO MEU IRMÃO!</p>
+                    
+                    <p class="action">*Leonidas e o encapuzado lutam por mais um tempo até Nathan chegar correndo pois escutou a explosão chegando na porta do salão vendo seus pais mortos e leonidas lutando com aquele homem*</p>
+                    
+                    <p class="dialogue">Nathan- Leonidas! *um grito de desespero ecoa por aquele local*</p>
+                    
+                    <p class="action">*o homem joga uma adaga dourada com um líquido preto na direção do Nathan mais leonidas foi mais rápido e se colocou na frente tomando uma facada do ombro e o homem foge sabendo que o "leonidas iria cuidar do resto"*</p>
+                    
+                    <p class="action">*Nathan segura o Leonidas desacordado por um instante mais dentro da mente leonidas se via sendo puxado por uma figura igual a ele mais antes de ser corrompido ele tenta falar algo ao Nathan*</p>
+                    
+                    <p class="dialogue">Leonidas- *fala com fraqueza* Nathan os corra vieram por...</p>
+                    
+                    <p class="action">*Leonidas é corrompido antes de terminar gritando que vieram pelo Nathan que os olhos verdes dele eram os culpados o Nathan escapa mais o leonidas se tornou corrompido*</p>
+                    
+                    <p class="action" style="text-align: center; margin: 30px 0; font-weight: bold;">3 meses se passaram</p>
+                    
+                    <p class="action">*Leonida está espancando um assassino que foi contratado para matar seu irmão mais no processo o outro assassino foi morto pelo nathan*</p>
+                    
+                    <p class="dialogue">Leonida- *Com uma voz forte e irritada* COMO DEIXARAM ISSO ACONTECER!!! Vocês só tinham um trabalho UM TRABALHO!!</p>
+                    
+                    <p class="dialogue">Assassino- *com uma voz falha por sua garganta ter sido machucada* Não... Tínhamos como prever isso...</p>
+                    
+                    <p class="action">*Leonidas acerta mais um chute deixando-o no chão*</p>
+                    
+                    <p class="dialogue">Leonidas- *com uma voz fria sem piedade* Foi só por essa merda que contratei vocês se não puderam você não é mais necessário aqui...</p>
+                    
+                    <p class="action">*Leonidas pisa no pescoço do assassino esmagando em uma cena sangrenta aonde sangue se espalhava até leonidas se retirar daquele lugar e partir de volta ao seu covil*</p>
+                    
+                    <p class="action">*Ao chegar em seu covil Leonidas suspira com raiva vendo que eliminar seu irmão seria mais difícil doque ele imaginava indo até seu trono onde se senta pensando alto*</p>
+                    
+                    <p class="thought">Leonidas- Ah... Parece que aquele ditado era verdade se quer algo bem-feito faça você mesmo</p>
+                    
+                    <p class="action">*Ele se levanta e convoca 3 capangas só para trazer Nathan até seu covil. Em uma média de 3 horas depois eles trazem o Nathan até ele*</p>
+                    
+                    <p class="dialogue">Leonidas- *fala em um tom de deboche* veja se não é o covarde que fugiu aquela noite</p>
+                    
+                    <p class="dialogue">Leonidas- *para de rir e repara nos olhos de seu irmão que estão vesgos um para cada lado* o que é isso? Um tipo de piada?</p>
+                    
+                    <p class="dialogue">Nathan- *mesmo com os olhos daquele jeito olha para leonidas com ódio e determinação* é o preço que se paga por tentar salvar alguém e falhar</p>
+                    
+                    <p class="dialogue">Leonidas- *mesmo corrompido olha para ele perplexo ao ver seu irmão com tal ódio* Já faz 3 meses desde que perdi tudo aqueles merdas vieram por sua culpa</p>
+                    
+                    <p class="dialogue">Nathan- *Não se abala e o responde à altura* Mais quem deveria ser o orgulho do clã? Quem deveria ter defendido todos aquela noite?</p>
+                    
+                    <p class="action">*Leonidas não diz nada só solta o Nathan das cordas e devolve a adaga de seu irmão e pegando sua force corrompida*</p>
+                    
+                    <p class="dialogue">Leonidas- Vamos por isso a prova!</p>
+                    
+                    <p class="action">*Leonidas parte para cima atacando com sua foice de cima para baixo mais Nathan bloqueia com a adaga puxando a lâmina da foice e dando um soco na cara de seu irmão, Leonidas coloca a mão no rosto e sorri de uma forma psicótica*</p>
+                    
+                    <p class="dialogue">Leonidas- Olha só muito bem!</p>
+                    
+                    <p class="action">*Nathan continua em silencio só olhando e se posicionando para continuar lutando, Leonidas parte de novo girando sua foice no ar até atingir o chão ao lado onde Nathan deveria estar até ser surpreendido com mais um soco de seu irmão em seu rosto, Nathan utilizando dessa brecha faz um corte pequeno do rosto de seu irmão antes de dar um mortal para traz recuando por um instante, Leonidas fica em silencio até lamber o sangue de sua bochecha e dar um flash indo cortar lateralmente Nathan, quando vemos Leonidas fez um corte pequeno no peito do Nathan, sem se abalar Nathan faz um contra-ataque usando sua adaga pregando a foice de Leonidas no chão e desferindo um chute que faz Leonidas soltar a foice, ambos perdem as armas e vão a uma luta corpo a corpo, Nathan avança com uma sequência de jebs acertando dois no processo, Leonidas começa a desviar e acerta um chute na coxa do Nathan abalando sua agilidade, Nathan por outro lado foca força em uma chute no chão abalando um onda de choque que joga Leonidas 12 centímetros para o lado e quando Leonidas percebe Nathan está a sua frente com um olhar tão frio pronto para dar um soco forte o suficiente para pregar ele no chão ali mesmo, Leonidas desvia e tenta se recompor ativando as células corrompidas moldando duas laminas negras feitas de energia vital semelhantes as laminas de loki, Nathan ao ver aquela cena e pega a foice de Leonidas e sua adaga se preparando para lutar novamente, Leonidas faz um turbilhão de ataques e Nathan quase é acertado mais desvia, Nathan fica assustado pois Leonidas tinha ganhado a vantagem por ter uma arma que ele sabia usar bem, Nathan desvia de um ataque direto que iria em seu olho o mesmo ataque usado contra Hermes na luta de anos atras, Leonidas dá um grito exalando  uma aura forte, Nathan para e concentra a força nas pernas e gira no ar com a foice acertando a perna de Leonidas neutralizando ele por uns segundos, Leonidas vira com um olho completamente laranja saindo uma lagrima preta antes de sorrir de atacar o Nathan por cima amarrando a foice e jogando ela para longe, Nathan se desespera usando a adaga e jogando na testa do Leonidas antes de correr embora pulando alto pelo teto*</p>
+                    
+                    <p class="dialogue">Leonidas- *olha para cima todo corrompido e dá um grito carregado de choque* NATHAN!!!</p>
+                    
+                    <p class="action">*depois daquela batalha Leonidas se recupera se regenerando aos poucos então ele invoca uma magia de olho amaldiçoado para ver para onde Nathan tinha ido dessa vez e vê ele sendo sugado a um portal roxo, então ele convoca um portal e vai atras dele e se depara com uma cidade inteira conhecida como cidade Lunáticos onde vê todas as possibilidades como um viajante do tempo, um delegado, uma prefeita que amava animais, um queijo vivo e várias pessoas amais*</p>
+                    
+                    <p class="action" style="text-align: center; margin: 30px 0; font-weight: bold;">4 meses depois...</p>
+                    
+                    <p class="action">*Leonidas passou por vários portais até parar em um mundo novo onde Nathan tinha se alocado em uma casa grande feita de carvalho escuro, Leonidas abordou Nathan para uma revanche*</p>
+                    
+                    <p class="dialogue">Leonidas- 4 Meses e finalmente te achei</p>
+                    
+                    <p class="dialogue">Nathan- sério cara estou muito cansado de lutar com você, a cada serie que eu passo você vem atras você já não matou gente o suficiente?</p>
+                    
+                    <p class="dialogue">Leonidas- *Para de ficar corrompido dando um glith mais volta logo em poucos segundos* HaHaHa! Acha que aquelas pessoas eram boas de alguma forma? HaHaHa! Você é mais ingênuo doque eu pensava meu irmão</p>
+                    
+                    <p class="dialogue">Nathan- *pela primeira vez realmente irritado grita* AH E VOCÊ É UM SANTO NÉ SEU DESGRAÇADO, NÃO BASTA TER MATADO QUEM EU MAIS AMEI AGORA QUER MATAR MAIS AINDA?</p>
+                    
+                    <p class="dialogue">Leonidas- *da mais um glith rápido* nossa, irmãozinho não sabia que ela era tão importante para você assim, *cara sádica* será que se eu matar ela em outro multiversos você luta comigo de novo?</p>
+                    
+                    <p class="dialogue">Nathan- *Puxa sua nova espada de diamante puro e se prepara falando em um tom muito frio* se prepara para morrer seu merda.</p>
+                    
+                    <p class="action">*Leonidas se espanta com a postura mais ri sadicamente novamente e já faz suas lâminas de mana preparado atacando primeiro, logo Nathan se esquiva usando uma adaga de ferro cravando a lâmina de Leonidas no chão e atacando fazendo um corte na orelha de Leonidas fazendo uma marca, Leonidas se assusta jogando as correntes da lâmina prendendo Nathan e jogando ele no chão, Nathan após o golpe fica meio abalado e se levanta com o cabelo ao invés de verde vermelho por causa do sangue, levantando ele parte para cima usando sua espada cortando a corrente de mana fazendo a arma de leonidas sumir e a outra pegada no chão Nathan corta o pescoço de leonidas em uma cena épica, Leonidas pega a cabeça no ar e coloca de volta se regenerando sorrindo e pegando a adaga jogando que quase corta o Nathan, eles lutam até a exaustão mais Leonidas se sobressalta pois se regenera e ele ia dar o ataque final no Nathan até que o tempo para e vemos o dentro da mente do Nathan*</p>
+                    
+                    <p class="dialogue">Nathan- Ué onde eu estou *ele olha para frente e vê sua namorada falecida em sua frente, Nathan olha com olhos arregalados* A..Amor...?</p>
+                    
+                    <p class="dialogue">Amor- é... oi... *ela sorri para ele*</p>
+                    
+                    <p class="dialogue">Nathan- *seus olhos estavam normais e ele desaba chorando a abraçando* des...desculpa! Eu não pude de proteger *soluçando Nathan se segura no moletom dela*</p>
+                    
+                    <p class="dialogue">Amor- Calma... não foi sua culpa olha agora eu serei parte de você... e vamos nos reencontrar em breve *ela sorri uma última vez até sumir em uma poeira verde e roxa linda caindo em cima do Nathan*</p>
+                    
+                    <p class="action">*Nathan finalmente volta e seus olhos estão verdes brilhantes e normais arrumando o que os traumas tinham quebrado, Leonidas vê essa transformação e da mais um glith seus olhos ficam roxos novamente e as veias roxas param de percorrer seu pescoço e ele começa a chorar olhando seu irmão novamente*</p>
+                    
+                    <p class="dialogue">Leonidas- *com uma voz chorosa sem estar corrompida* Irmão... me perdoa... sei que pelo visto fiz muitas coisas de que não vou me orgulhar... mais de um fim nisso aqui e agora eu confio em você...</p>
+                    
+                    <p class="action">*Leonidas diz suas últimas palavras antes de ficar corrompido novamente, mais antes que ele fosse atacar Nathan novamente correntes de mana o prendem no chão e o Nathan finalmente sela seu irmão corrompido em sua adaga e finca ela no chão para ser um tumulo adequado para seu irmão*</p>
+                    
+                    <p class="action">*vemos leonidas normal no mesmo lugar que vimos Nathan antes e lá estava ele no vazio*</p>
+                    
+                    <p class="dialogue">Leonidas- onde eu estou agora</p>
+                    
+                    <p class="dialogue">*uma voz misteriosa diz: você demorou para me ver novamente*</p>
+                    
+                    <p class="dialogue">Leonidas- *olha para trás assustado e vê todos aurora, seu pai e sua mãe que esperavam ele nas portas para o paraíso* vocês...  estavam me esperando...</p>
+                    
+                    <p class="action">*Aurora chega mais perto e sem dizer nada o abraça com força e começa a chorar*</p>
+                    
+                    <p class="action">*seu pai e mãe fazem o mesmo e o abraçam todos chorando juntos vendo do céu leonidas olha orgulhoso vendo o grande homem que seu irmão está virando...*</p>
+                    
+                    <p class="dialogue">Leonidas- Pelo menos ele tem amigos que vão ajudar ele daqui para frente... só fico mal por todas as atrocidades que disse e fiz...</p>
+                    
+                    <p class="dialogue">Aurora- *o abraça novamente* você não teve culpa... e seu irmão te respeita antes de sair daquela dimensão ele cravou aquela adaga no chão fazendo um tumulo dedicado a você...</p>
+                    
+                    <p class="action">*Leonidas chora mais um pouco antes de subir aquela escadaria com sua família sabendo que ele e seu irmão iriam se ver novamente em uma próxima vida*</p>
+                    
+                    <p class="action" style="text-align: center; margin: 30px 0; font-weight: bold;">Fim...</p>
+                    
+                    <div style="text-align: center; margin-top: 40px; padding: 20px; background: rgba(0,0,0,0.3); border-radius: 8px; border: 1px solid var(--roxo-lunar);">
+                        <p><strong>Mensagem do Autor:</strong></p>
+                        <p>Oii obrigado por ter lido essa história até o final to aqui para mostrar o que é a mensagem que quis passar nessa história, vemos onde inveja ou até mesmo ódio pode levar e saber que o amor tem seus limites pois bem a sua liberdade acaba onde o limite do outro começa e bem espero que tenham gostado da história e dos personagens e é isso flw vamos para o próximo capitulo</p>
+                    </div>
+                </div>
+                
+                <div class="reading-controls">
+                    <button class="nav-btn" id="prevChapter" disabled>
+                        <i class="fas fa-arrow-left"></i> Capítulo Anterior
+                    </button>
+                    <button class="nav-btn" id="nextChapter">
+                        Próximo Capítulo <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>Site desenvolvido por Nathan • Todos os direitos reservados • <span id="current-date"></span></p>
+    </div>
+
+    <script>
+        // Elementos do DOM
+        const themeToggle = document.getElementById('theme-toggle');
+        const loginModal = document.getElementById('loginModal');
+        const loginBtnNav = document.getElementById('loginBtnNav');
+        const closeBtn = document.querySelector('.close');
+        const showRegister = document.getElementById('showRegister');
+        const showLogin = document.getElementById('showLogin');
+        const loginForm = document.getElementById('loginForm');
+        const registerForm = document.getElementById('registerForm');
+        const loginSubmit = document.getElementById('login');
+        const registerSubmit = document.getElementById('register');
+        const loginMessage = document.getElementById('loginMessage');
+        const registerMessage = document.getElementById('registerMessage');
+        const logoutBtn = document.getElementById('logoutBtn');
+        const userAvatar = document.getElementById('userAvatar');
+        const prevChapterBtn = document.getElementById('prevChapter');
+        const nextChapterBtn = document.getElementById('nextChapter');
+        const chapterItems = document.querySelectorAll('.chapter-item');
+
+        // Verifica se o usuário está logado ao carregar a página
+        function checkLoginStatus() {
+            const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+            const username = localStorage.getItem('currentUser');
+            
+            if (isLoggedIn && username) {
+                document.body.classList.add('logged-in');
+                userAvatar.textContent = username.charAt(0).toUpperCase();
+            }
+        }
+
+        // Aplica o tema salvo no localStorage
+        function applyTheme() {
+            const isDark = localStorage.getItem('darkMode') === 'true';
+            document.documentElement.classList.toggle('dark-mode', isDark);
+            themeToggle.style.color = isDark ? '#f39c12' : '#f1c40f';
+        }
+        
+        // Evento de clique no botão de tema
+        themeToggle.addEventListener('click', () => {
+            const isDark = !document.documentElement.classList.contains('dark-mode');
+            localStorage.setItem('darkMode', isDark);
+            
+            themeToggle.style.transform = 'rotate(360deg) scale(1.2)';
+            setTimeout(() => {
+                themeToggle.style.transform = '';
+            }, 300);
+            
+            applyTheme();
+        });
+
+        // Abrir modal de login
+        loginBtnNav.addEventListener('click', () => {
+            loginModal.style.display = 'block';
+        });
+
+        // Fechar modal de login
+        closeBtn.addEventListener('click', () => {
+            loginModal.style.display = 'none';
+        });
+
+        // Fechar modal ao clicar fora
+        window.addEventListener('click', (e) => {
+            if (e.target === loginModal) {
+                loginModal.style.display = 'none';
+            }
+        });
+
+        // Alternar entre login e registro
+        showRegister.addEventListener('click', () => {
+            loginForm.style.display = 'none';
+            registerForm.style.display = 'block';
+        });
+
+        showLogin.addEventListener('click', () => {
+            registerForm.style.display = 'none';
+            loginForm.style.display = 'block';
+        });
+
+        // Sistema de registro (usando apenas localStorage)
+        registerSubmit.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const username = document.getElementById('registerUsername').value;
+            const password = document.getElementById('registerPassword').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+
+            // Validações
+            if (password !== confirmPassword) {
+                showMessage(registerMessage, "As senhas não coincidem!", 'error');
+                return;
+            }
+
+            if (password.length < 4) {
+                showMessage(registerMessage, "A senha deve ter pelo menos 4 caracteres!", 'error');
+                return;
+            }
+
+            // Salva no localStorage
+            const usuarios = JSON.parse(localStorage.getItem('usuarios_magicos') || '[]');
+            
+            // Verifica se usuário já existe
+            if (usuarios.some(u => u.username === username)) {
+                showMessage(registerMessage, "Este usuário já existe!", 'error');
+                return;
+            }
+            
+            usuarios.push({ username, password });
+            localStorage.setItem('usuarios_magicos', JSON.stringify(usuarios));
+            
+            showMessage(registerMessage, "Conta criada com sucesso!", 'success');
+            
+            // Limpa o formulário
+            this.reset();
+            
+            // Volta para o login após 2 segundos
+            setTimeout(() => {
+                registerForm.style.display = 'none';
+                loginForm.style.display = 'block';
+                registerMessage.style.display = 'none';
+            }, 2000);
+        });
+
+        // Sistema de login (usando localStorage)
+        loginSubmit.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const username = document.getElementById('loginUsername').value;
+            const password = document.getElementById('loginPassword').value;
+            
+            const usuarios = JSON.parse(localStorage.getItem('usuarios_magicos') || []);
+            const user = usuarios.find(u => u.username === username && u.password === password);
+            
+            if (user) {
+                showMessage(loginMessage, "Login bem-sucedido!", 'success');
+                localStorage.setItem('isLoggedIn', 'true');
+                localStorage.setItem('currentUser', username);
+                
+                setTimeout(() => {
+                    loginModal.style.display = 'none';
+                    checkLoginStatus();
+                }, 1000);
+            } else {
+                showMessage(loginMessage, "Usuário ou senha incorretos!", 'error');
+            }
+        });
+
+        // Logout
+        logoutBtn.addEventListener('click', () => {
+            localStorage.setItem('isLoggedIn', 'false');
+            localStorage.removeItem('currentUser');
+            document.body.classList.remove('logged-in');
+        });
+
+        // Função para mostrar mensagens
+        function showMessage(element, text, type) {
+            element.textContent = text;
+            element.style.display = 'block';
+            element.className = `status-message ${type}`;
+        }
+
+        // Navegação entre capítulos
+        chapterItems.forEach(item => {
+            item.addEventListener('click', () => {
+                // Remove a classe active de todos os itens
+                chapterItems.forEach(i => i.classList.remove('active'));
+                // Adiciona a classe active ao item clicado
+                item.classList.add('active');
+                
+                // Aqui você carregaria o conteúdo do capítulo selecionado
+                // Por enquanto, apenas atualizamos o título
+                document.querySelector('.chapter-title').textContent = item.textContent;
+            });
+        });
+
+        // Controles de navegação
+        prevChapterBtn.addEventListener('click', () => {
+            // Lógica para ir para o capítulo anterior
+            alert('Capítulo anterior (em desenvolvimento)');
+        });
+
+        nextChapterBtn.addEventListener('click', () => {
+            // Lógica para ir para o próximo capítulo
+            alert('Próximo capítulo (em desenvolvimento)');
+        });
+
+        // Atualiza a data no footer
+        document.getElementById('current-date').textContent = new Date().toLocaleDateString('pt-BR');
+
+        // Inicializa a página
+        applyTheme();
+        checkLoginStatus();
+    </script>
+</body>
+</html>
