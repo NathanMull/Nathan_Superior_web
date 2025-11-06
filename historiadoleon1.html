@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Leonidas - A Maldição Eterna | Nathan Superior Web</title>
-
+    <title>Leonidas - A Maldição Eterna | Capítulo 1 | Nathan Superior Web</title>
+    
     <style>
         /* Adicionando zoom de 110% para todo o documento */
         body {
@@ -13,7 +12,7 @@
             -moz-transform: scale(1.1);
             -moz-transform-origin: 0 0;
         }
-
+        
         /* Para outros navegadores */
         @media all and (-webkit-min-device-pixel-ratio:0) {
             body {
@@ -21,21 +20,21 @@
             }
         }
     </style>
-
+    
     <script>
-        (function () {
+        (function() {
             const isDark = localStorage.getItem('darkMode') === 'true';
             if (isDark) {
                 document.documentElement.classList.add('dark-mode');
             }
-
+            
             const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
             if (isLoggedIn) {
                 document.body.classList.add('logged-in');
             }
         })();
     </script>
-
+    
     <style>
         :root {
             --verde: #27ae60;
@@ -239,7 +238,7 @@
             max-width: 300px;
             margin: 20px auto;
             border-radius: 8px;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
         }
 
         .book-info {
@@ -251,7 +250,7 @@
         }
 
         .book-meta {
-            background: rgba(0, 0, 0, 0.5);
+            background: rgba(0,0,0,0.5);
             padding: 10px 20px;
             border-radius: 8px;
             border: 1px solid var(--neon-ciano);
@@ -298,6 +297,9 @@
             cursor: pointer;
             transition: all 0.3s;
             border: 1px solid transparent;
+            color: var(--texto);
+            text-decoration: none;
+            display: block;
         }
 
         .chapter-item:hover {
@@ -309,6 +311,14 @@
             background: rgba(142, 68, 173, 0.3);
             border: 1px solid var(--roxo-lunar);
             box-shadow: 0 0 8px var(--roxo-lunar);
+        }
+
+        .chapter-link {
+            color: inherit;
+            text-decoration: none;
+            display: block;
+            width: 100%;
+            height: 100%;
         }
 
         .reading-content {
@@ -412,7 +422,7 @@
             margin-top: 50px;
         }
 
-        /* MODAL DE LOGIN CORRIGIDO */
+        /* MODAL DE LOGIN */
         .modal {
             display: none;
             position: fixed;
@@ -421,7 +431,7 @@
             top: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.8);
+            background-color: rgba(0,0,0,0.8);
         }
 
         .modal-content {
@@ -447,33 +457,26 @@
         }
 
         .form-group {
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
 
         .form-group label {
             display: block;
-            margin-bottom: 8px;
-            font-weight: 500;
+            margin-bottom: 5px;
             color: var(--neon-ciano);
         }
 
         .form-group input {
             width: 100%;
-            padding: 12px;
+            padding: 10px;
             border: 1px solid var(--neon-ciano);
             border-radius: 5px;
-            font-size: 1rem;
-            background: rgba(0, 0, 0, 0.7);
+            background: rgba(0,0,0,0.7);
             color: var(--texto);
             box-shadow: 0 0 5px var(--neon-ciano);
         }
 
-        .form-group input:focus {
-            outline: none;
-            box-shadow: 0 0 10px var(--neon-ciano);
-        }
-
-        .login-btn {
+        .modal-btn {
             background: var(--neon-marinho);
             color: white;
             border: none;
@@ -487,7 +490,7 @@
             transition: all 0.3s;
         }
 
-        .login-btn:hover {
+        .modal-btn:hover {
             background: #0066aa;
             box-shadow: 0 0 10px var(--neon-marinho), 0 0 20px var(--neon-azul);
         }
@@ -512,14 +515,14 @@
             border-radius: 5px;
             text-align: center;
         }
-
+        
         .success {
             background-color: rgba(39, 174, 96, 0.2);
             color: var(--verde);
             border: 1px solid var(--verde);
             box-shadow: 0 0 5px var(--verde);
         }
-
+        
         .error {
             background-color: rgba(231, 76, 60, 0.2);
             color: var(--vermelho);
@@ -532,27 +535,22 @@
                 flex-wrap: wrap;
                 padding: 15px;
             }
-
             .search-bar {
                 order: 3;
                 width: 100%;
                 margin: 15px 0 0 0;
             }
-
             .container {
                 padding: 15px;
             }
-
             .reading-container {
                 flex-direction: column;
             }
-
             .chapter-nav {
                 width: 100%;
                 position: static;
                 margin-bottom: 20px;
             }
-
             .book-title {
                 font-size: 2.2rem;
             }
@@ -560,62 +558,61 @@
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
-
 <body>
-    <!-- Modal de Login Corrigido -->
+    <!-- Modal de Login -->
     <div id="loginModal" class="modal">
         <div class="modal-content">
             <span class="close">&times;</span>
-
+            
             <div id="loginForm">
                 <h2 style="color: var(--neon-ciano); margin-bottom: 20px; text-align: center; text-shadow: 0 0 5px var(--neon-ciano);">Entrar</h2>
-
+                
                 <form id="login">
                     <div class="form-group">
                         <label for="loginUsername"><i class="fas fa-user"></i> Nome de Usuário</label>
                         <input type="text" id="loginUsername" placeholder="Seu nome de usuário" required>
                     </div>
-
+                    
                     <div class="form-group">
                         <label for="loginPassword"><i class="fas fa-lock"></i> Senha</label>
                         <input type="password" id="loginPassword" placeholder="Sua senha" required>
                     </div>
-
-                    <button type="submit" class="login-btn"><i class="fas fa-sign-in-alt"></i> Entrar</button>
-
+                    
+                    <button type="submit" class="modal-btn"><i class="fas fa-sign-in-alt"></i> Entrar</button>
+                    
                     <div id="loginMessage" class="status-message" style="display: none;"></div>
                 </form>
-
+                
                 <div class="switch-form">
                     <span>Não tem uma conta? </span>
                     <button class="switch-btn" id="showRegister">Registre-se</button>
                 </div>
             </div>
-
+            
             <div id="registerForm" style="display: none;">
                 <h2 style="color: var(--neon-ciano); margin-bottom: 20px; text-align: center; text-shadow: 0 0 5px var(--neon-ciano);">Criar Conta</h2>
-
+                
                 <form id="register">
                     <div class="form-group">
                         <label for="registerUsername"><i class="fas fa-user-edit"></i> Nome de Usuário</label>
                         <input type="text" id="registerUsername" placeholder="Escolha um nome de usuário" required>
                     </div>
-
+                    
                     <div class="form-group">
                         <label for="registerPassword"><i class="fas fa-key"></i> Senha</label>
                         <input type="password" id="registerPassword" placeholder="Crie uma senha" required>
                     </div>
-
+                    
                     <div class="form-group">
                         <label for="confirmPassword"><i class="fas fa-check-circle"></i> Confirmar Senha</label>
                         <input type="password" id="confirmPassword" placeholder="Digite a senha novamente" required>
                     </div>
-
-                    <button type="submit" class="login-btn"><i class="fas fa-user-plus"></i> Registrar</button>
-
+                    
+                    <button type="submit" class="modal-btn"><i class="fas fa-user-plus"></i> Registrar</button>
+                    
                     <div id="registerMessage" class="status-message" style="display: none;"></div>
                 </form>
-
+                
                 <div class="switch-form">
                     <span>Já tem uma conta? </span>
                     <button class="switch-btn" id="showLogin">Faça login</button>
@@ -630,11 +627,11 @@
             <i id="theme-toggle" class="fas fa-star" title="Mudar tema"></i>
             <span>Nathan Superior Web <small>- Biblioteca</small></span>
         </div>
-
+        
         <div class="search-bar">
             <input type="text" placeholder="Pesquise...">
         </div>
-
+        
         <div class="nav-icons">
             <a href="index.html" class="nav-icon" title="Início">
                 <i class="fas fa-home"></i>
@@ -656,7 +653,7 @@
         <div class="book-header">
             <h1 class="book-title">Leonidas</h1>
             <h2 class="book-subtitle">A Maldição Eterna</h2>
-
+            
             <div class="book-info">
                 <div class="book-meta">
                     <h4>Autor</h4>
@@ -668,148 +665,100 @@
                 </div>
                 <div class="book-meta">
                     <h4>Capítulos</h4>
-                    <p>1</p>
+                    <p>2</p>
                 </div>
             </div>
         </div>
-
+        
         <div class="reading-container">
             <div class="chapter-nav">
                 <h3>Capítulos</h3>
                 <ul class="chapter-list">
-                    <li class="chapter-item active" data-chapter="1">Capítulo 1: A Maldição Eterna</li>
-                    <!-- Mais capítulos podem ser adicionados aqui -->
+                    <li class="chapter-item active" data-chapter="1">
+                        <span class="chapter-link">Capítulo 1: A Maldição Eterna</span>
+                    </li>
+                    <li class="chapter-item" data-chapter="2">
+                        <a href="capitulo2pag1.html" class="chapter-link">Capítulo 2: O Amor do Nathan</a>
+                    </li>
                 </ul>
             </div>
-
+            
             <div class="reading-content">
-                <h2 class="chapter-title">Capítulo 1: A Maldição Eterna</h2>
-
+                <h2 class="chapter-title">Capítulo 1: A Maldição Eterna - Página 1</h2>
+                
                 <div class="story-content">
-                    <p class="action">*Leonidas nasceu em uma vila de um clã chamado lunarianos sendo o filho mais velho
-                        do capitão e da capitã do clã, o progenitor que seria o novo capitão do clã até seu irmão mais
-                        novo nascer com olhos verdes como esmeraldas. Bem, vamos ver como tudo isso começou.*</p>
-
-                    <p class="action">*3 horas da manhã em ponto, quando leonidas entra no quarto após longas horas com
-                        sua mãe em trabalho de parto, então leonidas de 4 anos olha seu irmãozinho com um cabelo verde e
-                        olhos em cor de esmeralda diferente dos da família que eram roxos, mas ele não se importou ele
-                        segurou seu irmão olhando para ele com orgulho e feliz pelo seu irmão ser tão parecido com ele*
-                    </p>
-
+                    <p class="action">*Leonidas nasceu em uma vila de um clã chamado lunarianos sendo o filho mais velho do capitão e da capitã do clã, o progenitor que seria o novo capitão do clã até seu irmão mais novo nascer com olhos verdes como esmeraldas. Bem, vamos ver como tudo isso começou.*</p>
+                    
+                    <p class="action">*3 horas da manhã em ponto, quando leonidas entra no quarto após longas horas com sua mãe em trabalho de parto, então leonidas de 4 anos olha seu irmãozinho com um cabelo verde e olhos em cor de esmeralda diferente dos da família que eram roxos, mas ele não se importou ele segurou seu irmão olhando para ele com orgulho e feliz pelo seu irmão ser tão parecido com ele*</p>
+                    
                     <p class="dialogue">Leonidas- Ele é tão fofo...</p>
-
+                    
                     <p class="dialogue">Mãe- Seu dever vai ser protegê-lo daqui para frente</p>
-
-                    <p class="action">*a mãe de leonidas sorria gentilmente ao ver seus filhos se dando bem minutos
-                        depois de se verem pela primeira vez...*</p>
-
+                    
+                    <p class="action">*a mãe de leonidas sorria gentilmente ao ver seus filhos se dando bem minutos depois de se verem pela primeira vez...*</p>
+                    
                     <p class="action" style="text-align: center; margin: 30px 0; font-weight: bold;">6 Anos depois</p>
-
-                    <p class="action">*vemos leonidas emburrado andando pelas ruas da vila mesmo com 10 anos por ser
-                        filho do capitão todos esperavam que ele fosse forte então desde cedo leonidas se viu em uma
-                        cobrança estrema e todos acabaram tendo receio de entrar em seu caminho pois com 9 anos ele
-                        derrubou um dos melhores guardas da vila com certa facilidade. E ele andando viu algumas garotas
-                        a frente cochichando sobre ele e uma delas chama ele*</p>
-
+                    
+                    <p class="action">*vemos leonidas emburrado andando pelas ruas da vila mesmo com 10 anos por ser filho do capitão todos esperavam que ele fosse forte então desde cedo leonidas se viu em uma cobrança estrema e todos acabaram tendo receio de entrar em seu caminho pois com 9 anos ele derrubou um dos melhores guardas da vila com certa facilidade. E ele andando viu algumas garotas a frente cochichando sobre ele e uma delas chama ele*</p>
+                    
                     <p class="dialogue">Garota- Ei Leo por algum acaso está irritado por ninguém querer seu amigo?</p>
-
-                    <p class="action">*Leonidas fica confuso e mais emburrado e continua andando por mais um tempo até
-                        que a garota corre até ele rindo.*</p>
-
+                    
+                    <p class="action">*Leonidas fica confuso e mais emburrado e continua andando por mais um tempo até que a garota corre até ele rindo.*</p>
+                    
                     <p class="dialogue">Garota- Era piada!</p>
-
-                    <p class="action">*Ao escutar ela rindo, Leonidas para e vira-se. Ele vê que ela não parava de
-                        sorrir e rir, e isso fez algo no coração de Leonidas. E ele sorri de verdade para alguém depois
-                        de muito tempo.*</p>
-
-                    <p class="action">*Depois da garota se despedir dele, ele se senta em uma colina próxima, sorrindo,
-                        pensando e ficando feliz.*</p>
-
-                    <p class="thought">Leonidas- ✦ Ela sorriu para mim... Ela riu. Será que eu deveria melhorar para as
-                        pessoas me verem assim também? Ou melhoro para ela?... ✦</p>
-
-                    <!-- Continuação do capítulo -->
-                    <p class="action">*Leonidas foi, aos poucos, se transformando. Sem perder sua habilidade afiada -
-                        pois continuava um dos melhores lutadores da guarda do clã -, aprendeu a dosar a força com um
-                        sorriso. Um carisma genuíno, que antes estava soterrado, começou a florescer.*</p>
-
+                    
+                    <p class="action">*Ao escutar ela rindo, Leonidas para e vira-se. Ele vê que ela não parava de sorrir e rir, e isso fez algo no coração de Leonidas. E ele sorri de verdade para alguém depois de muito tempo.*</p>
+                    
+                    <p class="action">*Depois da garota se despedir dele, ele se senta em uma colina próxima, sorrindo, pensando e ficando feliz.*</p>
+                    
+                    <p class="thought">Leonidas- ✦ Ela sorriu para mim... Ela riu. Será que eu deveria melhorar para as pessoas me verem assim também? Ou melhoro para ela?... ✦</p>
+                    
+                    <p class="action">*Leonidas foi, aos poucos, se transformando. Sem perder sua habilidade afiada - pois continuava um dos melhores lutadores da guarda do clã -, aprendeu a dosar a força com um sorriso. Um carisma genuíno, que antes estava soterrado, começou a florescer.*</p>
+                    
                     <p class="action">*E no centro dessa transformação estava Aurora.*</p>
-
-                    <p class="action">*Ao redor dela, era como se um peso fosse tirado de seus ombros. Sua postura
-                        rígida dava lugar a brincadeiras despretensiosas; seu olhar severo se perdia em meio a risadas.
-                        Ele agia como um palhaço, um bobo da corte dedicado, só para ver o sorriso que havia iluminado
-                        seu mundo pela primeira vez.*</p>
-
-                    <p class="action">*Essa conexão se estendeu naturalmente ao irmão mais novo de Leonidas cresceu
-                        junto com o irmão, não apenas como um protetor distante, mas como um companheiro de aventuras
-                        inventadas e travessuras inocentes. Foram anos se entrelaçando, construindo uma história comum
-                        não sobre batalhas, mas sobre brincadeiras e uma felicidade simples que ele nunca imaginou poder
-                        pertencer a ele.*</p>
-
-                    <p class="action" style="text-align: center; margin: 30px 0; font-weight: bold;">6 Anos se
-                        passaram...</p>
-
-                    <p class="action">*Aos dezesseis anos, Leonidas estava no ápice de sua carreira na guarda do clã.
-                        Seu irmão, Nathan, de doze, tinha um orgulho imenso dele - aqueles olhos verdes cheios de
-                        admiração eram capazes de iluminar qualquer dia ruim. E, é claro, havia Aurora. Falar com ela
-                        era seu maior prêmio. Tomado por uma coragem rara, decidiu que era a hora. Colheu um buquê de
-                        flores do campo com todo o cuidado, o coração batendo forte contra o peito, e foi até a casa
-                        dela.*</p>
-
+                    
+                    <p class="action">*Ao redor dela, era como se um peso fosse tirado de seus ombros. Sua postura rígida dava lugar a brincadeiras despretensiosas; seu olhar severo se perdia em meio a risadas. Ele agia como um palhaço, um bobo da corte dedicado, só para ver o sorriso que havia iluminado seu mundo pela primeira vez.*</p>
+                    
+                    <p class="action">*Essa conexão se estendeu naturalmente ao irmão mais novo de Leonidas cresceu junto com o irmão, não apenas como um protetor distante, mas como um companheiro de aventuras inventadas e travessuras inocentes. Foram anos se entrelaçando, construindo uma história comum não sobre batalhas, mas sobre brincadeiras e uma felicidade simples que ele nunca imaginou poder pertencer a ele.*</p>
+                    
+                    <p class="action" style="text-align: center; margin: 30px 0; font-weight: bold;">6 Anos se passaram...</p>
+                    
+                    <p class="action">*Aos dezesseis anos, Leonidas estava no ápice de sua carreira na guarda do clã. Seu irmão, Nathan, de doze, tinha um orgulho imenso dele - aqueles olhos verdes cheios de admiração eram capazes de iluminar qualquer dia ruim. E, é claro, havia Aurora. Falar com ela era seu maior prêmio. Tomado por uma coragem rara, decidiu que era a hora. Colheu um buquê de flores do campo com todo o cuidado, o coração batendo forte contra o peito, e foi até a casa dela.*</p>
+                    
                     <p class="action">*Ela não estava.*</p>
-
+                    
                     <p class="thought">Leonidas- ✦Que estranho... bem ela deve estar na biblioteca✦</p>
-
-                    <!-- Continuação do capítulo -->
-                    <p class="action">*Sem desanimar, lembrou-se de seu lugar favorito: a biblioteca. Caminhou até lá,
-                        ensaiando mentalmente cada palavra, cada gesto de sua declaração.*</p>
-
+                    
+                    <p class="action">*Sem desanimar, lembrou-se de seu lugar favorito: a biblioteca. Caminhou até lá, ensaiando mentalmente cada palavra, cada gesto de sua declaração.*</p>
+                    
                     <p class="action">*Mas ao chegar à porta, o mundo desabou.*</p>
-
-                    <p class="action">*Lá estava ela. E com ela, seu maior rival - o filho do guarda que Leonidas
-                        humilhara em um duelo quando tinham dez anos. E Aurora... Aurora sorria para ele. Era um sorriso
-                        diferente de todos os outros que ele já vira. Um sorriso aberto, desarmado, que ela nunca havia
-                        dirigido a Leonidas.*</p>
-
-                    <p class="action">*A visão o atingiu como um golpe físico. Toda a coragem, a esperança, o futuro que
-                        ele imaginava - tudo se desfez em um instante. Paralisado, ele nem percebeu a própria mão se
-                        fechando, até ouvir o leve estalar dos cabos. Olhou para baixo e viu as pétalas esmagadas, o
-                        buquê que preparara com tanto carinho agora nada mais era que um punhado de ruína em sua mão
-                        tremula.*</p>
-
-                    <p class="thought">Leonidas- ✦O que é isso...? Porque ela esta sorrindo assim a ele e nunca sorriu
-                        assim para mim...? ✦</p>
-
-                    <!-- Continuação do capítulo (resumida para exemplo) -->
-                    <p class="action">*Após a cena na biblioteca, Leonidas saiu sem dizer uma palavra. Jogou o buquê
-                        despedaçado no lixo mais próximo e dirigiu-se para casa. Ao entrar em seu quarto, as pernas
-                        finalmente cederam. Ele caiu de joelhos no chão, o peso daquela visão esmagando-o por completo.*
-                    </p>
-
-                    <p class="action">*A casa estava vazia. Exceto por Nathan, que, ao ouvir o baque, correu até o
-                        quarto.*</p>
-
+                    
+                    <p class="action">*Lá estava ela. E com ela, seu maior rival - o filho do guarda que Leonidas humilhara em um duelo quando tinham dez anos. E Aurora... Aurora sorria para ele. Era um sorriso diferente de todos os outros que ele já vira. Um sorriso aberto, desarmado, que ela nunca havia dirigido a Leonidas.*</p>
+                    
+                    <p class="action">*A visão o atingiu como um golpe físico. Toda a coragem, a esperança, o futuro que ele imaginava - tudo se desfez em um instante. Paralisado, ele nem percebeu a própria mão se fechando, até ouvir o leve estalar dos cabos. Olhou para baixo e viu as pétalas esmagadas, o buquê que preparara com tanto carinho agora nada mais era que um punhado de ruína em sua mão tremula.*</p>
+                    
+                    <p class="thought">Leonidas- ✦O que é isso...? Porque ela esta sorrindo assim a ele e nunca sorriu assim para mim...? ✦</p>
+                    
+                    <p class="action">*Após a cena na biblioteca, Leonidas saiu sem dizer uma palavra. Jogou o buquê despedaçado no lixo mais próximo e dirigiu-se para casa. Ao entrar em seu quarto, as pernas finalmente cederam. Ele caiu de joelhos no chão, o peso daquela visão esmagando-o por completo.*</p>
+                    
+                    <p class="action">*A casa estava vazia. Exceto por Nathan, que, ao ouvir o baque, correu até o quarto.*</p>
+                    
                     <p class="dialogue">Nathan- *Olhando o irmão de cima a baixo* Irmão!? O que aconteceu!?</p>
-
+                    
                     <p class="dialogue">Leonidas- Nada, maninho... Eu vou ficar bem...</p>
-
+                    
                     <p class="dialogue">Nathan- Irmão, saiba que eu estou aqui, está bem?</p>
-
-                    <p class="action">*Leonidas apenas acenou com a cabeça. Nathan, entendendo a necessidade de espaço,
-                        saiu silenciosamente. Sozinho, um plano frio começou a se formar na mente de Leonidas. No dia
-                        seguinte, seria o teste para a guarda definitiva do clã. Seu rival, Hermes, estaria lá. E
-                        Leonidas sabia exatamente o que precisava fazer.*</p>
-
-                    <!-- Continuação do capítulo (resumida para exemplo) -->
-                    <p class="action" style="text-align: center; margin: 30px 0; font-weight: bold;">Vá para a próxima
-                        Página</p>
-
-
-                    <div class="reading-controls">
-                        <a href="historiadoleon2.html" class="nav-btn" id="nextChapter">
-                            Próxima Página <i class="fas fa-arrow-right"></i>
-                        </a>
-                    </div>
+                    
+                    <p class="action">*Leonidas apenas acenou com a cabeça. Nathan, entendendo a necessidade de espaço, saiu silenciosamente. Sozinho, um plano frio começou a se formar na mente de Leonidas. No dia seguinte, seria o teste para a guarda definitiva do clã. Seu rival, Hermes, estaria lá. E Leonidas sabia exatamente o que precisava fazer.*</p>
+                </div>
+                
+                <div class="reading-controls">
+                    <button class="nav-btn" id="prevChapter" disabled>
+                        <i class="fas fa-arrow-left"></i> Página Anterior
+                    </button>
+                    <a href="historiadoleon2.html" class="nav-btn" id="nextChapter">
+                        Próxima Página <i class="fas fa-arrow-right"></i>
+                    </a>
                 </div>
             </div>
         </div>
@@ -835,13 +784,15 @@
         const registerMessage = document.getElementById('registerMessage');
         const logoutBtn = document.getElementById('logoutBtn');
         const userAvatar = document.getElementById('userAvatar');
+        const prevChapterBtn = document.getElementById('prevChapter');
+        const nextChapterBtn = document.getElementById('nextChapter');
         const chapterItems = document.querySelectorAll('.chapter-item');
 
         // Verifica se o usuário está logado ao carregar a página
         function checkLoginStatus() {
             const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
             const username = localStorage.getItem('currentUser');
-
+            
             if (isLoggedIn && username) {
                 document.body.classList.add('logged-in');
                 userAvatar.textContent = username.charAt(0).toUpperCase();
@@ -854,17 +805,17 @@
             document.documentElement.classList.toggle('dark-mode', isDark);
             themeToggle.style.color = isDark ? '#f39c12' : '#f1c40f';
         }
-
+        
         // Evento de clique no botão de tema
         themeToggle.addEventListener('click', () => {
             const isDark = !document.documentElement.classList.contains('dark-mode');
             localStorage.setItem('darkMode', isDark);
-
+            
             themeToggle.style.transform = 'rotate(360deg) scale(1.2)';
             setTimeout(() => {
                 themeToggle.style.transform = '';
             }, 300);
-
+            
             applyTheme();
         });
 
@@ -897,7 +848,7 @@
         });
 
         // Sistema de registro (usando apenas localStorage)
-        registerSubmit.addEventListener('submit', function (e) {
+        registerSubmit.addEventListener('submit', function(e) {
             e.preventDefault();
             const username = document.getElementById('registerUsername').value;
             const password = document.getElementById('registerPassword').value;
@@ -916,21 +867,21 @@
 
             // Salva no localStorage
             const usuarios = JSON.parse(localStorage.getItem('usuarios_magicos') || '[]');
-
+            
             // Verifica se usuário já existe
             if (usuarios.some(u => u.username === username)) {
                 showMessage(registerMessage, "Este usuário já existe!", 'error');
                 return;
             }
-
+            
             usuarios.push({ username, password });
             localStorage.setItem('usuarios_magicos', JSON.stringify(usuarios));
-
+            
             showMessage(registerMessage, "Conta criada com sucesso!", 'success');
-
+            
             // Limpa o formulário
             this.reset();
-
+            
             // Volta para o login após 2 segundos
             setTimeout(() => {
                 registerForm.style.display = 'none';
@@ -940,19 +891,19 @@
         });
 
         // Sistema de login (usando localStorage)
-        loginSubmit.addEventListener('submit', function (e) {
+        loginSubmit.addEventListener('submit', function(e) {
             e.preventDefault();
             const username = document.getElementById('loginUsername').value;
             const password = document.getElementById('loginPassword').value;
-
-            const usuarios = JSON.parse(localStorage.getItem('usuarios_magicos') || '[]');
+            
+            const usuarios = JSON.parse(localStorage.getItem('usuarios_magicos') || []);
             const user = usuarios.find(u => u.username === username && u.password === password);
-
+            
             if (user) {
                 showMessage(loginMessage, "Login bem-sucedido!", 'success');
                 localStorage.setItem('isLoggedIn', 'true');
                 localStorage.setItem('currentUser', username);
-
+                
                 setTimeout(() => {
                     loginModal.style.display = 'none';
                     checkLoginStatus();
@@ -983,7 +934,7 @@
                 chapterItems.forEach(i => i.classList.remove('active'));
                 // Adiciona a classe active ao item clicado
                 item.classList.add('active');
-
+                
                 // Aqui você carregaria o conteúdo do capítulo selecionado
                 // Por enquanto, apenas atualizamos o título
                 document.querySelector('.chapter-title').textContent = item.textContent;
@@ -998,5 +949,4 @@
         checkLoginStatus();
     </script>
 </body>
-
 </html>
