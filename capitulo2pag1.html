@@ -1,0 +1,1097 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>O Amor e Perda | Nathan Superior Web</title>
+    
+    <style>
+        /* Adicionando zoom de 110% para todo o documento */
+        body {
+            zoom: 110%;
+            -moz-transform: scale(1.1);
+            -moz-transform-origin: 0 0;
+        }
+        
+        /* Para outros navegadores */
+        @media all and (-webkit-min-device-pixel-ratio:0) {
+            body {
+                zoom: 110%;
+            }
+        }
+    </style>
+    
+    <script>
+        (function() {
+            const isDark = localStorage.getItem('darkMode') === 'true';
+            if (isDark) {
+                document.documentElement.classList.add('dark-mode');
+            }
+            
+            const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+            if (isLoggedIn) {
+                document.body.classList.add('logged-in');
+            }
+        })();
+    </script>
+    
+    <style>
+        :root {
+            --verde: #27ae60;
+            --azul: #3498db;
+            --vermelho: #e74c3c;
+            --amarelo: #f1c40f;
+            --texto: #f0f0f0;
+            --fundo: #000000;
+            --card: #0a0a0a;
+            --borda: #222;
+            --neon-ciano: #0ff;
+            --neon-azul: #00f;
+            --neon-marinho: #0077be;
+            --roxo-lunar: #8e44ad;
+            --verde-esmeralda: #2ecc71;
+            --dourado: #ffd700;
+        }
+
+        .dark-mode {
+            --verde: #1e8449;
+            --azul: #2980b9;
+            --vermelho: #ff6b6b;
+            --amarelo: #f39c12;
+            --texto: #f0f0f0;
+            --fundo: #000000;
+            --card: #0a0a0a;
+            --borda: #222;
+            --neon-ciano: #0ff;
+            --neon-azul: #00f;
+            --neon-marinho: #0077be;
+            --roxo-lunar: #9b59b6;
+            --verde-esmeralda: #27ae60;
+            --dourado: #ffd700;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        body {
+            background: var(--fundo);
+            color: var(--texto);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* NAVBAR COM TEMA NEON */
+        .navbar {
+            background: rgba(10, 10, 10, 0.9);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 30px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 2px solid var(--dourado);
+            box-shadow: 0 0 10px var(--dourado), 0 0 20px var(--roxo-lunar);
+        }
+
+        .logo {
+            color: white;
+            font-weight: bold;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-shadow: 0 0 5px var(--dourado), 0 0 10px var(--dourado);
+        }
+
+        .logo small {
+            font-size: 0.8rem;
+            opacity: 0.9;
+            font-weight: normal;
+        }
+
+        #theme-toggle {
+            color: var(--dourado);
+            cursor: pointer;
+            font-size: 1.3rem;
+            transition: all 0.3s;
+            text-shadow: 0 0 5px var(--dourado);
+        }
+
+        #theme-toggle:hover {
+            transform: scale(1.2);
+            text-shadow: 0 0 10px var(--dourado), 0 0 20px var(--dourado);
+        }
+
+        .search-bar {
+            flex-grow: 1;
+            max-width: 500px;
+            margin: 0 20px;
+        }
+
+        .search-bar input {
+            width: 100%;
+            padding: 8px 15px;
+            border: 1px solid var(--dourado);
+            border-radius: 20px;
+            font-size: 0.9rem;
+            background: rgba(0, 0, 0, 0.7);
+            color: var(--texto);
+            box-shadow: 0 0 5px var(--dourado);
+        }
+
+        .search-bar input:focus {
+            outline: none;
+            box-shadow: 0 0 10px var(--dourado), 0 0 20px var(--roxo-lunar);
+        }
+
+        .nav-icons {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-icon {
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: transform 0.2s;
+            text-decoration: none;
+            text-shadow: 0 0 5px var(--dourado);
+        }
+
+        .nav-icon:hover {
+            transform: translateY(-2px);
+            text-shadow: 0 0 10px var(--dourado), 0 0 20px var(--dourado);
+        }
+
+        .user-info {
+            display: none;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .user-avatar {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background-color: var(--dourado);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: black;
+            font-weight: bold;
+            box-shadow: 0 0 5px var(--dourado);
+        }
+
+        .logout-btn {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            font-size: 0.9rem;
+            text-shadow: 0 0 5px var(--dourado);
+        }
+
+        body.logged-in .user-info {
+            display: flex;
+        }
+
+        body.logged-in .login-btn-nav {
+            display: none;
+        }
+
+        /* CONTEÚDO DA PÁGINA DO LIVRO */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 30px;
+        }
+
+        .book-header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 20px;
+            background: var(--card);
+            border-radius: 12px;
+            border: 1px solid var(--dourado);
+            box-shadow: 0 0 15px var(--dourado);
+        }
+
+        .book-title {
+            color: var(--dourado);
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+            text-shadow: 0 0 10px var(--dourado);
+        }
+
+        .book-subtitle {
+            color: var(--roxo-lunar);
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+
+        .book-cover {
+            max-width: 300px;
+            margin: 20px auto;
+            border-radius: 8px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+        }
+
+        .book-info {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .book-meta {
+            background: rgba(0,0,0,0.5);
+            padding: 10px 20px;
+            border-radius: 8px;
+            border: 1px solid var(--dourado);
+        }
+
+        .book-meta h4 {
+            color: var(--dourado);
+            margin-bottom: 5px;
+        }
+
+        .reading-container {
+            display: flex;
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .chapter-nav {
+            width: 250px;
+            background: var(--card);
+            border-radius: 12px;
+            padding: 20px;
+            border: 1px solid var(--dourado);
+            box-shadow: 0 0 10px var(--dourado);
+            height: fit-content;
+            position: sticky;
+            top: 100px;
+        }
+
+        .chapter-nav h3 {
+            color: var(--dourado);
+            margin-bottom: 15px;
+            text-align: center;
+            text-shadow: 0 0 5px var(--dourado);
+        }
+
+        .chapter-list {
+            list-style: none;
+        }
+
+        .chapter-item {
+            padding: 12px 15px;
+            margin-bottom: 8px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 1px solid transparent;
+        }
+
+        .chapter-item:hover {
+            background: rgba(255, 215, 0, 0.2);
+            border: 1px solid var(--dourado);
+        }
+
+        .chapter-item.active {
+            background: rgba(255, 215, 0, 0.3);
+            border: 1px solid var(--dourado);
+            box-shadow: 0 0 8px var(--dourado);
+        }
+
+        .reading-content {
+            flex: 1;
+            background: var(--card);
+            border-radius: 12px;
+            padding: 40px;
+            border: 1px solid var(--dourado);
+            box-shadow: 0 0 15px var(--dourado);
+            min-height: 800px;
+        }
+
+        .chapter-title {
+            color: var(--dourado);
+            font-size: 2.2rem;
+            margin-bottom: 30px;
+            text-align: center;
+            text-shadow: 0 0 8px var(--dourado);
+            border-bottom: 2px solid var(--dourado);
+            padding-bottom: 15px;
+        }
+
+        .warning-box {
+            background: rgba(231, 76, 60, 0.2);
+            border: 1px solid var(--vermelho);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 0 10px var(--vermelho);
+        }
+
+        .warning-box h3 {
+            color: var(--vermelho);
+            margin-bottom: 10px;
+            text-shadow: 0 0 5px var(--vermelho);
+        }
+
+        .story-content {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .story-content p {
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+
+        .story-content .dialogue {
+            margin-left: 30px;
+            font-style: italic;
+            color: var(--verde-esmeralda);
+            border-left: 2px solid var(--verde-esmeralda);
+            padding-left: 15px;
+            margin-bottom: 15px;
+        }
+
+        .story-content .thought {
+            margin-left: 20px;
+            color: var(--dourado);
+            font-style: italic;
+            margin-bottom: 15px;
+        }
+
+        .story-content .action {
+            margin-left: 10px;
+            color: var(--neon-ciano);
+            margin-bottom: 15px;
+        }
+
+        .reading-controls {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid var(--borda);
+        }
+
+        .nav-btn {
+            background: var(--dourado);
+            color: black;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 6px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s;
+            box-shadow: 0 0 5px var(--dourado);
+            font-weight: bold;
+        }
+
+        .nav-btn:hover {
+            background: #ffed4a;
+            box-shadow: 0 0 10px var(--dourado);
+            transform: translateY(-2px);
+        }
+
+        .nav-btn:disabled {
+            background: #555;
+            cursor: not-allowed;
+            box-shadow: none;
+            transform: none;
+            color: #999;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 20px;
+            font-size: 0.9rem;
+            color: var(--texto);
+            opacity: 0.8;
+            background: var(--card);
+            border-top: 1px solid var(--borda);
+            margin-top: 50px;
+        }
+
+        /* MODAL DE LOGIN */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.8);
+        }
+
+        .modal-content {
+            background-color: var(--card);
+            margin: 10% auto;
+            padding: 30px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 400px;
+            box-shadow: 0 0 15px var(--dourado), 0 0 30px var(--roxo-lunar);
+            position: relative;
+            border: 1px solid var(--dourado);
+        }
+
+        .close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--vermelho);
+            text-shadow: 0 0 5px var(--vermelho);
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: var(--dourado);
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid var(--dourado);
+            border-radius: 5px;
+            background: rgba(0,0,0,0.7);
+            color: var(--texto);
+            box-shadow: 0 0 5px var(--dourado);
+        }
+
+        .modal-btn {
+            background: var(--dourado);
+            color: black;
+            border: none;
+            padding: 12px;
+            width: 100%;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            margin-top: 10px;
+            box-shadow: 0 0 5px var(--dourado);
+            transition: all 0.3s;
+            font-weight: bold;
+        }
+
+        .modal-btn:hover {
+            background: #ffed4a;
+            box-shadow: 0 0 10px var(--dourado), 0 0 20px var(--roxo-lunar);
+        }
+
+        .switch-form {
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        .switch-btn {
+            background: none;
+            border: none;
+            color: var(--dourado);
+            cursor: pointer;
+            text-decoration: underline;
+            text-shadow: 0 0 5px var(--dourado);
+        }
+
+        .status-message {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            text-align: center;
+        }
+        
+        .success {
+            background-color: rgba(39, 174, 96, 0.2);
+            color: var(--verde);
+            border: 1px solid var(--verde);
+            box-shadow: 0 0 5px var(--verde);
+        }
+        
+        .error {
+            background-color: rgba(231, 76, 60, 0.2);
+            color: var(--vermelho);
+            border: 1px solid var(--vermelho);
+            box-shadow: 0 0 5px var(--vermelho);
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                flex-wrap: wrap;
+                padding: 15px;
+            }
+            .search-bar {
+                order: 3;
+                width: 100%;
+                margin: 15px 0 0 0;
+            }
+            .container {
+                padding: 15px;
+            }
+            .reading-container {
+                flex-direction: column;
+            }
+            .chapter-nav {
+                width: 100%;
+                position: static;
+                margin-bottom: 20px;
+            }
+            .book-title {
+                font-size: 2.2rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Modal de Login -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            
+            <div id="loginForm">
+                <h2 style="color: var(--dourado); margin-bottom: 20px; text-align: center; text-shadow: 0 0 5px var(--dourado);">Entrar</h2>
+                
+                <form id="login">
+                    <div class="form-group">
+                        <label for="loginUsername"><i class="fas fa-user"></i> Nome de Usuário</label>
+                        <input type="text" id="loginUsername" placeholder="Seu nome de usuário" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="loginPassword"><i class="fas fa-lock"></i> Senha</label>
+                        <input type="password" id="loginPassword" placeholder="Sua senha" required>
+                    </div>
+                    
+                    <button type="submit" class="modal-btn"><i class="fas fa-sign-in-alt"></i> Entrar</button>
+                    
+                    <div id="loginMessage" class="status-message" style="display: none;"></div>
+                </form>
+                
+                <div class="switch-form">
+                    <span>Não tem uma conta? </span>
+                    <button class="switch-btn" id="showRegister">Registre-se</button>
+                </div>
+            </div>
+            
+            <div id="registerForm" style="display: none;">
+                <h2 style="color: var(--dourado); margin-bottom: 20px; text-align: center; text-shadow: 0 0 5px var(--dourado);">Criar Conta</h2>
+                
+                <form id="register">
+                    <div class="form-group">
+                        <label for="registerUsername"><i class="fas fa-user-edit"></i> Nome de Usuário</label>
+                        <input type="text" id="registerUsername" placeholder="Escolha um nome de usuário" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="registerPassword"><i class="fas fa-key"></i> Senha</label>
+                        <input type="password" id="registerPassword" placeholder="Crie uma senha" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="confirmPassword"><i class="fas fa-check-circle"></i> Confirmar Senha</label>
+                        <input type="password" id="confirmPassword" placeholder="Digite a senha novamente" required>
+                    </div>
+                    
+                    <button type="submit" class="modal-btn"><i class="fas fa-user-plus"></i> Registrar</button>
+                    
+                    <div id="registerMessage" class="status-message" style="display: none;"></div>
+                </form>
+                
+                <div class="switch-form">
+                    <span>Já tem uma conta? </span>
+                    <button class="switch-btn" id="showLogin">Faça login</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="logo">
+            <i id="theme-toggle" class="fas fa-moon" title="Mudar tema"></i>
+            <span>Nathan Superior Web <small>- Biblioteca</small></span>
+        </div>
+        
+        <div class="search-bar">
+            <input type="text" placeholder="Pesquise...">
+        </div>
+        
+        <div class="nav-icons">
+            <a href="index.html" class="nav-icon" title="Início">
+                <i class="fas fa-home"></i>
+            </a>
+            <a href="favoritos.html" class="nav-icon" title="Favoritos">
+                <i class="fas fa-heart"></i>
+            </a>
+            <div class="user-info">
+                <div class="user-avatar" id="userAvatar"></div>
+                <button class="logout-btn" id="logoutBtn">Sair</button>
+            </div>
+            <button class="nav-icon login-btn-nav" id="loginBtnNav" title="Login">
+                <i class="fas fa-user"></i>
+            </button>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="book-header">
+            <h1 class="book-title">O Amor e Perda</h1>
+            <h2 class="book-subtitle">Amor e Perda</h2>
+            
+            <div class="book-info">
+                <div class="book-meta">
+                    <h4>Autor</h4>
+                    <p>Nathan</p>
+                </div>
+                <div class="book-meta">
+                    <h4>Gênero</h4>
+                    <p>Romance Fantástico</p>
+                </div>
+                <div class="book-meta">
+                    <h4>Capítulos</h4>
+                    <p>1</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="reading-container">
+            <div class="chapter-nav">
+                <h3>Capítulos</h3>
+                <ul class="chapter-list">
+                    <li class="chapter-item" data-chapter="1">
+                        <a href="historiadoleon2.html" style="color: inherit; text-decoration: none;">Capítulo 1: Leonidas</a>
+                    </li>
+                    <li class="chapter-item active" data-chapter="2">Capítulo 2: O Amor e Perda</li>
+                    <!-- Mais capítulos podem ser adicionados aqui -->
+                </ul>
+            </div>
+            
+            <div class="reading-content">
+                <h2 class="chapter-title">Capítulo 2: O Amor e Perda</h2>
+                
+                <div class="warning-box">
+                    <h3><i class="fas fa-exclamation-triangle"></i> Aviso Importante</h3>
+                    <p>Essa história tem cenas emocionantes. Não recomendo ler se for muito emocionado ou alguém que chora com facilidade.</p>
+                </div>
+                
+                <div class="story-content">
+                    <p class="action">*Depois da morte do doutor, Nathan se sentia sozinho vagando até chegar em uma vila a muitos quilômetros de distância de sua antiga casa*</p>
+                    
+                    <p class="thought">Nathan- ✦que lugar é esse?✦</p>
+                    
+                    <p class="action">*ele continua perambulando pela vila e enxerga uma grande bandeira com uma lua dourada estampada, andando mais um pouco guardas o param e o questionam*</p>
+                    
+                    <p class="dialogue">Guarda1- Quem é você garoto? E o que faz aqui?</p>
+                    
+                    <p class="dialogue">Nathan- Oi desculpa de verdade entrar na vila sem avisar só estou perdido</p>
+                    
+                    <p class="dialogue">Guarda2- Bem essa blusa não me soa estranho podemos levá-lo ao rei?</p>
+                    
+                    <p class="dialogue">Guarda1- Pode ser ele talvez saiba o que fazer</p>
+                    
+                    <p class="action">*Os dois guardas o levam até o castelo muito parecido com o que ele cresceu, ele é colocado ajoelhado na frente daquele homem com uma coroa sutil e um trono bem bonito, o rei tinha uma expressão calma e gentil ao olhar para Nathan ele se espanta com os olhos vesgos dele*</p>
+                    
+                    <p class="dialogue">Rei- Nossa de onde vocês o trouxeram?</p>
+                    
+                    <p class="dialogue">Guardas- Ele está perdido senhor!</p>
+                    
+                    <p class="thought">Nathan- ✦senhor? Isso é jeito de tratar o rei???✦</p>
+                    
+                    <p class="action">*o rei vira olhando para o Nathan*</p>
+                    
+                    <p class="dialogue">Rei- *se levanta de seu trono e se ajoelha na frente do Nathan* Me perdoe essa cena minha criança de onde você vem?</p>
+                    
+                    <p class="dialogue">Nathan- *se espanta com a gentileza e educação do rei* Majestade mil Perdões entrar em teu reino sem autorização é que meus pais foram mortos e quem estava cuidando de mim morreu...</p>
+                    
+                    <p class="dialogue">Rei- *fica extremamente chocado com o que acabara de ouvir* Minha criança esse símbolo em seu moletom é do clã dos lunarianos né...</p>
+                    
+                    <p class="action">*Nathan afirma com a cabeça segurando as lagrimas*</p>
+                    
+                    <p class="dialogue">Rei- *olha para os guardas e sabe exatamente o que aconteceu, ele abraça o Nathan deixando o chorar em seu ombro* Calma sabemos exatamente o que ouve... você não vai mais estar sozinho enquanto estiver aqui pode ficar à-vontade</p>
+                    
+                    <p class="action">*O Rei ajuda o Nathan a se levantar e o conduz até um quarto de hospedes grande e confortável, os olhos do Nathan brilham e o Rei da risada da reação dele, logo o Rei se senta na cama e o Nathan se senta ao lado*</p>
+                    
+                    <p class="dialogue">Rei- Bem me desculpe não me apresentar sou o Rei da cidade da lua dourada um reino prospero que vende remédio e alimento a vilas vizinhas e até mais</p>
+                    
+                    <p class="action">*Nathan se encanta com tudo aquilo até a chegada de uma pessoa inesperada, uma voz feminina ecoa "pai quem é esse garoto?" o Rei se vira levantando rápido com uma expressão feliz*</p>
+                    
+                    <p class="dialogue">Rei- Olá filhota como você está hoje?</p>
+                    
+                    <p class="dialogue">Jassy- Muito bem pai, temos um convidado hoje, muito prazer sou Jassy</p>
+                    
+                    <p class="dialogue">Nathan- *Fica lisonjeado* O prazer é todo meu sou Nathan *se curva em sinal de respeito*</p>
+                    
+                    <p class="action">*Jassy ri dele, e ele não entende nada, logo o Rei ri junto deixando ele mais confuso*</p>
+                    
+                    <p class="dialogue">Jassy- Pode se acalmar aqui não queremos reverenciar nem nada do tipo</p>
+                    
+                    <p class="dialogue">Rei- Exato aqui nossos títulos não são poder, status muito menos sinal de arrogância todos somo iguais nossa família é respeitada partir do possível pois cuidamos de tudo</p>
+                    
+                    <p class="action">*O Nathan entende e logo olha pela janela vendo que todos estão se ajudando e não tem classes todos são ricos e prósperos*</p>
+                    
+                    <p class="dialogue">Nathan- Mais como?</p>
+                    
+                    <p class="dialogue">Rei- É simples até aqui demos terras a todos mesmo, e demos ferramentas para plantar, criar animais e ter moradia cada um pode plantar ou criar uma coisa, e tudo se baseia nas trocas e cada coisa tem seu valor, obviamente tem coisas que valem mais que outras mais ainda sim todos são educados tem escolas públicas e bibliotecas cheias de livros</p>
+                    
+                    <p class="dialogue">Nathan- E quem perdeu produtos por causa de chuva e entre outros motivos?</p>
+                    
+                    <p class="dialogue">Rei- É simples pois como todos tem, todos que acabam precisando conseguem doações e ajuda além disso não usamos dinheiro pois é algo que não pode valer mais que a gentileza</p>
+                    
+                    <p class="dialogue">Nathan- *fica impressionado olhando para a janela vendo todos unidos* poxa parece muito bom ÓwÒ</p>
+                    
+                    <p class="dialogue">Jassy- Bem vem comigo, eu vou te mostrar o reino</p>
+                    
+                    <p class="action">*ela pega na mão dele e o arrasta por todos os lugares vão até a biblioteca depois ela mostra a escola todos educados e sem bullying afinal aqui valentões são expulsos da vila caso sejam mal-educados demais ou briguentos, depois vão ao centro de alimentação onde todos cozinham por amor e para ajudar (o Nathan até ganhou um milho de uma moça gentil) e antes do pôr do sol está ele e a Jassy sentados em uma colina conversando e rindo*</p>
+                    
+                    <p class="dialogue">Jassy- Ai ai já faz tanto tempo que não me divirto tanto</p>
+                    
+                    <p class="dialogue">Nathan- É eu também você é muito divertida Jassy</p>
+                    
+                    <p class="dialogue">Jassy- *fica corada e dá um soco no braço dele* para >///<</p>
+                    
+                    <p class="dialogue">Nathan- Não foi nada *começa a rir no chão*</p>
+                    
+                    <p class="action">*logo os dois ficam ali rindo até que decidem ir para dentro descansar, porém eles ficam no quarto dela conversando e rindo juntos até o Rei chegar*</p>
+                    
+                    <p class="dialogue">Rei- *chega de quietinho e fala em tom de brincadeira* Ei! Já eram para estar dormindo</p>
+                    
+                    <p class="dialogue">Nathan e Jassy- Não temos sono! >:D *e caem na gargalhada os três juntos então o rei sai, e o Nathan vai até o quarto dele e dorme um pouco*</p>
+                    
+                    <p class="action">*De manhã ele sai um pouco e vai a praça comer um pouco e conversar com a tia que deu um milho para ele no dia anterior, enquanto eles conversam ela fala que o nome dela é vera*</p>
+                    
+                    <p class="dialogue">Tia Vera- Bem Sabe eu faço essas comidas de milho pois gostava muito quando era criança mais não podia comprar</p>
+                    
+                    <p class="dialogue">Nathan- Como assim?</p>
+                    
+                    <p class="dialogue">Tia Vera- Sabe nosso reino nem sempre foram as mil maravilhas igual agora só foi mudar quando a filha do Rei nasceu a 14 anos atras</p>
+                    
+                    <p class="dialogue">Nathan- Sério me conte mais Tia 0o0</p>
+                    
+                    <p class="dialogue">Tia Vera- Bem a 14 anos atras éramos governados por um rei abusivo e que cobrava impostos altíssimos e dízimo absurdo, a 14 anos atras o Rei Vicktor que comandava, bem ele começou a perseguir as crianças então quem tivesse filhos teria que pagar mais ou escravizar os próprios filhos ou filhas para que ele ficasse ainda mais rico, isso até Rei Samuel aparecer o nosso rei atual era um barão e estava ao lado de Vicktor na questão financeira mais nunca viu a maldade real até a filha de Samuel ter nascido e ele querer cobrar dele...</p>
+                    
+                    <p class="dialogue">Nathan- E então??</p>
+                    
+                    <p class="dialogue">Tia Vera- ele levou a filha dele a um mini hospital com um doutor muito gentil, porém jovem devia ter uns 25 anos na época e Samuel andou muito e chegou em uma vila com pessoas poderosas com poderes de mana vindos da lua os maiores aliados do reino e derrotaram e selaram Vicktor para sempre e depois dessa batalha comemoramos e ganhamos terras e mais para vivermos em paz e o Rei Samuel até hoje cuida de nós e ele prometeu que qualquer um do clã da lua seria bem-vindo e de qualquer outra vila</p>
+                    
+                    <p class="dialogue">Nathan- *olha para ela chocado* O clã da lua? ...</p>
+                    
+                    <p class="dialogue">Tia Vera- Exatamente por quê?</p>
+                    
+                    <p class="dialogue">Nathan- Então os lunarianos estiveram aqui? Meu povo salvou vocês junto com o Rei</p>
+                    
+                    <p class="dialogue">Tia Vera- Sim o nome do reino foi inspirado a eles afinal a lua dourada é o ápice da lua cheia agora estamos bem graças a vocês</p>
+                    
+                    <p class="action">*Nathan se emociona abraçando a tia e comendo um pouco mais antes de ir de volta ao castelo, chegando lá o Rei o esperava com um sorriso*</p>
+                    
+                    <p class="dialogue">Nathan- A bom dia majestade! Desculpa sair sem avisar TwT</p>
+                    
+                    <p class="dialogue">Rei- Não se preocupe só estou chateado com uma coisa *pausa dramática* Porque não chamou a gente para ir lá comer junto *e começa a rir junto com o Nathan*</p>
+                    
+                    <p class="dialogue">Nathan- Ah não queria incomodar</p>
+                    
+                    <p class="dialogue">Rei- E quem disse que iria incomodar? bora antes que a Jassy fique doida por doces 😅</p>
+                    
+                    <p class="dialogue">Jassy- Alguém disse DOCE!!! >:3</p>
+                    
+                    <p class="dialogue">Rei- Não falei *e começa a rir levando os dois para almoçar juntos*</p>
+                    
+                    <p class="dialogue">Nathan- Não é meio estranho o senhor o Rei comer exposto?</p>
+                    
+                    <p class="dialogue">Rei- Não como disse todos são educados e principalmente eu salvei todo esse povo foi a...</p>
+                    
+                    <p class="dialogue">Nathan- 14 anos atras acertei *ri um pouco*</p>
+                    
+                    <p class="dialogue">Rei- Ei eu que deveria contar essa história *começam a rir juntos*</p>
+                    
+                    <p class="action">*algumas semanas se passam com eles brincando e sendo uma "família" ou amigos bem Nathan se sentia à-vontade mais a Jassy andava estranha ia sempre olhando ele e provocando direto, até que em uma manhã foram comer como de costume e ela falou algo curioso...*</p>
+                    
+                    <p class="dialogue">Jassy- *meio corada olha para o pai e pergunta* Pai eu posso me casar com quem eu quiser né...</p>
+                    
+                    <p class="dialogue">Rei- Ué pode porque essa pergunta minha anjinha?</p>
+                    
+                    <p class="dialogue">Jassy- É que eu... tô apaixonada...</p>
+                    
+                    <p class="action">*Nathan quase cospe a comida*</p>
+                    
+                    <p class="dialogue">Nathan- Sério??? Que massa por quem????</p>
+                    
+                    <p class="dialogue">Rei- Calma aí criança ela esta nervosa com isso *dá um pouco de risada*</p>
+                    
+                    <p class="dialogue">Jassy- Se eu contar prometem que não vão achar estranho 🥺</p>
+                    
+                    <p class="dialogue">Nathan- Claro que não quem é o sortudo 😁</p>
+                    
+                    <p class="dialogue">Jassy- É... você....</p>
+                    
+                    <p class="action">*Nathan fica pálido e quase cai para trás*</p>
+                    
+                    <p class="dialogue">Rei- *Começa a cair na gargalhada* Eu já imaginava *e ria ainda mais*</p>
+                    
+                    <p class="dialogue">Jassy- *fica tristinha* Eu sabia você não sente o mesmo ~n~</p>
+                    
+                    <p class="dialogue">Nathan- *se recompõem e fica extremamente corado* é claro que eu sinto só não imaginava que ia ser assim Ò///-//Ó</p>
+                    
+                    <p class="dialogue">Rei- *para de rir e cai na mesa pálido como fantasma* Meu Deus meu bebê quer casar TwT</p>
+                    
+                    <p class="dialogue">Jassy- eu não sou bb >:/</p>
+                    
+                    <p class="dialogue">Nathan- Bem senhor você acha que podemos...?</p>
+                    
+                    <p class="dialogue">Rei- *se levanta se vira e vai em uma barraca que dava vinho refrigerante e etecetera* ME VÊ UMA GARRAFA INTEIRA DE VINHO MINHA BEBÊ VAI NAMORAR E EU NÃO QUERO ESTAR SOBRIO QUANDO EU ACEITAR ISSO</p>
+                    
+                    <p class="action">*todos na praça começam a rir da atitude do Rei e todos se divertem, e o rei não pegou o vinho só foi brincar para constranger os dois, depois de um tempo eles voltaram ao castelo e o Nathan foi direto para o quarto*</p>
+                    
+                    <p class="thought">Nathan- *Se joga no travesseiro nervoso pois gostava dela a um tempo e não sabia que ela seria tão direta* ✦Poxa vida... o que eu faço vou lá falar com ela...✦</p>
+                    
+                    <p class="action">*Jassy entra no quarto de quietinha e se senta ao lado do Nathan*</p>
+                    
+                    <p class="dialogue">Jassy- Porque você não tinha me dito antes...</p>
+                    
+                    <p class="dialogue">Nathan- *Olhava para ela encantado algo mudou ela parecia 10 vezes mais bonita* Tive medo... medo de ser rejeitado afinal... quem iria querer um garoto vesgo cheio de traumas...</p>
+                    
+                    <p class="dialogue">Jassy- *Não fala nada só se aproxima o abraçando e se aconchegando nele* Foi isso que me fez gostar de você...</p>
+                    
+                    <p class="action">*Nathan começa a chorar com aquele ato tão simples e tão genuíno*</p>
+                    
+                    <p class="action">*Jassy começa a chorar junto incapaz de não sentir a emoção forte de Nathan*</p>
+                    
+                    <p class="action">*Enquanto isso o Rei olha de fora com orgulho vendo que sua luta para a filha ser feliz, e agora ela estava lá amando alguém de verdade antes de qualquer outra coisa ele entra e abraça os dois com força quase chorando junto esse ato mostra aos dois jovens que eles podem ser felizes, logo o Rei e a Jassy vão para seus quartos e o Nathan tenta descansar depois daquela montanha de sentimentos*</p>
+                    
+                    <p class="thought">Nathan- ✦Eu realmente amo esse lugar✦</p>
+                    
+                    <p class="action">*todos dormem tranquilos e no dia seguinte teríamos outra surpresa inesperada*</p>
+                </div>
+                
+                <div class="reading-controls">
+                    <button class="nav-btn" id="prevChapter">
+                        <i class="fas fa-arrow-left"></i> Capítulo Anterior
+                    </button>
+                    <button class="nav-btn" id="nextChapter" disabled>
+                        Próximo Capítulo <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>Site desenvolvido por Nathan • Todos os direitos reservados • <span id="current-date"></span></p>
+    </div>
+
+    <script>
+        // Elementos do DOM
+        const themeToggle = document.getElementById('theme-toggle');
+        const loginModal = document.getElementById('loginModal');
+        const loginBtnNav = document.getElementById('loginBtnNav');
+        const closeBtn = document.querySelector('.close');
+        const showRegister = document.getElementById('showRegister');
+        const showLogin = document.getElementById('showLogin');
+        const loginForm = document.getElementById('loginForm');
+        const registerForm = document.getElementById('registerForm');
+        const loginSubmit = document.getElementById('login');
+        const registerSubmit = document.getElementById('register');
+        const loginMessage = document.getElementById('loginMessage');
+        const registerMessage = document.getElementById('registerMessage');
+        const logoutBtn = document.getElementById('logoutBtn');
+        const userAvatar = document.getElementById('userAvatar');
+        const prevChapterBtn = document.getElementById('prevChapter');
+        const nextChapterBtn = document.getElementById('nextChapter');
+        const chapterItems = document.querySelectorAll('.chapter-item');
+
+        // Verifica se o usuário está logado ao carregar a página
+        function checkLoginStatus() {
+            const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+            const username = localStorage.getItem('currentUser');
+            
+            if (isLoggedIn && username) {
+                document.body.classList.add('logged-in');
+                userAvatar.textContent = username.charAt(0).toUpperCase();
+            }
+        }
+
+        // Aplica o tema salvo no localStorage
+        function applyTheme() {
+            const isDark = localStorage.getItem('darkMode') === 'true';
+            document.documentElement.classList.toggle('dark-mode', isDark);
+            themeToggle.style.color = isDark ? '#ffed4a' : '#ffd700';
+        }
+        
+        // Evento de clique no botão de tema
+        themeToggle.addEventListener('click', () => {
+            const isDark = !document.documentElement.classList.contains('dark-mode');
+            localStorage.setItem('darkMode', isDark);
+            
+            themeToggle.style.transform = 'rotate(360deg) scale(1.2)';
+            setTimeout(() => {
+                themeToggle.style.transform = '';
+            }, 300);
+            
+            applyTheme();
+        });
+
+        // Abrir modal de login
+        loginBtnNav.addEventListener('click', () => {
+            loginModal.style.display = 'block';
+        });
+
+        // Fechar modal de login
+        closeBtn.addEventListener('click', () => {
+            loginModal.style.display = 'none';
+        });
+
+        // Fechar modal ao clicar fora
+        window.addEventListener('click', (e) => {
+            if (e.target === loginModal) {
+                loginModal.style.display = 'none';
+            }
+        });
+
+        // Alternar entre login e registro
+        showRegister.addEventListener('click', () => {
+            loginForm.style.display = 'none';
+            registerForm.style.display = 'block';
+        });
+
+        showLogin.addEventListener('click', () => {
+            registerForm.style.display = 'none';
+            loginForm.style.display = 'block';
+        });
+
+        // Sistema de registro (usando apenas localStorage)
+        registerSubmit.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const username = document.getElementById('registerUsername').value;
+            const password = document.getElementById('registerPassword').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+
+            // Validações
+            if (password !== confirmPassword) {
+                showMessage(registerMessage, "As senhas não coincidem!", 'error');
+                return;
+            }
+
+            if (password.length < 4) {
+                showMessage(registerMessage, "A senha deve ter pelo menos 4 caracteres!", 'error');
+                return;
+            }
+
+            // Salva no localStorage
+            const usuarios = JSON.parse(localStorage.getItem('usuarios_magicos') || '[]');
+            
+            // Verifica se usuário já existe
+            if (usuarios.some(u => u.username === username)) {
+                showMessage(registerMessage, "Este usuário já existe!", 'error');
+                return;
+            }
+            
+            usuarios.push({ username, password });
+            localStorage.setItem('usuarios_magicos', JSON.stringify(usuarios));
+            
+            showMessage(registerMessage, "Conta criada com sucesso!", 'success');
+            
+            // Limpa o formulário
+            this.reset();
+            
+            // Volta para o login após 2 segundos
+            setTimeout(() => {
+                registerForm.style.display = 'none';
+                loginForm.style.display = 'block';
+                registerMessage.style.display = 'none';
+            }, 2000);
+        });
+
+        // Sistema de login (usando localStorage)
+        loginSubmit.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const username = document.getElementById('loginUsername').value;
+            const password = document.getElementById('loginPassword').value;
+            
+            const usuarios = JSON.parse(localStorage.getItem('usuarios_magicos') || []);
+            const user = usuarios.find(u => u.username === username && u.password === password);
+            
+            if (user) {
+                showMessage(loginMessage, "Login bem-sucedido!", 'success');
+                localStorage.setItem('isLoggedIn', 'true');
+                localStorage.setItem('currentUser', username);
+                
+                setTimeout(() => {
+                    loginModal.style.display = 'none';
+                    checkLoginStatus();
+                }, 1000);
+            } else {
+                showMessage(loginMessage, "Usuário ou senha incorretos!", 'error');
+            }
+        });
+
+        // Logout
+        logoutBtn.addEventListener('click', () => {
+            localStorage.setItem('isLoggedIn', 'false');
+            localStorage.removeItem('currentUser');
+            document.body.classList.remove('logged-in');
+        });
+
+        // Função para mostrar mensagens
+        function showMessage(element, text, type) {
+            element.textContent = text;
+            element.style.display = 'block';
+            element.className = `status-message ${type}`;
+        }
+
+        // Navegação entre capítulos
+        chapterItems.forEach(item => {
+            item.addEventListener('click', () => {
+                // Remove a classe active de todos os itens
+                chapterItems.forEach(i => i.classList.remove('active'));
+                // Adiciona a classe active ao item clicado
+                item.classList.add('active');
+                
+                // Aqui você carregaria o conteúdo do capítulo selecionado
+                // Por enquanto, apenas atualizamos o título
+                document.querySelector('.chapter-title').textContent = item.textContent;
+            });
+        });
+
+        // Controles de navegação
+        prevChapterBtn.addEventListener('click', () => {
+            // Volta para o capítulo anterior (Leonidas)
+            window.location.href = 'historiadoleon2.html';
+        });
+
+        nextChapterBtn.addEventListener('click', () => {
+            // Lógica para ir para o próximo capítulo
+            alert('Próximo capítulo (em desenvolvimento)');
+        });
+
+        // Atualiza a data no footer
+        document.getElementById('current-date').textContent = new Date().toLocaleDateString('pt-BR');
+
+        // Inicializa a página
+        applyTheme();
+        checkLoginStatus();
+    </script>
+</body>
+</html>
