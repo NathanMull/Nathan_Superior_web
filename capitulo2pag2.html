@@ -860,9 +860,11 @@
                             <i class="fas fa-arrow-left"></i> Página Anterior
                         </button>
                     </a>
-                    <button class="nav-btn" id="nextChapter">
-                        Próximo Capítulo <i class="fas fa-arrow-right"></i>
-                    </button>
+                    <a href="capitulo2pag3.html">
+                        <button class="nav-btn" id="nextChapter">
+                            Página 3 <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </a>
                 </div>
             </div>
         </div>
@@ -1049,11 +1051,6 @@
         prevChapterBtn.addEventListener('click', () => {
             // Volta para a primeira página do capítulo 2
             window.location.href = 'capitulo2pag1.html';
-        });
-
-        nextChapterBtn.addEventListener('click', () => {
-            // Aqui você pode linkar para o próximo capítulo quando criar
-            alert('Próximo capítulo em desenvolvimento!');
         });
 
         // Atualiza a data no footer
