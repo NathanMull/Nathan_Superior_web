@@ -1,0 +1,1165 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>O Amor e Perda - Capítulo 2 (Página 3) | Nathan Superior Web</title>
+    
+    <style>
+        /* Adicionando zoom de 110% para todo o documento */
+        body {
+            zoom: 110%;
+            -moz-transform: scale(1.1);
+            -moz-transform-origin: 0 0;
+        }
+        
+        /* Para outros navegadores */
+        @media all and (-webkit-min-device-pixel-ratio:0) {
+            body {
+                zoom: 110%;
+            }
+        }
+    </style>
+    
+    <script>
+        (function() {
+            const isDark = localStorage.getItem('darkMode') === 'true';
+            if (isDark) {
+                document.documentElement.classList.add('dark-mode');
+            }
+            
+            const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+            if (isLoggedIn) {
+                document.body.classList.add('logged-in');
+            }
+        })();
+    </script>
+    
+    <style>
+        :root {
+            --verde: #27ae60;
+            --azul: #3498db;
+            --vermelho: #e74c3c;
+            --amarelo: #f1c40f;
+            --texto: #f0f0f0;
+            --fundo: #000000;
+            --card: #0a0a0a;
+            --borda: #222;
+            --neon-ciano: #0ff;
+            --neon-azul: #00f;
+            --neon-marinho: #0077be;
+            --roxo-lunar: #8e44ad;
+            --verde-esmeralda: #2ecc71;
+            --dourado: #ffd700;
+        }
+
+        .dark-mode {
+            --verde: #1e8449;
+            --azul: #2980b9;
+            --vermelho: #ff6b6b;
+            --amarelo: #f39c12;
+            --texto: #f0f0f0;
+            --fundo: #000000;
+            --card: #0a0a0a;
+            --borda: #222;
+            --neon-ciano: #0ff;
+            --neon-azul: #00f;
+            --neon-marinho: #0077be;
+            --roxo-lunar: #9b59b6;
+            --verde-esmeralda: #27ae60;
+            --dourado: #ffd700;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        body {
+            background: var(--fundo);
+            color: var(--texto);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* NAVBAR COM TEMA NEON */
+        .navbar {
+            background: rgba(10, 10, 10, 0.9);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 30px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 2px solid var(--dourado);
+            box-shadow: 0 0 10px var(--dourado), 0 0 20px var(--roxo-lunar);
+        }
+
+        .logo {
+            color: white;
+            font-weight: bold;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-shadow: 0 0 5px var(--dourado), 0 0 10px var(--dourado);
+        }
+
+        .logo small {
+            font-size: 0.8rem;
+            opacity: 0.9;
+            font-weight: normal;
+        }
+
+        #theme-toggle {
+            color: var(--dourado);
+            cursor: pointer;
+            font-size: 1.3rem;
+            transition: all 0.3s;
+            text-shadow: 0 0 5px var(--dourado);
+        }
+
+        #theme-toggle:hover {
+            transform: scale(1.2);
+            text-shadow: 0 0 10px var(--dourado), 0 0 20px var(--dourado);
+        }
+
+        .search-bar {
+            flex-grow: 1;
+            max-width: 500px;
+            margin: 0 20px;
+        }
+
+        .search-bar input {
+            width: 100%;
+            padding: 8px 15px;
+            border: 1px solid var(--dourado);
+            border-radius: 20px;
+            font-size: 0.9rem;
+            background: rgba(0, 0, 0, 0.7);
+            color: var(--texto);
+            box-shadow: 0 0 5px var(--dourado);
+        }
+
+        .search-bar input:focus {
+            outline: none;
+            box-shadow: 0 0 10px var(--dourado), 0 0 20px var(--roxo-lunar);
+        }
+
+        .nav-icons {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-icon {
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: transform 0.2s;
+            text-decoration: none;
+            text-shadow: 0 0 5px var(--dourado);
+        }
+
+        .nav-icon:hover {
+            transform: translateY(-2px);
+            text-shadow: 0 0 10px var(--dourado), 0 0 20px var(--dourado);
+        }
+
+        .user-info {
+            display: none;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .user-avatar {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background-color: var(--dourado);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: black;
+            font-weight: bold;
+            box-shadow: 0 0 5px var(--dourado);
+        }
+
+        .logout-btn {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            font-size: 0.9rem;
+            text-shadow: 0 0 5px var(--dourado);
+        }
+
+        body.logged-in .user-info {
+            display: flex;
+        }
+
+        body.logged-in .login-btn-nav {
+            display: none;
+        }
+
+        /* CONTEÚDO DA PÁGINA DO LIVRO */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 30px;
+        }
+
+        .book-header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 20px;
+            background: var(--card);
+            border-radius: 12px;
+            border: 1px solid var(--dourado);
+            box-shadow: 0 0 15px var(--dourado);
+        }
+
+        .book-title {
+            color: var(--dourado);
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+            text-shadow: 0 0 10px var(--dourado);
+        }
+
+        .book-subtitle {
+            color: var(--roxo-lunar);
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+
+        .book-cover {
+            max-width: 300px;
+            margin: 20px auto;
+            border-radius: 8px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+        }
+
+        .book-info {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .book-meta {
+            background: rgba(0,0,0,0.5);
+            padding: 10px 20px;
+            border-radius: 8px;
+            border: 1px solid var(--dourado);
+        }
+
+        .book-meta h4 {
+            color: var(--dourado);
+            margin-bottom: 5px;
+        }
+
+        .reading-container {
+            display: flex;
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .chapter-nav {
+            width: 250px;
+            background: var(--card);
+            border-radius: 12px;
+            padding: 20px;
+            border: 1px solid var(--dourado);
+            box-shadow: 0 0 10px var(--dourado);
+            height: fit-content;
+            position: sticky;
+            top: 100px;
+        }
+
+        .chapter-nav h3 {
+            color: var(--dourado);
+            margin-bottom: 15px;
+            text-align: center;
+            text-shadow: 0 0 5px var(--dourado);
+        }
+
+        .chapter-list {
+            list-style: none;
+        }
+
+        .chapter-item {
+            padding: 12px 15px;
+            margin-bottom: 8px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 1px solid transparent;
+        }
+
+        .chapter-item:hover {
+            background: rgba(255, 215, 0, 0.2);
+            border: 1px solid var(--dourado);
+        }
+
+        .chapter-item.active {
+            background: rgba(255, 215, 0, 0.3);
+            border: 1px solid var(--dourado);
+            box-shadow: 0 0 8px var(--dourado);
+        }
+
+        .reading-content {
+            flex: 1;
+            background: var(--card);
+            border-radius: 12px;
+            padding: 40px;
+            border: 1px solid var(--dourado);
+            box-shadow: 0 0 15px var(--dourado);
+            min-height: 800px;
+        }
+
+        .chapter-title {
+            color: var(--dourado);
+            font-size: 2.2rem;
+            margin-bottom: 30px;
+            text-align: center;
+            text-shadow: 0 0 8px var(--dourado);
+            border-bottom: 2px solid var(--dourado);
+            padding-bottom: 15px;
+        }
+
+        .warning-box {
+            background: rgba(231, 76, 60, 0.2);
+            border: 1px solid var(--vermelho);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 0 10px var(--vermelho);
+        }
+
+        .warning-box h3 {
+            color: var(--vermelho);
+            margin-bottom: 10px;
+            text-shadow: 0 0 5px var(--vermelho);
+        }
+
+        .story-content {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .story-content p {
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+
+        .story-content .dialogue {
+            margin-left: 30px;
+            font-style: italic;
+            color: var(--verde-esmeralda);
+            border-left: 2px solid var(--verde-esmeralda);
+            padding-left: 15px;
+            margin-bottom: 15px;
+        }
+
+        .story-content .thought {
+            margin-left: 20px;
+            color: var(--dourado);
+            font-style: italic;
+            margin-bottom: 15px;
+        }
+
+        .story-content .action {
+            margin-left: 10px;
+            color: var(--neon-ciano);
+            margin-bottom: 15px;
+        }
+
+        .reading-controls {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid var(--borda);
+        }
+
+        .nav-btn {
+            background: var(--dourado);
+            color: black;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 6px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s;
+            box-shadow: 0 0 5px var(--dourado);
+            font-weight: bold;
+        }
+
+        .nav-btn:hover {
+            background: #ffed4a;
+            box-shadow: 0 0 10px var(--dourado);
+            transform: translateY(-2px);
+        }
+
+        .nav-btn:disabled {
+            background: #555;
+            cursor: not-allowed;
+            box-shadow: none;
+            transform: none;
+            color: #999;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 20px;
+            font-size: 0.9rem;
+            color: var(--texto);
+            opacity: 0.8;
+            background: var(--card);
+            border-top: 1px solid var(--borda);
+            margin-top: 50px;
+        }
+
+        /* MODAL DE LOGIN */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.8);
+        }
+
+        .modal-content {
+            background-color: var(--card);
+            margin: 10% auto;
+            padding: 30px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 400px;
+            box-shadow: 0 0 15px var(--dourado), 0 0 30px var(--roxo-lunar);
+            position: relative;
+            border: 1px solid var(--dourado);
+        }
+
+        .close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--vermelho);
+            text-shadow: 0 0 5px var(--vermelho);
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: var(--dourado);
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid var(--dourado);
+            border-radius: 5px;
+            background: rgba(0,0,0,0.7);
+            color: var(--texto);
+            box-shadow: 0 0 5px var(--dourado);
+        }
+
+        .modal-btn {
+            background: var(--dourado);
+            color: black;
+            border: none;
+            padding: 12px;
+            width: 100%;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            margin-top: 10px;
+            box-shadow: 0 0 5px var(--dourado);
+            transition: all 0.3s;
+            font-weight: bold;
+        }
+
+        .modal-btn:hover {
+            background: #ffed4a;
+            box-shadow: 0 0 10px var(--dourado), 0 0 20px var(--roxo-lunar);
+        }
+
+        .switch-form {
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        .switch-btn {
+            background: none;
+            border: none;
+            color: var(--dourado);
+            cursor: pointer;
+            text-decoration: underline;
+            text-shadow: 0 0 5px var(--dourado);
+        }
+
+        .status-message {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            text-align: center;
+        }
+        
+        .success {
+            background-color: rgba(39, 174, 96, 0.2);
+            color: var(--verde);
+            border: 1px solid var(--verde);
+            box-shadow: 0 0 5px var(--verde);
+        }
+        
+        .error {
+            background-color: rgba(231, 76, 60, 0.2);
+            color: var(--vermelho);
+            border: 1px solid var(--vermelho);
+            box-shadow: 0 0 5px var(--vermelho);
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                flex-wrap: wrap;
+                padding: 15px;
+            }
+            .search-bar {
+                order: 3;
+                width: 100%;
+                margin: 15px 0 0 0;
+            }
+            .container {
+                padding: 15px;
+            }
+            .reading-container {
+                flex-direction: column;
+            }
+            .chapter-nav {
+                width: 100%;
+                position: static;
+                margin-bottom: 20px;
+            }
+            .book-title {
+                font-size: 2.2rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Modal de Login -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            
+            <div id="loginForm">
+                <h2 style="color: var(--dourado); margin-bottom: 20px; text-align: center; text-shadow: 0 0 5px var(--dourado);">Entrar</h2>
+                
+                <form id="login">
+                    <div class="form-group">
+                        <label for="loginUsername"><i class="fas fa-user"></i> Nome de Usuário</label>
+                        <input type="text" id="loginUsername" placeholder="Seu nome de usuário" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="loginPassword"><i class="fas fa-lock"></i> Senha</label>
+                        <input type="password" id="loginPassword" placeholder="Sua senha" required>
+                    </div>
+                    
+                    <button type="submit" class="modal-btn"><i class="fas fa-sign-in-alt"></i> Entrar</button>
+                    
+                    <div id="loginMessage" class="status-message" style="display: none;"></div>
+                </form>
+                
+                <div class="switch-form">
+                    <span>Não tem uma conta? </span>
+                    <button class="switch-btn" id="showRegister">Registre-se</button>
+                </div>
+            </div>
+            
+            <div id="registerForm" style="display: none;">
+                <h2 style="color: var(--dourado); margin-bottom: 20px; text-align: center; text-shadow: 0 0 5px var(--dourado);">Criar Conta</h2>
+                
+                <form id="register">
+                    <div class="form-group">
+                        <label for="registerUsername"><i class="fas fa-user-edit"></i> Nome de Usuário</label>
+                        <input type="text" id="registerUsername" placeholder="Escolha um nome de usuário" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="registerPassword"><i class="fas fa-key"></i> Senha</label>
+                        <input type="password" id="registerPassword" placeholder="Crie uma senha" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="confirmPassword"><i class="fas fa-check-circle"></i> Confirmar Senha</label>
+                        <input type="password" id="confirmPassword" placeholder="Digite a senha novamente" required>
+                    </div>
+                    
+                    <button type="submit" class="modal-btn"><i class="fas fa-user-plus"></i> Registrar</button>
+                    
+                    <div id="registerMessage" class="status-message" style="display: none;"></div>
+                </form>
+                
+                <div class="switch-form">
+                    <span>Já tem uma conta? </span>
+                    <button class="switch-btn" id="showLogin">Faça login</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="logo">
+            <i id="theme-toggle" class="fas fa-moon" title="Mudar tema"></i>
+            <span>Nathan Superior Web <small>- Biblioteca</small></span>
+        </div>
+        
+        <div class="search-bar">
+            <input type="text" placeholder="Pesquise...">
+        </div>
+        
+        <div class="nav-icons">
+            <a href="index.html" class="nav-icon" title="Início">
+                <i class="fas fa-home"></i>
+            </a>
+            <a href="favoritos.html" class="nav-icon" title="Favoritos">
+                <i class="fas fa-heart"></i>
+            </a>
+            <div class="user-info">
+                <div class="user-avatar" id="userAvatar"></div>
+                <button class="logout-btn" id="logoutBtn">Sair</button>
+            </div>
+            <button class="nav-icon login-btn-nav" id="loginBtnNav" title="Login">
+                <i class="fas fa-user"></i>
+            </button>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="book-header">
+            <h1 class="book-title">O Amor e Perda</h1>
+            <h2 class="book-subtitle">Amor e Perda</h2>
+            
+            <div class="book-info">
+                <div class="book-meta">
+                    <h4>Autor</h4>
+                    <p>Nathan</p>
+                </div>
+                <div class="book-meta">
+                    <h4>Gênero</h4>
+                    <p>Romance Fantástico</p>
+                </div>
+                <div class="book-meta">
+                    <h4>Capítulos</h4>
+                    <p>2</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="reading-container">
+            <div class="chapter-nav">
+                <h3>Capítulos</h3>
+                <ul class="chapter-list">
+                    <li class="chapter-item" data-chapter="1">
+                        <a href="historiadoleon1.html" style="color: inherit; text-decoration: none;">Capítulo 1: Leonidas</a>
+                    </li>
+                    <li class="chapter-item active" data-chapter="2">
+                        <a href="capitulo2pag1.html" style="color: inherit; text-decoration: none;">Capítulo 2: O Amor e Perda</a>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="reading-content">
+                <h2 class="chapter-title">Capítulo 2: O Amor e Perda (Página 3)</h2>
+                
+                <div class="warning-box">
+                    <h3><i class="fas fa-exclamation-triangle"></i> Continuação da História</h3>
+                    <p>Esta é a terceira página do segundo capítulo. Leia as páginas anteriores para entender a história completa.</p>
+                </div>
+                
+                <div class="story-content">
+                    <p class="action">*Após a luta contra Leonidas, Nathan abre um portal ele não está mais vesgo, porém está muito machucado e chegando do outro lado vê um vale lindo e olhando pela luneta avista Snow estava lá tranquilo até o ver o Nathan*</p>
+                    
+                    <p class="dialogue">Snow- Nathaaaaannn!!</p>
+                    
+                    <p class="dialogue">Nathan-*Vai indo até chegar junto do Snow* Snow como você está meu mano</p>
+                    
+                    <p class="dialogue">Snow-*Olha o Nathan se cima abaixo* Eu tô bem mais o que aconteceu foi atropelado foi???</p>
+                    
+                    <p class="dialogue">Nathan-*Da um sorriso engraçado* Não *e começa a rir igual doido*</p>
+                    
+                    <p class="dialogue">Snow-*Fica assustado e entrega uma maça dourada para o Nathan* Toma come e fica melhor</p>
+                    
+                    <p class="dialogue">Nathan-*Ele come e depois de se recuperar chama o Snow e se sentam debaixo de uma árvore e ele conta todos os acontecimentos*</p>
+                    
+                    <p class="dialogue">Snow- Meu Deus aconteceu tudo isso enquanto você estava lá na insânia depois que a gente saiu??</p>
+                    
+                    <p class="dialogue">Nathan- É nem sei como mais deixei de ser vesgo e... eu acredito que a Jassy voltou mano...</p>
+                    
+                    <p class="dialogue">Snow-*Abraça ele* Se ela voltou e ela é tão importante para você nesse momento vamos achá-la mano só tenha paciência</p>
+                    
+                    <p class="dialogue">Nathan- É vamos ver mano...</p>
+                    
+                    <p class="action">*O Nathan sai e vai dar uma volta por aí para pôr as ideias no lugar e ele acha uma erva igual a que ele precisava como último ingrediente para a poção, o Nathan continua vagando pelo mundo para achar algo a mais e voltando para o vale ele começa a ver vultos em volta como se algo estivesse observando-o, andando mais um pouco ele achou o Cheesee*</p>
+                    
+                    <p class="dialogue">Cheesee- Salve Nathan, a quanto tempo</p>
+                    
+                    <p class="dialogue">Nathan- Fala Cheesee como tem passado?</p>
+                    
+                    <p class="dialogue">Cheesee- Ah até que bem tem alguém que quero te apresentar</p>
+                    
+                    <p class="dialogue">Nathan- Quem?</p>
+                    
+                    <p class="action">*Cheesee vira e mostra um queijinho pequeno atrás dele bem tímido*</p>
+                    
+                    <p class="dialogue">Cheesee- Esse é meu filhinho Queijinho</p>
+                    
+                    <p class="dialogue">Nathan-*Nathan se espanta* PERA QUE!! E quem é a mãe</p>
+                    
+                    <p class="dialogue">Cheesee- Bem ele caiu do céu</p>
+                    
+                    <p class="action">*Queijinho sai de trás do Cheesee e puxa uma plaquinha que ele usa para se comunicar*</p>
+                    
+                    <p class="dialogue">Queijinho- "Esse é o titio Nathan?"</p>
+                    
+                    <p class="dialogue">Cheesee- Isso mesmo dê oi para ele</p>
+                    
+                    <p class="dialogue">Queijinho- "Boa tarde tio :D"</p>
+                    
+                    <p class="dialogue">Nathan- Meu Deus que coisa fofa</p>
+                    
+                    <p class="dialogue">Cheesee- É né agora vamos Queijinho</p>
+                    
+                    <p class="dialogue">Queijinho- "ta bom tchau tio, meu pacto ta esperando :>"</p>
+                    
+                    <p class="action">*eles saíram e o Nathan ficou confuso como assim pacto???*</p>
+                    
+                    <p class="action">*é os dias se passam Nathan Faz uma casa enorme e fica junto com Donatello sua tartaruga de estimação, saindo fazer algo e distrair a cabeça mais sempre via vultos passando por ele sempre sendo atormentado pela lembrança de perder sua amada e seu irmão ter se redimido só quando morreu... voltando para casa ele não encontra o Donatello e vê que foi saqueado algo o enfurece e ele sai mais um pouco para esfriar a cabeça de novo afinal a raiva era ruim para ele, até que os vultos falam com ele*</p>
+                    
+                    <p class="dialogue">Jassy-"Aconteceu algo moh?"</p>
+                    
+                    <p class="dialogue">Leonidas-"eu morri e vejo meu irmão perdido do que fazer"</p>
+                    
+                    <p class="thought">Nathan- ✦Podem ficar quietos vocês só são coisas da minha cabeça✦</p>
+                    
+                    <p class="dialogue">Jassy-"ok desculpa"</p>
+                    
+                    <p class="dialogue">Leonidas-"Olha ele todo bravo, calma aí"</p>
+                    
+                    <p class="action">*ambos somem e o Nathan fica colhendo ervas para as alucinações passarem, pegando tudo e fazendo ele bebe um tipo de poção e fica melhor as coisas passando a fazer as coisas na série*</p>
+                    
+                    <p class="action">Alguns meses se passam desde então...</p>
+                    
+                    <p class="action">*O Nathan fica mais estável até tem um cachorro chamado Welinton, andando por aí a série acaba e o Nathan fica pensando sobre um assunto que o assombra como contar ao seu sogro que a filha dele foi selada em um broche e ele não sabe como tirar ela de lá então ele vai falar com o Snow*</p>
+                    
+                    <p class="action">Nathan-*bate palmas na frente da casa do Snow* está em casa mano preciso conversar...</p>
+                    
+                    <p class="dialogue">Snow-*Sai e fica feliz ao ver o Nathan* Bom dia entra aí me fala o que você precisa?</p>
+                    
+                    <p class="action">Nathan-*Entra se sentando na cadeira da cozinha* Olha mano to com medo de ir falar com o rei já faz quase 1 ano que eu e a Jassy saímos para nos aventurar e ela agora ta selada e tenho medo de quebrar o broche e ela simplesmente morrer...</p>
+                    
+                    <p class="dialogue">Snow- Uau! Calma nós graças a sua poção somos todos imortais certo?</p>
+                    
+                    <p class="dialogue">Nathan-Sim, porém a gente pode ser selado ou afetado por maldições</p>
+                    
+                    <p class="dialogue">Snow- Ta, quer que eu vá junto com você talvez eu possa dar apoio</p>
+                    
+                    <p class="dialogue">Nathan- Você faria esse favor?</p>
+                    
+                    <p class="dialogue">Snow- Por que eu não faria?</p>
+                    
+                    <p class="dialogue">Nathan- Sei lá</p>
+                    
+                    <p class="dialogue">Snow- Bem a série já acabou quer que eu vá junto?</p>
+                    
+                    <p class="thought">Nathan-*Olha para frente com determinação sabendo que pode voltar* Vamos nessa</p>
+                    
+                    <p class="action">*Eles abrem o portão saindo na entrada do castelo os guardas olham o Nathan meio mudado, mesmo assim vão até ele e se curvam*</p>
+                    
+                    <p class="dialogue">Guardas- Bem-vindo de volta príncipe Nathan!</p>
+                    
+                    <p class="dialogue">Nathan- Gente já falamos sobre isso eu não sou um príncipe sou alguém como todos nós sempre fomos</p>
+                    
+                    <p class="dialogue">Guarda 1- Tem razão mesmo assim bem-vindo de volta</p>
+                    
+                    <p class="action">*O Nathan sorri e eles entram no castelo e o Rei olha o Nathan Ficando feliz na hora e se levantando para abraçar ele*</p>
+                    
+                    <p class="dialogue">Rei- Nathan você está de volta!</p>
+                    
+                    <p class="dialogue">Nathan-*Abraça de volta mais meio triste* Olá majestade</p>
+                    
+                    <p class="dialogue">Rei- Me chama de sogro mesmo e vi que trouxeram um amigo mais, onde está minha filhinha?</p>
+                    
+                    <p class="action">*O Nathan e o Snow abaixam a cabeça em tristeza*</p>
+                    
+                    <p class="dialogue">Nathan- eu falhei em proteger ela...</p>
+                    
+                    <p class="action">*Mostrando o broche com um selo*</p>
+                    
+                    <p class="dialogue">Rei-*Olha com aquele olhar calmo e acolhedor de sempre o abraçando* Você não falhou você tentou não é?</p>
+                    
+                    <p class="action">Nathan-*começa a chorar*</p>
+                    
+                    <p class="action">*O Rei o espera se acalmar e vão até o último andar e o Nathan entrega o broche a ele*</p>
+                    
+                    <p class="dialogue">Rei- Se acalme um selo desse tipo não é tão difícil de quebrar quem fez o selo seu irmão? Você quer vingança?</p>
+                    
+                    <p class="dialogue">Nathan-*fica cabisbaixo* Sim foi ele, mas... meu irmão está morto...</p>
+                    
+                    <p class="dialogue">Rei-*Olha surpreso* Quem foi o responsável?</p>
+                    
+                    <p class="dialogue">Snow-*meio constrangido fala* Foi o Nathan...</p>
+                    
+                    <p class="dialogue">Rei-*olha com os olhos arregalados para o Nathan* Sério?? Mais você não iria salvar ele?</p>
+                    
+                    <p class="dialogue">Nathan-*chora de novo* Ele só foi descorrompido após quase estar perto de morrer...</p>
+                    
+                    <p class="dialogue">Rei-*Fica triste ao ver seu filho de consideração chorar muito* Se acalma se era o jeito você fez certo nunca duvide disso</p>
+                    
+                    <p class="dialogue">Nathan-*enxuga as lágrimas e mostra ao rei 5 frascos da poção aprimorada* Eu consegui e aqui tem o suficiente para fazer 50 cidades ou até mais não sofrerem mais...</p>
+                    
+                    <p class="dialogue">Rei-*Olha os frascos* Espera tá aprimorada? Me dá uma por gentileza</p>
+                    
+                    <p class="action">Nathan-*entrega um frasco*</p>
+                    
+                    <p class="dialogue">Rei-*Coloca no microscópio olhando* NATHAN!! Você é um gênio</p>
+                    
+                    <p class="dialogue">Nathan-*Se assusta* Como assim?</p>
+                    
+                    <p class="action">Rei-*pinga uma gota no broche selado e quebra uma parte* Olha sua poção pode libertar qualquer selo, porém acho que tem que ter variações mais fortes para quebrar mais selos você pode replicar mais 5 para poder quebrar os selos?</p>
+                    
+                    <p class="dialogue">Nathan-Posso sim vou ir com o Snow pegar os materiais vamos!</p>
+                    
+                    <p class="dialogue">Snow- Calma to indo</p>
+                    
+                    <p class="action">*Eles vão e o Rei coloca uma magia de proteção no broche até eles voltarem com tudo*</p>
+                    
+                    <p class="action">Nathan-*Entra no laboratório e já coloca os óculos e as luvas puxando o Snow para ajudar ele como assistente no laboratório* Passa a caixa de ervas por gentileza</p>
+                    
+                    <p class="action">*Eles ficam dias fazendo todo tipo de mistura e chamam os químicos da cidade para ajudar com 10 dias de trabalho árduo eles replicam 4 mais a quinta está sempre falhando*</p>
+                    
+                    <p class="dialogue">Químico-chefe- Precisávamos que alguém mais experiente</p>
+                    
+                    <p class="dialogue">Snow-*Olha para o Nathan* Será que podemos ir ao local onde o doutor "morreu" e trazer ele devolta?</p>
+                    
+                    <p class="dialogue">Nathan-*olha meio pensativo* Ele não morreu então podemos tentar fiquem longe do laboratório até eu voltar pessoal</p>
+                    
+                    <p class="dialogue">Químicos- OK!</p>
+                    
+                    <p class="action">*ele e o Snow correm até onde o doutor tinha se sacrificado*</p>
+                    
+                    <p class="dialogue">Nathan-*Olha meio nervoso* ok vou tentar chamar ele</p>
+                    
+                    <p class="dialogue">Snow-*confirma com a cabeça* só cuidado põe a cama aqui</p>
+                    
+                    <p class="action">*após a cama ser colocada Nathan respira e se deita adentrando um local espiritual ele viaja passando por várias pessoas até ser atacado por um guardião*</p>
+                    
+                    <p class="dialogue">Guardião- O que faz aqui mortal!</p>
+                    
+                    <p class="dialogue">Nathan- Vim buscar meu mestre</p>
+                    
+                    <p class="dialogue">Guardião-ahh como é seu mestre ele é um mortal também?</p>
+                    
+                    <p class="dialogue">Nathan- Isso!</p>
+                    
+                    <p class="action">Guardião-*ele aponta para um homem bem parecido com o doutor mais só que mais jovem*</p>
+                    
+                    <p class="dialogue">Nathan- Ok valeu</p>
+                    
+                    <p class="action">*ele corre até o doutor*</p>
+                    
+                    <p class="dialogue">Nathan- Mestre!!!</p>
+                    
+                    <p class="dialogue">Doutor-*Se assusta* Nathan? Você morreu??</p>
+                    
+                    <p class="dialogue">Nathan- Não e você também não doutor precisamos que você volte!</p>
+                    
+                    <p class="dialogue">Doutor-*Olha confuso* Por quê?</p>
+                    
+                    <p class="dialogue">Nathan-Precisamos fazer uma melhora em uma poção para quebrar um selo forte para libertar alguém</p>
+                    
+                    <p class="dialogue">Doutor-Ah não é tão importante</p>
+                    
+                    <p class="dialogue">Nathan- Para mim é mestre é alguém importante...</p>
+                    
+                    <p class="dialogue">Doutor- Quem é tão importante para você voltar aonde eu morri?</p>
+                    
+                    <p class="dialogue">Nathan-*fica em silêncio até dizer* O amor da minha vida mestre...</p>
+                    
+                    <p class="dialogue">Doutor-*fica calado* Pera? Amor da sua vida você tá namorando pera aí me conte tudo!!</p>
+                    
+                    <p class="dialogue">Nathan- Bem a filha do Rei da cidade da lua dourada...</p>
+                    
+                    <p class="dialogue">Doutor- A filha do Rei Samuel... vamos agora!</p>
+                    
+                    <p class="action">*eles vão até a saída*</p>
+                    
+                    <p class="dialogue">Guardião- Vai sair mesmo Doutor Sing?</p>
+                    
+                    <p class="dialogue">Doutor- Sim! Meu discípulo precisa de mim para ontem!</p>
+                    
+                    <p class="dialogue">Guardião- Ok mais olha não fiquem invadindo aqui é chato ter que cuidar de vocês</p>
+                    
+                    <p class="action">*eles concordam e saíram spawnando atrás do Snow dando um susto nele*</p>
+                    
+                    <p class="dialogue">Nathan-Vamos!</p>
+                    
+                    <p class="dialogue">Snow- Mano... Você demorou 1 dia TwT</p>
+                    
+                    <p class="dialogue">Nathan-Sério? Não importa vamos</p>
+                    
+                    <p class="action">*Eles chegam ao laboratório e ficam lá misturando tudo até conseguir levando 2 dias a mais só para terminar e com as 5 prontas eles vão até o Rei*</p>
+                    
+                    <p class="dialogue">Nathan- Sogrão conseguimos!</p>
+                    
+                    <p class="dialogue">Rei-*Olha com brilho nos olhos* Que Ótimo, espera... Doutor???</p>
+                    
+                    <p class="dialogue">Doutor- É parece que meu discípulo me trouxe de volta</p>
+                    
+                    <p class="dialogue">Rei- Ok vamos conversar depois vamos nessa</p>
+                    
+                    <p class="action">*Eles ficam horas descobrindo as ordens das poções até que descobrem as combinações a 1, 3, 5, 4 e 2, O broche brilha e a Jessy aparece e cai no chão*</p>
+                    
+                    <p class="action">Jassy-*Passa a mão na cabeça*Ai ai o que aconteceu onde eu to *ela olha para eles* AMOR!! PAPAI!!</p>
+                    
+                    <p class="action">*ela pula abraçando os dois chorando de alegria abraçando-os com muita força os três chorando juntos igual três crianças*</p>
+                    
+                    <p class="dialogue">Rei-*Soluçando de tanto chorar* Meu bebê!!!</p>
+                    
+                    <p class="dialogue">Jassy-*Ainda chorando mais meio brava* Eu não sou bebê T-T</p>
+                    
+                    <p class="action">*O Snow e o doutor ficam rindo da situação com os três patetas chorando, logo eles se recompõem e se abraçam mais uma vez*</p>
+                    
+                    <p class="dialogue">Rei- Você é incrível genro!</p>
+                    
+                    <p class="dialogue">Nathan- O senhor também sogrão</p>
+                    
+                    <p class="action">*Todos vão até a praça onde o rei anuncia que os heróis da vila retornaram no caso o Nathan o Snow e a Jassy, todos comem felizes*</p>
+                    
+                    <p class="action" style="text-align: center; margin-top: 30px; padding: 20px; background: rgba(255,215,0,0.1); border-radius: 10px; border: 1px solid var(--dourado);">
+                        Espero que tenham gostado do capítulo foi o meu favorito até agora e lembrem a história do livro é exclusiva do livro afinal o meu canal é focado nas series que nem agora usei a referência da Minecraft elemental para fazer essa página mais agora muito obrigado a todos que leram que deus abençoe e nos vemos no próximo capitulo.
+                    </p>
+                </div>
+                
+                <div class="reading-controls">
+                    <a href="capitulo2pag1.html">
+                        <button class="nav-btn" id="prevChapter">
+                            <i class="fas fa-arrow-left"></i> Página Anterior
+                        </button>
+                    </a>
+                    <button class="nav-btn" id="nextChapter" onclick="alert('Capítulo 3 em breve!')">
+                        Próximo Capítulo <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>Site desenvolvido por Nathan • Todos os direitos reservados • <span id="current-date"></span></p>
+    </div>
+
+    <script>
+        // Elementos do DOM
+        const themeToggle = document.getElementById('theme-toggle');
+        const loginModal = document.getElementById('loginModal');
+        const loginBtnNav = document.getElementById('loginBtnNav');
+        const closeBtn = document.querySelector('.close');
+        const showRegister = document.getElementById('showRegister');
+        const showLogin = document.getElementById('showLogin');
+        const loginForm = document.getElementById('loginForm');
+        const registerForm = document.getElementById('registerForm');
+        const loginSubmit = document.getElementById('login');
+        const registerSubmit = document.getElementById('register');
+        const loginMessage = document.getElementById('loginMessage');
+        const registerMessage = document.getElementById('registerMessage');
+        const logoutBtn = document.getElementById('logoutBtn');
+        const userAvatar = document.getElementById('userAvatar');
+        const prevChapterBtn = document.getElementById('prevChapter');
+        const nextChapterBtn = document.getElementById('nextChapter');
+        const chapterItems = document.querySelectorAll('.chapter-item');
+
+        // Verifica se o usuário está logado ao carregar a página
+        function checkLoginStatus() {
+            const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+            const username = localStorage.getItem('currentUser');
+            
+            if (isLoggedIn && username) {
+                document.body.classList.add('logged-in');
+                userAvatar.textContent = username.charAt(0).toUpperCase();
+            }
+        }
+
+        // Aplica o tema salvo no localStorage
+        function applyTheme() {
+            const isDark = localStorage.getItem('darkMode') === 'true';
+            document.documentElement.classList.toggle('dark-mode', isDark);
+            themeToggle.style.color = isDark ? '#ffed4a' : '#ffd700';
+        }
+        
+        // Evento de clique no botão de tema
+        themeToggle.addEventListener('click', () => {
+            const isDark = !document.documentElement.classList.contains('dark-mode');
+            localStorage.setItem('darkMode', isDark);
+            
+            themeToggle.style.transform = 'rotate(360deg) scale(1.2)';
+            setTimeout(() => {
+                themeToggle.style.transform = '';
+            }, 300);
+            
+            applyTheme();
+        });
+
+        // Abrir modal de login
+        loginBtnNav.addEventListener('click', () => {
+            loginModal.style.display = 'block';
+        });
+
+        // Fechar modal de login
+        closeBtn.addEventListener('click', () => {
+            loginModal.style.display = 'none';
+        });
+
+        // Fechar modal ao clicar fora
+        window.addEventListener('click', (e) => {
+            if (e.target === loginModal) {
+                loginModal.style.display = 'none';
+            }
+        });
+
+        // Alternar entre login e registro
+        showRegister.addEventListener('click', () => {
+            loginForm.style.display = 'none';
+            registerForm.style.display = 'block';
+        });
+
+        showLogin.addEventListener('click', () => {
+            registerForm.style.display = 'none';
+            loginForm.style.display = 'block';
+        });
+
+        // Sistema de registro (usando apenas localStorage)
+        registerSubmit.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const username = document.getElementById('registerUsername').value;
+            const password = document.getElementById('registerPassword').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+
+            // Validações
+            if (password !== confirmPassword) {
+                showMessage(registerMessage, "As senhas não coincidem!", 'error');
+                return;
+            }
+
+            if (password.length < 4) {
+                showMessage(registerMessage, "A senha deve ter pelo menos 4 caracteres!", 'error');
+                return;
+            }
+
+            // Salva no localStorage
+            const usuarios = JSON.parse(localStorage.getItem('usuarios_magicos') || '[]');
+            
+            // Verifica se usuário já existe
+            if (usuarios.some(u => u.username === username)) {
+                showMessage(registerMessage, "Este usuário já existe!", 'error');
+                return;
+            }
+            
+            usuarios.push({ username, password });
+            localStorage.setItem('usuarios_magicos', JSON.stringify(usuarios));
+            
+            showMessage(registerMessage, "Conta criada com sucesso!", 'success');
+            
+            // Limpa o formulário
+            this.reset();
+            
+            // Volta para o login após 2 segundos
+            setTimeout(() => {
+                registerForm.style.display = 'none';
+                loginForm.style.display = 'block';
+                registerMessage.style.display = 'none';
+            }, 2000);
+        });
+
+        // Sistema de login (usando localStorage)
+        loginSubmit.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const username = document.getElementById('loginUsername').value;
+            const password = document.getElementById('loginPassword').value;
+            
+            const usuarios = JSON.parse(localStorage.getItem('usuarios_magicos') || []);
+            const user = usuarios.find(u => u.username === username && u.password === password);
+            
+            if (user) {
+                showMessage(loginMessage, "Login bem-sucedido!", 'success');
+                localStorage.setItem('isLoggedIn', 'true');
+                localStorage.setItem('currentUser', username);
+                
+                setTimeout(() => {
+                    loginModal.style.display = 'none';
+                    checkLoginStatus();
+                }, 1000);
+            } else {
+                showMessage(loginMessage, "Usuário ou senha incorretos!", 'error');
+            }
+        });
+
+        // Logout
+        logoutBtn.addEventListener('click', () => {
+            localStorage.setItem('isLoggedIn', 'false');
+            localStorage.removeItem('currentUser');
+            document.body.classList.remove('logged-in');
+        });
+
+        // Função para mostrar mensagens
+        function showMessage(element, text, type) {
+            element.textContent = text;
+            element.style.display = 'block';
+            element.className = `status-message ${type}`;
+        }
+
+        // Navegação entre capítulos
+        chapterItems.forEach(item => {
+            item.addEventListener('click', () => {
+                // Remove a classe active de todos os itens
+                chapterItems.forEach(i => i.classList.remove('active'));
+                // Adiciona a classe active ao item clicado
+                item.classList.add('active');
+                
+                // Aqui você carregaria o conteúdo do capítulo selecionado
+                // Por enquanto, apenas atualizamos o título
+                document.querySelector('.chapter-title').textContent = item.textContent;
+            });
+        });
+
+        // Atualiza a data no footer
+        document.getElementById('current-date').textContent = new Date().toLocaleDateString('pt-BR');
+
+        // Inicializa a página
+        applyTheme();
+        checkLoginStatus();
+    </script>
+</body>
+</html>
