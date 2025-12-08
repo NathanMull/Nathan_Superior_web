@@ -794,7 +794,7 @@
             </button>
             <div class="filtros-ativos-info">
                 <div id="filtrosAtivosContagem">Filtros ativos: <span>0</span></div>
-                <div id="contadorResultados">Mostrando: <span>6 personagens</span></div>
+                <div id="contadorResultados">Mostrando: <span>5 personagens</span></div>
             </div>
         </div>
         
@@ -876,7 +876,7 @@
         const filtrosAtivosContagem = document.getElementById('filtrosAtivosContagem');
         const contadorResultados = document.getElementById('contadorResultados');
         
-        // Dados dos seus personagens
+        // Dados dos seus personagens - CORRIGIDOS
         const personagens = [
             {
                 id: 1,
@@ -884,14 +884,14 @@
                 imagem: "https://i.ibb.co/DPLQ31YD/Vbq-Flw-X1f-WL1-Rh-IKn1o0-Gpw-Ym-ZXKmtp-Y27-Nv-Lz-On9zy-WDV0e3-IX6-Ayl-ZYg-Xu-TJA5l-Ah3-VHP3-GQ-s160.jpg",
                 curiosidades: {
                     comida: ["Pizza", "Hambúrguer", "Chocolate"],
-                    diagnosticos: [ "Autismo Nível 1"],
+                    diagnosticos: ["Autismo Nível 1"], // CORRIGIDO: apenas Autismo Nível 1
                     sexualidade: "Heterossexual",
                     personalidade: ["Criativo", "Engraçado", "Vingativo"],
                     relacionamentos: ["Namorada Jassy", "Amigo do SrCheesee"],
                     hobbies: ["Criar conteúdo", "Jogar videogame", "Editar vídeos"],
                     idade: 15,
                     altura: "1.79m",
-                    signo: "Leãos",
+                    signo: "Leão",
                     medos: "Passado voltar para o assombrar"
                 }
             },
@@ -901,7 +901,7 @@
                 imagem: "https://i.ibb.co/Tx8CDVCK/nniu-Tx-DSY-j-FLKFbe-Aum-YB5o-XOxo-Jm-Wp-Gnn-RO5l-QGHe-M6p5-k3s-u-R8-Zh-E60f-Wy-A7-IVZYO8b-s160-c-k.jpg",
                 curiosidades: {
                     comida: ["Chocolate", "Macarrão", "Sorvete"],
-                    diagnosticos: [""],
+                    diagnosticos: ["TDAH"],
                     sexualidade: "Heterossexual",
                     personalidade: ["Analítico", "Calmo", "Observador"],
                     relacionamentos: ["Amigo do Nathan", "Amigo do KySnow"],
@@ -917,13 +917,13 @@
                 nome: "KySnow",
                 imagem: "https://i.ibb.co/b5rmST6b/Hc-g-Ukma-Hvseqc-LPdgy-OLx-Kw-LCo4-IK414e3e-Yu-X8-W2-Zhbam-L1-PFdvf7-Hfa-B9z-Cwq-M39b-HPs-Xc-s160-c.jpg",
                 curiosidades: {
-                    comida: ["Sushi", "Chá japones", "Biscoitos"],
-                    diagnosticos: [],
+                    comida: ["Sushi", "Chá japonês", "Biscoitos"],
+                    diagnosticos: [], // CORRIGIDO: sem autismo
                     sexualidade: "Pansexual",
                     personalidade: ["Artístico", "Sensível", "Sonhador"],
                     relacionamentos: ["Parceiro do SrCheesee", "Amigo da Chetos"],
                     hobbies: ["Contar piadas", "Ouvir música", "Escrever histórias"],
-                    idade: 14,
+                    idade: 15, // CORRIGIDO: de 14 para 15 anos
                     altura: "1.82m",
                     signo: "Peixes",
                     medos: "Perder os amigos"
@@ -935,7 +935,7 @@
                 imagem: "https://i.ibb.co/qLnwJ6QH/nt-Tv-Xw-Lv-Tp-E2-NWV-PDn-WS1c-EFFU4uzz-KEqv-Kh-YHHIkiy-Guq7c1-SNOFDBt-Hbki-Sx-H7e-A9-Qd1b-s160-c-k.jpg",
                 curiosidades: {
                     comida: ["Chetos", "Pipoca", "Refrigerante"],
-                    diagnosticos: ["Tdha"],
+                    diagnosticos: ["TDAH"],
                     sexualidade: "Assexual",
                     personalidade: ["Introvertida", "Fiel", "Protetora"],
                     relacionamentos: ["Melhor amiga do The Lek", "Best do KySnow"],
@@ -957,10 +957,10 @@
                     personalidade: ["Energético", "Competitivo", "Extrovertido"],
                     relacionamentos: ["Melhor amigo do Chetos", "Rival do Nathan"],
                     hobbies: ["Jogar FPS", "Streamar", "Tocar guitarra"],
-                    idade: 24,
+                    idade: 15,
                     altura: "1.80m",
                     signo: "Áries",
-                    medos: "Ficar entediado"
+                    medos: "Papai Noel"
                 }
             }
         ];
@@ -1330,7 +1330,7 @@
                 
                 // Gerar badges de diagnóstico
                 let diagnosticoBadges = '';
-                if (personagem.curiosidades.diagnosticos) {
+                if (personagem.curiosidades.diagnosticos && personagem.curiosidades.diagnosticos.length > 0) {
                     personagem.curiosidades.diagnosticos.forEach(diag => {
                         let classeBadge = '';
                         let classeTag = '';
@@ -1355,7 +1355,7 @@
                 
                 // Gerar tags de diagnóstico
                 let diagnosticoTags = '';
-                if (personagem.curiosidades.diagnosticos) {
+                if (personagem.curiosidades.diagnosticos && personagem.curiosidades.diagnosticos.length > 0) {
                     diagnosticoTags = personagem.curiosidades.diagnosticos.map(diag => {
                         let classeTag = '';
                         if (diag === "TDAH") classeTag = 'tag-tdah';
@@ -1389,7 +1389,7 @@
                                 <i class="fas fa-heartbeat"></i> Diagnósticos
                             </div>
                             <div class="info-value">
-                                ${personagem.curiosidades.diagnosticos ? personagem.curiosidades.diagnosticos.join(', ') : 'Nenhum diagnóstico informado'}
+                                ${personagem.curiosidades.diagnosticos && personagem.curiosidades.diagnosticos.length > 0 ? personagem.curiosidades.diagnosticos.join(', ') : 'Nenhum diagnóstico informado'}
                                 ${diagnosticoTags ? `<div class="info-tags">${diagnosticoTags}</div>` : ''}
                             </div>
                         </div>
