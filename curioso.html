@@ -1,0 +1,1511 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Curiosidades - Nathan Superior Web</title>
+    
+    <style>
+        /* Adicionando zoom de 110% para todo o documento */
+        body {
+            zoom: 110%;
+            -moz-transform: scale(1.1);
+            -moz-transform-origin: 0 0;
+        }
+        
+        /* Para outros navegadores */
+        @media all and (-webkit-min-device-pixel-ratio:0) {
+            body {
+                zoom: 110%;
+            }
+        }
+    </style>
+    
+    <script>
+        (function() {
+            const isDark = localStorage.getItem('darkMode') === 'true';
+            if (isDark) {
+                document.documentElement.classList.add('dark-mode');
+            }
+            
+            const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+            if (isLoggedIn) {
+                document.body.classList.add('logged-in');
+            }
+            
+            const filtrosVisiveis = localStorage.getItem('filtrosVisiveis') !== 'false';
+            if (!filtrosVisiveis) {
+                document.body.classList.add('filtros-ocultos');
+            }
+        })();
+    </script>
+    
+    <style>
+        :root {
+            --verde: #27ae60;
+            --azul: #3498db;
+            --vermelho: #e74c3c;
+            --amarelo: #f1c40f;
+            --texto: #f0f0f0;
+            --fundo: #000000;
+            --card: #0a0a0a;
+            --borda: #222;
+            --neon-ciano: #0ff;
+            --neon-azul: #00f;
+            --neon-marinho: #0077be;
+            --categoria-1: #9b59b6;
+            --categoria-2: #1abc9c;
+            --categoria-3: #e67e22;
+            --categoria-4: #e74c3c;
+            --tdah: #3498db;
+            --autismo-1: #2ecc71;
+            --autismo-2: #f1c40f;
+            --autismo-3: #e74c3c;
+        }
+
+        .dark-mode {
+            --verde: #1e8449;
+            --azul: #2980b9;
+            --vermelho: #ff6b6b;
+            --amarelo: #f39c12;
+            --texto: #f0f0f0;
+            --fundo: #000000;
+            --card: #0a0a0a;
+            --borda: #222;
+            --neon-ciano: #0ff;
+            --neon-azul: #00f;
+            --neon-marinho: #0077be;
+            --categoria-1: #8e44ad;
+            --categoria-2: #16a085;
+            --categoria-3: #d35400;
+            --categoria-4: #c0392b;
+            --tdah: #2980b9;
+            --autismo-1: #27ae60;
+            --autismo-2: #f39c12;
+            --autismo-3: #c0392b;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        body {
+            background: var(--fundo);
+            color: var(--texto);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .navbar {
+            background: rgba(10, 10, 10, 0.9);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 30px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 2px solid var(--neon-ciano);
+            box-shadow: 0 0 10px var(--neon-ciano), 0 0 20px var(--neon-azul);
+        }
+
+        .logo {
+            color: white;
+            font-weight: bold;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-shadow: 0 0 5px var(--neon-ciano), 0 0 10px var(--neon-ciano);
+        }
+
+        .logo small {
+            font-size: 0.8rem;
+            opacity: 0.9;
+            font-weight: normal;
+        }
+
+        #theme-toggle {
+            color: var(--neon-ciano);
+            cursor: pointer;
+            font-size: 1.3rem;
+            transition: all 0.3s;
+            text-shadow: 0 0 5px var(--neon-ciano);
+        }
+
+        #theme-toggle:hover {
+            transform: scale(1.2);
+            text-shadow: 0 0 10px var(--neon-ciano), 0 0 20px var(--neon-ciano);
+        }
+
+        .search-bar {
+            flex-grow: 1;
+            max-width: 500px;
+            margin: 0 20px;
+        }
+
+        .search-bar input {
+            width: 100%;
+            padding: 8px 15px;
+            border: 1px solid var(--neon-ciano);
+            border-radius: 20px;
+            font-size: 0.9rem;
+            background: rgba(0, 0, 0, 0.7);
+            color: var(--texto);
+            box-shadow: 0 0 5px var(--neon-ciano);
+        }
+
+        .search-bar input:focus {
+            outline: none;
+            box-shadow: 0 0 10px var(--neon-ciano), 0 0 20px var(--neon-azul);
+        }
+
+        .nav-icons {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-icon {
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: transform 0.2s;
+            text-shadow: 0 0 5px var(--neon-ciano);
+        }
+
+        .nav-icon:hover {
+            transform: translateY(-2px);
+            text-shadow: 0 0 10px var(--neon-ciano), 0 0 20px var(--neon-ciano);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .page-header {
+            text-align: center;
+            margin: 30px 0 40px;
+            padding: 20px;
+        }
+
+        .page-header h1 {
+            font-size: 2.5rem;
+            color: var(--neon-ciano);
+            text-shadow: 0 0 10px var(--neon-ciano), 0 0 20px var(--neon-azul);
+            margin-bottom: 15px;
+        }
+
+        .page-header p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+            opacity: 0.9;
+        }
+
+        /* BOTÃO TOGGLE FILTROS */
+        .toggle-filtros-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            background: var(--card);
+            padding: 15px 25px;
+            border-radius: 15px;
+            border: 1px solid var(--borda);
+        }
+
+        .toggle-filtros-btn {
+            background: transparent;
+            border: 2px solid var(--neon-ciano);
+            color: var(--neon-ciano);
+            padding: 8px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s;
+            box-shadow: 0 0 5px var(--neon-ciano);
+        }
+
+        .toggle-filtros-btn:hover {
+            background: rgba(0, 255, 255, 0.1);
+            box-shadow: 0 0 15px var(--neon-ciano);
+            transform: translateY(-2px);
+        }
+
+        .filtros-ativos-info {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            font-size: 0.9rem;
+        }
+
+        .filtros-ativos-info span {
+            color: var(--neon-ciano);
+            font-weight: bold;
+        }
+
+        /* FILTROS CONTAINER */
+        .filtros-container {
+            background: var(--card);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 40px;
+            border: 1px solid var(--neon-ciano);
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.1);
+            max-height: 600px;
+            overflow: hidden;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        body.filtros-ocultos .filtros-container {
+            max-height: 0;
+            padding: 0;
+            margin-bottom: 0;
+            border: 1px solid transparent;
+            opacity: 0;
+            transform: translateY(-20px);
+        }
+
+        .filtros-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--neon-azul);
+        }
+
+        .filtros-header h2 {
+            color: var(--neon-ciano);
+            font-size: 1.6rem;
+            text-shadow: 0 0 5px var(--neon-ciano);
+        }
+
+        .reset-filtros {
+            background: transparent;
+            border: 1px solid var(--neon-ciano);
+            color: var(--neon-ciano);
+            padding: 8px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .reset-filtros:hover {
+            background: rgba(0, 255, 255, 0.1);
+            box-shadow: 0 0 10px var(--neon-ciano);
+        }
+
+        .filtros-categorias {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 25px;
+            margin-bottom: 25px;
+        }
+
+        .categoria-filtro {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 12px;
+            padding: 20px;
+            border: 1px solid var(--borda);
+            transition: all 0.3s;
+        }
+
+        .categoria-filtro:hover {
+            border-color: var(--neon-ciano);
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.2);
+        }
+
+        .categoria-filtro h3 {
+            color: var(--neon-ciano);
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .opcoes-filtro {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            max-height: 200px;
+            overflow-y: auto;
+            padding-right: 5px;
+        }
+
+        .opcoes-filtro::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .opcoes-filtro::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 3px;
+        }
+
+        .opcoes-filtro::-webkit-scrollbar-thumb {
+            background: var(--neon-ciano);
+            border-radius: 3px;
+        }
+
+        .opcao-filtro {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+            padding: 8px 5px;
+            border-radius: 5px;
+            transition: background 0.2s;
+        }
+
+        .opcao-filtro:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .opcao-filtro input {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+            accent-color: var(--neon-ciano);
+        }
+
+        .opcao-filtro label {
+            cursor: pointer;
+            font-size: 0.95rem;
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .cor-categoria {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            display: inline-block;
+            flex-shrink: 0;
+        }
+
+        /* ESTILOS ESPECÍFICOS PARA DIAGNÓSTICOS */
+        .diagnostico-tdah {
+            background: var(--tdah) !important;
+        }
+
+        .diagnostico-autismo-1 {
+            background: var(--autismo-1) !important;
+        }
+
+        .diagnostico-autismo-2 {
+            background: var(--autismo-2) !important;
+        }
+
+        .diagnostico-autismo-3 {
+            background: var(--autismo-3) !important;
+        }
+
+        /* CARDS DE CURIOSIDADES */
+        .curiosidades-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .curiosidade-card {
+            background: var(--card);
+            border-radius: 15px;
+            overflow: hidden;
+            border: 1px solid var(--borda);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transition: all 0.4s ease;
+            position: relative;
+        }
+
+        .curiosidade-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--neon-ciano);
+            box-shadow: 0 10px 25px rgba(0, 255, 255, 0.2), 0 0 15px var(--neon-ciano);
+        }
+
+        .card-header {
+            position: relative;
+            height: 250px;
+            overflow: hidden;
+        }
+
+        .card-header img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .curiosidade-card:hover .card-header img {
+            transform: scale(1.05);
+        }
+
+        .personagem-nome {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+            color: white;
+            padding: 20px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.8);
+        }
+
+        .card-body {
+            padding: 25px;
+        }
+
+        .info-item {
+            margin-bottom: 18px;
+            padding-bottom: 18px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .info-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .info-label {
+            color: var(--neon-ciano);
+            font-weight: bold;
+            font-size: 0.95rem;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-shadow: 0 0 5px var(--neon-ciano);
+        }
+
+        .info-value {
+            color: var(--texto);
+            font-size: 1rem;
+            line-height: 1.6;
+            padding-left: 5px;
+        }
+
+        .info-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 8px;
+        }
+
+        .info-tag {
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .tag-tdah {
+            background: rgba(52, 152, 219, 0.2);
+            color: var(--tdah);
+            border: 1px solid var(--tdah);
+        }
+
+        .tag-autismo-1 {
+            background: rgba(46, 204, 113, 0.2);
+            color: var(--autismo-1);
+            border: 1px solid var(--autismo-1);
+        }
+
+        .tag-autismo-2 {
+            background: rgba(241, 196, 15, 0.2);
+            color: var(--autismo-2);
+            border: 1px solid var(--autismo-2);
+        }
+
+        .tag-autismo-3 {
+            background: rgba(231, 76, 60, 0.2);
+            color: var(--autismo-3);
+            border: 1px solid var(--autismo-3);
+        }
+
+        .card-footer {
+            padding: 20px 25px;
+            border-top: 1px solid var(--borda);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        .diagnostico-indicator {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .diagnostico-badge {
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .badge-tdah {
+            background: rgba(52, 152, 219, 0.2);
+            color: var(--tdah);
+            border: 1px solid var(--tdah);
+        }
+
+        .badge-autismo-1 {
+            background: rgba(46, 204, 113, 0.2);
+            color: var(--autismo-1);
+            border: 1px solid var(--autismo-1);
+        }
+
+        .badge-autismo-2 {
+            background: rgba(241, 196, 15, 0.2);
+            color: var(--autismo-2);
+            border: 1px solid var(--autismo-2);
+        }
+
+        .badge-autismo-3 {
+            background: rgba(231, 76, 60, 0.2);
+            color: var(--autismo-3);
+            border: 1px solid var(--autismo-3);
+        }
+
+        .card-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .card-action-btn {
+            background: transparent;
+            border: 1px solid var(--neon-ciano);
+            color: var(--neon-ciano);
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+
+        .card-action-btn:hover {
+            background: rgba(0, 255, 255, 0.1);
+            transform: scale(1.1);
+        }
+
+        .placeholder-img {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #001122, #003344);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--neon-ciano);
+            font-size: 4rem;
+            text-shadow: 0 0 10px var(--neon-ciano);
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            border: 2px solid var(--neon-ciano);
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            text-decoration: none;
+            margin: 20px 0 40px;
+            transition: all 0.3s;
+            box-shadow: 0 0 5px var(--neon-ciano);
+        }
+
+        .back-btn:hover {
+            background: rgba(0, 255, 255, 0.1);
+            transform: translateX(-5px);
+            box-shadow: 0 0 15px var(--neon-ciano);
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 60px 20px;
+            grid-column: 1 / -1;
+            color: var(--texto);
+            opacity: 0.7;
+            font-size: 1.3rem;
+            background: var(--card);
+            border-radius: 15px;
+            border: 1px solid var(--borda);
+        }
+
+        .no-results i {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            color: var(--neon-ciano);
+            display: block;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 25px;
+            font-size: 0.9rem;
+            color: var(--texto);
+            opacity: 0.8;
+            background: var(--card);
+            border-top: 1px solid var(--borda);
+            margin-top: 50px;
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                flex-wrap: wrap;
+                padding: 15px;
+            }
+            .search-bar {
+                order: 3;
+                width: 100%;
+                margin: 15px 0 0 0;
+            }
+            .container {
+                padding: 15px;
+            }
+            .curiosidades-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            .filtros-categorias {
+                grid-template-columns: 1fr;
+            }
+            .toggle-filtros-container {
+                flex-direction: column;
+                gap: 15px;
+                align-items: stretch;
+            }
+            .page-header h1 {
+                font-size: 2rem;
+            }
+        }
+
+        .user-info {
+            display: none;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .user-avatar {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background-color: var(--neon-ciano);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: black;
+            font-weight: bold;
+            box-shadow: 0 0 5px var(--neon-ciano);
+        }
+
+        .logout-btn {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            font-size: 0.9rem;
+            text-shadow: 0 0 5px var(--neon-ciano);
+        }
+
+        body.logged-in .user-info {
+            display: flex;
+        }
+
+        body.logged-in .login-btn-nav {
+            display: none;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <i id="theme-toggle" class="fas fa-star" title="Mudar tema"></i>
+            <span>Nathan Superior Web <small>- Site Oficial</small></span>
+        </div>
+        
+        <div class="search-bar">
+            <input type="text" id="searchInput" placeholder="Pesquise por personagem ou característica...">
+        </div>
+        
+        <div class="nav-icons">
+            <a href="index.html" class="nav-icon" title="Início">
+                <i class="fas fa-home"></i>
+            </a>
+            <a href="favoritos.html" class="nav-icon" title="Favoritos">
+                <i class="fas fa-heart"></i>
+            </a>
+            <div class="user-info">
+                <div class="user-avatar" id="userAvatar"></div>
+                <button class="logout-btn" id="logoutBtn">Sair</button>
+            </div>
+            <button class="nav-icon login-btn-nav" id="loginBtnNav" title="Login">
+                <i class="fas fa-user"></i>
+            </button>
+        </div>
+    </nav>
+
+    <div class="container">
+        <a href="index.html" class="back-btn">
+            <i class="fas fa-arrow-left"></i> Voltar para o Início
+        </a>
+        
+        <div class="page-header">
+            <h1><i class="fas fa-user-secret"></i> Curiosidades dos Personagens</h1>
+            <p>Descubra detalhes íntimos, preferências e características especiais dos personagens</p>
+        </div>
+        
+        <!-- Controle de Filtros -->
+        <div class="toggle-filtros-container">
+            <button class="toggle-filtros-btn" id="toggleFiltrosBtn">
+                <i class="fas fa-filter"></i>
+                <span id="toggleFiltrosText">Ocultar Filtros</span>
+            </button>
+            <div class="filtros-ativos-info">
+                <div id="filtrosAtivosContagem">Filtros ativos: <span>0</span></div>
+                <div id="contadorResultados">Mostrando: <span>6 personagens</span></div>
+            </div>
+        </div>
+        
+        <!-- Filtros -->
+        <div class="filtros-container" id="filtrosContainer">
+            <div class="filtros-header">
+                <h2><i class="fas fa-sliders-h"></i> Filtros Avançados</h2>
+                <button class="reset-filtros" id="resetFiltros">
+                    <i class="fas fa-times"></i> Limpar Tudo
+                </button>
+            </div>
+            
+            <div class="filtros-categorias">
+                <div class="categoria-filtro">
+                    <h3><i class="fas fa-utensils"></i> Comida Favorita</h3>
+                    <div class="opcoes-filtro" id="filtroComida">
+                        <!-- Gerado dinamicamente -->
+                    </div>
+                </div>
+                
+                <div class="categoria-filtro">
+                    <h3><i class="fas fa-heartbeat"></i> Diagnósticos Médicos</h3>
+                    <div class="opcoes-filtro" id="filtroDiagnosticos">
+                        <!-- Gerado dinamicamente -->
+                    </div>
+                </div>
+                
+                <div class="categoria-filtro">
+                    <h3><i class="fas fa-venus-mars"></i> Sexualidade</h3>
+                    <div class="opcoes-filtro" id="filtroSexualidade">
+                        <!-- Gerado dinamicamente -->
+                    </div>
+                </div>
+                
+                <div class="categoria-filtro">
+                    <h3><i class="fas fa-brain"></i> Personalidade</h3>
+                    <div class="opcoes-filtro" id="filtroPersonalidade">
+                        <!-- Gerado dinamicamente -->
+                    </div>
+                </div>
+                
+                <div class="categoria-filtro">
+                    <h3><i class="fas fa-users"></i> Relacionamentos</h3>
+                    <div class="opcoes-filtro" id="filtroRelacionamentos">
+                        <!-- Gerado dinamicamente -->
+                    </div>
+                </div>
+                
+                <div class="categoria-filtro">
+                    <h3><i class="fas fa-gamepad"></i> Hobbies</h3>
+                    <div class="opcoes-filtro" id="filtroHobbies">
+                        <!-- Gerado dinamicamente -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Cards de Curiosidades -->
+        <div class="curiosidades-grid" id="curiosidadesContainer">
+            <!-- Gerado dinamicamente via JavaScript -->
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>Site oficial desenvolvido por Nathan • Todos os direitos reservados • Atualizado regularmente</p>
+    </div>
+
+    <script>
+        // Elementos principais
+        const themeToggle = document.getElementById('theme-toggle');
+        const logoutBtn = document.getElementById('logoutBtn');
+        const userAvatar = document.getElementById('userAvatar');
+        const curiosidadesContainer = document.getElementById('curiosidadesContainer');
+        const searchInput = document.getElementById('searchInput');
+        const resetFiltrosBtn = document.getElementById('resetFiltros');
+        const toggleFiltrosBtn = document.getElementById('toggleFiltrosBtn');
+        const toggleFiltrosText = document.getElementById('toggleFiltrosText');
+        const filtrosContainer = document.getElementById('filtrosContainer');
+        const filtrosAtivosContagem = document.getElementById('filtrosAtivosContagem');
+        const contadorResultados = document.getElementById('contadorResultados');
+        
+        // Dados dos seus personagens
+        const personagens = [
+            {
+                id: 1,
+                nome: "Nathan Superior",
+                imagem: "https://i.ibb.co/DPLQ31YD/Vbq-Flw-X1f-WL1-Rh-IKn1o0-Gpw-Ym-ZXKmtp-Y27-Nv-Lz-On9zy-WDV0e3-IX6-Ayl-ZYg-Xu-TJA5l-Ah3-VHP3-GQ-s160.jpg",
+                curiosidades: {
+                    comida: ["Pizza", "Hambúrguer", "Chocolate"],
+                    diagnosticos: [ "Autismo Nível 1"],
+                    sexualidade: "Heterossexual",
+                    personalidade: ["Criativo", "Engraçado", "Vingativo"],
+                    relacionamentos: ["Namorada Jassy", "Amigo do SrCheesee"],
+                    hobbies: ["Criar conteúdo", "Jogar videogame", "Editar vídeos"],
+                    idade: 15,
+                    altura: "1.79m",
+                    signo: "Leãos",
+                    medos: "Passado voltar para o assombrar"
+                }
+            },
+            {
+                id: 2,
+                nome: "SrCheesee",
+                imagem: "https://i.ibb.co/Tx8CDVCK/nniu-Tx-DSY-j-FLKFbe-Aum-YB5o-XOxo-Jm-Wp-Gnn-RO5l-QGHe-M6p5-k3s-u-R8-Zh-E60f-Wy-A7-IVZYO8b-s160-c-k.jpg",
+                curiosidades: {
+                    comida: ["Chocolate", "Macarrão", "Sorvete"],
+                    diagnosticos: [""],
+                    sexualidade: "Heterossexual",
+                    personalidade: ["Analítico", "Calmo", "Observador"],
+                    relacionamentos: ["Amigo do Nathan", "Amigo do KySnow"],
+                    hobbies: ["Programar", "Resolver puzzles", "Jogar fortinite"],
+                    idade: 13,
+                    altura: "1.60m",
+                    signo: "Virgem",
+                    medos: "Do avô bater nele"
+                }
+            },
+            {
+                id: 3,
+                nome: "KySnow",
+                imagem: "https://i.ibb.co/b5rmST6b/Hc-g-Ukma-Hvseqc-LPdgy-OLx-Kw-LCo4-IK414e3e-Yu-X8-W2-Zhbam-L1-PFdvf7-Hfa-B9z-Cwq-M39b-HPs-Xc-s160-c.jpg",
+                curiosidades: {
+                    comida: ["Sushi", "Chá japones", "Biscoitos"],
+                    diagnosticos: [],
+                    sexualidade: "Pansexual",
+                    personalidade: ["Artístico", "Sensível", "Sonhador"],
+                    relacionamentos: ["Parceiro do SrCheesee", "Amigo da Chetos"],
+                    hobbies: ["Contar piadas", "Ouvir música", "Escrever histórias"],
+                    idade: 14,
+                    altura: "1.82m",
+                    signo: "Peixes",
+                    medos: "Perder os amigos"
+                }
+            },
+            {
+                id: 4,
+                nome: "Chetosgarfiel",
+                imagem: "https://i.ibb.co/qLnwJ6QH/nt-Tv-Xw-Lv-Tp-E2-NWV-PDn-WS1c-EFFU4uzz-KEqv-Kh-YHHIkiy-Guq7c1-SNOFDBt-Hbki-Sx-H7e-A9-Qd1b-s160-c-k.jpg",
+                curiosidades: {
+                    comida: ["Chetos", "Pipoca", "Refrigerante"],
+                    diagnosticos: ["Tdha"],
+                    sexualidade: "Assexual",
+                    personalidade: ["Introvertida", "Fiel", "Protetora"],
+                    relacionamentos: ["Melhor amiga do The Lek", "Best do KySnow"],
+                    hobbies: ["Assistir filmes", "Colecionar action figures", "Cuidar de gatos"],
+                    idade: 16,
+                    altura: "1.70m",
+                    signo: "Câncer",
+                    medos: "Barata"
+                }
+            },
+            {
+                id: 5,
+                nome: "Lek3d",
+                imagem: "https://i.ibb.co/TDVQDQ7Y/HKf-Dnz-GC-ZLVi-Gu-Djb7-Gr-R8b-HN1-VKo-It-Lxdo-CB8-Pjei-VNFnge-HNe7-AP9og-VPtz-Nqb9d-By-Xv7w-s160-c.jpg",
+                curiosidades: {
+                    comida: ["Pão de queijo", "Café", "Bolo"],
+                    diagnosticos: ["TDAH"],
+                    sexualidade: "Heterossexual",
+                    personalidade: ["Energético", "Competitivo", "Extrovertido"],
+                    relacionamentos: ["Melhor amigo do Chetos", "Rival do Nathan"],
+                    hobbies: ["Jogar FPS", "Streamar", "Tocar guitarra"],
+                    idade: 24,
+                    altura: "1.80m",
+                    signo: "Áries",
+                    medos: "Ficar entediado"
+                }
+            }
+        ];
+        
+        // Filtros ativos
+        let filtrosAtivos = {
+            comida: [],
+            diagnosticos: [],
+            sexualidade: [],
+            personalidade: [],
+            relacionamentos: [],
+            hobbies: []
+        };
+        
+        // Verificar status de login
+        function checkLoginStatus() {
+            const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+            const username = localStorage.getItem('currentUser');
+            
+            if (isLoggedIn && username) {
+                document.body.classList.add('logged-in');
+                userAvatar.textContent = username.charAt(0).toUpperCase();
+            }
+        }
+        
+        // Alternar tema
+        function applyTheme() {
+            const isDark = localStorage.getItem('darkMode') === 'true';
+            document.documentElement.classList.toggle('dark-mode', isDark);
+            themeToggle.style.color = isDark ? '#f39c12' : '#f1c40f';
+        }
+        
+        themeToggle.addEventListener('click', () => {
+            const isDark = !document.documentElement.classList.contains('dark-mode');
+            localStorage.setItem('darkMode', isDark);
+            
+            themeToggle.style.transform = 'rotate(360deg) scale(1.2)';
+            setTimeout(() => {
+                themeToggle.style.transform = '';
+            }, 300);
+            
+            applyTheme();
+        });
+        
+        // Logout
+        logoutBtn.addEventListener('click', () => {
+            localStorage.setItem('isLoggedIn', 'false');
+            localStorage.removeItem('currentUser');
+            document.body.classList.remove('logged-in');
+        });
+        
+        // Toggle dos filtros
+        toggleFiltrosBtn.addEventListener('click', () => {
+            const filtrosOcultos = document.body.classList.toggle('filtros-ocultos');
+            localStorage.setItem('filtrosVisiveis', !filtrosOcultos);
+            
+            if (filtrosOcultos) {
+                toggleFiltrosText.textContent = 'Mostrar Filtros';
+                toggleFiltrosBtn.innerHTML = '<i class="fas fa-filter"></i> <span>Mostrar Filtros</span>';
+            } else {
+                toggleFiltrosText.textContent = 'Ocultar Filtros';
+                toggleFiltrosBtn.innerHTML = '<i class="fas fa-filter"></i> <span>Ocultar Filtros</span>';
+            }
+        });
+        
+        // Extrair todas as opções únicas para cada categoria
+        function extrairOpcoesFiltro() {
+            const opcoes = {
+                comida: new Set(),
+                diagnosticos: new Set(),
+                sexualidade: new Set(),
+                personalidade: new Set(),
+                relacionamentos: new Set(),
+                hobbies: new Set()
+            };
+            
+            personagens.forEach(personagem => {
+                // Comida
+                if (personagem.curiosidades.comida) {
+                    personagem.curiosidades.comida.forEach(comida => opcoes.comida.add(comida));
+                }
+                
+                // Diagnósticos
+                if (personagem.curiosidades.diagnosticos) {
+                    personagem.curiosidades.diagnosticos.forEach(diag => opcoes.diagnosticos.add(diag));
+                }
+                
+                // Sexualidade
+                if (personagem.curiosidades.sexualidade) {
+                    opcoes.sexualidade.add(personagem.curiosidades.sexualidade);
+                }
+                
+                // Personalidade
+                if (personagem.curiosidades.personalidade) {
+                    personagem.curiosidades.personalidade.forEach(trait => opcoes.personalidade.add(trait));
+                }
+                
+                // Relacionamentos
+                if (personagem.curiosidades.relacionamentos) {
+                    personagem.curiosidades.relacionamentos.forEach(rel => {
+                        // Extrair tipos de relacionamento
+                        if (rel.includes(":")) {
+                            const tipo = rel.split(":")[0].trim();
+                            opcoes.relacionamentos.add(tipo);
+                        } else if (rel.includes("do") || rel.includes("da")) {
+                            const partes = rel.split(" ");
+                            if (partes.length > 1) {
+                                opcoes.relacionamentos.add(partes[0]);
+                            }
+                        }
+                    });
+                }
+                
+                // Hobbies
+                if (personagem.curiosidades.hobbies) {
+                    personagem.curiosidades.hobbies.forEach(hobby => opcoes.hobbies.add(hobby));
+                }
+            });
+            
+            return opcoes;
+        }
+        
+        // Criar filtros na interface
+        function criarFiltros() {
+            const opcoes = extrairOpcoesFiltro();
+            
+            // Comida
+            const filtroComida = document.getElementById('filtroComida');
+            Array.from(opcoes.comida).sort().forEach(comida => {
+                filtroComida.innerHTML += `
+                    <div class="opcao-filtro">
+                        <input type="checkbox" id="comida_${comida.replace(/\s+/g, '_')}" value="${comida}" data-categoria="comida">
+                        <label for="comida_${comida.replace(/\s+/g, '_')}">
+                            <span class="cor-categoria" style="background: var(--categoria-1);"></span>
+                            ${comida}
+                        </label>
+                    </div>
+                `;
+            });
+            
+            // Diagnósticos Médicos
+            const filtroDiagnosticos = document.getElementById('filtroDiagnosticos');
+            const diagnosticosOrdenados = Array.from(opcoes.diagnosticos).sort((a, b) => {
+                // Ordenar: TDAH primeiro, depois Autismo por nível
+                if (a === "TDAH") return -1;
+                if (b === "TDAH") return 1;
+                return a.localeCompare(b);
+            });
+            
+            diagnosticosOrdenados.forEach(diag => {
+                let classeCor = "";
+                if (diag === "TDAH") classeCor = "diagnostico-tdah";
+                if (diag === "Autismo Nível 1") classeCor = "diagnostico-autismo-1";
+                if (diag === "Autismo Nível 2") classeCor = "diagnostico-autismo-2";
+                if (diag === "Autismo Nível 3") classeCor = "diagnostico-autismo-3";
+                
+                filtroDiagnosticos.innerHTML += `
+                    <div class="opcao-filtro">
+                        <input type="checkbox" id="diag_${diag.replace(/\s+/g, '_')}" value="${diag}" data-categoria="diagnosticos">
+                        <label for="diag_${diag.replace(/\s+/g, '_')}">
+                            <span class="cor-categoria ${classeCor}"></span>
+                            ${diag}
+                        </label>
+                    </div>
+                `;
+            });
+            
+            // Sexualidade
+            const filtroSexualidade = document.getElementById('filtroSexualidade');
+            Array.from(opcoes.sexualidade).sort().forEach(sexualidade => {
+                filtroSexualidade.innerHTML += `
+                    <div class="opcao-filtro">
+                        <input type="checkbox" id="sexualidade_${sexualidade.replace(/\s+/g, '_')}" value="${sexualidade}" data-categoria="sexualidade">
+                        <label for="sexualidade_${sexualidade.replace(/\s+/g, '_')}">
+                            <span class="cor-categoria" style="background: var(--categoria-3);"></span>
+                            ${sexualidade}
+                        </label>
+                    </div>
+                `;
+            });
+            
+            // Personalidade
+            const filtroPersonalidade = document.getElementById('filtroPersonalidade');
+            Array.from(opcoes.personalidade).sort().forEach(trait => {
+                filtroPersonalidade.innerHTML += `
+                    <div class="opcao-filtro">
+                        <input type="checkbox" id="personalidade_${trait.replace(/\s+/g, '_')}" value="${trait}" data-categoria="personalidade">
+                        <label for="personalidade_${trait.replace(/\s+/g, '_')}">
+                            <span class="cor-categoria" style="background: var(--categoria-4);"></span>
+                            ${trait}
+                        </label>
+                    </div>
+                `;
+            });
+            
+            // Relacionamentos
+            const filtroRelacionamentos = document.getElementById('filtroRelacionamentos');
+            Array.from(opcoes.relacionamentos).sort().forEach(rel => {
+                filtroRelacionamentos.innerHTML += `
+                    <div class="opcao-filtro">
+                        <input type="checkbox" id="rel_${rel.replace(/\s+/g, '_')}" value="${rel}" data-categoria="relacionamentos">
+                        <label for="rel_${rel.replace(/\s+/g, '_')}">
+                            <span class="cor-categoria" style="background: var(--neon-ciano);"></span>
+                            ${rel}
+                        </label>
+                    </div>
+                `;
+            });
+            
+            // Hobbies
+            const filtroHobbies = document.getElementById('filtroHobbies');
+            Array.from(opcoes.hobbies).sort().forEach(hobby => {
+                filtroHobbies.innerHTML += `
+                    <div class="opcao-filtro">
+                        <input type="checkbox" id="hobby_${hobby.replace(/\s+/g, '_')}" value="${hobby}" data-categoria="hobbies">
+                        <label for="hobby_${hobby.replace(/\s+/g, '_')}">
+                            <span class="cor-categoria" style="background: var(--neon-azul);"></span>
+                            ${hobby}
+                        </label>
+                    </div>
+                `;
+            });
+            
+            // Adicionar listeners aos checkboxes
+            document.querySelectorAll('.opcao-filtro input').forEach(checkbox => {
+                checkbox.addEventListener('change', atualizarFiltros);
+            });
+        }
+        
+        // Atualizar filtros ativos
+        function atualizarFiltros() {
+            // Resetar filtros ativos
+            filtrosAtivos = {
+                comida: [],
+                diagnosticos: [],
+                sexualidade: [],
+                personalidade: [],
+                relacionamentos: [],
+                hobbies: []
+            };
+            
+            // Coletar filtros selecionados
+            document.querySelectorAll('.opcao-filtro input:checked').forEach(checkbox => {
+                const categoria = checkbox.dataset.categoria;
+                const valor = checkbox.value;
+                
+                if (categoria && valor && !filtrosAtivos[categoria].includes(valor)) {
+                    filtrosAtivos[categoria].push(valor);
+                }
+            });
+            
+            // Atualizar contagem de filtros ativos
+            atualizarContagemFiltros();
+            
+            // Aplicar filtros aos cards
+            aplicarFiltros();
+        }
+        
+        // Atualizar contagem de filtros ativos
+        function atualizarContagemFiltros() {
+            let totalFiltros = 0;
+            Object.values(filtrosAtivos).forEach(arr => totalFiltros += arr.length);
+            
+            filtrosAtivosContagem.innerHTML = `Filtros ativos: <span>${totalFiltros}</span>`;
+            
+            // Atualizar texto do botão toggle se houver filtros
+            if (totalFiltros > 0) {
+                filtrosAtivosContagem.style.color = 'var(--neon-ciano)';
+                filtrosAtivosContagem.querySelector('span').style.textShadow = '0 0 5px var(--neon-ciano)';
+            } else {
+                filtrosAtivosContagem.style.color = '';
+                filtrosAtivosContagem.querySelector('span').style.textShadow = '';
+            }
+        }
+        
+        // Aplicar filtros e mostrar resultados
+        function aplicarFiltros() {
+            const termoBusca = searchInput.value.toLowerCase();
+            let personagensFiltrados = personagens;
+            
+            // Aplicar filtros por categoria
+            Object.entries(filtrosAtivos).forEach(([categoria, valores]) => {
+                if (valores.length > 0) {
+                    personagensFiltrados = personagensFiltrados.filter(personagem => {
+                        if (!personagem.curiosidades[categoria]) return false;
+                        
+                        if (categoria === 'sexualidade') {
+                            // Para sexualidade (string única)
+                            return valores.includes(personagem.curiosidades.sexualidade);
+                        } else {
+                            // Para arrays (comida, diagnosticos, personalidade, hobbies, relacionamentos)
+                            return valores.some(valor => 
+                                personagem.curiosidades[categoria].some(item => 
+                                    item.toLowerCase().includes(valor.toLowerCase())
+                                )
+                            );
+                        }
+                    });
+                }
+            });
+            
+            // Aplicar busca por texto
+            if (termoBusca) {
+                personagensFiltrados = personagensFiltrados.filter(personagem => {
+                    const nomeMatch = personagem.nome.toLowerCase().includes(termoBusca);
+                    
+                    // Verificar em todas as curiosidades
+                    let curiosidadesMatch = false;
+                    Object.values(personagem.curiosidades).forEach(valor => {
+                        if (Array.isArray(valor)) {
+                            if (valor.some(item => item.toLowerCase().includes(termoBusca))) {
+                                curiosidadesMatch = true;
+                            }
+                        } else if (typeof valor === 'string' && valor.toLowerCase().includes(termoBusca)) {
+                            curiosidadesMatch = true;
+                        } else if (typeof valor === 'number' && valor.toString().includes(termoBusca)) {
+                            curiosidadesMatch = true;
+                        }
+                    });
+                    
+                    return nomeMatch || curiosidadesMatch;
+                });
+            }
+            
+            // Atualizar contador de resultados
+            contadorResultados.innerHTML = `Mostrando: <span>${personagensFiltrados.length} personagens</span>`;
+            
+            if (personagensFiltrados.length !== personagens.length) {
+                contadorResultados.style.color = 'var(--neon-ciano)';
+                contadorResultados.querySelector('span').style.textShadow = '0 0 5px var(--neon-ciano)';
+            } else {
+                contadorResultados.style.color = '';
+                contadorResultados.querySelector('span').style.textShadow = '';
+            }
+            
+            // Renderizar resultados
+            renderizarPersonagens(personagensFiltrados);
+        }
+        
+        // Renderizar cards de personagens
+        function renderizarPersonagens(personagensParaRenderizar) {
+            curiosidadesContainer.innerHTML = '';
+            
+            if (personagensParaRenderizar.length === 0) {
+                curiosidadesContainer.innerHTML = `
+                    <div class="no-results">
+                        <i class="fas fa-search"></i>
+                        <h3>Nenhum personagem encontrado</h3>
+                        <p>Tente ajustar seus filtros ou termos de busca</p>
+                        <button class="reset-filtros" id="resetNoResults" style="margin-top: 20px;">
+                            <i class="fas fa-times"></i> Limpar Filtros
+                        </button>
+                    </div>
+                `;
+                
+                // Adicionar listener ao botão de reset na tela de resultados vazios
+                document.getElementById('resetNoResults')?.addEventListener('click', () => {
+                    resetarFiltros();
+                });
+                
+                return;
+            }
+            
+            personagensParaRenderizar.forEach(personagem => {
+                const card = document.createElement('div');
+                card.className = 'curiosidade-card';
+                
+                // Gerar badges de diagnóstico
+                let diagnosticoBadges = '';
+                if (personagem.curiosidades.diagnosticos) {
+                    personagem.curiosidades.diagnosticos.forEach(diag => {
+                        let classeBadge = '';
+                        let classeTag = '';
+                        
+                        if (diag === "TDAH") {
+                            classeBadge = 'badge-tdah';
+                            classeTag = 'tag-tdah';
+                        } else if (diag === "Autismo Nível 1") {
+                            classeBadge = 'badge-autismo-1';
+                            classeTag = 'tag-autismo-1';
+                        } else if (diag === "Autismo Nível 2") {
+                            classeBadge = 'badge-autismo-2';
+                            classeTag = 'tag-autismo-2';
+                        } else if (diag === "Autismo Nível 3") {
+                            classeBadge = 'badge-autismo-3';
+                            classeTag = 'tag-autismo-3';
+                        }
+                        
+                        diagnosticoBadges += `<span class="diagnostico-badge ${classeBadge}"><i class="fas fa-stethoscope"></i> ${diag}</span>`;
+                    });
+                }
+                
+                // Gerar tags de diagnóstico
+                let diagnosticoTags = '';
+                if (personagem.curiosidades.diagnosticos) {
+                    diagnosticoTags = personagem.curiosidades.diagnosticos.map(diag => {
+                        let classeTag = '';
+                        if (diag === "TDAH") classeTag = 'tag-tdah';
+                        else if (diag === "Autismo Nível 1") classeTag = 'tag-autismo-1';
+                        else if (diag === "Autismo Nível 2") classeTag = 'tag-autismo-2';
+                        else if (diag === "Autismo Nível 3") classeTag = 'tag-autismo-3';
+                        
+                        return `<span class="info-tag ${classeTag}">${diag}</span>`;
+                    }).join('');
+                }
+                
+                card.innerHTML = `
+                    <div class="card-header">
+                        <div class="placeholder-img">
+                            <i class="fas fa-user-circle"></i>
+                        </div>
+                        <div class="personagem-nome">${personagem.nome}</div>
+                    </div>
+                    <div class="card-body">
+                        <div class="info-item">
+                            <div class="info-label">
+                                <i class="fas fa-utensils"></i> Comida Favorita
+                            </div>
+                            <div class="info-value">
+                                ${personagem.curiosidades.comida ? personagem.curiosidades.comida.join(', ') : 'Não informado'}
+                            </div>
+                        </div>
+                        
+                        <div class="info-item">
+                            <div class="info-label">
+                                <i class="fas fa-heartbeat"></i> Diagnósticos
+                            </div>
+                            <div class="info-value">
+                                ${personagem.curiosidades.diagnosticos ? personagem.curiosidades.diagnosticos.join(', ') : 'Nenhum diagnóstico informado'}
+                                ${diagnosticoTags ? `<div class="info-tags">${diagnosticoTags}</div>` : ''}
+                            </div>
+                        </div>
+                        
+                        <div class="info-item">
+                            <div class="info-label">
+                                <i class="fas fa-venus-mars"></i> Sexualidade
+                            </div>
+                            <div class="info-value">
+                                ${personagem.curiosidades.sexualidade || 'Não informado'}
+                            </div>
+                        </div>
+                        
+                        <div class="info-item">
+                            <div class="info-label">
+                                <i class="fas fa-brain"></i> Personalidade
+                            </div>
+                            <div class="info-value">
+                                ${personagem.curiosidades.personalidade ? personagem.curiosidades.personalidade.join(', ') : 'Não informado'}
+                            </div>
+                        </div>
+                        
+                        ${personagem.curiosidades.idade ? `
+                        <div class="info-item">
+                            <div class="info-label">
+                                <i class="fas fa-birthday-cake"></i> Idade
+                            </div>
+                            <div class="info-value">
+                                ${personagem.curiosidades.idade} anos
+                            </div>
+                        </div>
+                        ` : ''}
+                        
+                        ${personagem.curiosidades.medos ? `
+                        <div class="info-item">
+                            <div class="info-label">
+                                <i class="fas fa-ghost"></i> Maior Medo
+                            </div>
+                            <div class="info-value">
+                                ${personagem.curiosidades.medos}
+                            </div>
+                        </div>
+                        ` : ''}
+                        
+                        ${personagem.curiosidades.hobbies ? `
+                        <div class="info-item">
+                            <div class="info-label">
+                                <i class="fas fa-gamepad"></i> Hobbies
+                            </div>
+                            <div class="info-value">
+                                ${personagem.curiosidades.hobbies.join(', ')}
+                            </div>
+                        </div>
+                        ` : ''}
+                    </div>
+                    <div class="card-footer">
+                        <div class="diagnostico-indicator">
+                            ${diagnosticoBadges || '<span style="opacity: 0.7;">Sem diagnósticos</span>'}
+                        </div>
+                        <div class="card-actions">
+                            <button class="card-action-btn" title="Favoritar">
+                                <i class="far fa-heart"></i>
+                            </button>
+                            <button class="card-action-btn" title="Compartilhar">
+                                <i class="fas fa-share-alt"></i>
+                            </button>
+                        </div>
+                    </div>
+                `;
+                
+                // Se houver uma imagem real, substituir o placeholder
+                if (personagem.imagem) {
+                    const placeholder = card.querySelector('.placeholder-img');
+                    placeholder.outerHTML = `<img src="${personagem.imagem}" alt="${personagem.nome}" loading="lazy">`;
+                }
+                
+                curiosidadesContainer.appendChild(card);
+            });
+        }
+        
+        // Resetar filtros
+        function resetarFiltros() {
+            // Limpar checkboxes
+            document.querySelectorAll('.opcao-filtro input').forEach(checkbox => {
+                checkbox.checked = false;
+            });
+            
+            // Limpar busca
+            searchInput.value = '';
+            
+            // Resetar filtros ativos
+            filtrosAtivos = {
+                comida: [],
+                diagnosticos: [],
+                sexualidade: [],
+                personalidade: [],
+                relacionamentos: [],
+                hobbies: []
+            };
+            
+            // Atualizar exibição
+            atualizarContagemFiltros();
+            aplicarFiltros();
+        }
+        
+        resetFiltrosBtn.addEventListener('click', resetarFiltros);
+        
+        // Busca em tempo real
+        searchInput.addEventListener('input', aplicarFiltros);
+        
+        // Inicializar
+        applyTheme();
+        checkLoginStatus();
+        criarFiltros();
+        renderizarPersonagens(personagens);
+        atualizarContagemFiltros();
+    </script>
+</body>
+</html>
