@@ -48,6 +48,10 @@
             --neon-ciano: #0ff;
             --neon-azul: #00f;
             --neon-marinho: #0077be;
+            --categoria-1: #9b59b6;
+            --categoria-2: #1abc9c;
+            --categoria-3: #e67e22;
+            --categoria-4: #e74c3c;
         }
 
         .dark-mode {
@@ -62,6 +66,10 @@
             --neon-ciano: #0ff;
             --neon-azul: #00f;
             --neon-marinho: #0077be;
+            --categoria-1: #8e44ad;
+            --categoria-2: #16a085;
+            --categoria-3: #d35400;
+            --categoria-4: #c0392b;
         }
 
         * {
@@ -269,6 +277,84 @@
             box-shadow: 0 0 10px var(--neon-ciano);
         }
 
+        /* CATEGORIAS */
+        .categorias-container {
+            display: flex;
+            gap: 15px;
+            margin: 30px 0;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .categoria-btn {
+            padding: 12px 25px;
+            border: 2px solid var(--neon-ciano);
+            background: transparent;
+            color: var(--neon-ciano);
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s;
+            box-shadow: 0 0 5px var(--neon-ciano);
+        }
+
+        .categoria-btn:hover {
+            background: rgba(0, 255, 255, 0.1);
+            transform: translateY(-3px);
+            box-shadow: 0 0 15px var(--neon-ciano);
+        }
+
+        .categoria-btn.active {
+            background: var(--neon-ciano);
+            color: black;
+            font-weight: bold;
+            box-shadow: 0 0 15px var(--neon-ciano);
+        }
+
+        .categoria-btn[data-categoria="todos"] {
+            border-color: var(--neon-ciano);
+        }
+
+        .categoria-btn[data-categoria="minecraft"] {
+            border-color: var(--categoria-1);
+            color: var(--categoria-1);
+        }
+
+        .categoria-btn[data-categoria="minecraft"].active {
+            background: var(--categoria-1);
+            color: white;
+        }
+
+        .categoria-btn[data-categoria="insaniacraft"] {
+            border-color: var(--categoria-2);
+            color: var(--categoria-2);
+        }
+
+        .categoria-btn[data-categoria="insaniacraft"].active {
+            background: var(--categoria-2);
+            color: white;
+        }
+
+        .categoria-btn[data-categoria="pessoal"] {
+            border-color: var(--categoria-3);
+            color: var(--categoria-3);
+        }
+
+        .categoria-btn[data-categoria="pessoal"].active {
+            background: var(--categoria-3);
+            color: white;
+        }
+
+        .categoria-btn[data-categoria="exclusivo"] {
+            border-color: var(--categoria-4);
+            color: var(--categoria-4);
+        }
+
+        .categoria-btn[data-categoria="exclusivo"].active {
+            background: var(--categoria-4);
+            color: white;
+        }
+
         .videos-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
@@ -284,6 +370,12 @@
             transition: transform 0.3s, box-shadow 0.3s;
             position: relative;
             border: 1px solid var(--neon-ciano);
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .video-card.hidden {
+            display: none;
         }
 
         .video-card:hover {
@@ -337,6 +429,47 @@
             text-shadow: 0 0 5px currentColor;
         }
 
+        .video-tag {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            z-index: 2;
+            border: 1px solid;
+            box-shadow: 0 0 5px;
+        }
+
+        .tag-minecraft {
+            background: rgba(155, 89, 182, 0.9);
+            color: white;
+            border-color: var(--categoria-1);
+            box-shadow: 0 0 10px var(--categoria-1);
+        }
+
+        .tag-insaniacraft {
+            background: rgba(26, 188, 156, 0.9);
+            color: white;
+            border-color: var(--categoria-2);
+            box-shadow: 0 0 10px var(--categoria-2);
+        }
+
+        .tag-pessoal {
+            background: rgba(230, 126, 34, 0.9);
+            color: white;
+            border-color: var(--categoria-3);
+            box-shadow: 0 0 10px var(--categoria-3);
+        }
+
+        .tag-exclusivo {
+            background: rgba(231, 76, 60, 0.9);
+            color: white;
+            border-color: var(--categoria-4);
+            box-shadow: 0 0 10px var(--categoria-4);
+        }
+
         .section-divider {
             border: none;
             height: 2px;
@@ -357,7 +490,7 @@
         .featured-label {
             position: absolute;
             top: 10px;
-            right: 10px;
+            left: 10px;
             background: var(--vermelho);
             color: white;
             padding: 8px 15px;
@@ -368,18 +501,23 @@
             border: 1px solid var(--neon-ciano);
         }
 
-        .new-label {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background: var(--verde);
-            color: white;
-            padding: 8px 15px;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            z-index: 2;
-            box-shadow: 0 0 10px var(--verde);
-            border: 1px solid var(--neon-ciano);
+        .no-results {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 50px 20px;
+            color: var(--texto);
+            opacity: 0.7;
+            font-size: 1.2rem;
+            background: var(--card);
+            border-radius: 15px;
+            border: 1px solid var(--borda);
+        }
+
+        .no-results i {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: var(--neon-ciano);
+            display: block;
         }
 
         .footer {
@@ -570,6 +708,13 @@
             .featured-video .video-container {
                 padding-bottom: 56.25%;
             }
+            .categorias-container {
+                justify-content: center;
+            }
+            .categoria-btn {
+                padding: 10px 15px;
+                font-size: 0.9rem;
+            }
         }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -645,7 +790,7 @@
         </div>
         
         <div class="search-bar">
-            <input type="text" placeholder="Pesquise por spoilers, vídeos...">
+            <input type="text" id="searchInput" placeholder="Pesquise por spoilers, vídeos...">
         </div>
         
         <div class="nav-icons">
@@ -668,124 +813,27 @@
     <div class="container">
         <h1 class="page-title">Os Vídeos Mais Populares do Canal</h1>
         
-        <div class="videos-grid">
-            <!-- Vídeo mais visto (destaque) -->
-            <div class="video-card featured-video">
-                <div class="video-container">
-                    <span class="featured-label">🔥 Mais Popular</span>
-                    <i class="fas fa-heart favorite-heart" data-video-url="https://youtu.be/iPUQoKibauo?si=Zl_BUQbNpeI9KFyx"></i>
-                    <iframe src="https://www.youtube.com/embed/iPUQoKibauo" 
-                            title="YouTube video player" 
-                            frameborder="0" 
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                            allowfullscreen></iframe>
-                </div>
-                <div class="video-info">
-                    <h3 class="video-title">Série nova!!! Minecraft elementos o inicio de tudo</h3>
-                    <div class="video-stats">
-                        <span class="video-views"><i class="fas fa-eye"></i> 2.425 visualizações</span>
-                        <span class="video-likes"><i class="fas fa-heart"></i> 156 likes</span>
-                    </div>
-                </div>
-            </div>
-
-            <hr class="section-divider">
-
-            <!-- VÍDEOS NOVOS -->
-            <div class="video-card">
-                <div class="video-container">
-                    <span class="new-label">🎬 NOVO</span>
-                    <i class="fas fa-heart favorite-heart" data-video-url="https://youtu.be/S-zztul-L9c"></i>
-                    <iframe src="https://www.youtube.com/embed/S-zztul-L9c" 
-                            title="YouTube video player" 
-                            frameborder="0" 
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                            allowfullscreen></iframe>
-                </div>
-                <div class="video-info">
-                    <h3 class="video-title">CONSTRUI A CASA MAIS LINDA DESSA NOVA SERIE!!</h3>
-                    <div class="video-stats">
-                        <span class="video-views"><i class="fas fa-eye"></i> 99 visualizações</span>
-                        <span class="video-likes"><i class="fas fa-heart"></i> 12 likes</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="video-card">
-                <div class="video-container">
-                    <span class="new-label">🎬 NOVO</span>
-                    <i class="fas fa-heart favorite-heart" data-video-url="https://youtu.be/auPpp9KEtso?si=P_TvUtSHXgaZak6t"></i>
-                    <iframe src="https://www.youtube.com/embed/auPpp9KEtso" 
-                            title="YouTube video player" 
-                            frameborder="0" 
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                            allowfullscreen></iframe>
-                </div>
-                <div class="video-info">
-                    <h3 class="video-title">Eu Passei 30 Dias Pensando no Futuro do Meu Canal e Precisamos conversar!</h3>
-                    <div class="video-stats">
-                        <span class="video-views"><i class="fas fa-eye"></i> 102 visualizações</span>
-                        <span class="video-likes"><i class="fas fa-heart"></i> 20 likes</span>
-                    </div>
-                </div>
-            </div>
-
-            <hr class="section-divider">
-
-            <!-- Demais vídeos -->
-            <div class="video-card">
-                <div class="video-container">
-                    <i class="fas fa-heart favorite-heart" data-video-url="https://youtu.be/FPGAVhG8FoU?si=yhXwaycSj7CS6w1Y"></i>
-                    <iframe src="https://www.youtube.com/embed/FPGAVhG8FoU" 
-                            title="YouTube video player" 
-                            frameborder="0" 
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                            allowfullscreen></iframe>
-                </div>
-                <div class="video-info">
-                    <h3 class="video-title">InsaniaCraft: O MELHOR COMEÇO Produtivo! (EP.1)</h3>
-                    <div class="video-stats">
-                        <span class="video-views"><i class="fas fa-eye"></i> 119 visualizações</span>
-                        <span class="video-likes"><i class="fas fa-heart"></i> 12 likes</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="video-card">
-                <div class="video-container">
-                    <i class="fas fa-heart favorite-heart" data-video-url="https://youtu.be/3RMBjtrklD0?si=DOT7YghNw5s4RJWw"></i>
-                    <iframe src="https://www.youtube.com/embed/3RMBjtrklD0" 
-                            title="YouTube video player" 
-                            frameborder="0" 
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                            allowfullscreen></iframe>
-                </div>
-                <div class="video-info">
-                    <h3 class="video-title">O PORQUÊ EU SAI DA LUNÁTICOS...</h3>
-                    <div class="video-stats">
-                        <span class="video-views"><i class="fas fa-eye"></i> 115 visualizações</span>
-                        <span class="video-likes"><i class="fas fa-heart"></i> 15 likes</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="video-card">
-                <div class="video-container">
-                    <i class="fas fa-heart favorite-heart" data-video-url="https://youtu.be/58cKTox-L68?si=WeA-3AjmrD_7mm44"></i>
-                    <iframe src="https://www.youtube.com/embed/58cKTox-L68" 
-                            title="YouTube video player" 
-                            frameborder="0" 
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                            allowfullscreen></iframe>
-                </div>
-                <div class="video-info">
-                    <h3 class="video-title">DESAFIO: VIRAR PREFEITO NO InsaniaCraft EM 24 HORAS! (Será que Consigo?)</h3>
-                    <div class="video-stats">
-                        <span class="video-views"><i class="fas fa-eye"></i> 50 visualizações</span>
-                        <span class="video-likes"><i class="fas fa-heart"></i> 9 likes</span>
-                    </div>
-                </div>
-            </div>
+        <!-- Categorias -->
+        <div class="categorias-container">
+            <button class="categoria-btn active" data-categoria="todos">
+                <i class="fas fa-globe"></i> Todos
+            </button>
+            <button class="categoria-btn" data-categoria="minecraft">
+                <i class="fas fa-cube"></i> Minecraft
+            </button>
+            <button class="categoria-btn" data-categoria="insaniacraft">
+                <i class="fas fa-gamepad"></i> InsaniaCraft
+            </button>
+            <button class="categoria-btn" data-categoria="pessoal">
+                <i class="fas fa-user"></i> Pessoal
+            </button>
+            <button class="categoria-btn" data-categoria="exclusivo">
+                <i class="fas fa-star"></i> Exclusivos
+            </button>
+        </div>
+        
+        <div class="videos-grid" id="videosGrid">
+            <!-- Vídeos serão gerados dinamicamente via JavaScript -->
         </div>
     </div>
 
@@ -809,7 +857,106 @@
         const registerMessage = document.getElementById('registerMessage');
         const logoutBtn = document.getElementById('logoutBtn');
         const userAvatar = document.getElementById('userAvatar');
-        const favoriteHearts = document.querySelectorAll('.favorite-heart');
+        const searchInput = document.getElementById('searchInput');
+        const videosGrid = document.getElementById('videosGrid');
+        const categoriaBtns = document.querySelectorAll('.categoria-btn');
+
+        // Dados dos vídeos
+        const videos = [
+            // Minecraft Elementos (ATUALIZADO)
+            {
+                id: 1,
+                titulo: "Série nova!!! Minecraft elementos o inicio de tudo",
+                url: "https://www.youtube.com/embed/iPUQoKibauo",
+                videoUrl: "https://youtu.be/iPUQoKibauo",
+                views: "3.514", // ATUALIZADO
+                likes: "162", // ATUALIZADO
+                categoria: "minecraft",
+                tag: "tag-minecraft",
+                featured: true
+            },
+            
+            // InsaniaCraft
+            {
+                id: 2,
+                titulo: "InsaniaCraft: O MELHOR COMEÇO Produtivo! (EP.1)",
+                url: "https://www.youtube.com/embed/FPGAVhG8FoU",
+                videoUrl: "https://youtu.be/FPGAVhG8FoU",
+                views: "119",
+                likes: "12",
+                categoria: "insaniacraft",
+                tag: "tag-insaniacraft",
+                featured: false
+            },
+            
+            // Pessoal
+            {
+                id: 3,
+                titulo: "O PORQUÊ EU SAI DA LUNÁTICOS...",
+                url: "https://www.youtube.com/embed/3RMBjtrklD0",
+                videoUrl: "https://youtu.be/3RMBjtrklD0",
+                views: "115",
+                likes: "15",
+                categoria: "pessoal",
+                tag: "tag-pessoal",
+                featured: false
+            },
+            
+            // InsaniaCraft
+            {
+                id: 4,
+                titulo: "DESAFIO: VIRAR PREFEITO NO InsaniaCraft EM 24 HORAS! (Será que Consigo?)",
+                url: "https://www.youtube.com/embed/58cKTox-L68",
+                videoUrl: "https://youtu.be/58cKTox-L68",
+                views: "50",
+                likes: "9",
+                categoria: "insaniacraft",
+                tag: "tag-insaniacraft",
+                featured: false
+            },
+            
+            // Exclusivo (NOVO)
+            {
+                id: 5,
+                titulo: "Sinto sua falta jassy...",
+                url: "https://www.youtube.com/embed/l7ZS5LetDig",
+                videoUrl: "https://youtu.be/l7ZS5LetDig",
+                views: "Indeterminado",
+                likes: "3",
+                categoria: "exclusivo",
+                tag: "tag-exclusivo",
+                featured: false,
+                descricao: "Exclusivo 100% no site - Liberado no canal dia sim e dia não"
+            },
+            
+            // InsaniaCraft (NOVO)
+            {
+                id: 6,
+                titulo: "Eu Revelo o SEGREDO do Servidor Insaniacraft!",
+                url: "https://www.youtube.com/embed/Mt2OVeeQFWs",
+                videoUrl: "https://youtu.be/Mt2OVeeQFWs",
+                views: "51",
+                likes: "10",
+                categoria: "insaniacraft",
+                tag: "tag-insaniacraft",
+                featured: false
+            },
+            
+            // Pessoal (NOVO)
+            {
+                id: 7,
+                titulo: "Obrigado pessoal...",
+                url: "https://www.youtube.com/embed/M67JDk9xr4g",
+                videoUrl: "https://youtu.be/M67JDk9xr4g",
+                views: "143",
+                likes: "18",
+                categoria: "pessoal",
+                tag: "tag-pessoal",
+                featured: false
+            }
+        ];
+
+        let categoriaAtiva = 'todos';
 
         // Criar bolinhas neon no fundo
         function createNeonCircles() {
@@ -986,12 +1133,122 @@
             element.className = `status-message ${type}`;
         }
 
+        // Renderizar vídeos
+        function renderVideos(videosParaRenderizar) {
+            videosGrid.innerHTML = '';
+            
+            if (videosParaRenderizar.length === 0) {
+                videosGrid.innerHTML = `
+                    <div class="no-results">
+                        <i class="fas fa-search"></i>
+                        <h3>Nenhum vídeo encontrado</h3>
+                        <p>Tente ajustar sua busca ou selecione outra categoria</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            videosParaRenderizar.forEach((video, index) => {
+                const isFeatured = video.featured && categoriaAtiva === 'todos';
+                const videoCard = document.createElement('div');
+                videoCard.className = `video-card ${isFeatured ? 'featured-video' : ''}`;
+                
+                videoCard.innerHTML = `
+                    <div class="video-container">
+                        ${video.descricao ? `<span class="featured-label">🎬 ${video.descricao}</span>` : ''}
+                        ${isFeatured ? '<span class="featured-label">🔥 Mais Popular</span>' : ''}
+                        <span class="video-tag ${video.tag}">${video.categoria.toUpperCase()}</span>
+                        <i class="fas fa-heart favorite-heart" data-video-url="${video.videoUrl}"></i>
+                        <iframe src="${video.url}" 
+                                title="YouTube video player" 
+                                frameborder="0" 
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                allowfullscreen></iframe>
+                    </div>
+                    <div class="video-info">
+                        <h3 class="video-title">${video.titulo}</h3>
+                        <div class="video-stats">
+                            <span class="video-views"><i class="fas fa-eye"></i> ${video.views} visualizações</span>
+                            <span class="video-likes"><i class="fas fa-heart"></i> ${video.likes} likes</span>
+                        </div>
+                    </div>
+                `;
+                
+                videosGrid.appendChild(videoCard);
+            });
+            
+            updateFavoriteHearts();
+            setupFavoriteListeners();
+        }
+
+        // Filtrar vídeos por categoria
+        function filtrarPorCategoria(categoria) {
+            categoriaAtiva = categoria;
+            
+            // Atualizar botões ativos
+            categoriaBtns.forEach(btn => {
+                if (btn.dataset.categoria === categoria) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+            
+            // Filtrar vídeos
+            let videosFiltrados;
+            if (categoria === 'todos') {
+                videosFiltrados = videos;
+            } else {
+                videosFiltrados = videos.filter(video => video.categoria === categoria);
+            }
+            
+            // Aplicar busca também se houver
+            const termoBusca = searchInput.value.toLowerCase();
+            if (termoBusca) {
+                videosFiltrados = videosFiltrados.filter(video => 
+                    video.titulo.toLowerCase().includes(termoBusca)
+                );
+            }
+            
+            renderVideos(videosFiltrados);
+        }
+
+        // Buscar vídeos
+        function buscarVideos() {
+            const termo = searchInput.value.toLowerCase();
+            
+            let videosFiltrados;
+            if (categoriaAtiva === 'todos') {
+                videosFiltrados = videos;
+            } else {
+                videosFiltrados = videos.filter(video => video.categoria === categoriaAtiva);
+            }
+            
+            if (termo) {
+                videosFiltrados = videosFiltrados.filter(video => 
+                    video.titulo.toLowerCase().includes(termo)
+                );
+            }
+            
+            renderVideos(videosFiltrados);
+        }
+
+        // Event listeners para categorias
+        categoriaBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filtrarPorCategoria(btn.dataset.categoria);
+            });
+        });
+
+        // Event listener para busca
+        searchInput.addEventListener('input', buscarVideos);
+
         // Atualiza os corações dos favoritos
         function updateFavoriteHearts() {
             const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
             const favoriteVideos = JSON.parse(localStorage.getItem('favoriteVideos')) || [];
             
-            favoriteHearts.forEach(heart => {
+            document.querySelectorAll('.favorite-heart').forEach(heart => {
                 const videoUrl = heart.getAttribute('data-video-url');
                 
                 if (isLoggedIn && favoriteVideos.includes(videoUrl)) {
@@ -1009,36 +1266,38 @@
         }
 
         // Adiciona/remove favoritos
-        favoriteHearts.forEach(heart => {
-            heart.addEventListener('click', function() {
-                const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
-                
-                if (!isLoggedIn) {
-                    loginModal.style.display = 'block';
-                    return;
-                }
-                
-                const videoUrl = this.getAttribute('data-video-url');
-                let favoriteVideos = JSON.parse(localStorage.getItem('favoriteVideos')) || [];
-                const index = favoriteVideos.indexOf(videoUrl);
-                
-                if (index === -1) {
-                    favoriteVideos.push(videoUrl);
-                    this.classList.add('favorited');
-                } else {
-                    favoriteVideos.splice(index, 1);
-                    this.classList.remove('favorited');
-                }
-                
-                localStorage.setItem('favoriteVideos', JSON.stringify(favoriteVideos));
-                
-                // Feedback visual
-                this.style.transform = 'scale(1.3)';
-                setTimeout(() => {
-                    this.style.transform = '';
-                }, 300);
+        function setupFavoriteListeners() {
+            document.querySelectorAll('.favorite-heart').forEach(heart => {
+                heart.addEventListener('click', function() {
+                    const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+                    
+                    if (!isLoggedIn) {
+                        loginModal.style.display = 'block';
+                        return;
+                    }
+                    
+                    const videoUrl = this.getAttribute('data-video-url');
+                    let favoriteVideos = JSON.parse(localStorage.getItem('favoriteVideos')) || [];
+                    const index = favoriteVideos.indexOf(videoUrl);
+                    
+                    if (index === -1) {
+                        favoriteVideos.push(videoUrl);
+                        this.classList.add('favorited');
+                    } else {
+                        favoriteVideos.splice(index, 1);
+                        this.classList.remove('favorited');
+                    }
+                    
+                    localStorage.setItem('favoriteVideos', JSON.stringify(favoriteVideos));
+                    
+                    // Feedback visual
+                    this.style.transform = 'scale(1.3)';
+                    setTimeout(() => {
+                        this.style.transform = '';
+                    }, 300);
+                });
             });
-        });
+        }
 
         // Atualiza a data no footer
         document.getElementById('current-date').textContent = new Date().toLocaleDateString('pt-BR');
@@ -1046,8 +1305,8 @@
         // Inicializa a página
         applyTheme();
         checkLoginStatus();
-        updateFavoriteHearts();
         createNeonCircles();
+        renderVideos(videos);
 
         // Recriar bolinhas quando a janela for redimensionada
         window.addEventListener('resize', createNeonCircles);
