@@ -234,11 +234,61 @@
             font-style: italic;
         }
 
-        .book-cover {
-            max-width: 300px;
-            margin: 20px auto;
-            border-radius: 8px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+        /* BOTÃO GUIA DO LIVRO */
+        .guide-book-btn-container {
+            text-align: center;
+            margin: 25px 0;
+        }
+
+        .guide-book-btn {
+            background: linear-gradient(135deg, var(--neon-marinho), var(--roxo-lunar));
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 12px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            transition: all 0.3s;
+            box-shadow: 0 0 10px var(--neon-marinho), 0 0 20px var(--roxo-lunar);
+            text-decoration: none;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .guide-book-btn::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.2), transparent);
+            transform: rotate(45deg);
+            animation: shine 3s infinite;
+            z-index: 0;
+        }
+
+        @keyframes shine {
+            0% { left: -50%; }
+            100% { left: 150%; }
+        }
+
+        .guide-book-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 20px var(--neon-marinho), 0 0 40px var(--roxo-lunar);
+        }
+
+        .guide-book-btn i {
+            font-size: 1.4rem;
+            z-index: 1;
+        }
+
+        .guide-book-btn span {
+            z-index: 1;
         }
 
         .book-info {
@@ -554,6 +604,10 @@
             .book-title {
                 font-size: 2.2rem;
             }
+            .guide-book-btn {
+                padding: 12px 20px;
+                font-size: 1.1rem;
+            }
         }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -654,6 +708,17 @@
             <h1 class="book-title">Leonidas</h1>
             <h2 class="book-subtitle">A Maldição Eterna</h2>
             
+            <!-- BOTÃO GUIA DO LIVRO -->
+            <div class="guide-book-btn-container">
+                <a href="guialivro.html" class="guide-book-btn">
+                    <i class="fas fa-book-open"></i>
+                    <span>Primeiro: Veja o Guia do Livro</span>
+                </a>
+                <p style="margin-top: 10px; font-size: 0.9rem; color: var(--texto); opacity: 0.8;">
+                    Recomendado para quem está começando a ler
+                </p>
+            </div>
+            
             <div class="book-info">
                 <div class="book-meta">
                     <h4>Autor</h4>
@@ -665,23 +730,40 @@
                 </div>
                 <div class="book-meta">
                     <h4>Capítulos</h4>
-                    <p>2</p>
+                    <p>3</p>
+                </div>
+                <div class="book-meta">
+                    <h4>Status</h4>
+                    <p>Em Andamento</p>
                 </div>
             </div>
         </div>
         
         <div class="reading-container">
-            <div class="chapter-nav">
-                <h3>Capítulos</h3>
-                <ul class="chapter-list">
-                    <li class="chapter-item active" data-chapter="1">
-                        <span class="chapter-link">Capítulo 1: A Maldição Eterna</span>
-                    </li>
-                    <li class="chapter-item" data-chapter="2">
-                        <a href="capitulo2pag1.html" class="chapter-link">Capítulo 2: O Amor do Nathan</a>
-                    </li>
-                </ul>
-            </div>
+    <div class="chapter-nav">
+        <h3>Navegação</h3>
+        <ul class="chapter-list">
+            <li class="chapter-item active" data-chapter="1">
+                <a href="historiadoleon1.html" class="chapter-link">Capítulo 1: A Maldição Eterna</a>
+            </li>
+            <li class="chapter-item" data-chapter="2">
+                <a href="capitulo2pag1.html" class="chapter-link">Capítulo 2: O Amor e Perda</a>
+            </li>
+            <li class="chapter-item" data-chapter="3">
+                <a href="capitulo3pag1.html" class="chapter-link">Capítulo 3: O Pesadelo Sempre Voltará</a>
+            </li>
+        </ul>
+        
+        <!-- LINK PARA O GUIA DO MUNDO -->
+        <div style="margin-top: 25px; padding-top: 15px; border-top: 1px solid var(--roxo-lunar);">
+            <h4 style="color: var(--neon-ciano); margin-bottom: 10px; font-size: 1rem;">
+                <i class="fas fa-globe"></i> Mundo Expandido
+            </h4>
+            <a href="guia-mundo.html" style="display: block; color: var(--neon-ciano); text-decoration: none; padding: 8px; border-radius: 5px; transition: all 0.3s; background: rgba(0, 255, 255, 0.1);">
+                <i class="fas fa-external-link-alt"></i> Guia do Mundo
+            </a>
+        </div>
+    </div>
             
             <div class="reading-content">
                 <h2 class="chapter-title">Capítulo 1: A Maldição Eterna - Página 1</h2>
