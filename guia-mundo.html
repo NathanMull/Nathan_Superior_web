@@ -1,0 +1,967 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guia do Mundo | Nathan Superior Web</title>
+    
+    <style>
+        /* Adicionando zoom de 110% */
+        body { zoom: 110%; }
+    </style>
+    
+    <script>
+        // Apenas carregar o tema imediatamente (isso é seguro)
+        (function() {
+            const isDark = localStorage.getItem('darkMode') === 'true';
+            if (isDark) {
+                document.documentElement.classList.add('dark-mode');
+            }
+        })();
+    </script>
+    
+    <style>
+        :root {
+            --verde: #27ae60; --azul: #3498db; --vermelho: #e74c3c;
+            --texto: #f0f0f0; --fundo: #000000; --card: #0a0a0a;
+            --roxo-lunar: #8e44ad; --verde-esmeralda: #2ecc71;
+            --dourado: #ffd700; --rosa: #ff6b9d; --laranja: #ff8c00;
+        }
+
+        .dark-mode {
+            --verde: #1e8449; --azul: #2980b9; --vermelho: #ff6b6b;
+            --roxo-lunar: #9b59b6; --verde-esmeralda: #27ae60;
+            --dourado: #ffed4a; --rosa: #ff8fab; --laranja: #ffa500;
+        }
+
+        * {
+            margin: 0; padding: 0; box-sizing: border-box;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        body {
+            background: var(--fundo); color: var(--texto);
+            line-height: 1.6; min-height: 100vh;
+        }
+
+        /* NAVBAR */
+        .navbar {
+            background: rgba(10,10,10,0.95);
+            padding: 15px 30px;
+            border-bottom: 2px solid var(--dourado);
+            box-shadow: 0 0 10px var(--dourado);
+            position: sticky; top: 0; z-index: 100;
+            backdrop-filter: blur(10px);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: white; font-size: 1.5rem; font-weight: bold;
+            display: flex; align-items: center; gap: 10px;
+            text-shadow: 0 0 5px var(--dourado);
+        }
+
+        #theme-toggle {
+            color: var(--dourado); cursor: pointer;
+            font-size: 1.3rem; transition: all 0.3s;
+        }
+
+        .nav-icons {
+            display: flex; align-items: center; gap: 20px;
+        }
+
+        .nav-icon {
+            color: white; font-size: 1.2rem;
+            cursor: pointer; transition: transform 0.2s;
+            text-shadow: 0 0 5px var(--dourado);
+            text-decoration: none;
+        }
+
+        .nav-icon:hover {
+            transform: translateY(-2px);
+            text-shadow: 0 0 10px var(--dourado);
+        }
+
+        .user-info {
+            display: none;
+            align-items: center; gap: 10px;
+        }
+
+        .user-avatar {
+            width: 30px; height: 30px; border-radius: 50%;
+            background-color: var(--dourado);
+            display: flex; align-items: center;
+            justify-content: center; color: black;
+            font-weight: bold; box-shadow: 0 0 5px var(--dourado);
+        }
+
+        .logout-btn {
+            background: none; border: none; color: white;
+            cursor: pointer; font-size: 0.9rem;
+            text-shadow: 0 0 5px var(--dourado);
+        }
+
+        body.logged-in .user-info {
+            display: flex;
+        }
+
+        body.logged-in .login-btn-nav {
+            display: none;
+        }
+
+        /* MODAL DE LOGIN */
+        .modal {
+            display: none;
+            position: fixed; z-index: 1000;
+            left: 0; top: 0;
+            width: 100%; height: 100%;
+            background-color: rgba(0,0,0,0.8);
+        }
+
+        .modal-content {
+            background-color: var(--card);
+            margin: 10% auto; padding: 30px;
+            border-radius: 10px; width: 90%;
+            max-width: 400px; position: relative;
+            border: 1px solid var(--dourado);
+            box-shadow: 0 0 15px var(--dourado);
+        }
+
+        .close {
+            position: absolute; top: 15px; right: 15px;
+            font-size: 1.5rem; cursor: pointer;
+            color: var(--vermelho);
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block; margin-bottom: 5px;
+            color: var(--dourado);
+        }
+
+        .form-group input {
+            width: 100%; padding: 10px;
+            border: 1px solid var(--dourado); border-radius: 5px;
+            background: rgba(0,0,0,0.7); color: var(--texto);
+        }
+
+        .modal-btn {
+            background: var(--dourado); color: black;
+            border: none; padding: 12px; width: 100%;
+            border-radius: 5px; font-size: 1rem;
+            cursor: pointer; margin-top: 10px;
+            font-weight: bold;
+        }
+
+        .switch-form {
+            text-align: center; margin-top: 15px;
+        }
+
+        .switch-btn {
+            background: none; border: none;
+            color: var(--dourado); cursor: pointer;
+            text-decoration: underline;
+        }
+
+        .status-message {
+            padding: 10px; margin: 10px 0;
+            border-radius: 5px; text-align: center;
+            display: none;
+        }
+        
+        .success {
+            background-color: rgba(39, 174, 96, 0.2);
+            color: var(--verde); border: 1px solid var(--verde);
+        }
+        
+        .error {
+            background-color: rgba(231, 76, 60, 0.2);
+            color: var(--vermelho); border: 1px solid var(--vermelho);
+        }
+
+        /* CONTAINER PRINCIPAL */
+        .container {
+            max-width: 1400px; margin: 0 auto;
+            padding: 30px; min-height: calc(100vh - 100px);
+        }
+
+        /* HEADER */
+        .guide-header {
+            text-align: center; margin-bottom: 40px;
+            padding: 30px; border-radius: 15px;
+            border: 2px solid var(--dourado);
+            box-shadow: 0 0 20px var(--dourado);
+            background: linear-gradient(135deg, 
+                rgba(142,68,173,0.2), 
+                rgba(46,204,113,0.2));
+        }
+
+        .guide-title {
+            color: var(--dourado); font-size: 3rem;
+            margin-bottom: 10px;
+            text-shadow: 0 0 10px var(--dourado);
+        }
+
+        .guide-subtitle {
+            color: var(--verde-esmeralda);
+            font-size: 1.5rem; font-style: italic;
+        }
+
+        /* FILTROS */
+        .filter-section {
+            background: var(--card); border-radius: 12px;
+            padding: 25px; margin-bottom: 30px;
+            border: 1px solid var(--roxo-lunar);
+            box-shadow: 0 0 10px var(--roxo-lunar);
+        }
+
+        .filter-title {
+            color: var(--dourado); font-size: 1.8rem;
+            margin-bottom: 20px; text-align: center;
+        }
+
+        .filter-tags {
+            display: flex; flex-wrap: wrap;
+            gap: 10px; justify-content: center;
+        }
+
+        .filter-tag {
+            background: rgba(0,0,0,0.5);
+            border: 2px solid; padding: 10px 20px;
+            border-radius: 25px; cursor: pointer;
+            font-weight: bold; display: flex;
+            align-items: center; gap: 8px;
+            transition: all 0.3s;
+        }
+
+        .filter-tag:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .filter-tag.active {
+            color: black !important;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .tag-todos { border-color: var(--dourado); color: var(--dourado); }
+        .tag-todos.active { background: var(--dourado); }
+
+        .tag-racas { border-color: var(--verde); color: var(--verde); }
+        .tag-racas.active { background: var(--verde); }
+
+        .tag-clas { border-color: var(--azul); color: var(--azul); }
+        .tag-clas.active { background: var(--azul); }
+
+        .tag-sistemas { border-color: var(--roxo-lunar); color: var(--roxo-lunar); }
+        .tag-sistemas.active { background: var(--roxo-lunar); }
+
+        /* SEÇÕES DE CONTEÚDO */
+        .content-section {
+            margin-bottom: 50px;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .section-title {
+            color: var(--dourado); font-size: 2.2rem;
+            margin-bottom: 25px; padding-bottom: 10px;
+            border-bottom: 3px solid;
+            display: flex; align-items: center;
+            gap: 15px;
+        }
+
+        .title-racas { border-color: var(--verde); }
+        .title-clas { border-color: var(--azul); }
+        .title-sistemas { border-color: var(--roxo-lunar); }
+
+        /* GRID DE CARDS */
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 25px;
+            margin-top: 20px;
+        }
+
+        .item-card {
+            background: var(--card); border-radius: 12px;
+            padding: 25px; border: 2px solid;
+            transition: all 0.4s;
+        }
+
+        .item-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.4);
+        }
+
+        .card-raca { border-color: var(--verde); box-shadow: 0 0 10px var(--verde); }
+        .card-cla { border-color: var(--azul); box-shadow: 0 0 10px var(--azul); }
+        .card-sistema { border-color: var(--roxo-lunar); box-shadow: 0 0 10px var(--roxo-lunar); }
+
+        .card-header {
+            display: flex; align-items: center;
+            gap: 15px; margin-bottom: 20px;
+            padding-bottom: 15px; border-bottom: 2px solid;
+        }
+
+        .card-icon { font-size: 2rem; }
+        .card-title { font-size: 1.5rem; font-weight: bold; }
+
+        .card-content p { margin-bottom: 15px; text-align: justify; }
+        .card-content ul { padding-left: 20px; margin-bottom: 15px; }
+        .card-content li { margin-bottom: 8px; }
+
+        .highlight {
+            color: var(--dourado); font-weight: bold;
+            text-shadow: 0 0 3px var(--dourado);
+        }
+
+        /* RESULTADOS */
+        .results-info {
+            text-align: center; margin: 20px 0;
+            color: var(--dourado); font-size: 1.1rem;
+        }
+
+        .results-count {
+            background: var(--dourado); color: black;
+            padding: 5px 15px; border-radius: 20px;
+            font-weight: bold; margin: 0 5px;
+        }
+
+        /* BOTÃO VOLTAR */
+        .back-container {
+            text-align: center; margin-top: 40px;
+        }
+
+        .back-btn {
+            background: var(--dourado); color: black;
+            border: none; padding: 12px 25px;
+            border-radius: 8px; font-size: 1.1rem;
+            font-weight: bold; cursor: pointer;
+            text-decoration: none; display: inline-flex;
+            align-items: center; gap: 10px;
+            transition: all 0.3s;
+            box-shadow: 0 0 10px var(--dourado);
+        }
+
+        .back-btn:hover {
+            background: #ffed4a;
+            box-shadow: 0 0 20px var(--dourado);
+            transform: translateY(-3px);
+        }
+
+        /* FOOTER */
+        .footer {
+            text-align: center; padding: 20px;
+            font-size: 0.9rem; color: var(--texto);
+            background: var(--card);
+            border-top: 1px solid var(--borda);
+        }
+
+        /* RESPONSIVIDADE */
+        @media (max-width: 768px) {
+            .container { padding: 15px; }
+            .guide-title { font-size: 2.2rem; }
+            .content-grid { grid-template-columns: 1fr; }
+            .filter-tag { padding: 8px 15px; font-size: 0.9rem; }
+            .navbar { padding: 15px; flex-wrap: wrap; }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Modal de Login -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            
+            <div id="loginForm">
+                <h2 style="color: var(--dourado); margin-bottom: 20px; text-align: center;">Entrar</h2>
+                
+                <form id="login">
+                    <div class="form-group">
+                        <label for="loginUsername"><i class="fas fa-user"></i> Nome de Usuário</label>
+                        <input type="text" id="loginUsername" placeholder="Seu nome de usuário" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="loginPassword"><i class="fas fa-lock"></i> Senha</label>
+                        <input type="password" id="loginPassword" placeholder="Sua senha" required>
+                    </div>
+                    
+                    <button type="submit" class="modal-btn"><i class="fas fa-sign-in-alt"></i> Entrar</button>
+                    
+                    <div id="loginMessage" class="status-message"></div>
+                </form>
+                
+                <div class="switch-form">
+                    <span>Não tem uma conta? </span>
+                    <button class="switch-btn" id="showRegister">Registre-se</button>
+                </div>
+            </div>
+            
+            <div id="registerForm" style="display: none;">
+                <h2 style="color: var(--dourado); margin-bottom: 20px; text-align: center;">Criar Conta</h2>
+                
+                <form id="register">
+                    <div class="form-group">
+                        <label for="registerUsername"><i class="fas fa-user-edit"></i> Nome de Usuário</label>
+                        <input type="text" id="registerUsername" placeholder="Escolha um nome de usuário" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="registerPassword"><i class="fas fa-key"></i> Senha</label>
+                        <input type="password" id="registerPassword" placeholder="Crie uma senha" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="confirmPassword"><i class="fas fa-check-circle"></i> Confirmar Senha</label>
+                        <input type="password" id="confirmPassword" placeholder="Digite a senha novamente" required>
+                    </div>
+                    
+                    <button type="submit" class="modal-btn"><i class="fas fa-user-plus"></i> Registrar</button>
+                    
+                    <div id="registerMessage" class="status-message"></div>
+                </form>
+                
+                <div class="switch-form">
+                    <span>Já tem uma conta? </span>
+                    <button class="switch-btn" id="showLogin">Faça login</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="logo">
+            <i id="theme-toggle" class="fas fa-globe" title="Mudar tema"></i>
+            <span>Guia do Mundo <small>- Universo de Nathan</small></span>
+        </div>
+        
+        <div class="nav-icons">
+            <a href="index.html" class="nav-icon" title="Voltar ao Início">
+                <i class="fas fa-home"></i>
+            </a>
+            <div class="user-info">
+                <div class="user-avatar" id="userAvatar"></div>
+                <button class="logout-btn" id="logoutBtn">Sair</button>
+            </div>
+            <button class="nav-icon login-btn-nav" id="loginBtnNav" title="Login">
+                <i class="fas fa-user"></i>
+            </button>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- HEADER -->
+        <div class="guide-header">
+            <h1 class="guide-title">Guia do Mundo</h1>
+            <p class="guide-subtitle">Explore um tópico por vez com o sistema de filtros</p>
+        </div>
+
+        <!-- FILTROS -->
+        <div class="filter-section">
+            <h2 class="filter-title">Selecione um Tópico</h2>
+            <div class="filter-tags">
+                <button class="filter-tag tag-todos active" data-filter="todos">
+                    <i class="fas fa-layer-group"></i> Todos
+                </button>
+                <button class="filter-tag tag-racas" data-filter="racas">
+                    <i class="fas fa-dragon"></i> Raças
+                </button>
+                <button class="filter-tag tag-clas" data-filter="clas">
+                    <i class="fas fa-shield-alt"></i> Clãs
+                </button>
+                <button class="filter-tag tag-sistemas" data-filter="sistemas">
+                    <i class="fas fa-cogs"></i> Sistemas
+                </button>
+            </div>
+            <div class="results-info" id="resultsInfo">
+                Mostrando: <span class="results-count" id="resultsCount">Todos os tópicos</span>
+            </div>
+        </div>
+
+        <!-- SEÇÃO RAÇAS -->
+        <div class="content-section" id="section-racas" data-category="racas">
+            <h2 class="section-title title-racas">
+                <i class="fas fa-dragon" style="color: var(--verde);"></i>
+                Raças do Universo
+            </h2>
+            
+            <div class="content-grid">
+                <!-- Humanos -->
+                <div class="item-card card-raca">
+                    <div class="card-header" style="border-color: var(--verde); color: var(--verde);">
+                        <i class="fas fa-user card-icon"></i>
+                        <h3 class="card-title">Humanos</h3>
+                    </div>
+                    <div class="card-content">
+                        <p>Nem preciso explicar né, mais são seres que não são diferentes do padrão. O máximo que se diferem um dos outros são características sutis e corporais. Tirando isso são seres muito comuns pelo mundo.</p>
+                        <p><span class="highlight">Curiosidade:</span> São a raça mais versátil e adaptável.</p>
+                    </div>
+                </div>
+
+                <!-- Goblins -->
+                <div class="item-card card-raca">
+                    <div class="card-header" style="border-color: var(--verde); color: var(--verde);">
+                        <i class="fas fa-helmet-battle card-icon"></i>
+                        <h3 class="card-title">Goblins</h3>
+                    </div>
+                    <div class="card-content">
+                        <p>São seres baixos de pele verde, azul ou roxa. Eles são meio burros comparados a outros seres racionais, mais são habilidosos em sobreviver e atacar em equipe, e fazer ferramentas básicas.</p>
+                        <p><span class="highlight">Diferenças de Gênero:</span> As fêmeas são mais altas e experientes, mas mais fracas que os machos.</p>
+                        <p><span class="highlight">Hierarquia:</span> Vivem em tribos com líderes baseados em força.</p>
+                    </div>
+                </div>
+
+                <!-- Ozakais -->
+                <div class="item-card card-raca">
+                    <div class="card-header" style="border-color: var(--verde); color: var(--verde);">
+                        <i class="fas fa-paw card-icon"></i>
+                        <h3 class="card-title">Ozakais</h3>
+                    </div>
+                    <div class="card-content">
+                        <p>São seres bem próximos dos humanos, mais com características animalescas. Cada um com espécies e culturas diferentes. Alguns são mais animais do que outros.</p>
+                        <p><span class="highlight">Biologia:</span> Podem procriar com humanos (versão mais humana).</p>
+                        <p><span class="highlight">Cultura:</span> Variam de nobres em castelos a tribos nas florestas.</p>
+                    </div>
+                </div>
+
+                <!-- Orcs -->
+                <div class="item-card card-raca">
+                    <div class="card-header" style="border-color: var(--verde); color: var(--verde);">
+                        <i class="fas fa-fist-raised card-icon"></i>
+                        <h3 class="card-title">Orcs</h3>
+                    </div>
+                    <div class="card-content">
+                        <p>São seres verdes ou azuis, grandes e robustos, com uma inteligência bem poderosa que quase se iguala a humana. Mais eles não tem o hábito de criar ou descobrir, focam no acaso.</p>
+                        <p><span class="highlight">Tecnologia:</span> Pararam na Era do Ferro.</p>
+                        <p><span class="highlight">Filosofia:</span> Valorizam força, honra e vida simples.</p>
+                    </div>
+                </div>
+
+                <!-- Anões -->
+                <div class="item-card card-raca">
+                    <div class="card-header" style="border-color: var(--verde); color: var(--verde);">
+                        <i class="fas fa-mountain card-icon"></i>
+                        <h3 class="card-title">Anões</h3>
+                    </div>
+                    <div class="card-content">
+                        <p>São muito próximos dos humanos, mais tem inteligência superior. Porém tem reservas de mana bem mais baixa, mais são duros na queda.</p>
+                        <p><span class="highlight">Habilidades:</span> Ferreiros habilidosos e escultores de vidro/pedra.</p>
+                        <p><span class="highlight">Ambiente:</span> Adoram calor (forjas e montanhas).</p>
+                    </div>
+                </div>
+
+                <!-- Golems -->
+                <div class="item-card card-raca">
+                    <div class="card-header" style="border-color: var(--verde); color: var(--verde);">
+                        <i class="fas fa-gem card-icon"></i>
+                        <h3 class="card-title">Golems</h3>
+                    </div>
+                    <div class="card-content">
+                        <p>Não se tem muitas informações. Aparecem no acaso quando objetos inanimados (Pedras, Árvores, Lama) ganham mana excessiva naturalmente.</p>
+                        <p><span class="highlight">Comportamento:</span> Burros mais poderosos, como crianças curiosas.</p>
+                        <p><span class="highlight">Raridade:</span> São raros e imprevisíveis.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SEÇÃO CLÃS -->
+        <div class="content-section" id="section-clas" data-category="clas">
+            <h2 class="section-title title-clas">
+                <i class="fas fa-shield-alt" style="color: var(--azul);"></i>
+                Clãs e Sociedades
+            </h2>
+            
+            <div class="content-grid">
+                <!-- O Que São Clãs -->
+                <div class="item-card card-cla">
+                    <div class="card-header" style="border-color: var(--azul); color: var(--azul);">
+                        <i class="fas fa-users card-icon"></i>
+                        <h3 class="card-title">O Que São Clãs?</h3>
+                    </div>
+                    <div class="card-content">
+                        <p>Um clã não é só uma galera morando no mesmo lugar. Um clã é uma <span class="highlight">família escolhida</span>. É quando um bando de pessoas decide que juntas elas são mais fortes, mais espertas ou têm mais com o que contar.</p>
+                        <p>Sempre se juntam por um <span class="highlight">propósito maior</span>: adorar um deus, proteger um segredo, dominar magia ou sobreviver.</p>
+                    </div>
+                </div>
+
+                <!-- Lunarianos -->
+                <div class="item-card card-cla">
+                    <div class="card-header" style="border-color: var(--azul); color: var(--azul);">
+                        <i class="fas fa-moon card-icon"></i>
+                        <h3 class="card-title">Lunarianos</h3>
+                    </div>
+                    <div class="card-content">
+                        <p>Clã central da história, abençoados pela Deusa Jasy da Lua. Sangue roxo e olhos que variam de roxo a verde esmeralda.</p>
+                        <p><span class="highlight">Hierarquia:</span> Capitão e Capitã, com guardas de elite.</p>
+                        <p><span class="highlight">Poderes:</span> Mana lunar e habilidades de combate excepcionais.</p>
+                        <p><span class="highlight">História:</span> Salvaram a Cidade da Lua Dourada há 14 anos.</p>
+                    </div>
+                </div>
+
+                <!-- Reconhecimento -->
+                <div class="item-card card-cla">
+                    <div class="card-header" style="border-color: var(--azul); color: var(--azul);">
+                        <i class="fas fa-trophy card-icon"></i>
+                        <h3 class="card-title">Como São Reconhecidos</h3>
+                    </div>
+                    <div class="card-content">
+                        <p>Dois caminhos principais:</p>
+                        <ul>
+                            <li><span class="highlight">Pelo Punho:</span> Força em batalha, defesa de território, torneios.</li>
+                            <li><span class="highlight">Pela Cabeça:</span> Ser o melhor em algo - ferreiro, comerciante, curandeiro.</li>
+                        </ul>
+                        <p>Todo clã tem uma <span class="highlight">história</span> e uma <span class="highlight">razão</span> para existir.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SEÇÃO SISTEMAS -->
+        <div class="content-section" id="section-sistemas" data-category="sistemas">
+            <h2 class="section-title title-sistemas">
+                <i class="fas fa-cogs" style="color: var(--roxo-lunar);"></i>
+                Os 5 Sistemas Fundamentais
+            </h2>
+            
+            <!-- Bençãos -->
+            <div class="item-card card-sistema">
+                <div class="card-header" style="border-color: var(--verde-esmeralda); color: var(--verde-esmeralda);">
+                    <i class="fas fa-hands-praying card-icon"></i>
+                    <h3 class="card-title">Bençãos</h3>
+                </div>
+                <div class="card-content">
+                    <p><span class="highlight">Duas formas de adquirir:</span></p>
+                    <ul>
+                        <li><span class="highlight">Deuses:</span> Escolhem pessoas ou clãs para abençoar.</li>
+                        <li><span class="highlight">Cultura:</span> Passada através de objetos e herança.</li>
+                    </ul>
+                    <p><span class="highlight">Regra:</span> Quebrar a cultura = perder a benção.</p>
+                    <p><span class="highlight">Conflito:</span> Herdeiro inadequado X tradição cultural.</p>
+                </div>
+            </div>
+
+            <!-- Maldições -->
+            <div class="item-card card-sistema">
+                <div class="card-header" style="border-color: var(--vermelho); color: var(--vermelho);">
+                    <i class="fas fa-skull-crossbones card-icon"></i>
+                    <h3 class="card-title">Maldições</h3>
+                </div>
+                <div class="card-content">
+                    <p><span class="highlight">Dois tipos:</span></p>
+                    <ul>
+                        <li><span class="highlight">Corporais:</span> Marcam e incapacitam fisicamente.</li>
+                        <li><span class="highlight">Mentais:</span> Como a de Leonidas - consciente mas controlado.</li>
+                    </ul>
+                    <p><span class="highlight">Interações:</span> Bençãos podem remover maldições e vice-versa.</p>
+                </div>
+            </div>
+
+            <!-- Poções -->
+            <div class="item-card card-sistema">
+                <div class="card-header" style="border-color: var(--laranja); color: var(--laranja);">
+                    <i class="fas fa-flask card-icon"></i>
+                    <h3 class="card-title">Poções</h3>
+                </div>
+                <div class="card-content">
+                    <p><span class="highlight">Dois tipos:</span></p>
+                    <ul>
+                        <li><span class="highlight">Comuns:</span> Vida, estamina - efeitos únicos.</li>
+                        <li><span class="highlight">Especiais:</span> Múltiplos efeitos - como a "imortalidade" do Nathan.</li>
+                    </ul>
+                    <p><span class="highlight">Complexidade:</span> Ingredientes raros e conhecimento avançado.</p>
+                </div>
+            </div>
+
+            <!-- Mana -->
+            <div class="item-card card-sistema">
+                <div class="card-header" style="border-color: #00ffff; color: #00ffff;">
+                    <i class="fas fa-bolt card-icon"></i>
+                    <h3 class="card-title">Mana</h3>
+                </div>
+                <div class="card-content">
+                    <p>A mana serve como <span class="highlight">2 coisas:</span></p>
+                    <ul>
+                        <li><span class="highlight">Vida:</span> Energia vital de todos os seres.</li>
+                        <li><span class="highlight">Magia:</span> Combustível para feitiços e habilidades.</li>
+                    </ul>
+                    <p><span class="highlight">Comparação:</span> Como chakra - reserva pessoal que cresce com treino.</p>
+                    <p><span class="highlight">Perigo:</span> Usar demais pode drenar a própria vida.</p>
+                </div>
+            </div>
+
+            <!-- Selos -->
+            <div class="item-card card-sistema">
+                <div class="card-header" style="border-color: var(--rosa); color: var(--rosa);">
+                    <i class="fas fa-lock card-icon"></i>
+                    <h3 class="card-title">Selos</h3>
+                </div>
+                <div class="card-content">
+                    <p><span class="highlight">Dois tipos:</span></p>
+                    <ul>
+                        <li><span class="highlight">Internos:</span> Prisão interna (como o broche da Jassy).</li>
+                        <li><span class="highlight">Externos:</span> Marcas com efeitos limitadores (impedir magia, uso de armadura).</li>
+                    </ul>
+                    <p><span class="highlight">Aplicações:</span> Proteção, punição ou controle social.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- BOTÃO VOLTAR -->
+        <div class="back-container">
+            <a href="index.html" class="back-btn">
+                <i class="fas fa-arrow-left"></i> Voltar ao Início
+            </a>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>Guia do Mundo • Universo criado por Nathan • <span id="current-date"></span></p>
+    </div>
+
+    <script>
+        // ============== FUNÇÃO DE INICIALIZAÇÃO ==============
+        function initPage() {
+            // Verificar login APÓS o DOM carregar
+            const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+            if (isLoggedIn) {
+                document.body.classList.add('logged-in');
+                const username = localStorage.getItem('currentUser');
+                if (username && document.getElementById('userAvatar')) {
+                    document.getElementById('userAvatar').textContent = username.charAt(0).toUpperCase();
+                }
+            }
+            
+            // Resto da inicialização...
+            applyFilter('todos');
+            updateCurrentDate();
+            
+            // Mostrar mensagem no console se logado
+            if (isLoggedIn) {
+                const username = localStorage.getItem('currentUser');
+                console.log(`🎮 Bem-vindo de volta, ${username}! (Guia do Mundo)`);
+            }
+        }
+
+        // ============== SISTEMA DE FILTROS ==============
+        const filterTags = document.querySelectorAll('.filter-tag');
+        const sections = document.querySelectorAll('.content-section');
+        const resultsInfo = document.getElementById('resultsInfo');
+        const resultsCount = document.getElementById('resultsCount');
+        let currentFilter = 'todos';
+
+        // Aplicar filtro
+        filterTags.forEach(tag => {
+            tag.addEventListener('click', () => {
+                const filter = tag.getAttribute('data-filter');
+                
+                // Remover active de todos
+                filterTags.forEach(t => t.classList.remove('active'));
+                // Adicionar active no clicado
+                tag.classList.add('active');
+                
+                currentFilter = filter;
+                applyFilter(filter);
+            });
+        });
+
+        function applyFilter(filter) {
+            let visibleCount = 0;
+            let sectionName = '';
+            
+            sections.forEach(section => {
+                const category = section.getAttribute('data-category');
+                
+                if (filter === 'todos' || filter === category) {
+                    section.style.display = 'block';
+                    visibleCount++;
+                    
+                    if (filter !== 'todos') {
+                        sectionName = section.querySelector('.section-title').textContent;
+                    }
+                } else {
+                    section.style.display = 'none';
+                }
+            });
+            
+            // Atualizar info de resultados
+            if (filter === 'todos') {
+                resultsCount.textContent = 'Todos os tópicos';
+                resultsInfo.style.display = 'block';
+            } else {
+                resultsCount.textContent = sectionName;
+                resultsInfo.style.display = 'block';
+            }
+        }
+
+        // ============== SISTEMA DE TEMA ==============
+        const themeToggle = document.getElementById('theme-toggle');
+        
+        themeToggle.addEventListener('click', () => {
+            const isDark = !document.documentElement.classList.contains('dark-mode');
+            localStorage.setItem('darkMode', isDark);
+            
+            themeToggle.style.transform = 'rotate(360deg)';
+            setTimeout(() => {
+                themeToggle.style.transform = '';
+            }, 300);
+            
+            document.documentElement.classList.toggle('dark-mode', isDark);
+        });
+
+        // ============== SISTEMA DE LOGIN ==============
+        const loginModal = document.getElementById('loginModal');
+        const loginBtnNav = document.getElementById('loginBtnNav');
+        const closeBtn = document.querySelector('.close');
+        const showRegister = document.getElementById('showRegister');
+        const showLogin = document.getElementById('showLogin');
+        const loginForm = document.getElementById('loginForm');
+        const registerForm = document.getElementById('registerForm');
+        const loginSubmit = document.getElementById('login');
+        const registerSubmit = document.getElementById('register');
+        const loginMessage = document.getElementById('loginMessage');
+        const registerMessage = document.getElementById('registerMessage');
+        const logoutBtn = document.getElementById('logoutBtn');
+        const userAvatar = document.getElementById('userAvatar');
+
+        // Abrir modal
+        loginBtnNav.addEventListener('click', () => {
+            loginModal.style.display = 'block';
+        });
+
+        // Fechar modal
+        closeBtn.addEventListener('click', () => {
+            loginModal.style.display = 'none';
+        });
+
+        window.addEventListener('click', (e) => {
+            if (e.target === loginModal) {
+                loginModal.style.display = 'none';
+            }
+        });
+
+        // Alternar entre login e registro
+        showRegister.addEventListener('click', () => {
+            loginForm.style.display = 'none';
+            registerForm.style.display = 'block';
+            loginMessage.style.display = 'none';
+            registerMessage.style.display = 'none';
+        });
+
+        showLogin.addEventListener('click', () => {
+            registerForm.style.display = 'none';
+            loginForm.style.display = 'block';
+            loginMessage.style.display = 'none';
+            registerMessage.style.display = 'none';
+        });
+
+        // Registrar
+        registerSubmit.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const username = document.getElementById('registerUsername').value;
+            const password = document.getElementById('registerPassword').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+
+            if (password !== confirmPassword) {
+                showMessage(registerMessage, "As senhas não coincidem!", 'error');
+                return;
+            }
+
+            if (password.length < 4) {
+                showMessage(registerMessage, "A senha precisa ter pelo menos 4 caracteres!", 'error');
+                return;
+            }
+
+            const usuarios = JSON.parse(localStorage.getItem('usuarios_magicos') || '[]');
+            
+            if (usuarios.some(u => u.username === username)) {
+                showMessage(registerMessage, "Este usuário já existe!", 'error');
+                return;
+            }
+            
+            usuarios.push({ username, password });
+            localStorage.setItem('usuarios_magicos', JSON.stringify(usuarios));
+            
+            showMessage(registerMessage, "Conta criada com sucesso!", 'success');
+            
+            this.reset();
+            
+            setTimeout(() => {
+                registerForm.style.display = 'none';
+                loginForm.style.display = 'block';
+                registerMessage.style.display = 'none';
+            }, 2000);
+        });
+
+        // Login
+        loginSubmit.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const username = document.getElementById('loginUsername').value;
+            const password = document.getElementById('loginPassword').value;
+            
+            const usuarios = JSON.parse(localStorage.getItem('usuarios_magicos') || []);
+            const user = usuarios.find(u => u.username === username && u.password === password);
+            
+            if (user) {
+                showMessage(loginMessage, "Login bem-sucedido! Redirecionando...", 'success');
+                
+                localStorage.setItem('isLoggedIn', 'true');
+                localStorage.setItem('currentUser', username);
+                
+                setTimeout(() => {
+                    loginModal.style.display = 'none';
+                    location.reload(); // Recarrega a página para atualizar o estado
+                }, 1000);
+            } else {
+                showMessage(loginMessage, "Usuário ou senha incorretos!", 'error');
+            }
+        });
+
+        // Logout
+        logoutBtn.addEventListener('click', () => {
+            localStorage.setItem('isLoggedIn', 'false');
+            localStorage.removeItem('currentUser');
+            location.reload(); // Recarrega para mostrar estado deslogado
+        });
+
+        // Mostrar mensagens
+        function showMessage(element, text, type) {
+            element.textContent = text;
+            element.style.display = 'block';
+            element.className = `status-message ${type}`;
+        }
+
+        // ============== OUTRAS FUNÇÕES ==============
+        function updateCurrentDate() {
+            const dateElement = document.getElementById('current-date');
+            if (dateElement) {
+                const now = new Date();
+                const options = { day: '2-digit', month: '2-digit', year: 'numeric' };
+                dateElement.textContent = now.toLocaleDateString('pt-BR', options);
+            }
+        }
+
+        // ============== INICIALIZAR TUDO ==============
+        // Aguardar o DOM carregar completamente
+        document.addEventListener('DOMContentLoaded', initPage);
+        
+        // Backup: também executar quando a página terminar de carregar
+        window.addEventListener('load', initPage);
+    </script>
+</body>
+</html>
