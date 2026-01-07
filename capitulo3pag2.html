@@ -1,0 +1,1217 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Capítulo 3: O Pesadelo Sempre Voltará - Página 2 | Nathan Superior Web</title>
+    
+    <style>
+        /* Adicionando zoom de 110% para todo o documento */
+        body {
+            zoom: 110%;
+            -moz-transform: scale(1.1);
+            -moz-transform-origin: 0 0;
+        }
+        
+        /* Para outros navegadores */
+        @media all and (-webkit-min-device-pixel-ratio:0) {
+            body {
+                zoom: 110%;
+            }
+        }
+    </style>
+    
+    <script>
+        (function() {
+            const isDark = localStorage.getItem('darkMode') === 'true';
+            if (isDark) {
+                document.documentElement.classList.add('dark-mode');
+            }
+            
+            const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+            if (isLoggedIn) {
+                document.body.classList.add('logged-in');
+            }
+        })();
+    </script>
+    
+    <style>
+        :root {
+            --verde: #27ae60;
+            --azul: #3498db;
+            --vermelho: #e74c3c;
+            --amarelo: #f1c40f;
+            --texto: #f0f0f0;
+            --fundo: #000000;
+            --card: #0a0a0a;
+            --borda: #222;
+            --neon-ciano: #0ff;
+            --neon-azul: #00f;
+            --neon-marinho: #0077be;
+            --roxo-lunar: #8e44ad;
+            --verde-esmeralda: #2ecc71;
+            --dourado: #ffd700;
+        }
+
+        .dark-mode {
+            --verde: #1e8449;
+            --azul: #2980b9;
+            --vermelho: #ff6b6b;
+            --amarelo: #f39c12;
+            --texto: #f0f0f0;
+            --fundo: #000000;
+            --card: #0a0a0a;
+            --borda: #222;
+            --neon-ciano: #0ff;
+            --neon-azul: #00f;
+            --neon-marinho: #0077be;
+            --roxo-lunar: #9b59b6;
+            --verde-esmeralda: #27ae60;
+            --dourado: #ffd700;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        body {
+            background: var(--fundo);
+            color: var(--texto);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* NAVBAR COM TEMA NEON AZUL */
+        .navbar {
+            background: rgba(10, 10, 10, 0.9);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 30px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 2px solid var(--neon-azul);
+            box-shadow: 0 0 10px var(--neon-azul), 0 0 20px var(--neon-ciano);
+        }
+
+        .logo {
+            color: white;
+            font-weight: bold;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-shadow: 0 0 5px var(--neon-azul), 0 0 10px var(--neon-azul);
+        }
+
+        .logo small {
+            font-size: 0.8rem;
+            opacity: 0.9;
+            font-weight: normal;
+        }
+
+        #theme-toggle {
+            color: var(--neon-ciano);
+            cursor: pointer;
+            font-size: 1.3rem;
+            transition: all 0.3s;
+            text-shadow: 0 0 5px var(--neon-ciano);
+        }
+
+        #theme-toggle:hover {
+            transform: scale(1.2);
+            text-shadow: 0 0 10px var(--neon-ciano), 0 0 20px var(--neon-ciano);
+        }
+
+        .search-bar {
+            flex-grow: 1;
+            max-width: 500px;
+            margin: 0 20px;
+        }
+
+        .search-bar input {
+            width: 100%;
+            padding: 8px 15px;
+            border: 1px solid var(--neon-ciano);
+            border-radius: 20px;
+            font-size: 0.9rem;
+            background: rgba(0, 0, 0, 0.7);
+            color: var(--texto);
+            box-shadow: 0 0 5px var(--neon-ciano);
+        }
+
+        .search-bar input:focus {
+            outline: none;
+            box-shadow: 0 0 10px var(--neon-ciano), 0 0 20px var(--neon-azul);
+        }
+
+        .nav-icons {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-icon {
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: transform 0.2s;
+            text-decoration: none;
+            text-shadow: 0 0 5px var(--neon-ciano);
+        }
+
+        .nav-icon:hover {
+            transform: translateY(-2px);
+            text-shadow: 0 0 10px var(--neon-ciano), 0 0 20px var(--neon-ciano);
+        }
+
+        .user-info {
+            display: none;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .user-avatar {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background-color: var(--neon-ciano);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: black;
+            font-weight: bold;
+            box-shadow: 0 0 5px var(--neon-ciano);
+        }
+
+        .logout-btn {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            font-size: 0.9rem;
+            text-shadow: 0 0 5px var(--neon-ciano);
+        }
+
+        body.logged-in .user-info {
+            display: flex;
+        }
+
+        body.logged-in .login-btn-nav {
+            display: none;
+        }
+
+        /* CONTEÚDO DA PÁGINA DO LIVRO */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 30px;
+        }
+
+        .book-header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 20px;
+            background: var(--card);
+            border-radius: 12px;
+            border: 1px solid var(--neon-azul);
+            box-shadow: 0 0 15px var(--neon-azul), 0 0 25px var(--neon-marinho);
+        }
+
+        .book-title {
+            color: var(--neon-ciano);
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+            text-shadow: 0 0 10px var(--neon-ciano);
+        }
+
+        .book-subtitle {
+            color: var(--neon-ciano);
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            font-style: italic;
+            text-shadow: 0 0 5px var(--neon-ciano);
+        }
+
+        .chapter-title-special {
+            color: var(--neon-azul);
+            font-size: 2.5rem;
+            text-align: center;
+            margin: 20px 0;
+            text-shadow: 0 0 8px var(--neon-azul);
+        }
+
+        .book-cover {
+            max-width: 300px;
+            margin: 20px auto;
+            border-radius: 8px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+        }
+
+        .book-info {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .book-meta {
+            background: rgba(0,0,0,0.5);
+            padding: 10px 20px;
+            border-radius: 8px;
+            border: 1px solid var(--neon-azul);
+            box-shadow: 0 0 8px var(--neon-azul);
+        }
+
+        .book-meta h4 {
+            color: var(--neon-ciano);
+            margin-bottom: 5px;
+            text-shadow: 0 0 3px var(--neon-ciano);
+        }
+
+        .reading-container {
+            display: flex;
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .chapter-nav {
+            width: 250px;
+            background: var(--card);
+            border-radius: 12px;
+            padding: 20px;
+            border: 1px solid var(--neon-azul);
+            box-shadow: 0 0 10px var(--neon-azul), 0 0 15px var(--neon-marinho);
+            height: fit-content;
+            position: sticky;
+            top: 100px;
+        }
+
+        .chapter-nav h3 {
+            color: var(--neon-ciano);
+            margin-bottom: 15px;
+            text-align: center;
+            text-shadow: 0 0 5px var(--neon-ciano);
+            border-bottom: 2px solid var(--neon-azul);
+            padding-bottom: 8px;
+        }
+
+        .chapter-list {
+            list-style: none;
+        }
+
+        .chapter-item {
+            padding: 12px 15px;
+            margin-bottom: 8px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 1px solid transparent;
+        }
+
+        .chapter-item:hover {
+            background: rgba(0, 119, 190, 0.2);
+            border: 1px solid var(--neon-marinho);
+        }
+
+        .chapter-item.active {
+            background: rgba(0, 119, 190, 0.3);
+            border: 1px solid var(--neon-marinho);
+            box-shadow: 0 0 8px var(--neon-marinho);
+        }
+
+        .reading-content {
+            flex: 1;
+            background: var(--card);
+            border-radius: 12px;
+            padding: 40px;
+            border: 1px solid var(--neon-azul);
+            box-shadow: 0 0 15px var(--neon-azul), 0 0 25px var(--neon-marinho);
+            min-height: 800px;
+        }
+
+        .chapter-title {
+            color: var(--neon-ciano);
+            font-size: 2.2rem;
+            margin-bottom: 30px;
+            text-align: center;
+            text-shadow: 0 0 8px var(--neon-ciano);
+            border-bottom: 2px solid var(--neon-azul);
+            padding-bottom: 15px;
+        }
+
+        .warning-box {
+            background: rgba(231, 76, 60, 0.2);
+            border: 1px solid var(--vermelho);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 0 10px var(--vermelho);
+        }
+
+        .warning-box h3 {
+            color: var(--vermelho);
+            margin-bottom: 10px;
+            text-shadow: 0 0 5px var(--vermelho);
+        }
+
+        .story-content {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .story-content p {
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+
+        .story-content .dialogue {
+            margin-left: 30px;
+            font-style: italic;
+            color: var(--verde-esmeralda);
+            border-left: 2px solid var(--verde-esmeralda);
+            padding-left: 15px;
+            margin-bottom: 15px;
+            text-shadow: 0 0 3px var(--verde-esmeralda);
+        }
+
+        .story-content .thought {
+            margin-left: 20px;
+            color: var(--dourado);
+            font-style: italic;
+            margin-bottom: 15px;
+            text-shadow: 0 0 3px var(--dourado);
+        }
+
+        .story-content .action {
+            margin-left: 10px;
+            color: var(--neon-ciano);
+            margin-bottom: 15px;
+            text-shadow: 0 0 3px var(--neon-ciano);
+        }
+
+        .story-content .narrator {
+            color: var(--neon-ciano);
+            font-style: italic;
+            margin-bottom: 15px;
+            text-shadow: 0 0 3px var(--neon-ciano);
+        }
+
+        .story-content .character {
+            color: var(--verde);
+            font-weight: bold;
+            text-shadow: 0 0 2px var(--verde);
+        }
+
+        .story-content .highlight {
+            color: var(--neon-ciano);
+            font-weight: bold;
+            text-shadow: 0 0 5px var(--neon-ciano);
+        }
+
+        .reading-controls {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid var(--borda);
+        }
+
+        .nav-btn {
+            background: var(--neon-marinho);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 6px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s;
+            box-shadow: 0 0 5px var(--neon-marinho), 0 0 10px var(--neon-azul);
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .nav-btn:hover {
+            background: #0099ff;
+            box-shadow: 0 0 10px var(--neon-marinho), 0 0 20px var(--neon-azul);
+            transform: translateY(-2px);
+        }
+
+        .nav-btn:disabled {
+            background: #555;
+            cursor: not-allowed;
+            box-shadow: none;
+            transform: none;
+            color: #999;
+        }
+
+        .development-warning {
+            background: rgba(241, 196, 15, 0.2);
+            border: 1px solid var(--amarelo);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+            box-shadow: 0 0 10px var(--amarelo);
+        }
+
+        .development-warning h3 {
+            color: var(--amarelo);
+            margin-bottom: 10px;
+            text-shadow: 0 0 5px var(--amarelo);
+        }
+
+        .footer {
+            text-align: center;
+            padding: 20px;
+            font-size: 0.9rem;
+            color: var(--texto);
+            opacity: 0.8;
+            background: var(--card);
+            border-top: 1px solid var(--borda);
+            margin-top: 50px;
+        }
+
+        /* MODAL DE LOGIN */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.8);
+        }
+
+        .modal-content {
+            background-color: var(--card);
+            margin: 10% auto;
+            padding: 30px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 400px;
+            box-shadow: 0 0 15px var(--neon-ciano), 0 0 30px var(--neon-azul);
+            position: relative;
+            border: 1px solid var(--neon-ciano);
+        }
+
+        .close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--vermelho);
+            text-shadow: 0 0 5px var(--vermelho);
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: var(--neon-ciano);
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid var(--neon-ciano);
+            border-radius: 5px;
+            background: rgba(0,0,0,0.7);
+            color: var(--texto);
+            box-shadow: 0 0 5px var(--neon-ciano);
+        }
+
+        .modal-btn {
+            background: var(--neon-marinho);
+            color: white;
+            border: none;
+            padding: 12px;
+            width: 100%;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            margin-top: 10px;
+            box-shadow: 0 0 5px var(--neon-marinho);
+            transition: all 0.3s;
+            font-weight: bold;
+        }
+
+        .modal-btn:hover {
+            background: #0099ff;
+            box-shadow: 0 0 10px var(--neon-marinho), 0 0 20px var(--neon-azul);
+        }
+
+        .switch-form {
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        .switch-btn {
+            background: none;
+            border: none;
+            color: var(--neon-ciano);
+            cursor: pointer;
+            text-decoration: underline;
+            text-shadow: 0 0 5px var(--neon-ciano);
+        }
+
+        .status-message {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            text-align: center;
+        }
+        
+        .success {
+            background-color: rgba(39, 174, 96, 0.2);
+            color: var(--verde);
+            border: 1px solid var(--verde);
+            box-shadow: 0 0 5px var(--verde);
+        }
+        
+        .error {
+            background-color: rgba(231, 76, 60, 0.2);
+            color: var(--vermelho);
+            border: 1px solid var(--vermelho);
+            box-shadow: 0 0 5px var(--vermelho);
+        }
+
+        /* ANIMAÇÃO NEON PARA O CAPÍTULO */
+        @keyframes neonPulse {
+            0%, 100% {
+                text-shadow: 0 0 5px var(--neon-ciano), 0 0 10px var(--neon-ciano), 0 0 15px var(--neon-ciano);
+            }
+            50% {
+                text-shadow: 0 0 10px var(--neon-ciano), 0 0 20px var(--neon-ciano), 0 0 30px var(--neon-ciano);
+            }
+        }
+
+        .chapter-pulse {
+            animation: neonPulse 2s infinite;
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                flex-wrap: wrap;
+                padding: 15px;
+            }
+            .search-bar {
+                order: 3;
+                width: 100%;
+                margin: 15px 0 0 0;
+            }
+            .container {
+                padding: 15px;
+            }
+            .reading-container {
+                flex-direction: column;
+            }
+            .chapter-nav {
+                width: 100%;
+                position: static;
+                margin-bottom: 20px;
+            }
+            .book-title {
+                font-size: 2.2rem;
+            }
+            .chapter-title {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Modal de Login -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            
+            <div id="loginForm">
+                <h2 style="color: var(--neon-ciano); margin-bottom: 20px; text-align: center; text-shadow: 0 0 5px var(--neon-ciano);">Entrar</h2>
+                
+                <form id="login">
+                    <div class="form-group">
+                        <label for="loginUsername"><i class="fas fa-user"></i> Nome de Usuário</label>
+                        <input type="text" id="loginUsername" placeholder="Seu nome de usuário" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="loginPassword"><i class="fas fa-lock"></i> Senha</label>
+                        <input type="password" id="loginPassword" placeholder="Sua senha" required>
+                    </div>
+                    
+                    <button type="submit" class="modal-btn"><i class="fas fa-sign-in-alt"></i> Entrar</button>
+                    
+                    <div id="loginMessage" class="status-message" style="display: none;"></div>
+                </form>
+                
+                <div class="switch-form">
+                    <span>Não tem uma conta? </span>
+                    <button class="switch-btn" id="showRegister">Registre-se</button>
+                </div>
+            </div>
+            
+            <div id="registerForm" style="display: none;">
+                <h2 style="color: var(--neon-ciano); margin-bottom: 20px; text-align: center; text-shadow: 0 0 5px var(--neon-ciano);">Criar Conta</h2>
+                
+                <form id="register">
+                    <div class="form-group">
+                        <label for="registerUsername"><i class="fas fa-user-edit"></i> Nome de Usuário</label>
+                        <input type="text" id="registerUsername" placeholder="Escolha um nome de usuário" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="registerPassword"><i class="fas fa-key"></i> Senha</label>
+                        <input type="password" id="registerPassword" placeholder="Crie uma senha" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="confirmPassword"><i class="fas fa-check-circle"></i> Confirmar Senha</label>
+                        <input type="password" id="confirmPassword" placeholder="Digite a senha novamente" required>
+                    </div>
+                    
+                    <button type="submit" class="modal-btn"><i class="fas fa-user-plus"></i> Registrar</button>
+                    
+                    <div id="registerMessage" class="status-message" style="display: none;"></div>
+                </form>
+                
+                <div class="switch-form">
+                    <span>Já tem uma conta? </span>
+                    <button class="switch-btn" id="showLogin">Faça login</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="logo">
+            <i id="theme-toggle" class="fas fa-moon" title="Mudar tema"></i>
+            <span>Nathan Superior Web <small>- Biblioteca</small></span>
+        </div>
+        
+        <div class="search-bar">
+            <input type="text" placeholder="Pesquise por capítulos, personagens...">
+        </div>
+        
+        <div class="nav-icons">
+            <a href="index.html" class="nav-icon" title="Início">
+                <i class="fas fa-home"></i>
+            </a>
+            <a href="favoritos.html" class="nav-icon" title="Favoritos">
+                <i class="fas fa-heart"></i>
+            </a>
+            <a href="guia-mundo.html" class="nav-icon" title="Guia do Mundo" style="color: var(--verde-esmeralda);">
+                <i class="fas fa-globe"></i>
+            </a>
+            <div class="user-info">
+                <div class="user-avatar" id="userAvatar"></div>
+                <button class="logout-btn" id="logoutBtn">Sair</button>
+            </div>
+            <button class="nav-icon login-btn-nav" id="loginBtnNav" title="Login">
+                <i class="fas fa-user"></i>
+            </button>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="book-header">
+            <h1 class="book-title">O Amor e Perda</h1>
+            <h2 class="book-subtitle">Livro da Série de Leonidas</h2>
+            
+            <h2 class="chapter-title-special chapter-pulse">Capítulo 3<br>O pesadelo sempre voltará...</h2>
+            
+            <div class="book-info">
+                <div class="book-meta">
+                    <h4>Autor</h4>
+                    <p>Nathan</p>
+                </div>
+                <div class="book-meta">
+                    <h4>Gênero</h4>
+                    <p>Fantasia Épica</p>
+                </div>
+                <div class="book-meta">
+                    <h4>Capitulos</h4>
+                    <p>3 </p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="reading-container">
+            <div class="chapter-nav">
+                <h3>Capítulos</h3>
+                <ul class="chapter-list">
+                    <li class="chapter-item" data-chapter="1">
+                        <a href="historiadoleon1.html" style="color: inherit; text-decoration: none; display: block;">Capítulo 1: Leonidas</a>
+                    </li>
+                    <li class="chapter-item" data-chapter="2">
+                        <a href="capitulo2pag1.html" style="color: inherit; text-decoration: none; display: block;">Capítulo 2: O Amor e Perda</a>
+                    </li>
+                    <li class="chapter-item active" data-chapter="3">
+                        <a href="capitulo3pag1.html" style="color: inherit; text-decoration: none; display: block;">Capítulo 3: O Pesadelo Sempre Voltará </a>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="reading-content">
+                <h2 class="chapter-title">Capítulo 3: O Pesadelo Sempre Voltará - Página 2</h2>
+                
+                <div class="story-content">
+                    <p class="action">*Eles estão na entrada norte prontos para partir, a única coisa vemos o Snow correndo em desespero pois dormiu e acordou depois*</p>
+                    
+                    <p class="dialogue"><span class="character">Snow</span>- ME ESPEREM!!!</p>
+                    
+                    <p class="action">*Nathan e Cheesee ficam rindo da cara do Snow*</p>
+                    
+                    <p class="action">*Eles pegam o mapa e andam até uma caverna de extração de minérios, está abandonada e tem boatos de que pessoas não voltam de lá com vida... mais nossos protagonistas não têm que se preocupar quanto a isso mais sim pegar tudo tem suas picaretas em mão e estão dispostos a entrar lá dentro*</p>
+                    
+                    <p class="dialogue"><span class="character">Cheesee</span>- É esse lugar está meio escuro né?</p>
+                    
+                    <p class="dialogue"><span class="character">Nathan</span>- *Joga uma poção de visão noturna no chão* agora não está mais deve durar umas duas horas tenho o suficiente para 6</p>
+                    
+                    <p class="action">*Eles andam mais adiante vendo um lugar cheio de minérios brilhantes como esmeralda, rubis e afins mais nada do mithril ou do titânio, mesmo assim eles vão minerar*</p>
+                    
+                    <p class="dialogue"><span class="character">Snow</span>- Ei gente o que vocês pegaram?</p>
+                    
+                    <p class="dialogue"><span class="character">Cheesee</span>- Eu achei umas 7 esmeraldas e uns 2 Ruby e você Nathan?</p>
+                    
+                    <p class="dialogue"><span class="character">Nathan</span>- Achei 3 titânios mais nem um escuro e talvez 2 obsidianas</p>
+                    
+                    <p class="dialogue"><span class="character">Snow</span>- Eu achei 6 safiras para a arma que a Bella me recomendou</p>
+                    
+                    <p class="dialogue"><span class="character">Nathan</span>- Que arma seria essa?</p>
+                    
+                    <p class="dialogue"><span class="character">Snow</span>- Uma foice eu gostei da ideia</p>
+                    
+                    <p class="dialogue"><span class="character">Cheesee</span>- será que essa quantidade vai dar boa?</p>
+                    
+                    <p class="dialogue"><span class="character">Snow</span>- Acho que o certo seria levar mais 14 tipo ter 20 no total ou misturar com Ruby ia dar uma lâmina roxa linda não acham?</p>
+                    
+                    <p class="dialogue"><span class="character">Nathan</span>- Top! Vai ser legal mesmo se é esse tipo de arma que você vai gostar mais, só uma pergunta do que vai ser o cabo?</p>
+                    
+                    <p class="dialogue"><span class="character">Snow</span>- ehh... não sei...</p>
+                    
+                    <p class="dialogue"><span class="character">Cheesee</span>- Qualquer coisa te empresto um pouco de coisa para o cabo só preciso de 2 minérios para a faca do meu filhote aqui</p>
+                    
+                    <p class="dialogue"><span class="character">Queijinho</span>- "vou estrear minha tamontina nova hehehe >:)"</p>
+                    
+                    <p class="dialogue"><span class="character">Snow</span>- ah valeu</p>
+                    
+                    <p class="dialogue"><span class="character">Nathan</span>- Bem de volta ao trabalho :P</p>
+                    
+                    <p class="action">*eles continuam minerando e entrando mais adentro da caverna vendo minérios mais raros como safiras e mithril com mais frequência o Nathan entra mais afundo e avista algo brilhando se aproximando percebe um slime roxo brilhante, consumindo mithril de cor roxa como doido*</p>
+                    
+                    <p class="dialogue"><span class="character">Nathan</span>- pessoal acho que achei algo muito raro...</p>
+                    
+                    <p class="action">*O Cheesee e o Snow chegam rapidamente, todos olham o slime que se vira protegendo a veia de mithril com o corpo e atacando eles, o Nathan não toma ataques pois a sua picareta o protege na hora*</p>
+                    
+                    <p class="dialogue"><span class="character">Nathan</span>- Pessoal bora bater nessa gosma do djabo >:(</p>
+                    
+                    <p class="dialogue"><span class="character">Snow</span>- Pode deixar comigo *O Snow corre dando uma picaretada linda na cabeça do slime o atordoando*</p>
+                    
+                    <p class="action">*O slime fica encurralado então ele joga um cuspi ácido no braço do Cheesee todos se assustam afinal o Cheesee perde um pedaço mesmo que pequeno, logo o Snow e o Nathan batem tão forte no slime com as picaretas que ele morre com o dano adicionado*</p>
+                    
+                    <p class="dialogue"><span class="character">Nathan</span>- Cheesee!? Você tá legal!?</p>
+                    
+                    <p class="dialogue"><span class="character">Cheesee</span>- *O braço dele começa a regenerar devagar mesmo sem poção de cura* calma eu vou ficar bem só, tá ardendo um pouco agora</p>
+                    
+                    <p class="action">*todos se acalmam e voltam a minerar ficando mais um tempo e achando muito mais minérios do que realmente pretendiam levar eles estavam quase saindo da mina quando o Nathan para eles e pergunta*</p>
+                    
+                    <p class="dialogue"><span class="character">Nathan</span>- Ok, vamos ver o que pegamos e se vai dar para fazer as nossas armas</p>
+                    
+                    <p class="dialogue"><span class="character">Snow</span>- Eu peguei 11 Safiras, 13 Ruby e mais 6 Mithril de cor roxa que o slime dropou sem contar muitas pedras como 22 Ardosias mais nada além disso</p>
+                    
+                    <p class="dialogue"><span class="character">Cheesee</span>- Tá, eu peguei 7 Esmeraldas e perdi os Ruby mais achei 3 Mithril da cor vermelha</p>
+                    
+                    <p class="dialogue"><span class="character">Nathan</span>- Ok, eu consegui 5 Mithril da cor ciano, 7 Obsidianas e mais 7 Titânio mais nem um deles é escuro então vou substituir pelo Mithril ciano já que preciso 3 gastar 2 na minha espada rapieira não deve ser problema</p>
+                    
+                    <p class="dialogue"><span class="character">Cheesee</span>- Bem eu tenho o suficiente para sei lá talvez umas manoplas ou quem sabe um soco inglês?</p>
+                    
+                    <p class="dialogue"><span class="character">Queijinho</span>- "E a minha faquinha >:^"</p>
+                    
+                    <p class="action">*Todos voltam rindo e contando piadas até que na entrada norte encontram o Jax de novo ele não parecia estar procurando confusão só acena para eles querendo conversar*</p>
+                    
+                    <p class="dialogue"><span class="character">Jax</span>- Eai príncipe desculpa incomodar vocês, queria saber de uma coisa o anão que eu machuquei está melhor?</p>
+                    
+                    <p class="dialogue"><span class="character">Nathan</span>- Ele está sim por quê?</p>
+                    
+                    <p class="dialogue"><span class="character">Jax</span>- Queria saber vim trazer um pouco desses cristais azuis tem 5 aqui o suficiente para algo para ele mesmo ou uma arma que alguém digno possa querer</p>
+                    
+                    <p class="dialogue"><span class="character">Nathan</span>- Valeu entrego a ele pode deixar</p>
+                    
+                    <p class="action">*O Jax entrega para ele e depois vai em direção ao sul e se vai entre as árvores, logo eles entram na cidade*</p>
+                    
+                    <p class="dialogue"><span class="character">Droquer</span>- até que vocês não demoraram né, o que tem aí?</p>
+                    
+                    <p class="action">*Nathan entrega os materiais a ele mostrando as cores e o resto*</p>
+                    
+                    <p class="dialogue"><span class="character">Droquer</span>- é infelizmente nada do titânio escuro né uma pena mais ok faço do mesmo material do cabo e da lâmina você pegou até mais, volte amanhã já terei terminado e a faca do pequeno queijo também</p>
+                    
+                    <p class="dialogue"><span class="character">Cheesee</span>- pessoal quem saberia armas para os punhos?</p>
+                    
+                    <p class="dialogue"><span class="character">Bardum</span>- acho que posso fazer algo deixe comigo essas esmeraldas e esses mithril vermelho acho que posso fazer algo bom volte amanhã</p>
+                    
+                    <p class="dialogue"><span class="character">Snow</span>- ok e quem sabe fazer foices grandes?</p>
+                    
+                    <p class="dialogue"><span class="character">Bella</span>- opa acho que posso ajudar com isso, você tem ótimos materiais me dê e faço algo novo que ninguém jamais viu, amanhã é o prazo para garantir</p>
+                    
+                    <p class="action">*Os três saíram de lá felizes cada um com suas armas que logo seriam forjadas, eles se separam e logo Nathan chega no castelo e o rei estava sentado no trono meio estranho e inquieto*</p>
+                    
+                    <p class="dialogue"><span class="character">Nathan</span>- Senhor Samuel o que houve?</p>
+                    
+                    <p class="dialogue"><span class="character">Rei</span>- Ah... eu não sei a Jassy está muito triste e estranha já faz horas que ela se trancou no quarto e responde seco não sei o que houve com ela...</p>
+                    
+                    <p class="dialogue"><span class="character">Nathan</span>- Vou tentar falar com ela não se preocupe</p>
+                    
+                    <p class="action">*o Rei fica lá chorando com medo da filha estar mal, logo o Nathan chega no quarto dela e se senta na porta dando leves toques para chamá-la*</p>
+                    
+                    <p class="dialogue"><span class="character">Jassy</span>- *meio sequinha* Que foi</p>
+                    
+                    <p class="dialogue"><span class="character">Nathan</span>- Sou eu amor quer conversar?</p>
+                    
+                    <p class="dialogue"><span class="character">Jassy</span>- agora não...</p>
+                    
+                    <p class="dialogue"><span class="character">Nathan</span>- Algo te deixou triste?</p>
+                    
+                    <p class="dialogue"><span class="character">Jassy</span>- Não, eu tô bem pode ficar tranquilo</p>
+                    
+                    <p class="dialogue"><span class="character">Nathan</span>- *fica meio cabisbaixo* ok quando quiser estarei aqui</p>
+                    
+                    <p class="dialogue"><span class="character">Jassy</span>- ...Te amo...</p>
+                    
+                    <p class="dialogue"><span class="character">Nathan</span>- Você sabe que eu sempre amo mais durma bem hoje irei dormir no meu quarto está bem</p>
+                    
+                    <p class="dialogue"><span class="character">Jassy</span>- ok...</p>
+                    
+                    <p class="action">*O Nathan sai meio mal querendo saber o que aconteceu, ele entra em seu quarto deitando-se na cama vendo como aquele jogo de tabuleiro que jogaram um dia estava guardado e eles não jogavam há muito tempo*</p>
+                    
+                    <p class="thought"><span class="character">Nathan</span>- ✦ela deve estar mal com aquela goblin nova que "deu em cima de mim" ou talvez pelo fato de eu ter saído sem ela ou algo que não possa saber✦</p>
+                    
+                    <p class="action">*ele se deita de lado e dorme um pouco... em seu sonho vemos um lugar destruído e só uma figura no meio igual ele... não, era Leonidas*</p>
+                    
+                    <p class="thought"><span class="character">Leonidas</span>- ✦você não me salvou...✦</p>
+                    
+                    <p class="thought"><span class="character">Nathan</span>- ✦*voz trêmula* Eu tentei..✦</p>
+                    
+                    <p class="thought"><span class="character">Leonidas</span>- ✦MAIS NÃO SALVOU!!✦</p>
+                    
+                    <p class="thought"><span class="character">Nathan</span>- ✦*voz meio chorando* EU SEI!!✦</p>
+                    
+                    <p class="action">*Leonidas começa a dar glitches, e começa a chorar*</p>
+                    
+                    <p class="thought"><span class="character">Leonidas</span>- ✦Queria um irmão mais forte..✦</p>
+                    
+                    <p class="action">*ele anda para frente*</p>
+                    
+                    <p class="thought"><span class="character">Leonidas</span>- ✦VOCÊ NÃO SALVOU NINGUÉM!!✦</p>
+                    
+                    <p class="thought"><span class="character">Nathan</span>- ✦Eu sei...✦</p>
+                    
+                    <p class="thought"><span class="character">Leonidas</span>- ✦Quando vai deixar de ser esse fracote e finalmente salvar alguém de verdade...✦</p>
+                    
+                    <p class="thought"><span class="character">Nathan</span>- ✦Não sei...✦</p>
+                    
+                    <p class="thought"><span class="character">Leonidas</span>- ✦Suma da minha frente... Como vou confiar em alguém tão covarde e fraco como você...✦</p>
+                    
+                    <p class="action">*Nathan acorda chorando sentindo uma dor no peito muito grande ele olha para o relógio são exatamente 5 da manhã, ele levanta faz tudo que precisava e sai dar uma caminhada, andando pela vila tomada pela luz da lua ele sente que alguém está perto e olhando para o lado e vê Kron sentado no degrau do castelo*</p>
+                    
+                    <p class="dialogue"><span class="character">Nathan</span>- Oi Kron</p>
+                    
+                    <p class="dialogue"><span class="character">Kron</span>- Boa noite príncipe, O que faz acordado tão cedo?</p>
+                    
+                    <p class="dialogue"><span class="character">Nathan</span>- *Se senta do lado dele* Ah eu tive um sonho horrível e acabei acordando..</p>
+                    
+                    <p class="dialogue"><span class="character">Kron</span>- Quer desabafar?</p>
+                    
+                    <p class="dialogue"><span class="character">Nathan</span>- Não precisa Kron mais muito obrigado pela preocupação</p>
+                    
+                    <p class="dialogue"><span class="character">Kron</span>- O pior pecado que um homem pode cometer é mentir para si mesmo... acha que está bem?</p>
+                    
+                    <p class="dialogue"><span class="character">Nathan</span>- Não...</p>
+                    
+                    <p class="dialogue"><span class="character">Kron</span>- Então bota para fora garoto faz bem</p>
+                    
+                    <p class="dialogue"><span class="character">Nathan</span>- ... Eu deixei meu irmão morrer... ele foi tomado por uma maldição... Não pude salvar ele...</p>
+                    
+                    <p class="dialogue"><span class="character">Kron</span>- Olha eu tive que ver meu irmão morrer e não voltar mais, além disso minha vila passa fome então vim até aqui e resolvi isso trabalhando aqui</p>
+                    
+                    <p class="dialogue"><span class="character">Nathan</span>- Você amava seu irmão?</p>
+                    
+                    <p class="dialogue"><span class="character">Kron</span>- Ele... Era o melhor irmão mais novo que poderia ter... mas ele fez coisas de que não me orgulhei...</p>
+                    
+                    <p class="dialogue"><span class="character">Nathan</span>- Muito pessoal?</p>
+                    
+                    <p class="dialogue"><span class="character">Kron</span>- Se envolveu com pessoas erradas e ele caiu junto com elas ele morreu tentando salvar pessoas ruins... mesmo assim não me arrependo de dizer que ele não morreu à toa..</p>
+                    
+                    <p class="dialogue"><span class="character">Nathan</span>- É estranho ver que você não chora lembrando disso...</p>
+                    
+                    <p class="dialogue"><span class="character">Kron</span>- Porque choraria se eu o amei mais que tudo nesse mundo, ele não merece me ver chorando lá dos céus, não vou manchar as lembranças dele</p>
+                    
+                    <p class="dialogue"><span class="character">Nathan</span>- Entendo...</p>
+                    
+                    <p class="dialogue"><span class="character">Kron</span>- Chorar faz bem, mas ele não merece minhas lágrimas só meu amor que nunca irá morrer, se você ama deve cuidar mesmo que não totalmente</p>
+                    
+                    <p class="dialogue"><span class="character">Nathan</span>- Eu amo a Jassy e muito sabia, ela estava distante hoje...</p>
+                    
+                    <p class="dialogue"><span class="character">Kron</span>- Mas ainda a ama, certo?</p>
+                    
+                    <p class="dialogue"><span class="character">Nathan</span>- Claro que sim só estou com medo...</p>
+                    
+                    <p class="dialogue"><span class="character">Kron</span>- Não tenha, afinal você tem que ser forte para proteger eles e não poderá fazer isso se você não se proteger, a vida é curta demais para a gente ficar se lamentando pelo que foi ou pelo que irá ser</p>
+                    
+                    <p class="dialogue"><span class="character">Nathan</span>- Entendo totalmente obrigado Kron...</p>
+                    
+                    <p class="dialogue"><span class="character">Kron</span>- *Passa a mão na cabeça dele* Boa garoto!</p>
+                </div>
+                
+                <div class="development-warning">
+                    <h3><i class="fas fa-tools"></i> Em Desenvolvimento</h3>
+                    <p>O Capítulo 3 está sendo escrito! A próxima página será lançada em breve.</p>
+                </div>
+                
+                <div class="reading-controls">
+                    <a href="capitulo3pag1.html">
+                        <button class="nav-btn" id="prevChapter">
+                            <i class="fas fa-arrow-left"></i> Página Anterior
+                        </button>
+                    </a>
+                    <button class="nav-btn" id="nextChapter" onclick="showDevelopmentMessage()">
+                        Próxima Página <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>Site desenvolvido por Nathan • Todos os direitos reservados • <span id="current-date"></span></p>
+    </div>
+
+    <script>
+        // Elementos do DOM
+        const themeToggle = document.getElementById('theme-toggle');
+        const loginModal = document.getElementById('loginModal');
+        const loginBtnNav = document.getElementById('loginBtnNav');
+        const closeBtn = document.querySelector('.close');
+        const showRegister = document.getElementById('showRegister');
+        const showLogin = document.getElementById('showLogin');
+        const loginForm = document.getElementById('loginForm');
+        const registerForm = document.getElementById('registerForm');
+        const loginSubmit = document.getElementById('login');
+        const registerSubmit = document.getElementById('register');
+        const loginMessage = document.getElementById('loginMessage');
+        const registerMessage = document.getElementById('registerMessage');
+        const logoutBtn = document.getElementById('logoutBtn');
+        const userAvatar = document.getElementById('userAvatar');
+        const chapterItems = document.querySelectorAll('.chapter-item');
+        const nextChapterBtn = document.getElementById('nextChapter');
+
+        // Verifica se o usuário está logado ao carregar a página
+        function checkLoginStatus() {
+            const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+            const username = localStorage.getItem('currentUser');
+            
+            if (isLoggedIn && username) {
+                document.body.classList.add('logged-in');
+                userAvatar.textContent = username.charAt(0).toUpperCase();
+            }
+        }
+
+        // Aplica o tema salvo no localStorage
+        function applyTheme() {
+            const isDark = localStorage.getItem('darkMode') === 'true';
+            document.documentElement.classList.toggle('dark-mode', isDark);
+            themeToggle.style.color = isDark ? '#ffed4a' : '#ffd700';
+        }
+        
+        // Evento de clique no botão de tema
+        themeToggle.addEventListener('click', () => {
+            const isDark = !document.documentElement.classList.contains('dark-mode');
+            localStorage.setItem('darkMode', isDark);
+            
+            themeToggle.style.transform = 'rotate(360deg) scale(1.2)';
+            setTimeout(() => {
+                themeToggle.style.transform = '';
+            }, 300);
+            
+            applyTheme();
+        });
+
+        // Função para mostrar mensagem de desenvolvimento
+        function showDevelopmentMessage() {
+            alert("🚧 Capítulo em desenvolvimento!\n\nA próxima página do Capítulo 3 está sendo escrita e será lançada em breve. Aguarde por mais aventuras de Nathan e seus amigos!");
+            
+            // Adiciona um efeito visual ao botão
+            nextChapterBtn.style.transform = 'scale(0.95)';
+            nextChapterBtn.style.backgroundColor = '#f39c12';
+            setTimeout(() => {
+                nextChapterBtn.style.transform = '';
+                nextChapterBtn.style.backgroundColor = '';
+            }, 300);
+        }
+
+        // Abrir modal de login
+        loginBtnNav.addEventListener('click', () => {
+            loginModal.style.display = 'block';
+        });
+
+        // Fechar modal de login
+        closeBtn.addEventListener('click', () => {
+            loginModal.style.display = 'none';
+        });
+
+        // Fechar modal ao clicar fora
+        window.addEventListener('click', (e) => {
+            if (e.target === loginModal) {
+                loginModal.style.display = 'none';
+            }
+        });
+
+        // Alternar entre login e registro
+        showRegister.addEventListener('click', () => {
+            loginForm.style.display = 'none';
+            registerForm.style.display = 'block';
+        });
+
+        showLogin.addEventListener('click', () => {
+            registerForm.style.display = 'none';
+            loginForm.style.display = 'block';
+        });
+
+        // Sistema de registro (usando apenas localStorage)
+        registerSubmit.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const username = document.getElementById('registerUsername').value;
+            const password = document.getElementById('registerPassword').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+
+            // Validações
+            if (password !== confirmPassword) {
+                showMessage(registerMessage, "As senhas não coincidem!", 'error');
+                return;
+            }
+
+            if (password.length < 4) {
+                showMessage(registerMessage, "A senha deve ter pelo menos 4 caracteres!", 'error');
+                return;
+            }
+
+            // Salva no localStorage
+            const usuarios = JSON.parse(localStorage.getItem('usuarios_magicos') || '[]');
+            
+            // Verifica se usuário já existe
+            if (usuarios.some(u => u.username === username)) {
+                showMessage(registerMessage, "Este usuário já existe!", 'error');
+                return;
+            }
+            
+            usuarios.push({ username, password });
+            localStorage.setItem('usuarios_magicos', JSON.stringify(usuarios));
+            
+            showMessage(registerMessage, "Conta criada com sucesso!", 'success');
+            
+            // Limpa o formulário
+            this.reset();
+            
+            // Volta para o login após 2 segundos
+            setTimeout(() => {
+                registerForm.style.display = 'none';
+                loginForm.style.display = 'block';
+                registerMessage.style.display = 'none';
+            }, 2000);
+        });
+
+        // Sistema de login (usando localStorage)
+        loginSubmit.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const username = document.getElementById('loginUsername').value;
+            const password = document.getElementById('loginPassword').value;
+            
+            const usuarios = JSON.parse(localStorage.getItem('usuarios_magicos') || []);
+            const user = usuarios.find(u => u.username === username && u.password === password);
+            
+            if (user) {
+                showMessage(loginMessage, "Login bem-sucedido!", 'success');
+                localStorage.setItem('isLoggedIn', 'true');
+                localStorage.setItem('currentUser', username);
+                
+                setTimeout(() => {
+                    loginModal.style.display = 'none';
+                    checkLoginStatus();
+                }, 1000);
+            } else {
+                showMessage(loginMessage, "Usuário ou senha incorretos!", 'error');
+            }
+        });
+
+        // Logout
+        logoutBtn.addEventListener('click', () => {
+            localStorage.setItem('isLoggedIn', 'false');
+            localStorage.removeItem('currentUser');
+            document.body.classList.remove('logged-in');
+        });
+
+        // Função para mostrar mensagens
+        function showMessage(element, text, type) {
+            element.textContent = text;
+            element.style.display = 'block';
+            element.className = `status-message ${type}`;
+        }
+
+        // Navegação entre capítulos
+        chapterItems.forEach(item => {
+            item.addEventListener('click', () => {
+                // Remove a classe active de todos os itens
+                chapterItems.forEach(i => i.classList.remove('active'));
+                // Adiciona a classe active ao item clicado
+                item.classList.add('active');
+            });
+        });
+
+        // Atualiza a data no footer
+        function updateCurrentDate() {
+            const dateElement = document.getElementById('current-date');
+            if (dateElement) {
+                const now = new Date();
+                const options = { 
+                    day: '2-digit', 
+                    month: '2-digit', 
+                    year: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit'
+                };
+                dateElement.textContent = now.toLocaleDateString('pt-BR', options);
+            }
+        }
+
+        // Inicializa a página
+        window.addEventListener('load', () => {
+            applyTheme();
+            checkLoginStatus();
+            updateCurrentDate();
+            
+            // Destaca o capítulo atual na navegação
+            const currentChapter = document.querySelector('.chapter-item.active');
+            if (currentChapter) {
+                currentChapter.style.boxShadow = '0 0 15px var(--neon-ciano), 0 0 25px var(--neon-azul)';
+                currentChapter.style.border = '1px solid var(--neon-ciano)';
+            }
+        });
+    </script>
+</body>
+</html>
