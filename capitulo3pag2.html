@@ -354,12 +354,6 @@
             box-shadow: 0 0 10px var(--vermelho);
         }
 
-        .warning-box h3 {
-            color: var(--vermelho);
-            margin-bottom: 10px;
-            text-shadow: 0 0 5px var(--vermelho);
-        }
-
         .story-content {
             font-size: 1.1rem;
             line-height: 1.8;
@@ -452,22 +446,6 @@
             box-shadow: none;
             transform: none;
             color: #999;
-        }
-
-        .development-warning {
-            background: rgba(241, 196, 15, 0.2);
-            border: 1px solid var(--amarelo);
-            border-radius: 8px;
-            padding: 20px;
-            margin: 20px 0;
-            text-align: center;
-            box-shadow: 0 0 10px var(--amarelo);
-        }
-
-        .development-warning h3 {
-            color: var(--amarelo);
-            margin-bottom: 10px;
-            text-shadow: 0 0 5px var(--amarelo);
         }
 
         .footer {
@@ -840,7 +818,7 @@
                     
                     <p class="dialogue"><span class="character">Nathan</span>- Ok, eu consegui 5 Mithril da cor ciano, 7 Obsidianas e mais 7 Titânio mais nem um deles é escuro então vou substituir pelo Mithril ciano já que preciso 3 gastar 2 na minha espada rapieira não deve ser problema</p>
                     
-                    <p class="dialogue"><span class="character">Cheesee</span>- Bem eu tenho o suficiente para sei lá talvez umas manoplas ou quem sabe um soco inglês?</p>
+                    <p class="dialogue"><span class="character">Cheesee</span>- Bem eu tenho o suficiente para sei lá talvez umus manoplas ou quem sabe um soco inglês?</p>
                     
                     <p class="dialogue"><span class="character">Queijinho</span>- "E a minha faquinha >:^"</p>
                     
@@ -979,20 +957,17 @@
                     <p class="dialogue"><span class="character">Kron</span>- *Passa a mão na cabeça dele* Boa garoto!</p>
                 </div>
                 
-                <div class="development-warning">
-                    <h3><i class="fas fa-tools"></i> Em Desenvolvimento</h3>
-                    <p>O Capítulo 3 está sendo escrito! A próxima página será lançada em breve.</p>
-                </div>
-                
                 <div class="reading-controls">
                     <a href="capitulo3pag1.html">
                         <button class="nav-btn" id="prevChapter">
                             <i class="fas fa-arrow-left"></i> Página Anterior
                         </button>
                     </a>
-                    <button class="nav-btn" id="nextChapter" onclick="showDevelopmentMessage()">
-                        Próxima Página <i class="fas fa-arrow-right"></i>
-                    </button>
+                    <a href="capitulo3pag3.html">
+                        <button class="nav-btn" id="nextChapter">
+                            Próxima Página <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </a>
                 </div>
             </div>
         </div>
@@ -1019,7 +994,6 @@
         const logoutBtn = document.getElementById('logoutBtn');
         const userAvatar = document.getElementById('userAvatar');
         const chapterItems = document.querySelectorAll('.chapter-item');
-        const nextChapterBtn = document.getElementById('nextChapter');
 
         // Verifica se o usuário está logado ao carregar a página
         function checkLoginStatus() {
@@ -1051,19 +1025,6 @@
             
             applyTheme();
         });
-
-        // Função para mostrar mensagem de desenvolvimento
-        function showDevelopmentMessage() {
-            alert("🚧 Capítulo em desenvolvimento!\n\nA próxima página do Capítulo 3 está sendo escrita e será lançada em breve. Aguarde por mais aventuras de Nathan e seus amigos!");
-            
-            // Adiciona um efeito visual ao botão
-            nextChapterBtn.style.transform = 'scale(0.95)';
-            nextChapterBtn.style.backgroundColor = '#f39c12';
-            setTimeout(() => {
-                nextChapterBtn.style.transform = '';
-                nextChapterBtn.style.backgroundColor = '';
-            }, 300);
-        }
 
         // Abrir modal de login
         loginBtnNav.addEventListener('click', () => {
