@@ -1,0 +1,1085 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Capítulo 3: O Pesadelo Sempre Voltará - Página 4 | Nathan Superior Web</title>
+    
+    <style>
+        /* Adicionando zoom de 110% para todo o documento */
+        body {
+            zoom: 110%;
+            -moz-transform: scale(1.1);
+            -moz-transform-origin: 0 0;
+        }
+        
+        /* Para outros navegadores */
+        @media all and (-webkit-min-device-pixel-ratio:0) {
+            body {
+                zoom: 110%;
+            }
+        }
+    </style>
+    
+    <script>
+        (function() {
+            const isDark = localStorage.getItem('darkMode') === 'true';
+            if (isDark) {
+                document.documentElement.classList.add('dark-mode');
+            }
+            
+            const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+            if (isLoggedIn) {
+                document.body.classList.add('logged-in');
+            }
+        })();
+    </script>
+    
+    <style>
+        :root {
+            --verde: #27ae60;
+            --azul: #3498db;
+            --vermelho: #e74c3c;
+            --amarelo: #f1c40f;
+            --texto: #f0f0f0;
+            --fundo: #000000;
+            --card: #0a0a0a;
+            --borda: #222;
+            --neon-ciano: #0ff;
+            --neon-azul: #00f;
+            --neon-marinho: #0077be;
+            --roxo-lunar: #8e44ad;
+            --verde-esmeralda: #2ecc71;
+            --dourado: #ffd700;
+        }
+
+        .dark-mode {
+            --verde: #1e8449;
+            --azul: #2980b9;
+            --vermelho: #ff6b6b;
+            --amarelo: #f39c12;
+            --texto: #f0f0f0;
+            --fundo: #000000;
+            --card: #0a0a0a;
+            --borda: #222;
+            --neon-ciano: #0ff;
+            --neon-azul: #00f;
+            --neon-marinho: #0077be;
+            --roxo-lunar: #9b59b6;
+            --verde-esmeralda: #27ae60;
+            --dourado: #ffd700;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        body {
+            background: var(--fundo);
+            color: var(--texto);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* NAVBAR COM TEMA NEON AZUL */
+        .navbar {
+            background: rgba(10, 10, 10, 0.9);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 30px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 2px solid var(--neon-azul);
+            box-shadow: 0 0 10px var(--neon-azul), 0 0 20px var(--neon-ciano);
+        }
+
+        .logo {
+            color: white;
+            font-weight: bold;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-shadow: 0 0 5px var(--neon-azul), 0 0 10px var(--neon-azul);
+        }
+
+        .logo small {
+            font-size: 0.8rem;
+            opacity: 0.9;
+            font-weight: normal;
+        }
+
+        #theme-toggle {
+            color: var(--neon-ciano);
+            cursor: pointer;
+            font-size: 1.3rem;
+            transition: all 0.3s;
+            text-shadow: 0 0 5px var(--neon-ciano);
+        }
+
+        #theme-toggle:hover {
+            transform: scale(1.2);
+            text-shadow: 0 0 10px var(--neon-ciano), 0 0 20px var(--neon-ciano);
+        }
+
+        .search-bar {
+            flex-grow: 1;
+            max-width: 500px;
+            margin: 0 20px;
+        }
+
+        .search-bar input {
+            width: 100%;
+            padding: 8px 15px;
+            border: 1px solid var(--neon-ciano);
+            border-radius: 20px;
+            font-size: 0.9rem;
+            background: rgba(0, 0, 0, 0.7);
+            color: var(--texto);
+            box-shadow: 0 0 5px var(--neon-ciano);
+        }
+
+        .search-bar input:focus {
+            outline: none;
+            box-shadow: 0 0 10px var(--neon-ciano), 0 0 20px var(--neon-azul);
+        }
+
+        .nav-icons {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-icon {
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: transform 0.2s;
+            text-decoration: none;
+            text-shadow: 0 0 5px var(--neon-ciano);
+        }
+
+        .nav-icon:hover {
+            transform: translateY(-2px);
+            text-shadow: 0 0 10px var(--neon-ciano), 0 0 20px var(--neon-ciano);
+        }
+
+        .user-info {
+            display: none;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .user-avatar {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background-color: var(--neon-ciano);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: black;
+            font-weight: bold;
+            box-shadow: 0 0 5px var(--neon-ciano);
+        }
+
+        .logout-btn {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            font-size: 0.9rem;
+            text-shadow: 0 0 5px var(--neon-ciano);
+        }
+
+        body.logged-in .user-info {
+            display: flex;
+        }
+
+        body.logged-in .login-btn-nav {
+            display: none;
+        }
+
+        /* CONTEÚDO DA PÁGINA DO LIVRO */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 30px;
+        }
+
+        .book-header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 20px;
+            background: var(--card);
+            border-radius: 12px;
+            border: 1px solid var(--neon-azul);
+            box-shadow: 0 0 15px var(--neon-azul), 0 0 25px var(--neon-marinho);
+        }
+
+        .book-title {
+            color: var(--neon-ciano);
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+            text-shadow: 0 0 10px var(--neon-ciano);
+        }
+
+        .book-subtitle {
+            color: var(--neon-ciano);
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            font-style: italic;
+            text-shadow: 0 0 5px var(--neon-ciano);
+        }
+
+        .chapter-title-special {
+            color: var(--neon-azul);
+            font-size: 2.5rem;
+            text-align: center;
+            margin: 20px 0;
+            text-shadow: 0 0 8px var(--neon-azul);
+        }
+
+        .book-cover {
+            max-width: 300px;
+            margin: 20px auto;
+            border-radius: 8px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+        }
+
+        .book-info {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .book-meta {
+            background: rgba(0,0,0,0.5);
+            padding: 10px 20px;
+            border-radius: 8px;
+            border: 1px solid var(--neon-azul);
+            box-shadow: 0 0 8px var(--neon-azul);
+        }
+
+        .book-meta h4 {
+            color: var(--neon-ciano);
+            margin-bottom: 5px;
+            text-shadow: 0 0 3px var(--neon-ciano);
+        }
+
+        .reading-container {
+            display: flex;
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .chapter-nav {
+            width: 250px;
+            background: var(--card);
+            border-radius: 12px;
+            padding: 20px;
+            border: 1px solid var(--neon-azul);
+            box-shadow: 0 0 10px var(--neon-azul), 0 0 15px var(--neon-marinho);
+            height: fit-content;
+            position: sticky;
+            top: 100px;
+        }
+
+        .chapter-nav h3 {
+            color: var(--neon-ciano);
+            margin-bottom: 15px;
+            text-align: center;
+            text-shadow: 0 0 5px var(--neon-ciano);
+            border-bottom: 2px solid var(--neon-azul);
+            padding-bottom: 8px;
+        }
+
+        .chapter-list {
+            list-style: none;
+        }
+
+        .chapter-item {
+            padding: 12px 15px;
+            margin-bottom: 8px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 1px solid transparent;
+        }
+
+        .chapter-item:hover {
+            background: rgba(0, 119, 190, 0.2);
+            border: 1px solid var(--neon-marinho);
+        }
+
+        .chapter-item.active {
+            background: rgba(0, 119, 190, 0.3);
+            border: 1px solid var(--neon-marinho);
+            box-shadow: 0 0 8px var(--neon-marinho);
+        }
+
+        .reading-content {
+            flex: 1;
+            background: var(--card);
+            border-radius: 12px;
+            padding: 40px;
+            border: 1px solid var(--neon-azul);
+            box-shadow: 0 0 15px var(--neon-azul), 0 0 25px var(--neon-marinho);
+            min-height: 800px;
+        }
+
+        .chapter-title {
+            color: var(--neon-ciano);
+            font-size: 2.2rem;
+            margin-bottom: 30px;
+            text-align: center;
+            text-shadow: 0 0 8px var(--neon-ciano);
+            border-bottom: 2px solid var(--neon-azul);
+            padding-bottom: 15px;
+        }
+
+        .warning-box {
+            background: rgba(231, 76, 60, 0.2);
+            border: 1px solid var(--vermelho);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 0 10px var(--vermelho);
+        }
+
+        .warning-box h3 {
+            color: var(--vermelho);
+            margin-bottom: 10px;
+            text-shadow: 0 0 5px var(--vermelho);
+        }
+
+        .story-content {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .story-content p {
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+
+        .story-content .dialogue {
+            margin-left: 30px;
+            font-style: italic;
+            color: var(--verde-esmeralda);
+            border-left: 2px solid var(--verde-esmeralda);
+            padding-left: 15px;
+            margin-bottom: 15px;
+            text-shadow: 0 0 3px var(--verde-esmeralda);
+        }
+
+        .story-content .thought {
+            margin-left: 20px;
+            color: var(--dourado);
+            font-style: italic;
+            margin-bottom: 15px;
+            text-shadow: 0 0 3px var(--dourado);
+        }
+
+        .story-content .action {
+            margin-left: 10px;
+            color: var(--neon-ciano);
+            margin-bottom: 15px;
+            text-shadow: 0 0 3px var(--neon-ciano);
+        }
+
+        .story-content .narrator {
+            color: var(--neon-ciano);
+            font-style: italic;
+            margin-bottom: 15px;
+            text-shadow: 0 0 3px var(--neon-ciano);
+        }
+
+        .story-content .character {
+            color: var(--verde);
+            font-weight: bold;
+            text-shadow: 0 0 2px var(--verde);
+        }
+
+        .story-content .highlight {
+            color: var(--neon-ciano);
+            font-weight: bold;
+            text-shadow: 0 0 5px var(--neon-ciano);
+        }
+
+        .reading-controls {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid var(--borda);
+        }
+
+        .nav-btn {
+            background: var(--neon-marinho);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 6px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s;
+            box-shadow: 0 0 5px var(--neon-marinho), 0 0 10px var(--neon-azul);
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .nav-btn:hover {
+            background: #0099ff;
+            box-shadow: 0 0 10px var(--neon-marinho), 0 0 20px var(--neon-azul);
+            transform: translateY(-2px);
+        }
+
+        .nav-btn:disabled {
+            background: #555;
+            cursor: not-allowed;
+            box-shadow: none;
+            transform: none;
+            color: #999;
+        }
+
+        .development-warning {
+            background: rgba(241, 196, 15, 0.2);
+            border: 1px solid var(--amarelo);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+            box-shadow: 0 0 10px var(--amarelo);
+        }
+
+        .development-warning h3 {
+            color: var(--amarelo);
+            margin-bottom: 10px;
+            text-shadow: 0 0 5px var(--amarelo);
+        }
+
+        .footer {
+            text-align: center;
+            padding: 20px;
+            font-size: 0.9rem;
+            color: var(--texto);
+            opacity: 0.8;
+            background: var(--card);
+            border-top: 1px solid var(--borda);
+            margin-top: 50px;
+        }
+
+        /* MODAL DE LOGIN */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.8);
+        }
+
+        .modal-content {
+            background-color: var(--card);
+            margin: 10% auto;
+            padding: 30px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 400px;
+            box-shadow: 0 0 15px var(--neon-ciano), 0 0 30px var(--neon-azul);
+            position: relative;
+            border: 1px solid var(--neon-ciano);
+        }
+
+        .close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--vermelho);
+            text-shadow: 0 0 5px var(--vermelho);
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: var(--neon-ciano);
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid var(--neon-ciano);
+            border-radius: 5px;
+            background: rgba(0,0,0,0.7);
+            color: var(--texto);
+            box-shadow: 0 0 5px var(--neon-ciano);
+        }
+
+        .modal-btn {
+            background: var(--neon-marinho);
+            color: white;
+            border: none;
+            padding: 12px;
+            width: 100%;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            margin-top: 10px;
+            box-shadow: 0 0 5px var(--neon-marinho);
+            transition: all 0.3s;
+            font-weight: bold;
+        }
+
+        .modal-btn:hover {
+            background: #0099ff;
+            box-shadow: 0 0 10px var(--neon-marinho), 0 0 20px var(--neon-azul);
+        }
+
+        .switch-form {
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        .switch-btn {
+            background: none;
+            border: none;
+            color: var(--neon-ciano);
+            cursor: pointer;
+            text-decoration: underline;
+            text-shadow: 0 0 5px var(--neon-ciano);
+        }
+
+        .status-message {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            text-align: center;
+        }
+        
+        .success {
+            background-color: rgba(39, 174, 96, 0.2);
+            color: var(--verde);
+            border: 1px solid var(--verde);
+            box-shadow: 0 0 5px var(--verde);
+        }
+        
+        .error {
+            background-color: rgba(231, 76, 60, 0.2);
+            color: var(--vermelho);
+            border: 1px solid var(--vermelho);
+            box-shadow: 0 0 5px var(--vermelho);
+        }
+
+        /* ANIMAÇÃO NEON PARA O CAPÍTULO */
+        @keyframes neonPulse {
+            0%, 100% {
+                text-shadow: 0 0 5px var(--neon-ciano), 0 0 10px var(--neon-ciano), 0 0 15px var(--neon-ciano);
+            }
+            50% {
+                text-shadow: 0 0 10px var(--neon-ciano), 0 0 20px var(--neon-ciano), 0 0 30px var(--neon-ciano);
+            }
+        }
+
+        .chapter-pulse {
+            animation: neonPulse 2s infinite;
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                flex-wrap: wrap;
+                padding: 15px;
+            }
+            .search-bar {
+                order: 3;
+                width: 100%;
+                margin: 15px 0 0 0;
+            }
+            .container {
+                padding: 15px;
+            }
+            .reading-container {
+                flex-direction: column;
+            }
+            .chapter-nav {
+                width: 100%;
+                position: static;
+                margin-bottom: 20px;
+            }
+            .book-title {
+                font-size: 2.2rem;
+            }
+            .chapter-title {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Modal de Login -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            
+            <div id="loginForm">
+                <h2 style="color: var(--neon-ciano); margin-bottom: 20px; text-align: center; text-shadow: 0 0 5px var(--neon-ciano);">Entrar</h2>
+                
+                <form id="login">
+                    <div class="form-group">
+                        <label for="loginUsername"><i class="fas fa-user"></i> Nome de Usuário</label>
+                        <input type="text" id="loginUsername" placeholder="Seu nome de usuário" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="loginPassword"><i class="fas fa-lock"></i> Senha</label>
+                        <input type="password" id="loginPassword" placeholder="Sua senha" required>
+                    </div>
+                    
+                    <button type="submit" class="modal-btn"><i class="fas fa-sign-in-alt"></i> Entrar</button>
+                    
+                    <div id="loginMessage" class="status-message" style="display: none;"></div>
+                </form>
+                
+                <div class="switch-form">
+                    <span>Não tem uma conta? </span>
+                    <button class="switch-btn" id="showRegister">Registre-se</button>
+                </div>
+            </div>
+            
+            <div id="registerForm" style="display: none;">
+                <h2 style="color: var(--neon-ciano); margin-bottom: 20px; text-align: center; text-shadow: 0 0 5px var(--neon-ciano);">Criar Conta</h2>
+                
+                <form id="register">
+                    <div class="form-group">
+                        <label for="registerUsername"><i class="fas fa-user-edit"></i> Nome de Usuário</label>
+                        <input type="text" id="registerUsername" placeholder="Escolha um nome de usuário" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="registerPassword"><i class="fas fa-key"></i> Senha</label>
+                        <input type="password" id="registerPassword" placeholder="Crie uma senha" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="confirmPassword"><i class="fas fa-check-circle"></i> Confirmar Senha</label>
+                        <input type="password" id="confirmPassword" placeholder="Digite a senha novamente" required>
+                    </div>
+                    
+                    <button type="submit" class="modal-btn"><i class="fas fa-user-plus"></i> Registrar</button>
+                    
+                    <div id="registerMessage" class="status-message" style="display: none;"></div>
+                </form>
+                
+                <div class="switch-form">
+                    <span>Já tem uma conta? </span>
+                    <button class="switch-btn" id="showLogin">Faça login</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="logo">
+            <i id="theme-toggle" class="fas fa-moon" title="Mudar tema"></i>
+            <span>Nathan Superior Web <small>- Biblioteca</small></span>
+        </div>
+        
+        <div class="search-bar">
+            <input type="text" placeholder="Pesquise por capítulos, personagens...">
+        </div>
+        
+        <div class="nav-icons">
+            <a href="index.html" class="nav-icon" title="Início">
+                <i class="fas fa-home"></i>
+            </a>
+            <a href="favoritos.html" class="nav-icon" title="Favoritos">
+                <i class="fas fa-heart"></i>
+            </a>
+            <a href="guia-mundo.html" class="nav-icon" title="Guia do Mundo" style="color: var(--verde-esmeralda);">
+                <i class="fas fa-globe"></i>
+            </a>
+            <div class="user-info">
+                <div class="user-avatar" id="userAvatar"></div>
+                <button class="logout-btn" id="logoutBtn">Sair</button>
+            </div>
+            <button class="nav-icon login-btn-nav" id="loginBtnNav" title="Login">
+                <i class="fas fa-user"></i>
+            </button>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="book-header">
+            <h1 class="book-title">O Amor e Perda</h1>
+            <h2 class="book-subtitle">Livro da Série de Leonidas</h2>
+            
+            <h2 class="chapter-title-special chapter-pulse">Capítulo 3<br>O pesadelo sempre voltará...</h2>
+            
+            <div class="book-info">
+                <div class="book-meta">
+                    <h4>Autor</h4>
+                    <p>Nathan</p>
+                </div>
+                <div class="book-meta">
+                    <h4>Gênero</h4>
+                    <p>Fantasia Épica</p>
+                </div>
+                <div class="book-meta">
+                    <h4>Capitulos</h4>
+                    <p>3</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="reading-container">
+            <div class="chapter-nav">
+                <h3>Capítulos</h3>
+                <ul class="chapter-list">
+                    <li class="chapter-item" data-chapter="1">
+                        <a href="historiadoleon1.html" style="color: inherit; text-decoration: none; display: block;">Capítulo 1: Leonidas</a>
+                    </li>
+                    <li class="chapter-item" data-chapter="2">
+                        <a href="capitulo2pag1.html" style="color: inherit; text-decoration: none; display: block;">Capítulo 2: O Amor e Perda</a>
+                    </li>
+                    <li class="chapter-item active" data-chapter="3">
+                        <a href="capitulo3pag1.html" style="color: inherit; text-decoration: none; display: block;">Capítulo 3: O Pesadelo Sempre Voltará</a>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="reading-content">
+                <h2 class="chapter-title">Capítulo 3: O Pesadelo Sempre Voltará - Página 4</h2>
+                
+                <div class="story-content">
+                    <p class="action">*O combate começa com Nathan partindo com uma estocada com sua lança rapidamente até Cheesee. Ele desvia contra-atacando com um soco no cabo da lança do Nathan, uma mini onda de choque leva ambos para lados opostos*</p>
+                    
+                    <p class="dialogue"><span class="character">Nathan</span>- *Sorri feliz com a luta* Andou comendo feijão Cheesee?</p>
+                    
+                    <p class="dialogue"><span class="character">Cheesee</span>- Aqui só na cidade eu só como feijão puro >:)</p>
+                    
+                    <p class="action">*Voltamos a batalha, Cheesee desferiu um soco estrondoso no chão que faz a arena tremer e o chão rachar fazendo todos na arena se desequilibrar, logo Nathan pula soltando um corte reto contra Cheesee que desvia tentando contra-atacar novamente, Nathan percebendo a intenção gira sua lança confrontando o soco inglês de Cheesee o jogando longe, logo Cheesee bate na parede da arena mais logo volta e sobe sua guarda novamente para voltar a luta, Nathan volta a posição novamente e espera ele vir para cima novamente*</p>
+                    
+                    <p class="action">*Logo Cheesee respira fundo e some deixando todos na arena incrédulos, Nathan guarda sua lança nas costas e puxa sua rapieira ficando em posição de esgrima, todos olham pela arena procurando Cheesee, enquanto isso Nathan se atenta aos sons ao seu redor e escuta passos na areia ao seu lado soltando um ataque rápido para lado até escutarmos um alto som de metal colidindo e Cheesee surgindo defendendo o ataque*</p>
+                    
+                    <p class="dialogue"><span class="character">Nathan</span>- *Fala quase sussurrando* Achei você seu rato...</p>
+                    
+                    <p class="action">*Logo ele puxa a espada para si e solta uma estocada que passa centímetros do peito do Cheesee mais ele desviou no último momento pulando para trás e voltando a guarda alta e se aproximando como um lutador de boxe, Nathan são da trégua e logo desfere um golpe no ar que dá para ver a rajada fina que se forma no ar à frente de Cheesee que o acerta fazendo ele defender e quase ser arremessado para trás, após isso Nathan pula soltando estocadas, Cheesee tem dificuldade mais consegue desviar da maioria dos ataques e levando de raspão outros até Nathan parar e se reposicionar*</p>
+                    
+                    <p class="action">*Cheesee vendo seus machucados logo ele se regenera e volta a luta, levantando a guarda dessa vez vemos ele assumindo uma pose de algo que lembra kung fu com as lâminas de seus socos ingleses para os lados, Nathan junta a rapieira na sua lança novamente ergue a guarda da sua lança, Cheesee pula girando seu corpo batendo a lâmina na lança do Nathan disputando força de lâminas, Nathan vendo sua posição logo ele encaixa sua lança e joga a lâmina para trás e o cabo com tudo para frente batendo no Cheesee o jogando longe novamente*</p>
+                    
+                    <p class="dialogue"><span class="character">Cheesee</span>- Tá pegando leve?? Bora ataca logo!</p>
+                    
+                    <p class="action">*Nathan solta um sorriso colocando sua Qiang em seu ombro andando devagar em direção do Cheesee, ele tenta atacar o Nathan mais ele só defende com a lança todos os socos e ataques até jogar a lança para cima e pegar bem no final do cabo e soltar um ataque que Cheesee defende mais tem dificuldade com a força, até Nathan tirar a rapieira e soltar um corte limpo que para do lado do rosto do Cheesee*</p>
+                    
+                    <p class="dialogue"><span class="character">Nathan</span>- Desiste?</p>
+                    
+                    <p class="dialogue"><span class="character">Cheesee</span>- *Solta uma risada alta* não >:)</p>
+                    
+                    <p class="action">*Soltando uma rasteira no Nathan fazendo ele cair e ele ficar em cima dele*</p>
+                    
+                    <p class="dialogue"><span class="character">Cheesee</span>- E você?? Arrega???</p>
+                    
+                    <p class="action">*Todos começam a rir afinal ninguém teoricamente ganhou fazendo a luta ser um empate técnico pois o Nathan tinha ganhado, porém foi derrubado então ninguém ganhou, logo todos saíram da arena indo para a barraca da Tia Vera comer um pouco e aproveitar*</p>
+                    
+                    <p class="dialogue"><span class="character">Cheesee</span>- Ei Nathan lutou bem mano!</p>
+                    
+                    <p class="dialogue"><span class="character">Nathan</span>- Você também mano</p>
+                    
+                    <p class="dialogue"><span class="character">Jassy</span>- Vocês pretendem lutar com pessoas de outras cidades??</p>
+                    
+                    <p class="dialogue"><span class="character">Nathan</span>- Eu acho que não, tipo não tem porque lutar se somos pacifistas né :/</p>
+                    
+                    <p class="dialogue"><span class="character">Rei</span>- É o Nathan está certo, vocês não devem lutar por diversão ou por arrogância, mas sim para manter a paz, nunca se sabe se outro Leonidas da vida irá aparecer.</p>
+                    
+                    <p class="dialogue"><span class="character">Cheesee</span>- Ah mais se aparecer nós damos cabo no safado UwU</p>
+                    
+                    <p class="dialogue"><span class="character">Snow</span>- *Tom de deboche* Acha que troca soco com um vilão é?</p>
+                    
+                    <p class="dialogue"><span class="character">Cheesee</span>- Não fui eu que perdi hoje</p>
+                    
+                    <p class="action">*Todos começam a rir brincando e adivinha já virou rotina levar o Rei e o Snow no colo para casa porque caíram de bêbados depois da festa, logo o Nathan e a Jassy vão se deitar juntos para conversar um pouco e tals*</p>
+                    
+                    <p class="dialogue"><span class="character">Nathan</span>- Jassy o que você viu em mim?</p>
+                    
+                    <p class="dialogue"><span class="character">Jassy</span>- Como assim vida?</p>
+                    
+                    <p class="dialogue"><span class="character">Nathan</span>- O que você viu para gostar de mim?</p>
+                    
+                    <p class="dialogue"><span class="character">Jassy</span>- Não sei acho que o seu jeitinho</p>
+                    
+                    <p class="dialogue"><span class="character">Nathan</span>- E qual seria esse "jeitinho"?</p>
+                    
+                    <p class="dialogue"><span class="character">Jassy</span>- Sei lá</p>
+                    
+                    <p class="dialogue"><span class="character">Nathan</span>- Ué</p>
+                    
+                    <p class="action">*Ambos começam a rir e ficam conversando durante a noite. No dia seguinte tudo corria bem, os treinos, a galera comendo e se divertindo... Até se ouvir uma grande explosão. Do meio da fumaça sai um encapuzado vermelho e... mais uma pessoa*</p>
+                    
+                    <p class="dialogue"><span class="character">Bruton</span>- *Vem correndo atrás de todos* Kron, Príncipe, juntem todos os lutadores! A cidade está sobre ataque! Portão leste!</p>
+                    
+                    <p class="action">*Nathan, Cheesee, Snow e Kron correm até o portão leste se deparando com as duas figuras a sua frente*</p>
+                    
+                    <p class="dialogue"><span class="character">Cheesee</span>- *Voz meio trêmula* Nathan.. Aquele ali... é...</p>
+                    
+                    <p class="action">*Todos prestam atenção a figura e vemos Leonidas com os olhos pretos e camiseta meio rasgada com um rosto sem emoção e frio*</p>
+                    
+                    <p class="action">*Nathan começa a tremer vendo o corpo que está em sua frente*</p>
+                    
+                    <p class="action">*Não tem conversa, não tem violência, só um ataque. Aquele corpo de Leonidas avança sobre o pescoço do Nathan o jogando no chão e o imobilizando e da fumaça que se dissipou vários capangas investem contra Kron, Snow e Cheesee. Uma luta começa, todos batalhando. Snow corta vários capangas e solta a foice e usa a corrente para dar um golpe de longa distância no Leonidas que só segura puxando a foice e batendo o Snow no chão antes dele e do encapuzado pegarem o Nathan e os homens se dissiparem novamente indo embora*</p>
+                    
+                    <p class="dialogue"><span class="character">Cheesee</span>- ELES PEGARAM O NATHAN! AGENTE TEM QUE FAZER ALGUMA COISA!</p>
+                    
+                    <p class="action">*Kron segura o Cheesee e o abraça*</p>
+                    
+                    <p class="dialogue"><span class="character">Kron</span>- Não seja imprudente. Nós vamos resgatar ele, só... vamos cuidar do Snow e vamos convocar os anões.</p>
+                    
+                    <p class="action">*Logo a cidade vira um caos, todos chorando, pensando no que fazer, como iriam salvar o Nathan. Kron acalma a todos dizendo que eles vão trazer ele de volta de alguma forma, só não sabia como de imediato*</p>
+                    
+                    <p class="action">*Jassy chega correndo, vê a lança quebrada de Nathan no chão e cai de joelhos, segurando o rosto*</p>
+                    
+                    <p class="dialogue"><span class="character">Jassy</span>- *Grito desesperado* NATHAN!!!!</p>
+                    
+                    <p class="action"><span class="highlight">Continua na Página 5...</span></p>
+                </div>
+                
+                <div class="reading-controls">
+                    <a href="capitulo3pag3.html">
+                        <button class="nav-btn" id="prevChapter">
+                            <i class="fas fa-arrow-left"></i> Página Anterior
+                        </button>
+                    </a>
+                    <a href="capitulo3pag5.html">
+                        <button class="nav-btn" id="nextChapter">
+                            Próxima Página <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>Site desenvolvido por Nathan • Todos os direitos reservados • <span id="current-date"></span></p>
+    </div>
+
+    <script>
+        // Elementos do DOM
+        const themeToggle = document.getElementById('theme-toggle');
+        const loginModal = document.getElementById('loginModal');
+        const loginBtnNav = document.getElementById('loginBtnNav');
+        const closeBtn = document.querySelector('.close');
+        const showRegister = document.getElementById('showRegister');
+        const showLogin = document.getElementById('showLogin');
+        const loginForm = document.getElementById('loginForm');
+        const registerForm = document.getElementById('registerForm');
+        const loginSubmit = document.getElementById('login');
+        const registerSubmit = document.getElementById('register');
+        const loginMessage = document.getElementById('loginMessage');
+        const registerMessage = document.getElementById('registerMessage');
+        const logoutBtn = document.getElementById('logoutBtn');
+        const userAvatar = document.getElementById('userAvatar');
+        const chapterItems = document.querySelectorAll('.chapter-item');
+        const nextChapterBtn = document.getElementById('nextChapter');
+
+        // Verifica se o usuário está logado ao carregar a página
+        function checkLoginStatus() {
+            const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+            const username = localStorage.getItem('currentUser');
+            
+            if (isLoggedIn && username) {
+                document.body.classList.add('logged-in');
+                userAvatar.textContent = username.charAt(0).toUpperCase();
+            }
+        }
+
+        // Aplica o tema salvo no localStorage
+        function applyTheme() {
+            const isDark = localStorage.getItem('darkMode') === 'true';
+            document.documentElement.classList.toggle('dark-mode', isDark);
+            themeToggle.style.color = isDark ? '#ffed4a' : '#ffd700';
+        }
+        
+        // Evento de clique no botão de tema
+        themeToggle.addEventListener('click', () => {
+            const isDark = !document.documentElement.classList.contains('dark-mode');
+            localStorage.setItem('darkMode', isDark);
+            
+            themeToggle.style.transform = 'rotate(360deg) scale(1.2)';
+            setTimeout(() => {
+                themeToggle.style.transform = '';
+            }, 300);
+            
+            applyTheme();
+        });
+
+        // Abrir modal de login
+        loginBtnNav.addEventListener('click', () => {
+            loginModal.style.display = 'block';
+        });
+
+        // Fechar modal de login
+        closeBtn.addEventListener('click', () => {
+            loginModal.style.display = 'none';
+        });
+
+        // Fechar modal ao clicar fora
+        window.addEventListener('click', (e) => {
+            if (e.target === loginModal) {
+                loginModal.style.display = 'none';
+            }
+        });
+
+        // Alternar entre login e registro
+        showRegister.addEventListener('click', () => {
+            loginForm.style.display = 'none';
+            registerForm.style.display = 'block';
+        });
+
+        showLogin.addEventListener('click', () => {
+            registerForm.style.display = 'none';
+            loginForm.style.display = 'block';
+        });
+
+        // Sistema de registro (usando apenas localStorage)
+        registerSubmit.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const username = document.getElementById('registerUsername').value;
+            const password = document.getElementById('registerPassword').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+
+            // Validações
+            if (password !== confirmPassword) {
+                showMessage(registerMessage, "As senhas não coincidem!", 'error');
+                return;
+            }
+
+            if (password.length < 4) {
+                showMessage(registerMessage, "A senha deve ter pelo menos 4 caracteres!", 'error');
+                return;
+            }
+
+            // Salva no localStorage
+            const usuarios = JSON.parse(localStorage.getItem('usuarios_magicos') || '[]');
+            
+            // Verifica se usuário já existe
+            if (usuarios.some(u => u.username === username)) {
+                showMessage(registerMessage, "Este usuário já existe!", 'error');
+                return;
+            }
+            
+            usuarios.push({ username, password });
+            localStorage.setItem('usuarios_magicos', JSON.stringify(usuarios));
+            
+            showMessage(registerMessage, "Conta criada com sucesso!", 'success');
+            
+            // Limpa o formulário
+            this.reset();
+            
+            // Volta para o login após 2 segundos
+            setTimeout(() => {
+                registerForm.style.display = 'none';
+                loginForm.style.display = 'block';
+                registerMessage.style.display = 'none';
+            }, 2000);
+        });
+
+        // Sistema de login (usando localStorage)
+        loginSubmit.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const username = document.getElementById('loginUsername').value;
+            const password = document.getElementById('loginPassword').value;
+            
+            const usuarios = JSON.parse(localStorage.getItem('usuarios_magicos') || '[]');
+            const user = usuarios.find(u => u.username === username && u.password === password);
+            
+            if (user) {
+                showMessage(loginMessage, "Login bem-sucedido!", 'success');
+                localStorage.setItem('isLoggedIn', 'true');
+                localStorage.setItem('currentUser', username);
+                
+                setTimeout(() => {
+                    loginModal.style.display = 'none';
+                    checkLoginStatus();
+                }, 1000);
+            } else {
+                showMessage(loginMessage, "Usuário ou senha incorretos!", 'error');
+            }
+        });
+
+        // Logout
+        logoutBtn.addEventListener('click', () => {
+            localStorage.setItem('isLoggedIn', 'false');
+            localStorage.removeItem('currentUser');
+            document.body.classList.remove('logged-in');
+        });
+
+        // Função para mostrar mensagens
+        function showMessage(element, text, type) {
+            element.textContent = text;
+            element.style.display = 'block';
+            element.className = `status-message ${type}`;
+        }
+
+        // Navegação entre capítulos
+        chapterItems.forEach(item => {
+            item.addEventListener('click', () => {
+                // Remove a classe active de todos os itens
+                chapterItems.forEach(i => i.classList.remove('active'));
+                // Adiciona a classe active ao item clicado
+                item.classList.add('active');
+            });
+        });
+
+        // Atualiza a data no footer
+        function updateCurrentDate() {
+            const dateElement = document.getElementById('current-date');
+            if (dateElement) {
+                const now = new Date();
+                const options = { 
+                    day: '2-digit', 
+                    month: '2-digit', 
+                    year: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit'
+                };
+                dateElement.textContent = now.toLocaleDateString('pt-BR', options);
+            }
+        }
+
+        // Inicializa a página
+        window.addEventListener('load', () => {
+            applyTheme();
+            checkLoginStatus();
+            updateCurrentDate();
+            
+            // Destaca o capítulo atual na navegação
+            const currentChapter = document.querySelector('.chapter-item.active');
+            if (currentChapter) {
+                currentChapter.style.boxShadow = '0 0 15px var(--neon-ciano), 0 0 25px var(--neon-azul)';
+                currentChapter.style.border = '1px solid var(--neon-ciano)';
+            }
+        });
+    </script>
+</body>
+</html>
