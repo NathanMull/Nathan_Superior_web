@@ -1,0 +1,1415 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Capítulo 3: O Pesadelo Sempre Voltará - Página 5 | Nathan Superior Web</title>
+    
+    <style>
+        /* Adicionando zoom de 110% para todo o documento */
+        body {
+            zoom: 110%;
+            -moz-transform: scale(1.1);
+            -moz-transform-origin: 0 0;
+        }
+        
+        /* Para outros navegadores */
+        @media all and (-webkit-min-device-pixel-ratio:0) {
+            body {
+                zoom: 110%;
+            }
+        }
+    </style>
+    
+    <script>
+        (function() {
+            const isDark = localStorage.getItem('darkMode') === 'true';
+            if (isDark) {
+                document.documentElement.classList.add('dark-mode');
+            }
+            
+            const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+            if (isLoggedIn) {
+                document.body.classList.add('logged-in');
+            }
+        })();
+    </script>
+    
+    <style>
+        :root {
+            --verde: #27ae60;
+            --azul: #3498db;
+            --vermelho: #e74c3c;
+            --amarelo: #f1c40f;
+            --texto: #f0f0f0;
+            --fundo: #000000;
+            --card: #0a0a0a;
+            --borda: #222;
+            --neon-ciano: #0ff;
+            --neon-azul: #00f;
+            --neon-marinho: #0077be;
+            --roxo-lunar: #8e44ad;
+            --verde-esmeralda: #2ecc71;
+            --dourado: #ffd700;
+        }
+
+        .dark-mode {
+            --verde: #1e8449;
+            --azul: #2980b9;
+            --vermelho: #ff6b6b;
+            --amarelo: #f39c12;
+            --texto: #f0f0f0;
+            --fundo: #000000;
+            --card: #0a0a0a;
+            --borda: #222;
+            --neon-ciano: #0ff;
+            --neon-azul: #00f;
+            --neon-marinho: #0077be;
+            --roxo-lunar: #9b59b6;
+            --verde-esmeralda: #27ae60;
+            --dourado: #ffd700;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        body {
+            background: var(--fundo);
+            color: var(--texto);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* NAVBAR COM TEMA NEON AZUL */
+        .navbar {
+            background: rgba(10, 10, 10, 0.9);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 30px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 2px solid var(--neon-azul);
+            box-shadow: 0 0 10px var(--neon-azul), 0 0 20px var(--neon-ciano);
+        }
+
+        .logo {
+            color: white;
+            font-weight: bold;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-shadow: 0 0 5px var(--neon-azul), 0 0 10px var(--neon-azul);
+        }
+
+        .logo small {
+            font-size: 0.8rem;
+            opacity: 0.9;
+            font-weight: normal;
+        }
+
+        #theme-toggle {
+            color: var(--neon-ciano);
+            cursor: pointer;
+            font-size: 1.3rem;
+            transition: all 0.3s;
+            text-shadow: 0 0 5px var(--neon-ciano);
+        }
+
+        #theme-toggle:hover {
+            transform: scale(1.2);
+            text-shadow: 0 0 10px var(--neon-ciano), 0 0 20px var(--neon-ciano);
+        }
+
+        .search-bar {
+            flex-grow: 1;
+            max-width: 500px;
+            margin: 0 20px;
+        }
+
+        .search-bar input {
+            width: 100%;
+            padding: 8px 15px;
+            border: 1px solid var(--neon-ciano);
+            border-radius: 20px;
+            font-size: 0.9rem;
+            background: rgba(0, 0, 0, 0.7);
+            color: var(--texto);
+            box-shadow: 0 0 5px var(--neon-ciano);
+        }
+
+        .search-bar input:focus {
+            outline: none;
+            box-shadow: 0 0 10px var(--neon-ciano), 0 0 20px var(--neon-azul);
+        }
+
+        .nav-icons {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-icon {
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: transform 0.2s;
+            text-decoration: none;
+            text-shadow: 0 0 5px var(--neon-ciano);
+        }
+
+        .nav-icon:hover {
+            transform: translateY(-2px);
+            text-shadow: 0 0 10px var(--neon-ciano), 0 0 20px var(--neon-ciano);
+        }
+
+        .user-info {
+            display: none;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .user-avatar {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background-color: var(--neon-ciano);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: black;
+            font-weight: bold;
+            box-shadow: 0 0 5px var(--neon-ciano);
+        }
+
+        .logout-btn {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            font-size: 0.9rem;
+            text-shadow: 0 0 5px var(--neon-ciano);
+        }
+
+        body.logged-in .user-info {
+            display: flex;
+        }
+
+        body.logged-in .login-btn-nav {
+            display: none;
+        }
+
+        /* CONTEÚDO DA PÁGINA DO LIVRO */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 30px;
+        }
+
+        .book-header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 20px;
+            background: var(--card);
+            border-radius: 12px;
+            border: 1px solid var(--neon-azul);
+            box-shadow: 0 0 15px var(--neon-azul), 0 0 25px var(--neon-marinho);
+        }
+
+        .book-title {
+            color: var(--neon-ciano);
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+            text-shadow: 0 0 10px var(--neon-ciano);
+        }
+
+        .book-subtitle {
+            color: var(--neon-ciano);
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            font-style: italic;
+            text-shadow: 0 0 5px var(--neon-ciano);
+        }
+
+        .chapter-title-special {
+            color: var(--neon-azul);
+            font-size: 2.5rem;
+            text-align: center;
+            margin: 20px 0;
+            text-shadow: 0 0 8px var(--neon-azul);
+        }
+
+        .book-cover {
+            max-width: 300px;
+            margin: 20px auto;
+            border-radius: 8px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+        }
+
+        .book-info {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .book-meta {
+            background: rgba(0,0,0,0.5);
+            padding: 10px 20px;
+            border-radius: 8px;
+            border: 1px solid var(--neon-azul);
+            box-shadow: 0 0 8px var(--neon-azul);
+        }
+
+        .book-meta h4 {
+            color: var(--neon-ciano);
+            margin-bottom: 5px;
+            text-shadow: 0 0 3px var(--neon-ciano);
+        }
+
+        .reading-container {
+            display: flex;
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .chapter-nav {
+            width: 250px;
+            background: var(--card);
+            border-radius: 12px;
+            padding: 20px;
+            border: 1px solid var(--neon-azul);
+            box-shadow: 0 0 10px var(--neon-azul), 0 0 15px var(--neon-marinho);
+            height: fit-content;
+            position: sticky;
+            top: 100px;
+        }
+
+        .chapter-nav h3 {
+            color: var(--neon-ciano);
+            margin-bottom: 15px;
+            text-align: center;
+            text-shadow: 0 0 5px var(--neon-ciano);
+            border-bottom: 2px solid var(--neon-azul);
+            padding-bottom: 8px;
+        }
+
+        .chapter-list {
+            list-style: none;
+        }
+
+        .chapter-item {
+            padding: 12px 15px;
+            margin-bottom: 8px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 1px solid transparent;
+        }
+
+        .chapter-item:hover {
+            background: rgba(0, 119, 190, 0.2);
+            border: 1px solid var(--neon-marinho);
+        }
+
+        .chapter-item.active {
+            background: rgba(0, 119, 190, 0.3);
+            border: 1px solid var(--neon-marinho);
+            box-shadow: 0 0 8px var(--neon-marinho);
+        }
+
+        .reading-content {
+            flex: 1;
+            background: var(--card);
+            border-radius: 12px;
+            padding: 40px;
+            border: 1px solid var(--neon-azul);
+            box-shadow: 0 0 15px var(--neon-azul), 0 0 25px var(--neon-marinho);
+            min-height: 800px;
+        }
+
+        .chapter-title {
+            color: var(--neon-ciano);
+            font-size: 2.2rem;
+            margin-bottom: 30px;
+            text-align: center;
+            text-shadow: 0 0 8px var(--neon-ciano);
+            border-bottom: 2px solid var(--neon-azul);
+            padding-bottom: 15px;
+        }
+
+        .warning-box {
+            background: rgba(231, 76, 60, 0.2);
+            border: 1px solid var(--vermelho);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 0 10px var(--vermelho);
+        }
+
+        .warning-box h3 {
+            color: var(--vermelho);
+            margin-bottom: 10px;
+            text-shadow: 0 0 5px var(--vermelho);
+        }
+
+        .story-content {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .story-content p {
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+
+        .story-content .dialogue {
+            margin-left: 30px;
+            font-style: italic;
+            color: var(--verde-esmeralda);
+            border-left: 2px solid var(--verde-esmeralda);
+            padding-left: 15px;
+            margin-bottom: 15px;
+            text-shadow: 0 0 3px var(--verde-esmeralda);
+        }
+
+        .story-content .thought {
+            margin-left: 20px;
+            color: var(--dourado);
+            font-style: italic;
+            margin-bottom: 15px;
+            text-shadow: 0 0 3px var(--dourado);
+        }
+
+        .story-content .action {
+            margin-left: 10px;
+            color: var(--neon-ciano);
+            margin-bottom: 15px;
+            text-shadow: 0 0 3px var(--neon-ciano);
+        }
+
+        .story-content .narrator {
+            color: var(--neon-ciano);
+            font-style: italic;
+            margin-bottom: 15px;
+            text-shadow: 0 0 3px var(--neon-ciano);
+        }
+
+        .story-content .character {
+            color: var(--verde);
+            font-weight: bold;
+            text-shadow: 0 0 2px var(--verde);
+        }
+
+        .story-content .highlight {
+            color: var(--neon-ciano);
+            font-weight: bold;
+            text-shadow: 0 0 5px var(--neon-ciano);
+        }
+
+        .reading-controls {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid var(--borda);
+        }
+
+        .nav-btn {
+            background: var(--neon-marinho);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 6px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s;
+            box-shadow: 0 0 5px var(--neon-marinho), 0 0 10px var(--neon-azul);
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .nav-btn:hover {
+            background: #0099ff;
+            box-shadow: 0 0 10px var(--neon-marinho), 0 0 20px var(--neon-azul);
+            transform: translateY(-2px);
+        }
+
+        .nav-btn:disabled {
+            background: #555;
+            cursor: not-allowed;
+            box-shadow: none;
+            transform: none;
+            color: #999;
+        }
+
+        .development-warning {
+            background: rgba(241, 196, 15, 0.2);
+            border: 1px solid var(--amarelo);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+            box-shadow: 0 0 10px var(--amarelo);
+        }
+
+        .development-warning h3 {
+            color: var(--amarelo);
+            margin-bottom: 10px;
+            text-shadow: 0 0 5px var(--amarelo);
+        }
+
+        .footer {
+            text-align: center;
+            padding: 20px;
+            font-size: 0.9rem;
+            color: var(--texto);
+            opacity: 0.8;
+            background: var(--card);
+            border-top: 1px solid var(--borda);
+            margin-top: 50px;
+        }
+
+        /* MODAL DE LOGIN */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.8);
+        }
+
+        .modal-content {
+            background-color: var(--card);
+            margin: 10% auto;
+            padding: 30px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 400px;
+            box-shadow: 0 0 15px var(--neon-ciano), 0 0 30px var(--neon-azul);
+            position: relative;
+            border: 1px solid var(--neon-ciano);
+        }
+
+        .close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--vermelho);
+            text-shadow: 0 0 5px var(--vermelho);
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: var(--neon-ciano);
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid var(--neon-ciano);
+            border-radius: 5px;
+            background: rgba(0,0,0,0.7);
+            color: var(--texto);
+            box-shadow: 0 0 5px var(--neon-ciano);
+        }
+
+        .modal-btn {
+            background: var(--neon-marinho);
+            color: white;
+            border: none;
+            padding: 12px;
+            width: 100%;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            margin-top: 10px;
+            box-shadow: 0 0 5px var(--neon-marinho);
+            transition: all 0.3s;
+            font-weight: bold;
+        }
+
+        .modal-btn:hover {
+            background: #0099ff;
+            box-shadow: 0 0 10px var(--neon-marinho), 0 0 20px var(--neon-azul);
+        }
+
+        .switch-form {
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        .switch-btn {
+            background: none;
+            border: none;
+            color: var(--neon-ciano);
+            cursor: pointer;
+            text-decoration: underline;
+            text-shadow: 0 0 5px var(--neon-ciano);
+        }
+
+        .status-message {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            text-align: center;
+        }
+        
+        .success {
+            background-color: rgba(39, 174, 96, 0.2);
+            color: var(--verde);
+            border: 1px solid var(--verde);
+            box-shadow: 0 0 5px var(--verde);
+        }
+        
+        .error {
+            background-color: rgba(231, 76, 60, 0.2);
+            color: var(--vermelho);
+            border: 1px solid var(--vermelho);
+            box-shadow: 0 0 5px var(--vermelho);
+        }
+
+        /* ANIMAÇÃO NEON PARA O CAPÍTULO */
+        @keyframes neonPulse {
+            0%, 100% {
+                text-shadow: 0 0 5px var(--neon-ciano), 0 0 10px var(--neon-ciano), 0 0 15px var(--neon-ciano);
+            }
+            50% {
+                text-shadow: 0 0 10px var(--neon-ciano), 0 0 20px var(--neon-ciano), 0 0 30px var(--neon-ciano);
+            }
+        }
+
+        .chapter-pulse {
+            animation: neonPulse 2s infinite;
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                flex-wrap: wrap;
+                padding: 15px;
+            }
+            .search-bar {
+                order: 3;
+                width: 100%;
+                margin: 15px 0 0 0;
+            }
+            .container {
+                padding: 15px;
+            }
+            .reading-container {
+                flex-direction: column;
+            }
+            .chapter-nav {
+                width: 100%;
+                position: static;
+                margin-bottom: 20px;
+            }
+            .book-title {
+                font-size: 2.2rem;
+            }
+            .chapter-title {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Modal de Login -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            
+            <div id="loginForm">
+                <h2 style="color: var(--neon-ciano); margin-bottom: 20px; text-align: center; text-shadow: 0 0 5px var(--neon-ciano);">Entrar</h2>
+                
+                <form id="login">
+                    <div class="form-group">
+                        <label for="loginUsername"><i class="fas fa-user"></i> Nome de Usuário</label>
+                        <input type="text" id="loginUsername" placeholder="Seu nome de usuário" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="loginPassword"><i class="fas fa-lock"></i> Senha</label>
+                        <input type="password" id="loginPassword" placeholder="Sua senha" required>
+                    </div>
+                    
+                    <button type="submit" class="modal-btn"><i class="fas fa-sign-in-alt"></i> Entrar</button>
+                    
+                    <div id="loginMessage" class="status-message" style="display: none;"></div>
+                </form>
+                
+                <div class="switch-form">
+                    <span>Não tem uma conta? </span>
+                    <button class="switch-btn" id="showRegister">Registre-se</button>
+                </div>
+            </div>
+            
+            <div id="registerForm" style="display: none;">
+                <h2 style="color: var(--neon-ciano); margin-bottom: 20px; text-align: center; text-shadow: 0 0 5px var(--neon-ciano);">Criar Conta</h2>
+                
+                <form id="register">
+                    <div class="form-group">
+                        <label for="registerUsername"><i class="fas fa-user-edit"></i> Nome de Usuário</label>
+                        <input type="text" id="registerUsername" placeholder="Escolha um nome de usuário" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="registerPassword"><i class="fas fa-key"></i> Senha</label>
+                        <input type="password" id="registerPassword" placeholder="Crie uma senha" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="confirmPassword"><i class="fas fa-check-circle"></i> Confirmar Senha</label>
+                        <input type="password" id="confirmPassword" placeholder="Digite a senha novamente" required>
+                    </div>
+                    
+                    <button type="submit" class="modal-btn"><i class="fas fa-user-plus"></i> Registrar</button>
+                    
+                    <div id="registerMessage" class="status-message" style="display: none;"></div>
+                </form>
+                
+                <div class="switch-form">
+                    <span>Já tem uma conta? </span>
+                    <button class="switch-btn" id="showLogin">Faça login</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="logo">
+            <i id="theme-toggle" class="fas fa-moon" title="Mudar tema"></i>
+            <span>Nathan Superior Web <small>- Biblioteca</small></span>
+        </div>
+        
+        <div class="search-bar">
+            <input type="text" placeholder="Pesquise por capítulos, personagens...">
+        </div>
+        
+        <div class="nav-icons">
+            <a href="index.html" class="nav-icon" title="Início">
+                <i class="fas fa-home"></i>
+            </a>
+            <a href="favoritos.html" class="nav-icon" title="Favoritos">
+                <i class="fas fa-heart"></i>
+            </a>
+            <a href="guia-mundo.html" class="nav-icon" title="Guia do Mundo" style="color: var(--verde-esmeralda);">
+                <i class="fas fa-globe"></i>
+            </a>
+            <div class="user-info">
+                <div class="user-avatar" id="userAvatar"></div>
+                <button class="logout-btn" id="logoutBtn">Sair</button>
+            </div>
+            <button class="nav-icon login-btn-nav" id="loginBtnNav" title="Login">
+                <i class="fas fa-user"></i>
+            </button>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="book-header">
+            <h1 class="book-title">O Amor e Perda</h1>
+            <h2 class="book-subtitle">Livro da Série de Leonidas</h2>
+            
+            <h2 class="chapter-title-special chapter-pulse">Capítulo 3<br>O pesadelo sempre voltará...</h2>
+            
+            <div class="book-info">
+                <div class="book-meta">
+                    <h4>Autor</h4>
+                    <p>Nathan</p>
+                </div>
+                <div class="book-meta">
+                    <h4>Gênero</h4>
+                    <p>Fantasia Épica</p>
+                </div>
+                <div class="book-meta">
+                    <h4>Capitulos</h4>
+                    <p>3</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="reading-container">
+            <div class="chapter-nav">
+                <h3>Capítulos</h3>
+                <ul class="chapter-list">
+                    <li class="chapter-item" data-chapter="1">
+                        <a href="historiadoleon1.html" style="color: inherit; text-decoration: none; display: block;">Capítulo 1: Leonidas</a>
+                    </li>
+                    <li class="chapter-item" data-chapter="2">
+                        <a href="capitulo2pag1.html" style="color: inherit; text-decoration: none; display: block;">Capítulo 2: O Amor e Perda</a>
+                    </li>
+                    <li class="chapter-item active" data-chapter="3">
+                        <a href="capitulo3pag1.html" style="color: inherit; text-decoration: none; display: block;">Capítulo 3: O Pesadelo Sempre Voltará</a>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="reading-content">
+                <h2 class="chapter-title">Capítulo 3: O Pesadelo Sempre Voltará - Página 5</h2>
+                
+                <div class="story-content">
+                    <p class="action">*Logo escutamos sons altos batendo no quartzo do corredor passos de saltos ecoam até entrar na sala, e a porta se abre rapidamente vemos a Jassy atônita e quando ela vê aquela cena começa a chorar, todos os amigos tentam a confortar mais ela está em prantos*</p>
+                    
+                    <p class="dialogue"><span class="character">Jassy</span>- *chorando sussurra* Nathan...</p>
+                    
+                    <p class="action">*em meio a todo aquele caos e desordem vemos uma pessoa subindo e mandando todos se acalmarem, Snow soltou um grito tão estrondoso que todos se calam e passam a escutar ele*</p>
+                    
+                    <p class="dialogue"><span class="character">Snow</span>- *quase chorando com um rosto de odio* EU TENHO UM PLANO!... mais preciso da ajuda de todos os cientistas e dos anões vamos abrir um portal para outra dimensão</p>
+                    
+                    <p class="action">*Logo todos os cidadãos se dirigiram a suas casas e nosso grupo foi em direção aos laboratórios para começar o plano mais improvável possível*</p>
+                    
+                    <p class="action">*3 Horas depois vemos Nathan que está em uma sela vazia Nathan está amarrado com uma corda sentado meio desacordado até ele despertar e ver aquele lugar frio só iluminado por tochas do lado de fora e o Leonidas parado fazendo a guarda da sela*</p>
+                    
+                    <p class="dialogue"><span class="character">Nathan</span>- *voz meio rouca por causa do golpe na garganta* Aonde eu estou..?</p>
+                    
+                    <p class="action">*Ele olha para Leonidas que está em posição sem se mexer nem um musculo, com aquela expressão fria sem emoção alguma*</p>
+                    
+                    <p class="dialogue"><span class="character">Nathan</span>- Eu... achei que você tinha morrido...</p>
+                    
+                    <p class="action">*Leonidas continuava calado*</p>
+                    
+                    <p class="dialogue"><span class="character">Nathan</span>- Não vai falar nada?</p>
+                    
+                    <p class="action">*Logo Leonidas só sai da posição saindo como se nem escutasse Nathan, logo Nathan se desamara mais ele sabia que da sela ele não iria sair, logo o Encapuzado aparece no corredor indo devagar até a sela do Nathan e parando um metro antes*</p>
+                    
+                    <p class="dialogue"><span class="character">Nathan</span>- Quem é você? E o que quer comigo? E o mais importante o que você está fazendo com meu irmão!?</p>
+                    
+                    <p class="action">*Então o encapuzado tira o manto vermelho e se revela um homem não muito velho tem a idade do rei ou até mesmo mais novo*</p>
+                    
+                    <p class="dialogue"><span class="character">Nathan</span>- Quem é você?</p>
+                    
+                    <p class="dialogue"><span class="character">Vicktor</span>- Muito prazer sou Vicktor, por mais que as pessoinhas da quela cidade que você tanto ama, me conhecem muito bem...</p>
+                    
+                    <p class="dialogue"><span class="character">Nathan</span>- Como assim? Conhecem?</p>
+                    
+                    <p class="dialogue"><span class="character">Vicktor</span>- *Levanta o tom de voz* Conheciam antes do seu maldito clã e Salomão aquele maldito traidor me tirarem a força de lá!</p>
+                    
+                    <p class="dialogue"><span class="character">Nathan</span>- Você? É o tirado que as histórias contavam?</p>
+                    
+                    <p class="dialogue"><span class="character">Vicktor</span>- *Se exalta* TIRANO? EU TENTEI TIRAR MEU POVO DA MISERIA!</p>
+                    
+                    <p class="dialogue"><span class="character">Nathan</span>- E o que temos haver com isso? A cidade está bem, e sem a sua ajuda, então por que nos atacou assim sem mais nem menos?</p>
+                    
+                    <p class="dialogue"><span class="character">Vicktor</span>- *se recompõem* Pois quero aquilo o que é meu por direito, e minha vingança!</p>
+                    
+                    <p class="dialogue"><span class="character">Nathan</span>- Boa sorte, todos os lunarianos estão mortos e aquele povo é inocente</p>
+                    
+                    <p class="dialogue"><span class="character">Vicktor</span>- Eu sei que seu clãzinho estão mortos *Ele solta uma risada sádica* Quem você acha que atacou sua vila naquela fatídica noite?</p>
+                    
+                    <p class="dialogue"><span class="character">Nathan</span>- *fica em silencio em choque* Você...</p>
+                    
+                    <p class="dialogue"><span class="character">Vicktor</span>- *Fala em um tom mais sádico e debochado* onw... mais quem matou seu irmão me responde, fui eu? Não, não fui eu</p>
+                    
+                    <p class="dialogue"><span class="character">Nathan</span>- *Começa a quase chorar* Cala a boca... Não se atreva a pôr o nome do meu irmão nessa sua boca imunda..</p>
+                    
+                    <p class="dialogue"><span class="character">Vicktor</span>- *Volta a postura seria e normal* Bem você tem o tempo todo para ficar olhando seu irmão, posso ser tudo na sua visão menos um monstro</p>
+                    
+                    <p class="action">*Ele vai embora e o corpo e frio de Leonidas volta ficando em posição em silencio igual a antes só vemos Vicktor indo embora deixando Nathan quebrado e solitário... Logo a cena corta durantes essas 3 horas fizeram e refizeram o tal do portal, por mais que eles falharam todas as vezes até então*</p>
+                    
+                    <p class="dialogue"><span class="character">Snow</span>- Então o que deu agora?</p>
+                    
+                    <p class="dialogue"><span class="character">Alice</span>- Nada certo quando achamos a dimensão solicitada a máquina exige mais cristais e o golem ja deu a carga toda por uma semana provavelmente</p>
+                    
+                    <p class="dialogue"><span class="character">Snow</span>- Quanto ainda temos?</p>
+                    
+                    <p class="dialogue"><span class="character">Aline</span>- 1 cristal é o último se não for agora não poderemos falhar</p>
+                    
+                    <p class="action">*Snow pega o último cristal na mão e coloca na máquina e logo fica sério... sério até demais então uma aura escura começa a ficar em volta do Snow canalizando a maquinha fazendo um portal preto aparecer diante deles*</p>
+                    
+                    <p class="dialogue"><span class="character">Snow</span>- Eu odeio usar isso...</p>
+                    
+                    <p class="action">*Logo depois de um tempo duas figuras saíram do portal a dupla élfica mais doida de todos os multiversos Laryz e Flechera*</p>
+                    
+                    <p class="dialogue"><span class="character">Lary</span>- *Sai do portal e quando vê Snow ela pula o abraçando* MANINHOOO!! >W<</p>
+                    
+                    <p class="dialogue"><span class="character">Flechera</span>- Fala aí Snow a quanto tempo mano que lugar é esse aqui *ele olha em volta e olha o portal* é... vocês fizeram um portal bem meia boca</p>
+                    
+                    <p class="dialogue"><span class="character">Snow</span>- Fizemos na preça afianal... o Nathan foi capturado pelo visto com alguem muito mais forte doque poderiamos prever</p>
+                    
+                    <p class="dialogue"><span class="character">Flechera</span>- O NATHAN FOI SEQUESTRADO E VOCÊ SÓ ME FALA ISSO AGORA!?</p>
+                    
+                    <p class="dialogue"><span class="character">Snow</span>- Foi mal ;-;</p>
+                    
+                    <p class="dialogue"><span class="character">Flechera</span>- ah.. Ok sabem alguma coisa do inimigo?</p>
+                    
+                    <p class="dialogue"><span class="character">Snow</span>- Ele apareceu explodiu o portão leste e o irmão do Nathan que ja esta morto estava la parecia um zumbi sem emoção</p>
+                    
+                    <p class="dialogue"><span class="character">Lary</span>- Ai credo que horror ÓnÒ</p>
+                    
+                    <p class="dialogue"><span class="character">Flechera</span>- parece que vamos precisar de magia para rastrear ele, meu amor pode por gentileza achar ele?</p>
+                    
+                    <p class="dialogue"><span class="character">Lary</span>- Ok.. Vou ficar cansada depois mais vou só porque esta me pedindo</p>
+                    
+                    <p class="action">*logo a Jassy chega corendoe entra no laboratorio com uma espada roxa guardada na bainha em suas costas*</p>
+                    
+                    <p class="dialogue"><span class="character">Jassy</span>- Então Snow vamos resgatar meu noivo?</p>
+                    
+                    <p class="dialogue"><span class="character">Lary</span>- Snow, me apresenta a senhorita por gentileza</p>
+                    
+                    <p class="dialogue"><span class="character">Snow</span>- Ah essa é a Jassy noiva do Nathan</p>
+                    
+                    <p class="dialogue"><span class="character">Lary</span>- NOIVA?? O NATHAN JA ESTA QUASE CASANDO E NÃO CHAMOU AGENTE??</p>
+                    
+                    <p class="dialogue"><span class="character">Snow</span>- Vocês moram literalmente em outra dimensão ;-;</p>
+                    
+                    <p class="dialogue"><span class="character">Jassy</span>- Muito prazer</p>
+                    
+                    <p class="dialogue"><span class="character">Snow</span>- Bem não precisa ir Jassy é perigoso o Nathan não iria gos-</p>
+                    
+                    <p class="action">*A jassy interompe ele*</p>
+                    
+                    <p class="dialogue"><span class="character">Jassy</span>- O noivo é meu e eu vou lá buscar ele</p>
+                    
+                    <p class="dialogue"><span class="character">Lary</span>- Calma ai princesa acho que é melhor você ficar aqui</p>
+                    
+                    <p class="dialogue"><span class="character">Jassy</span>- Princesa é literalmente o que eu sou, então eu falo que vou</p>
+                    
+                    <p class="dialogue"><span class="character">Lary</span>- ei escuta aqui-</p>
+                    
+                    <p class="action">*Snow corta as duas antes que comecem a briga e no final todos vão ao resgate do Nathan Kron e Bruton prontos com os machados em mãos, os anões com seus martelos e facas prontos para luta, e nossos protagonistas rastreado a energia do Nathan... a e o Queijinho está rindo sadicamente na cabeça do Cheesee com sua faquinha em mão pronto para furar alguém*</p>
+                    
+                    <p class="action">*A Lary detecta o Nathan em lugar não muito distante, porem no subsolo e cercado de uma aura vermelha escuro quase vinho logo entrando na área vemos cães de duas cabeças vermelhos pelo menos 5 cuidando de uma moita, farejando em volta procurando nosso grupo que estava atras do mato*</p>
+                    
+                    <p class="dialogue"><span class="character">Lary</span>- Fudeu, como agente entra lá?</p>
+                    
+                    <p class="dialogue"><span class="character">Kron</span>- Calma, que tal eu e o Brutom abrirmos caminho?</p>
+                    
+                    <p class="action">*Antes que qualquer um do grupo fazer algo 3 flechas voam acertando um dos lobos, logo um ozakai leão surge de cima com uma adaga caindo no meio dos lobos atacando todos eles sendo mordido por um deles, logo mais ozakais felinos aparecem atacando os lobos abrindo caminho até que Snow sente alguém o cutucar, quando ele vira vê que Jax estava lá*</p>
+                    
+                    <p class="dialogue"><span class="character">Jax</span>- Depois que vocês me perdoaram adquiri uma dívida com vocês então agora ta paga, vamos la lutar?</p>
+                    
+                    <p class="action">*Snow sorri sacando sua foice todos apostos e entram na briga, mais lobos aparecem, mas não são ameaça ao grupo e aos aliados, até o Queijinho aparece lutando com um lobo pequeno*</p>
+                    
+                    <p class="action">*Snow corta e decapta alguns lobos e logo corta a moita que eles protegiam revelando um alçapão de aço e quando a moita é cortada os lobos ficam assustados e fogem *</p>
+                    
+                    <p class="dialogue"><span class="character">Queijinho</span>- É bom correrem mesmo seus lobos maus >:C</p>
+                    
+                    <p class="action">*Os ozakais vão atrás dos lobos para garantir que eles não irão voltar logo nosso grupo abre e entra é uma escada que leva a um corredor, logo todos entram ficando em formação a Lary detecta o Nathan mais longe mais estavam perto do local só ir mais fundo naquele lugar sem fim logo nosso grupo resolve se separar para garantir que possam achar o Nathan e dar o fora daquele lugar o quanto antes*</p>
+                    
+                    <p class="dialogue"><span class="character">Kron</span>- Eu vou na frente, Cheesee e Snow tentem ir por aquele corredor a esquerda, Lary, Flechera e Jassy vão pela direita e Brutom fique aqui caso precisemos de você</p>
+                    
+                    <p class="action">*Todos seguem seu caminho se separando, logo Cheesee e Snow entram em uma sala cheia de coisas, potes de vidro cheios de substancias desconhecidas ervas e uma variedade de coisas como cranios daqueles lobos que vimos mais cedo *</p>
+                    
+                    <p class="dialogue"><span class="character">Cheesee</span>- Snow... será que vamos conseguir resgatar o Nathan...</p>
+                    
+                    <p class="dialogue"><span class="character">Snow</span>- Claro que vamos... eu acho, bem não é hora para pensar assim</p>
+                    
+                    <p class="action">*Cheesee fica meio mal mais voltam a vasculhar pela sala, Lary começa a ir por aquele corredor vendo a aura do Nathan no mil como se estivesse correndo parado*</p>
+                    
+                    <p class="dialogue"><span class="character">Lary</span>- Tem algo acontecendo com o Nathan... Ele parece estar ansioso de alguma forma</p>
+                    
+                    <p class="dialogue"><span class="character">Flechera</span>- Logo nós achamos ele</p>
+                    
+                    <p class="dialogue"><span class="character">Jassy</span>- Tadinho TnT</p>
+                    
+                    <p class="dialogue"><span class="character">Lary</span>- Não podemos esperar muito vamos devagar afinal não sabemos se vamos achar algum monstro feio por aqui ~n~</p>
+                    
+                    <p class="action">*Eles seguem indo em direção ao Nathan, logo vemos onde está Kron, andando por um longo corredor até chegar em uma sala com um trono e Vicktor estava sentado lá e olha surpreso e com malicia a Kron*</p>
+                    
+                    <p class="dialogue"><span class="character">Vicktor</span>- Um orc? Nossa você é bem grandinho para alguém verde da especie</p>
+                    
+                    <p class="dialogue"><span class="character">Kron</span>- Cadê meu aluno.</p>
+                    
+                    <p class="dialogue"><span class="character">Vicktor</span>- Quem? O lunariano de olhos verdes? Acho que ele merece o lugar que ele está nesse momento</p>
+                    
+                    <p class="dialogue"><span class="character">Kron</span>- *fica notavelmente irritado* Seu desgraçado...</p>
+                    
+                    <p class="action">*Logo Vicktor se levanta pronto para lutar com kron, logo vicktor sorri e usa sua mana e cria um golem com seu trono e o ordena atacar Kron, quando o golem vai para cima tenta acertar um soco em Kron mas ele usa o machado cortando o braço do golem, logo Kron fica irritado e solta um corte reto cortando o golem no meio indo frete para atacar vicktor, logo vemos a Lary o Flecha e a Jassy correndo chegando cada vez mais perto escutando algo que pareciam alguém soluçando de chorar*</p>
+                    
+                    <p class="dialogue"><span class="character">Jassy</span>- VAMOS LOGO!</p>
+                    
+                    <p class="dialogue"><span class="character">Lary</span>- Não me apressa guria >:^</p>
+                    
+                    <p class="action">*Vemos Leonidas correndo e interceptando flechera o tacando na parede, de novo não tem aviso não tem barulho somente acontece, aquele corpo ja deixo de ser humano faz tempo, logo Lary invoca uma magia criando uma barreira protegendo e curando o flecha, e Leonidas se vira para a Jassy segurando-a pelo pescoço, Flechera volta dando uma bicuda nas costadas de Leonidas fazendo ele soltar a Jassy que bate com o cabo de sua espada no peito dele correndo para trás da Lary logo em seguida*</p>
+                    
+                    <p class="dialogue"><span class="character">Lary</span>- Você ta bem?</p>
+                    
+                    <p class="dialogue"><span class="character">Jassy</span>- *tosse um pouco* To sim</p>
+                    
+                    <p class="dialogue"><span class="character">Lary</span>- Ótimo... *ela bate com o cajado na cabeça da Jassy* Da próxima vez não vem junto >:<</p>
+                    
+                    <p class="dialogue"><span class="character">Jassy</span>- AI T~T</p>
+                    
+                    <p class="dialogue"><span class="character">Flechera</span>- Vamos logo o Nathan parece estar mais perto</p>
+                    
+                    <p class="action">*Todos correm em direção aonde Nathan esta, Leonidas se levanta pronto para ir atras deles ataque parado em sua frente vemos... QUEIJINHO? *</p>
+                    
+                    <p class="dialogue"><span class="character">Queijinho</span>- *meio psicopata* Olá titio... >:)</p>
+                    
+                    <p class="action">*Voltamos para o Kron brigando intensamente com Vicktor, Kron está arranhado mais sem nem um ferimento visível os dois andam em círculos procurando uma brecha na defesa de cada um... *</p>
+                    
+                    <p class="dialogue"><span class="character">Vicktor</span>- pff.... HAHAHA *ele começa a cair na gargalhada*</p>
+                    
+                    <p class="dialogue"><span class="character">Kron</span>- Doque está rindo imbecil</p>
+                    
+                    <p class="dialogue"><span class="character">Vicktor</span>- To rindo, afinal nunca imaginei essa cena de lutar com um orc, Maldito!</p>
+                    
+                    <p class="dialogue"><span class="character">Kron</span>- Ta com medo de perder?</p>
+                    
+                    <p class="dialogue"><span class="character">Vicktor</span>- *Fecha a cara* Acho que você ainda não entendeu...</p>
+                    
+                    <p class="dialogue"><span class="character">Kron</span>- Entendi que você é um maldito que merece ser enterrado embaixo do chão</p>
+                    
+                    <p class="dialogue"><span class="character">Vicktor</span>- Você veio para salvar ele, mas você nem mesmo sabe onde ele está nesse exato momento</p>
+                    
+                    <p class="dialogue"><span class="character">Kron</span>- Vamos logo acabar com isso.</p>
+                    
+                    <p class="action">*logo Vicktor fica sério cansado de tentar achar as fraquezas de Kron preferindo atacar de uma vez, aparecem asas pretas nas costas dele sem penas só escuridão em forma de asas, ele as bate fazendo grandes ondas de ar fazendo Kron se desequilibrar mais ou menos, Kron vendo que pode cair a qualquer momento joga seu machado para o lado, o ar faz o machado pregar no chão logo quando o ar para Kron aperta a mão dando para estralar seus dedos e vai para cima, desferindo um soco forte no peito de Vicktor o jogando para longe ele quase bate na parede mais depois volta com tudo batendo a asa como se fosse um soco, Kron segura a asa de Vicktor e o bate no chão e desferindo um chute tão forte que faz Vicktor sangrar, então ele o pega pela asa novamente e joga ele para o ar batendo ele no chão novamente*</p>
+                    
+                    <p class="dialogue"><span class="character">Kron</span>- Fala! *desfere outro chute* Fala que meu aluno mereceu isso!</p>
+                    
+                    <p class="dialogue"><span class="character">Vicktor</span>- É... você tem razão em uma coisa... *desfere um soco em Kron que faz ele bater no teto* Ele mereceu cada segundo aqui!</p>
+                    
+                    <p class="action">*Quando Kron bate no teto Cheesee e Snow que não estavam longe escutam a luta e começam a correr até o salão vendo Kron no chão todo ensanguentado*</p>
+                    
+                    <p class="dialogue"><span class="character">Cheesee</span>- Seu... MALDITO!</p>
+                    
+                    <p class="action">*Logo Cheesee vai para cima de Vicktor que desvia por pouco batendo nele jogando-o de volta, logo Snow olha a corrente de sua foice que foi aumentada antes deles saírem da cidade ele lembra de sua luta com Nathan e manda Cheesee sair dali que ele iria cuidar por um segundo e logo Cheesee entende que ele vai segurar Vicktor e depois ele poderia lutar*</p>
+                    
+                    <p class="dialogue"><span class="character">Cheesee</span>- Entendi só não morra eu ja volto</p>
+                    
+                    <p class="action">*O Cheesee Pega Kron mesmo ele sendo pesado e o tira da sala dando margem para o Snow destruir tudo ali se necessário*</p>
+                    
+                    <p class="dialogue"><span class="character">Vicktor</span>- Olha o que temos aqui mais um dos amiguinhos do lunariano... que pena que todos serão mortos essa noite</p>
+                    
+                    <p class="dialogue"><span class="character">Snow</span>- Você é muito confiante para alguém tão fraco</p>
+                    
+                    <p class="action">*Vicktor começa a rir loucamente ficou mais loco que o coringa, até que ele se controla e põem um sorriso no rosto*</p>
+                    
+                    <p class="dialogue"><span class="character">Vicktor</span>- Fraco? Isso foi a coisa mais hilaria que escutei em toda minha vida</p>
+                    
+                    <p class="action">*Snow pega sua foice a soltando e pegando a corrente corre começando a girar o corpo junto de sua foice parecendo uma hélice gigante indo na direção de Vicktor, ele tenta desviar, porém Snow muda a direção girando na lateral cortando uma das asas que some e evapora basicamente, logo Snow puxa sua foice e corta Vicktor, fazendo um corte limpo não muito fundo do peito até a barriga*</p>
+                    
+                    <p class="dialogue"><span class="character">Snow</span>- Você é fraco seu lixo</p>
+                    
+                    <p class="dialogue"><span class="character">Vicktor</span>- Inteligente... Gostei de você</p>
+                    
+                    <p class="action">*Snow joga sua foice que se prende no lustre e ele puxa fazendo o lustre gigante cair em vicktor, logo Snow sai vitorioso saindo e encontrando Cheesee que olha ele vendo que ele não estava machucado e quase desmaia achando que vicktor tinha controlado o corpo de Snow*</p>
+                    
+                    <p class="dialogue"><span class="character">Cheesee</span>- *sai correndo* O SNOW VIROU ZUMBIIII AAAHHHHHH!</p>
+                    
+                    <p class="dialogue"><span class="character">Snow</span>- *Corre atras dele* Que zumbi oque volta aqui poha</p>
+                    
+                    <p class="action">*Logo Flechera, Lary e Jassy encontram o Nathan que ja estava deitado inconciente no chão*</p>
+                    
+                    <p class="dialogue"><span class="character">Jassy</span>- AMOR! :C</p>
+                    
+                    <p class="action">*Vemos Nathan ele escuta mais quando vemos ele fica totalmente inconsiente como se tivesse entrado em um coma logo vemos um lugar totalmente iluminado e Nathan estava nesso local e vemos o Guardião da vida e da morte sentado olhando de canto de olho para Nathan *</p>
+                    
+                    <p class="dialogue"><span class="character">Nathan</span>- Guardião? Eu morri?</p>
+                    
+                    <p class="dialogue"><span class="character">Guardião</span>- Não, você só entrou em um coma por causa do estresse e da carga emocional intensa.</p>
+                    
+                    <p class="dialogue"><span class="character">Nathan</span>- Mais eu preciso voltar!</p>
+                    
+                    <p class="dialogue"><span class="character">Guardião</span>- Calma filho, seus amigos estão te tirando daquele lugar e ainda mais eu tenho algo para te mostrar venha comigo.</p>
+                    
+                    <p class="action">*Logo Nathan começa o seguir e escutamos um choro abafado ao aredor do lugar, logo andando mais um pouco vemos a alma de Leonidas ele que esta chorando *</p>
+                    
+                    <p class="dialogue"><span class="character">Guardião</span>- Leonidas temos uma visita para você</p>
+                    
+                    <p class="dialogue"><span class="character">Leonidas</span>- *Se vira aina chorando e quando vê Nathan ele desaba* Irmão!... Me perdoa!...</p>
+                    
+                    <p class="action">*Logo Nathan o abraça tentando o acalmar *</p>
+                    
+                    <p class="dialogue"><span class="character">Nathan</span>- *Começando a quase chorar junto* Você... Não tem culapa!</p>
+                    
+                    <p class="action">*Logo ambos param de parar de chorar e vemos que Leonidas está machucado mesmo sendo apenas uma*</p>
+                    
+                    <p class="dialogue"><span class="character">Leonidas</span>- *Aponta ao seu corpo no mundo real que estava correndo do queijinho* Tá vendo, eu não consigo descansar minha alma está sendo rasgada enquanto meu corpo fica la sem minha alma</p>
+                    
+                    <p class="dialogue"><span class="character">Nathan</span>- Como ele achou seu corpo?</p>
+                    
+                    <p class="dialogue"><span class="character">Leonidas</span>- Sendo sincero eu nem sei, afinal eu só fui tirado do lado de nossos pais, e meu corpo passou por uma imensa dor como se fosse mutilado, e aquele maldito está usando meu corpo de fantoche...</p>
+                    
+                    <p class="dialogue"><span class="character">Nathan</span>- Me perdoe... Por não ter feito um tumulo mais digno para você</p>
+                    
+                    <p class="dialogue"><span class="character">Leonidas</span>- A culpa não é sua irmão você ja deveria saber faz tempo</p>
+                    
+                    <p class="dialogue"><span class="character">Nathan</span>- *Começa a ficar meio choroso* Sei la sabe... tem dias que acho que não poderia dizer que você foi um bom irmão e não teve culpa doque ouve naquela noite...</p>
+                    
+                    <p class="dialogue"><span class="character">Leonidas</span>- Até parece... tudo isso tem mão minha, culpado ou não eu sei que sou cumplice disso...</p>
+                    
+                    <p class="dialogue"><span class="character">Nathan</span>- Como se você não pode escolher?</p>
+                    
+                    <p class="dialogue"><span class="character">Leonidas</span>- Eu já nem sei...</p>
+                    
+                    <p class="dialogue"><span class="character">Nathan</span>- Se formos sair dessa, vamos sair juntos!</p>
+                    
+                    <p class="dialogue"><span class="character">Leonidas</span>- Mais será que o guardião vai permitir eu voltar a vida?</p>
+                    
+                    <p class="action">*Ambos olham para o guardião sentado atras deles olhando toda a conversa*</p>
+                    
+                    <p class="dialogue"><span class="character">Guardião</span>- Acho que você ainda tem um proposito Leonidas, pode ir, e quando voltar as pessoas que você ama estarão esperando você</p>
+                    
+                    <p class="action">*Nathan e Leonidas se olham pensando como vão acordar então o guardião se levanta pegando sua lança e batendo ela no chão com tal força que abre um portal*</p>
+                    
+                    <p class="dialogue"><span class="character">Guardião</span>- Se entrarem vão voltar para seus corpos, vocês estarão com suas forças atuais, então leonidas não se preocupe com seu corpo ele vai ficar normal assim que você voltar</p>
+                    
+                    <p class="action">*Os irmãos olham o portão e logo dão um toca aqui pulando dentro do portal*</p>
+                    
+                    <p class="action">*Quando Leonidas volta seu corpo se regenera de uma forma absurda e ele cai por parar de correr dunada ele fica confuso e quando olha para trás o Queijinho vem correndo com a faca logo atras dele*</p>
+                    
+                    <p class="dialogue"><span class="character">Leonidas</span>- *Volta a correr* Nathan!!! Aonde você taaaaaa</p>
+                    
+                    <p class="dialogue"><span class="character">Queijinho</span>- Volta aqui titio hehehehe >:)</p>
+                    
+                    <p class="action">*Logo o Nathan recobra a consciência e quando percebe o flechera ta carregando ele e correndo*</p>
+                    
+                    <p class="dialogue"><span class="character">Nathan</span>- flechera...?, QUE VIADAGEM É ESSA ME PÕE NO CHÃO SELOKO</p>
+                    
+                    <p class="action">*Todos param de correr e logo Flechera coloca o Nathan no chão e mal passa um segundo e a Jassy se joga no Nathan o abraçando e chorando*</p>
+                    
+                    <p class="dialogue"><span class="character">Jassy</span>- Amooooor T0T</p>
+                    
+                    <p class="dialogue"><span class="character">Nathan</span>- *Se assusta mais fica feliz* Calma minha linda, Eu to bem eu to bem TwT</p>
+                    
+                    <p class="dialogue"><span class="character">Flechera</span>- Ok gente só vamos logo que o seu irmão doido ta vindo atras da gente</p>
+                    
+                    <p class="dialogue"><span class="character">Nathan</span>- A verdade não vão ter que se preocupar com ele</p>
+                    
+                    <p class="dialogue"><span class="character">Flechera</span>- Como assim?</p>
+                    
+                    <p class="dialogue"><span class="character">Leonidas</span>- *Correndo por eles* Socorro pelo amor de Deus!!!</p>
+                    
+                    <p class="action">*quando eles olham o Queijinho correndo que nem loco atras dele *</p>
+                    
+                    <p class="dialogue"><span class="character">Queijinho</span>- Volta aqui hahahaha 🤪</p>
+                    
+                    <p class="dialogue"><span class="character">Nathan</span>- Queijinho pode parar de correr atras dele ele ta limpo</p>
+                    
+                    <p class="dialogue"><span class="character">Queijinho</span>- *para e olha para o Nathan* Tabom tio 🥺</p>
+                    
+                    <p class="dialogue"><span class="character">Leonidas</span>- *ofegante* Acabei de voltar a vida e ja querem me matar do coração -~-</p>
+                    
+                    <p class="action">*Logo Snow e Cheesee chegam correndo*</p>
+                    
+                    <p class="dialogue"><span class="character">Cheesee</span>- Nathan! Que bom que você está bem!</p>
+                    
+                    <p class="action">*Todos se abraçam felizes pela vitória*</p>
+                    
+                    <p class="dialogue"><span class="character">Snow</span>- *percebe Leonidas ali do lado e quase ataca ele* E ele??</p>
+                    
+                    <p class="dialogue"><span class="character">Nathan</span>- Calma ele ta limpo</p>
+                    
+                    <p class="dialogue"><span class="character">Snow</span>- Se sair da linha eu juro que te mato</p>
+                    
+                    <p class="dialogue"><span class="character">Leonidas</span>- Que isso 0-0, foi mal eu acho não sabia que eu era tão feio assim TwT</p>
+                    
+                    <p class="dialogue"><span class="character">Snow</span>- Feio não, só que você ja tentou matar meu amigo muitas vezes</p>
+                    
+                    <p class="dialogue"><span class="character">Leonidas</span>- Nem me lembro disso T.T</p>
+                    
+                    <p class="dialogue"><span class="character">Nathan</span>- *Olha em volta* Vieram só vocês 0-0?</p>
+                    
+                    <p class="dialogue"><span class="character">Cheesee</span>- Na verdade veio nós e mais o Kron e o Bruton, o Bruton ta la na entrada e o Kron está nos... corredores...</p>
+                    
+                    <p class="dialogue"><span class="character">Nathan</span>- Ah então vamos achar eles logo</p>
+                    
+                    <p class="action">*Todos se entre olham e depois olham para o Nathan com uma tristeza profunda no rosto*</p>
+                    
+                    <p class="dialogue"><span class="character">Nathan</span>- O que foi gente?</p>
+                    
+                    <p class="dialogue"><span class="character">Snow</span>- Nathan... vem comigo acho que é bom você vir sozinho</p>
+                    
+                    <p class="action">*Logo o Snow guia o Nathan aos corredores e andando um pouco acham o Kron todo ensanguentado e machucado, quando Nathan o vê entra em desespero e corre até Kron*</p>
+                    
+                    <p class="dialogue"><span class="character">Nathan</span>- MESTRE!</p>
+                    
+                    <p class="action">*Nathan se ajoelha perto dele o tocando muito ansioso com medo dele estar muito mal, logo depois de uns segundos Kron levanta o braço e coloca a mão na cabeça do Nathan, logo Nathan começa a chorar de preocupação*</p>
+                    
+                    <p class="dialogue"><span class="character">Nathan</span>- *Voz quebrada e chorosa* Mestre... Você vai ficar bem... você vai ficar bem vamos te tirar daqui</p>
+                    
+                    <p class="dialogue"><span class="character">Kron</span>- *Voz fraca e Rouca* Não se preocupe comigo, eu só cumpri meu dever que era proteger você príncipe.</p>
+                    
+                    <p class="dialogue"><span class="character">Nathan</span>- *Chorando mais* Não fale isso... O senhor vai ficar bem</p>
+                    
+                    <p class="dialogue"><span class="character">Kron</span>- *Tosse um pouco* Nathan escute com atenção, isso não é ruim faça o que lhe ensinei e proteja aqueles que você ama, e viva treine direito, coma direito e viva com tudo de bom que a vida tem a oferecer *Sua voz fica mais fraca* meu irmão está esperando... está na hora</p>
+                    
+                    <p class="dialogue"><span class="character">Nathan</span>- *Começa a chorar* Calma Mestre não diga uma coisa dessas...</p>
+                    
+                    <p class="dialogue"><span class="character">Kron</span>- *Mais fraco* Viva... e ame aqueles que lhe fizeram bem...</p>
+                    
+                    <p class="action">*Ele finalmente fecha os olhos e sua mão se enconsta gentilmente ao chão, logo Nathan começa chorar e a soluçar novamente, todos chegam e veem Nathan chorando no peito de seu mestre que lutou até o final por ele, todos se reúnem e se abaixam para orar pela bravura e pelo sacrifício de Kron*</p>
+                    
+                    <p class="dialogue"><span class="character">Leonidas</span>- *Chega mais perto e se ajoelha ao lado de Nathan* Você amava ele não é?</p>
+                    
+                    <p class="dialogue"><span class="character">Nathan</span>- *Ainda chorando* Ele me ensinou tudo que eu precisava...</p>
+                    
+                    <p class="dialogue"><span class="character">Leonidas</span>- Saiba que ele teve muito orgulho de você meu irmão e saiba que eu também estou orgulhoso</p>
+                    
+                    <p class="action">*Nathan volta a chorar e leonidas o abraça gentilmente, todos veem perto e abraçam ele também, com essa perda tão triste eles pegam o corpo de Kron e levam para fora daquele lugar achando uma grande arvore aonde o enterram*</p>
+                    
+                    <p class="dialogue"><span class="character">Bruton</span>- *Mais sério e emocional doque nunca* Nessa noite um grande e honroso guerreiro caiu, um protetor, um mestre... um amigo, que os deuses levem tua alma para descançar e deixe seu nome gravado nos ceus como um guerreiro que amou e lutou até o final por aqueles que amava...</p>
+                    
+                    <p class="action">*Todos se ajoelham em forma de respeito e harmonia para a pessoa mais importante que lutou por todos e ganhou, voltando a cidade todos comemoram a volta de nossos heróis mais quando percebem a falta de Kron entendem o que aconteceu e todos em sinal de respeito se reúnem na praça esculpiram seu nome no chafariz da cidade, logo todos vão para suas casas e vemos Nathan na varanda olhando a cidade de cima pensando em seu mestre que ja não está mais aqui*</p>
+                    
+                    <p class="dialogue"><span class="character">Jassy</span>- *Se aproxima do Nathan na sacada do quarto* Amor ta melhor?</p>
+                    
+                    <p class="dialogue"><span class="character">Nathan</span>- *Forçando uma risadinha* Nem te conto...</p>
+                    
+                    <p class="dialogue"><span class="character">Jassy</span>- Ta... mais oque você vai fazer agora?</p>
+                    
+                    <p class="dialogue"><span class="character">Nathan</span>- *Suspira alto * Eu acho... que podemos voltar a vagar pelos universos em paz</p>
+                    
+                    <p class="dialogue"><span class="character">Jassy</span>- Mais quem vai proteger a cidade?</p>
+                    
+                    <p class="dialogue"><span class="character">Nathan</span>- Temos o Brutom, Leonidas e a tribo felinia agora são aliados então nessa parte não temos de nos preoucupar afinal sempre que precisarem de nós iremos vir o mais rapido possivel</p>
+                    
+                    <p class="dialogue"><span class="character">Jassy</span>- Vamos partir de manhã?</p>
+                    
+                    <p class="dialogue"><span class="character">Nathan</span>- Vamos</p>
+                    
+                    <p class="action">*Logo Jassy o puxa para dentro do quarto e ambos vão dormir tranquilos e logo no dia seguinte o Rei faz um pequeno evento aonde todos os habitantes da cidade aparecem*</p>
+                    
+                    <p class="dialogue"><span class="character">Rei</span>- Bom dia, Senhoras e Senhores. Ontem nossa equipe de defesa voltou infelizmente com menos um membro porém, derrotamos a maior ameaça em anos, logo que o sacrificio do nosso guarda Kron não seja em vão, e peço um minuto de silêncio para nosso guarda que serviu e morreu fazeno seu trabalho...</p>
+                    
+                    <p class="action">*Todos abaixam suas cabeças em respeito ao Kron por um minuto *</p>
+                    
+                    <p class="dialogue"><span class="character">Rei</span>- Depois desse minuto de silêncio viemos dizer que Nathan, Snow, Cheesee, minha filhinha, Flechera e Laryz vão para outros universos logo voltaram quando precisarmos mais enquanto eles estiverem fora temos o nosso mais novo guarda da cidade. Todos dem as boas-vindas a Leonidas</p>
+                    
+                    <p class="action">*Logo Leonidas sobe ao palco ja uniformizado e preparado para proteger a todos. Todos comemoram e logo um portal é aberto e todos nosso heróis vão em busca de sua nova aventura*</p>
+                    
+                    <p class="action"><span class="highlight">Fim do Capítulo 3</span></p>
+                </div>
+                
+                <div class="reading-controls">
+                    <a href="capitulo3pag4.html">
+                        <button class="nav-btn" id="prevChapter">
+                            <i class="fas fa-arrow-left"></i> Página Anterior
+                        </button>
+                    </a>
+                    <a href="capitulo4pag1.html">
+                        <button class="nav-btn" id="nextChapter">
+                            Próximo Capítulo <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>Site desenvolvido por Nathan • Todos os direitos reservados • <span id="current-date"></span></p>
+    </div>
+
+    <script>
+        // Elementos do DOM
+        const themeToggle = document.getElementById('theme-toggle');
+        const loginModal = document.getElementById('loginModal');
+        const loginBtnNav = document.getElementById('loginBtnNav');
+        const closeBtn = document.querySelector('.close');
+        const showRegister = document.getElementById('showRegister');
+        const showLogin = document.getElementById('showLogin');
+        const loginForm = document.getElementById('loginForm');
+        const registerForm = document.getElementById('registerForm');
+        const loginSubmit = document.getElementById('login');
+        const registerSubmit = document.getElementById('register');
+        const loginMessage = document.getElementById('loginMessage');
+        const registerMessage = document.getElementById('registerMessage');
+        const logoutBtn = document.getElementById('logoutBtn');
+        const userAvatar = document.getElementById('userAvatar');
+        const chapterItems = document.querySelectorAll('.chapter-item');
+
+        // Verifica se o usuário está logado ao carregar a página
+        function checkLoginStatus() {
+            const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+            const username = localStorage.getItem('currentUser');
+            
+            if (isLoggedIn && username) {
+                document.body.classList.add('logged-in');
+                userAvatar.textContent = username.charAt(0).toUpperCase();
+            }
+        }
+
+        // Aplica o tema salvo no localStorage
+        function applyTheme() {
+            const isDark = localStorage.getItem('darkMode') === 'true';
+            document.documentElement.classList.toggle('dark-mode', isDark);
+            themeToggle.style.color = isDark ? '#ffed4a' : '#ffd700';
+        }
+        
+        // Evento de clique no botão de tema
+        themeToggle.addEventListener('click', () => {
+            const isDark = !document.documentElement.classList.contains('dark-mode');
+            localStorage.setItem('darkMode', isDark);
+            
+            themeToggle.style.transform = 'rotate(360deg) scale(1.2)';
+            setTimeout(() => {
+                themeToggle.style.transform = '';
+            }, 300);
+            
+            applyTheme();
+        });
+
+        // Abrir modal de login
+        loginBtnNav.addEventListener('click', () => {
+            loginModal.style.display = 'block';
+        });
+
+        // Fechar modal de login
+        closeBtn.addEventListener('click', () => {
+            loginModal.style.display = 'none';
+        });
+
+        // Fechar modal ao clicar fora
+        window.addEventListener('click', (e) => {
+            if (e.target === loginModal) {
+                loginModal.style.display = 'none';
+            }
+        });
+
+        // Alternar entre login e registro
+        showRegister.addEventListener('click', () => {
+            loginForm.style.display = 'none';
+            registerForm.style.display = 'block';
+        });
+
+        showLogin.addEventListener('click', () => {
+            registerForm.style.display = 'none';
+            loginForm.style.display = 'block';
+        });
+
+        // Sistema de registro (usando apenas localStorage)
+        registerSubmit.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const username = document.getElementById('registerUsername').value;
+            const password = document.getElementById('registerPassword').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+
+            // Validações
+            if (password !== confirmPassword) {
+                showMessage(registerMessage, "As senhas não coincidem!", 'error');
+                return;
+            }
+
+            if (password.length < 4) {
+                showMessage(registerMessage, "A senha deve ter pelo menos 4 caracteres!", 'error');
+                return;
+            }
+
+            // Salva no localStorage
+            const usuarios = JSON.parse(localStorage.getItem('usuarios_magicos') || '[]');
+            
+            // Verifica se usuário já existe
+            if (usuarios.some(u => u.username === username)) {
+                showMessage(registerMessage, "Este usuário já existe!", 'error');
+                return;
+            }
+            
+            usuarios.push({ username, password });
+            localStorage.setItem('usuarios_magicos', JSON.stringify(usuarios));
+            
+            showMessage(registerMessage, "Conta criada com sucesso!", 'success');
+            
+            // Limpa o formulário
+            this.reset();
+            
+            // Volta para o login após 2 segundos
+            setTimeout(() => {
+                registerForm.style.display = 'none';
+                loginForm.style.display = 'block';
+                registerMessage.style.display = 'none';
+            }, 2000);
+        });
+
+        // Sistema de login (usando localStorage)
+        loginSubmit.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const username = document.getElementById('loginUsername').value;
+            const password = document.getElementById('loginPassword').value;
+            
+            const usuarios = JSON.parse(localStorage.getItem('usuarios_magicos') || '[]');
+            const user = usuarios.find(u => u.username === username && u.password === password);
+            
+            if (user) {
+                showMessage(loginMessage, "Login bem-sucedido!", 'success');
+                localStorage.setItem('isLoggedIn', 'true');
+                localStorage.setItem('currentUser', username);
+                
+                setTimeout(() => {
+                    loginModal.style.display = 'none';
+                    checkLoginStatus();
+                }, 1000);
+            } else {
+                showMessage(loginMessage, "Usuário ou senha incorretos!", 'error');
+            }
+        });
+
+        // Logout
+        logoutBtn.addEventListener('click', () => {
+            localStorage.setItem('isLoggedIn', 'false');
+            localStorage.removeItem('currentUser');
+            document.body.classList.remove('logged-in');
+        });
+
+        // Função para mostrar mensagens
+        function showMessage(element, text, type) {
+            element.textContent = text;
+            element.style.display = 'block';
+            element.className = `status-message ${type}`;
+        }
+
+        // Navegação entre capítulos
+        chapterItems.forEach(item => {
+            item.addEventListener('click', () => {
+                chapterItems.forEach(i => i.classList.remove('active'));
+                item.classList.add('active');
+            });
+        });
+
+        // Atualiza a data no footer
+        function updateCurrentDate() {
+            const dateElement = document.getElementById('current-date');
+            if (dateElement) {
+                const now = new Date();
+                const options = { 
+                    day: '2-digit', 
+                    month: '2-digit', 
+                    year: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit'
+                };
+                dateElement.textContent = now.toLocaleDateString('pt-BR', options);
+            }
+        }
+
+        // Inicializa a página
+        window.addEventListener('load', () => {
+            applyTheme();
+            checkLoginStatus();
+            updateCurrentDate();
+            
+            const currentChapter = document.querySelector('.chapter-item.active');
+            if (currentChapter) {
+                currentChapter.style.boxShadow = '0 0 15px var(--neon-ciano), 0 0 25px var(--neon-azul)';
+                currentChapter.style.border = '1px solid var(--neon-ciano)';
+            }
+        });
+    </script>
+</body>
+</html>
