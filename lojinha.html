@@ -1,0 +1,1207 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nathan Store - Loja Oficial</title>
+    
+    <style>
+        body {
+            zoom: 110%;
+            -moz-transform: scale(1.1);
+            -moz-transform-origin: 0 0;
+        }
+        @media all and (-webkit-min-device-pixel-ratio:0) {
+            body { zoom: 110%; }
+        }
+    </style>
+    
+    <script>
+        (function() {
+            const isDark = localStorage.getItem('darkMode') === 'true';
+            if (isDark) document.documentElement.classList.add('dark-mode');
+            
+            const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+            if (isLoggedIn) document.body.classList.add('logged-in');
+            
+            const filtrosVisiveis = localStorage.getItem('filtrosVisiveis') !== 'false';
+            if (!filtrosVisiveis) document.body.classList.add('filtros-ocultos');
+        })();
+    </script>
+    
+    <style>
+        :root {
+            --verde: #27ae60;
+            --azul: #3498db;
+            --vermelho: #e74c3c;
+            --amarelo: #f1c40f;
+            --texto: #f0f0f0;
+            --fundo: #000000;
+            --card: #0a0a0a;
+            --borda: #222;
+            --neon-ciano: #0ff;
+            --neon-azul: #00f;
+            --neon-marinho: #0077be;
+            --tag-camisa: #e74c3c;
+            --tag-blusa: #9b59b6;
+            --tag-boneco: #f39c12;
+        }
+
+        .dark-mode {
+            --verde: #1e8449;
+            --azul: #2980b9;
+            --vermelho: #ff6b6b;
+            --amarelo: #f39c12;
+            --texto: #f0f0f0;
+            --fundo: #000000;
+            --card: #0a0a0a;
+            --borda: #222;
+            --neon-ciano: #0ff;
+            --neon-azul: #00f;
+            --neon-marinho: #0077be;
+            --tag-camisa: #c0392b;
+            --tag-blusa: #8e44ad;
+            --tag-boneco: #d35400;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        body {
+            background: var(--fundo);
+            color: var(--texto);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .navbar {
+            background: rgba(10, 10, 10, 0.9);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 30px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 2px solid var(--neon-ciano);
+            box-shadow: 0 0 10px var(--neon-ciano), 0 0 20px var(--neon-azul);
+        }
+
+        .logo {
+            color: white;
+            font-weight: bold;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-shadow: 0 0 5px var(--neon-ciano), 0 0 10px var(--neon-ciano);
+        }
+
+        .logo small {
+            font-size: 0.8rem;
+            opacity: 0.9;
+            font-weight: normal;
+        }
+
+        #theme-toggle {
+            color: var(--neon-ciano);
+            cursor: pointer;
+            font-size: 1.3rem;
+            transition: all 0.3s;
+            text-shadow: 0 0 5px var(--neon-ciano);
+        }
+
+        #theme-toggle:hover {
+            transform: scale(1.2);
+            text-shadow: 0 0 10px var(--neon-ciano), 0 0 20px var(--neon-ciano);
+        }
+
+        .search-bar {
+            flex-grow: 1;
+            max-width: 500px;
+            margin: 0 20px;
+        }
+
+        .search-bar input {
+            width: 100%;
+            padding: 8px 15px;
+            border: 1px solid var(--neon-ciano);
+            border-radius: 20px;
+            font-size: 0.9rem;
+            background: rgba(0, 0, 0, 0.7);
+            color: var(--texto);
+            box-shadow: 0 0 5px var(--neon-ciano);
+        }
+
+        .search-bar input:focus {
+            outline: none;
+            box-shadow: 0 0 10px var(--neon-ciano), 0 0 20px var(--neon-azul);
+        }
+
+        .nav-icons {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .nav-icon {
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: transform 0.2s;
+            text-shadow: 0 0 5px var(--neon-ciano);
+            position: relative;
+        }
+
+        .nav-icon:hover {
+            transform: translateY(-2px);
+            text-shadow: 0 0 10px var(--neon-ciano), 0 0 20px var(--neon-ciano);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .page-header {
+            text-align: center;
+            margin: 30px 0 40px;
+            padding: 20px;
+        }
+
+        .page-header h1 {
+            font-size: 2.5rem;
+            color: var(--neon-ciano);
+            text-shadow: 0 0 10px var(--neon-ciano), 0 0 20px var(--neon-azul);
+            margin-bottom: 15px;
+        }
+
+        .page-header p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+            opacity: 0.9;
+        }
+
+        .toggle-filtros-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            background: var(--card);
+            padding: 15px 25px;
+            border-radius: 15px;
+            border: 1px solid var(--borda);
+        }
+
+        .toggle-filtros-btn {
+            background: transparent;
+            border: 2px solid var(--neon-ciano);
+            color: var(--neon-ciano);
+            padding: 8px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s;
+            box-shadow: 0 0 5px var(--neon-ciano);
+        }
+
+        .toggle-filtros-btn:hover {
+            background: rgba(0, 255, 255, 0.1);
+            box-shadow: 0 0 15px var(--neon-ciano);
+            transform: translateY(-2px);
+        }
+
+        .filtros-ativos-info {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            font-size: 0.9rem;
+        }
+
+        .filtros-ativos-info span {
+            color: var(--neon-ciano);
+            font-weight: bold;
+        }
+
+        .filtros-container {
+            background: var(--card);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 40px;
+            border: 1px solid var(--neon-ciano);
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.1);
+            max-height: 600px;
+            overflow: hidden;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        body.filtros-ocultos .filtros-container {
+            max-height: 0;
+            padding: 0;
+            margin-bottom: 0;
+            border: 1px solid transparent;
+            opacity: 0;
+            transform: translateY(-20px);
+        }
+
+        .filtros-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--neon-azul);
+        }
+
+        .filtros-header h2 {
+            color: var(--neon-ciano);
+            font-size: 1.6rem;
+            text-shadow: 0 0 5px var(--neon-ciano);
+        }
+
+        .reset-filtros {
+            background: transparent;
+            border: 1px solid var(--neon-ciano);
+            color: var(--neon-ciano);
+            padding: 8px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .reset-filtros:hover {
+            background: rgba(0, 255, 255, 0.1);
+            box-shadow: 0 0 10px var(--neon-ciano);
+        }
+
+        .filtros-categorias {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 25px;
+        }
+
+        .categoria-filtro {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 12px;
+            padding: 20px;
+            border: 1px solid var(--borda);
+            transition: all 0.3s;
+        }
+
+        .categoria-filtro:hover {
+            border-color: var(--neon-ciano);
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.2);
+        }
+
+        .categoria-filtro h3 {
+            color: var(--neon-ciano);
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .opcoes-filtro {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .opcao-filtro {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+            padding: 8px 5px;
+            border-radius: 5px;
+            transition: background 0.2s;
+        }
+
+        .opcao-filtro:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .opcao-filtro input {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+            accent-color: var(--neon-ciano);
+        }
+
+        .opcao-filtro label {
+            cursor: pointer;
+            font-size: 0.95rem;
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* FILTRO DE PREÇO */
+        .price-range-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .price-inputs {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .price-inputs input[type="number"] {
+            width: 100%;
+            padding: 8px 12px;
+            border: 1px solid var(--neon-ciano);
+            border-radius: 8px;
+            background: rgba(0, 0, 0, 0.6);
+            color: var(--texto);
+            font-size: 0.95rem;
+            box-shadow: 0 0 5px rgba(0, 255, 255, 0.3);
+        }
+
+        .price-inputs input[type="number"]:focus {
+            outline: none;
+            box-shadow: 0 0 10px var(--neon-ciano);
+        }
+
+        .price-inputs span {
+            color: var(--neon-ciano);
+            font-weight: bold;
+        }
+
+        .price-slider {
+            width: 100%;
+        }
+
+        .price-slider input[type="range"] {
+            width: 100%;
+            accent-color: var(--neon-ciano);
+            cursor: pointer;
+        }
+
+        .price-values {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            color: var(--neon-ciano);
+            font-weight: bold;
+        }
+
+        /* TAGS DE CATEGORIA (Camisa, Blusa, Bonecos) */
+        .tag-selector {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .tag-btn {
+            padding: 8px 18px;
+            border-radius: 20px;
+            border: 2px solid;
+            background: transparent;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s;
+        }
+
+        .tag-btn[data-tag="camisa"] {
+            color: var(--tag-camisa);
+            border-color: var(--tag-camisa);
+        }
+        .tag-btn[data-tag="camisa"]:hover,
+        .tag-btn[data-tag="camisa"].active {
+            background: var(--tag-camisa);
+            color: white;
+            box-shadow: 0 0 15px var(--tag-camisa);
+        }
+
+        .tag-btn[data-tag="blusa"] {
+            color: var(--tag-blusa);
+            border-color: var(--tag-blusa);
+        }
+        .tag-btn[data-tag="blusa"]:hover,
+        .tag-btn[data-tag="blusa"].active {
+            background: var(--tag-blusa);
+            color: white;
+            box-shadow: 0 0 15px var(--tag-blusa);
+        }
+
+        .tag-btn[data-tag="boneco"] {
+            color: var(--tag-boneco);
+            border-color: var(--tag-boneco);
+        }
+        .tag-btn[data-tag="boneco"]:hover,
+        .tag-btn[data-tag="boneco"].active {
+            background: var(--tag-boneco);
+            color: white;
+            box-shadow: 0 0 15px var(--tag-boneco);
+        }
+
+        /* PRODUTOS */
+        .produtos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .produto-card {
+            background: var(--card);
+            border-radius: 15px;
+            overflow: hidden;
+            border: 1px solid var(--borda);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transition: all 0.4s ease;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .produto-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--neon-ciano);
+            box-shadow: 0 10px 25px rgba(0, 255, 255, 0.2), 0 0 15px var(--neon-ciano);
+        }
+
+        .card-header {
+            position: relative;
+            height: 260px;
+            overflow: hidden;
+            background: linear-gradient(135deg, #001122, #003344);
+        }
+
+        .card-header img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .produto-card:hover .card-header img {
+            transform: scale(1.05);
+        }
+
+        .placeholder-img {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--neon-ciano);
+            font-size: 4rem;
+            text-shadow: 0 0 10px var(--neon-ciano);
+        }
+
+        /* TAG DO PRODUTO (canto superior) */
+        .produto-tag-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            color: white;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.5);
+            z-index: 2;
+        }
+
+        .produto-tag-badge.camisa { background: var(--tag-camisa); box-shadow: 0 0 10px var(--tag-camisa); }
+        .produto-tag-badge.blusa { background: var(--tag-blusa); box-shadow: 0 0 10px var(--tag-blusa); }
+        .produto-tag-badge.boneco { background: var(--tag-boneco); box-shadow: 0 0 10px var(--tag-boneco); }
+
+        .card-body {
+            padding: 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .produto-nome {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: var(--texto);
+            line-height: 1.3;
+        }
+
+        .produto-preco {
+            font-size: 1.6rem;
+            font-weight: bold;
+            color: var(--neon-ciano);
+            text-shadow: 0 0 8px var(--neon-ciano);
+        }
+
+        .card-footer {
+            padding: 15px 20px 20px;
+        }
+
+        .comprar-btn {
+            width: 100%;
+            background: var(--neon-ciano);
+            color: black;
+            border: none;
+            padding: 14px 20px;
+            border-radius: 10px;
+            font-weight: bold;
+            font-size: 1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: all 0.3s;
+            box-shadow: 0 0 10px var(--neon-ciano);
+        }
+
+        .comprar-btn:hover {
+            background: white;
+            box-shadow: 0 0 20px var(--neon-ciano), 0 0 30px var(--neon-ciano);
+            transform: scale(1.02);
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            border: 2px solid var(--neon-ciano);
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            text-decoration: none;
+            margin: 20px 0 40px;
+            transition: all 0.3s;
+            box-shadow: 0 0 5px var(--neon-ciano);
+        }
+
+        .back-btn:hover {
+            background: rgba(0, 255, 255, 0.1);
+            transform: translateX(-5px);
+            box-shadow: 0 0 15px var(--neon-ciano);
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 60px 20px;
+            grid-column: 1 / -1;
+            color: var(--texto);
+            opacity: 0.7;
+            font-size: 1.3rem;
+            background: var(--card);
+            border-radius: 15px;
+            border: 1px solid var(--borda);
+        }
+
+        .no-results i {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            color: var(--neon-ciano);
+            display: block;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 25px;
+            font-size: 0.9rem;
+            color: var(--texto);
+            opacity: 0.8;
+            background: var(--card);
+            border-top: 1px solid var(--borda);
+            margin-top: 50px;
+        }
+
+        @media (max-width: 768px) {
+            .navbar { flex-wrap: wrap; padding: 15px; }
+            .search-bar {
+                order: 3;
+                width: 100%;
+                margin: 15px 0 0 0;
+            }
+            .container { padding: 15px; }
+            .produtos-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            .filtros-categorias { grid-template-columns: 1fr; }
+            .toggle-filtros-container {
+                flex-direction: column;
+                gap: 15px;
+                align-items: stretch;
+            }
+            .page-header h1 { font-size: 2rem; }
+        }
+
+        .user-info {
+            display: none;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .user-avatar {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background-color: var(--neon-ciano);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: black;
+            font-weight: bold;
+            box-shadow: 0 0 5px var(--neon-ciano);
+        }
+
+        .logout-btn {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            font-size: 0.9rem;
+            text-shadow: 0 0 5px var(--neon-ciano);
+        }
+
+        body.logged-in .user-info { display: flex; }
+        body.logged-in .login-btn-nav { display: none; }
+
+        /* Toast */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--card);
+            border: 2px solid var(--neon-ciano);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px var(--neon-ciano);
+            z-index: 999;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transform: translateX(150%);
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .toast.show { transform: translateX(0); }
+
+        .toast i {
+            color: var(--verde);
+            font-size: 1.5rem;
+        }
+
+        .cart-badge-nav {
+            position: absolute;
+            top: -8px;
+            right: -10px;
+            background: var(--vermelho);
+            color: white;
+            font-size: 0.7rem;
+            font-weight: bold;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .cart-badge-nav.empty { display: none; }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <i id="theme-toggle" class="fas fa-star" title="Mudar tema"></i>
+            <span>Nathan Store <small>- Loja Oficial</small></span>
+        </div>
+        
+        <div class="search-bar">
+            <input type="text" id="searchInput" placeholder="Pesquise por produto...">
+        </div>
+        
+        <div class="nav-icons">
+            <a href="index.html" class="nav-icon" title="Início">
+                <i class="fas fa-home"></i>
+            </a>
+            <a href="favoritos.html" class="nav-icon" title="Favoritos">
+                <i class="fas fa-heart"></i>
+            </a>
+            <div class="nav-icon" id="cartBtn" title="Carrinho">
+                <i class="fas fa-shopping-cart"></i>
+                <span class="cart-badge-nav empty" id="cartBadgeNav">0</span>
+            </div>
+            <div class="user-info">
+                <div class="user-avatar" id="userAvatar"></div>
+                <button class="logout-btn" id="logoutBtn">Sair</button>
+            </div>
+            <button class="nav-icon login-btn-nav" id="loginBtnNav" title="Login">
+                <i class="fas fa-user"></i>
+            </button>
+        </div>
+    </nav>
+
+    <div class="container">
+        <a href="index.html" class="back-btn">
+            <i class="fas fa-arrow-left"></i> Voltar para o Início
+        </a>
+        
+        <div class="page-header">
+            <h1><i class="fas fa-store"></i> Lojinha do Nathan</h1>
+            <p>Produtos exclusivos: camisas, blusas e bonecos dos seus personagens favoritos</p>
+        </div>
+        
+        <!-- Controle de Filtros -->
+        <div class="toggle-filtros-container">
+            <button class="toggle-filtros-btn" id="toggleFiltrosBtn">
+                <i class="fas fa-filter"></i>
+                <span id="toggleFiltrosText">Ocultar Filtros</span>
+            </button>
+            <div class="filtros-ativos-info">
+                <div id="filtrosAtivosContagem">Filtros ativos: <span>0</span></div>
+                <div id="contadorResultados">Mostrando: <span>0 produtos</span></div>
+            </div>
+        </div>
+        
+        <!-- Filtros -->
+        <div class="filtros-container" id="filtrosContainer">
+            <div class="filtros-header">
+                <h2><i class="fas fa-sliders-h"></i> Filtrar Produtos</h2>
+                <button class="reset-filtros" id="resetFiltros">
+                    <i class="fas fa-times"></i> Limpar Tudo
+                </button>
+            </div>
+            
+            <div class="filtros-categorias">
+                <!-- FILTRO DE PREÇO -->
+                <div class="categoria-filtro">
+                    <h3><i class="fas fa-dollar-sign"></i> Faixa de Preço</h3>
+                    <div class="price-range-container">
+                        <div class="price-inputs">
+                            <input type="number" id="precoMin" placeholder="Mín" min="0" value="0">
+                            <span>—</span>
+                            <input type="number" id="precoMax" placeholder="Máx" min="0" value="500">
+                        </div>
+                        <div class="price-slider">
+                            <input type="range" id="precoRange" min="0" max="500" step="5" value="500">
+                        </div>
+                        <div class="price-values">
+                            <span>R$ 0</span>
+                            <span id="precoRangeLabel">R$ 500</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CATEGORIAS (Camisa, Blusa, Bonecos) -->
+                <div class="categoria-filtro">
+                    <h3><i class="fas fa-tags"></i> Categorias</h3>
+                    <div class="tag-selector">
+                        <button class="tag-btn" data-tag="camisa">
+                            <i class="fas fa-tshirt"></i> Camisa
+                        </button>
+                        <button class="tag-btn" data-tag="blusa">
+                            <i class="fas fa-vest"></i> Blusa
+                        </button>
+                        <button class="tag-btn" data-tag="boneco">
+                            <i class="fas fa-robot"></i> Bonecos
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Cards de Produtos -->
+        <div class="produtos-grid" id="produtosContainer"></div>
+    </div>
+
+    <div class="footer">
+        <p>Nathan Store © 2025 • Todos os direitos reservados • Produtos oficiais da comunidade</p>
+    </div>
+
+    <!-- Toast de notificação -->
+    <div class="toast" id="toast">
+        <i class="fas fa-check-circle"></i>
+        <span id="toastMessage">Produto adicionado ao carrinho!</span>
+    </div>
+
+    <script>
+        // Elementos principais
+        const themeToggle = document.getElementById('theme-toggle');
+        const logoutBtn = document.getElementById('logoutBtn');
+        const userAvatar = document.getElementById('userAvatar');
+        const produtosContainer = document.getElementById('produtosContainer');
+        const searchInput = document.getElementById('searchInput');
+        const resetFiltrosBtn = document.getElementById('resetFiltros');
+        const toggleFiltrosBtn = document.getElementById('toggleFiltrosBtn');
+        const toggleFiltrosText = document.getElementById('toggleFiltrosText');
+        const filtrosAtivosContagem = document.getElementById('filtrosAtivosContagem');
+        const contadorResultados = document.getElementById('contadorResultados');
+        const cartBtn = document.getElementById('cartBtn');
+        const cartBadgeNav = document.getElementById('cartBadgeNav');
+        const toast = document.getElementById('toast');
+        const toastMessage = document.getElementById('toastMessage');
+        const precoMinInput = document.getElementById('precoMin');
+        const precoMaxInput = document.getElementById('precoMax');
+        const precoRange = document.getElementById('precoRange');
+        const precoRangeLabel = document.getElementById('precoRangeLabel');
+        
+        // PRODUTOS (10 itens de exemplo - edite os preços e tags)
+        const produtos = [
+            // CAMISAS
+            {
+                id: 1,
+                nome: "Camisa Nathan ",
+                imagem: "https://i.ibb.co/7Jdqj4TW/image.png",
+                preco: 89.90,
+                tag: "camisa"
+            },
+            {
+                id: 2,
+                nome: "Camisa Jassy",
+                imagem: "https://i.ibb.co/Dh1x2LZ/image.png",
+                preco: 89.90,
+                tag: "camisa"
+            },
+            {
+                id: 3,
+                nome: "Camisa Leonidas",
+                imagem: "https://i.ibb.co/9HHRW1zC/image.png",
+                preco: 89.90,
+                tag: "camisa"
+            },
+            {
+                id: 4,
+                nome: "Camisa Leonidas infectado",
+                imagem: "https://i.ibb.co/fVgLcWpW/image.png",
+                preco: 89.90,
+                tag: "camisa"
+            },
+            // BLUSAS
+            {
+                id: 5,
+                nome: "Blusa Nathan Superior",
+                imagem: "https://i.ibb.co/DPLQ31YD/Vbq-Flw-X1f-WL1-Rh-IKn1o0-Gpw-Ym-ZXKmtp-Y27-Nv-Lz-On9zy-WDV0e3-IX6-Ayl-ZYg-Xu-TJA5l-Ah3-VHP3-GQ-s160.jpg",
+                preco: 129.90,
+                tag: "blusa"
+            },
+            
+            // BONECOS
+            {
+                id: 8,
+                nome: "Boneco Nathan ",
+                imagem: "https://i.ibb.co/S770knkv/image.png",
+                preco: 69.99,
+                tag: "boneco"
+            },
+            {
+                id: 9,
+                nome: "Boneca Jassy",
+                imagem: "https://i.ibb.co/239Fn1X8/image.png",
+                preco: 69.99,
+                tag: "boneco"
+            },
+           
+        ];
+        
+        // Estado dos filtros
+        let filtroTags = []; // camisa, blusa, boneco
+        let filtroPrecoMin = 0;
+        let filtroPrecoMax = 500;
+        
+        // Carrinho
+        let carrinho = JSON.parse(localStorage.getItem('carrinho') || '[]');
+        
+        // Login
+        function checkLoginStatus() {
+            const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+            const username = localStorage.getItem('currentUser');
+            
+            if (isLoggedIn && username) {
+                document.body.classList.add('logged-in');
+                userAvatar.textContent = username.charAt(0).toUpperCase();
+            }
+        }
+        
+        // Tema
+        function applyTheme() {
+            const isDark = localStorage.getItem('darkMode') === 'true';
+            document.documentElement.classList.toggle('dark-mode', isDark);
+            themeToggle.style.color = isDark ? '#f39c12' : '#f1c40f';
+        }
+        
+        themeToggle.addEventListener('click', () => {
+            const isDark = !document.documentElement.classList.contains('dark-mode');
+            localStorage.setItem('darkMode', isDark);
+            themeToggle.style.transform = 'rotate(360deg) scale(1.2)';
+            setTimeout(() => { themeToggle.style.transform = ''; }, 300);
+            applyTheme();
+        });
+        
+        // Logout
+        logoutBtn.addEventListener('click', () => {
+            localStorage.setItem('isLoggedIn', 'false');
+            localStorage.removeItem('currentUser');
+            document.body.classList.remove('logged-in');
+        });
+        
+        // Toggle filtros
+        toggleFiltrosBtn.addEventListener('click', () => {
+            const filtrosOcultos = document.body.classList.toggle('filtros-ocultos');
+            localStorage.setItem('filtrosVisiveis', !filtrosOcultos);
+            
+            if (filtrosOcultos) {
+                toggleFiltrosText.textContent = 'Mostrar Filtros';
+                toggleFiltrosBtn.innerHTML = '<i class="fas fa-filter"></i> <span>Mostrar Filtros</span>';
+            } else {
+                toggleFiltrosText.textContent = 'Ocultar Filtros';
+                toggleFiltrosBtn.innerHTML = '<i class="fas fa-filter"></i> <span>Ocultar Filtros</span>';
+            }
+        });
+        
+        // TAGS (Camisa, Blusa, Bonecos)
+        document.querySelectorAll('.tag-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const tag = btn.dataset.tag;
+                if (filtroTags.includes(tag)) {
+                    filtroTags = filtroTags.filter(t => t !== tag);
+                    btn.classList.remove('active');
+                } else {
+                    filtroTags.push(tag);
+                    btn.classList.add('active');
+                }
+                aplicarFiltros();
+            });
+        });
+        
+        // FILTRO DE PREÇO
+        function atualizarFiltroPreco() {
+            let min = parseFloat(precoMinInput.value) || 0;
+            let max = parseFloat(precoMaxInput.value) || 500;
+            
+            if (min < 0) min = 0;
+            if (max < min) max = min;
+            
+            filtroPrecoMin = min;
+            filtroPrecoMax = max;
+            
+            // Atualiza o label do range
+            precoRangeLabel.textContent = `R$ ${max.toFixed(0)}`;
+            
+            aplicarFiltros();
+        }
+        
+        precoMinInput.addEventListener('input', atualizarFiltroPreco);
+        precoMaxInput.addEventListener('input', atualizarFiltroPreco);
+        
+        precoRange.addEventListener('input', () => {
+            precoMaxInput.value = precoRange.value;
+            precoRangeLabel.textContent = `R$ ${precoRange.value}`;
+            atualizarFiltroPreco();
+        });
+        
+        // Atualizar contagem de filtros ativos
+        function atualizarContagemFiltros() {
+            let total = filtroTags.length;
+            // Conta filtro de preço se não for o padrão
+            if (filtroPrecoMin > 0 || filtroPrecoMax < 500) total += 1;
+            
+            filtrosAtivosContagem.innerHTML = `Filtros ativos: <span>${total}</span>`;
+            
+            if (total > 0) {
+                filtrosAtivosContagem.style.color = 'var(--neon-ciano)';
+                filtrosAtivosContagem.querySelector('span').style.textShadow = '0 0 5px var(--neon-ciano)';
+            } else {
+                filtrosAtivosContagem.style.color = '';
+                filtrosAtivosContagem.querySelector('span').style.textShadow = '';
+            }
+        }
+        
+        // APLICAR FILTROS
+        function aplicarFiltros() {
+            const termoBusca = searchInput.value.toLowerCase().trim();
+            let produtosFiltrados = [...produtos];
+            
+            // Filtro por tags
+            if (filtroTags.length > 0) {
+                produtosFiltrados = produtosFiltrados.filter(p => filtroTags.includes(p.tag));
+            }
+            
+            // Filtro por preço
+            produtosFiltrados = produtosFiltrados.filter(p => 
+                p.preco >= filtroPrecoMin && p.preco <= filtroPrecoMax
+            );
+            
+            // Filtro por busca
+            if (termoBusca) {
+                produtosFiltrados = produtosFiltrados.filter(p => 
+                    p.nome.toLowerCase().includes(termoBusca) ||
+                    p.tag.toLowerCase().includes(termoBusca)
+                );
+            }
+            
+            contadorResultados.innerHTML = `Mostrando: <span>${produtosFiltrados.length} produtos</span>`;
+            
+            if (produtosFiltrados.length !== produtos.length) {
+                contadorResultados.style.color = 'var(--neon-ciano)';
+                contadorResultados.querySelector('span').style.textShadow = '0 0 5px var(--neon-ciano)';
+            } else {
+                contadorResultados.style.color = '';
+                contadorResultados.querySelector('span').style.textShadow = '';
+            }
+            
+            atualizarContagemFiltros();
+            renderizarProdutos(produtosFiltrados);
+        }
+        
+        // RENDERIZAR PRODUTOS
+        function renderizarProdutos(lista) {
+            produtosContainer.innerHTML = '';
+            
+            if (lista.length === 0) {
+                produtosContainer.innerHTML = `
+                    <div class="no-results">
+                        <i class="fas fa-search"></i>
+                        <h3>Nenhum produto encontrado</h3>
+                        <p>Tente ajustar os filtros ou termos de busca</p>
+                        <button class="reset-filtros" id="resetNoResults" style="margin-top: 20px;">
+                            <i class="fas fa-times"></i> Limpar Filtros
+                        </button>
+                    </div>
+                `;
+                document.getElementById('resetNoResults')?.addEventListener('click', resetarFiltros);
+                return;
+            }
+            
+            lista.forEach(produto => {
+                const card = document.createElement('div');
+                card.className = 'produto-card';
+                
+                const tagLabel = produto.tag === 'camisa' ? 'Camisa' : 
+                                 produto.tag === 'blusa' ? 'Blusa' : 'Boneco';
+                const tagIcon = produto.tag === 'camisa' ? 'fa-tshirt' : 
+                                produto.tag === 'blusa' ? 'fa-vest' : 'fa-robot';
+                
+                card.innerHTML = `
+                    <div class="card-header">
+                        <span class="produto-tag-badge ${produto.tag}">
+                            <i class="fas ${tagIcon}"></i> ${tagLabel}
+                        </span>
+                        <div class="placeholder-img"><i class="fas fa-box-open"></i></div>
+                    </div>
+                    <div class="card-body">
+                        <div class="produto-nome">${produto.nome}</div>
+                        <div class="produto-preco">R$ ${produto.preco.toFixed(2).replace('.', ',')}</div>
+                    </div>
+                    <div class="card-footer">
+                        <button class="comprar-btn" data-id="${produto.id}">
+                            <i class="fas fa-shopping-cart"></i> Adicionar ao Carrinho
+                        </button>
+                    </div>
+                `;
+                
+                if (produto.imagem) {
+                    const ph = card.querySelector('.placeholder-img');
+                    ph.outerHTML = `<img src="${produto.imagem}" alt="${produto.nome}" loading="lazy">`;
+                }
+                
+                card.querySelector('.comprar-btn').addEventListener('click', () => {
+                    adicionarAoCarrinho(produto);
+                });
+                
+                produtosContainer.appendChild(card);
+            });
+        }
+        
+        // Adicionar ao carrinho
+        function adicionarAoCarrinho(produto) {
+            const itemExistente = carrinho.find(i => i.id === produto.id);
+            if (itemExistente) {
+                itemExistente.quantidade += 1;
+            } else {
+                carrinho.push({
+                    id: produto.id,
+                    nome: produto.nome,
+                    preco: produto.preco,
+                    imagem: produto.imagem,
+                    quantidade: 1
+                });
+            }
+            
+            localStorage.setItem('carrinho', JSON.stringify(carrinho));
+            atualizarBadgeCarrinho();
+            
+            toastMessage.textContent = `${produto.nome} adicionado!`;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 2500);
+        }
+        
+        // Atualizar badge do carrinho
+        function atualizarBadgeCarrinho() {
+            const total = carrinho.reduce((acc, item) => acc + item.quantidade, 0);
+            cartBadgeNav.textContent = total;
+            cartBadgeNav.classList.toggle('empty', total === 0);
+        }
+        
+        // Resetar filtros
+        function resetarFiltros() {
+            // Reset tags
+            filtroTags = [];
+            document.querySelectorAll('.tag-btn').forEach(btn => btn.classList.remove('active'));
+            
+            // Reset preço
+            precoMinInput.value = 0;
+            precoMaxInput.value = 500;
+            precoRange.value = 500;
+            precoRangeLabel.textContent = 'R$ 500';
+            filtroPrecoMin = 0;
+            filtroPrecoMax = 500;
+            
+            // Reset busca
+            searchInput.value = '';
+            
+            aplicarFiltros();
+        }
+        
+        resetFiltrosBtn.addEventListener('click', resetarFiltros);
+        searchInput.addEventListener('input', aplicarFiltros);
+        
+        cartBtn.addEventListener('click', () => {
+            const total = carrinho.reduce((a, i) => a + i.quantidade, 0);
+            const valor = carrinho.reduce((a, i) => a + i.preco * i.quantidade, 0);
+            alert(`🛒 Carrinho:\n${total} item(ns)\nTotal: R$ ${valor.toFixed(2).replace('.', ',')}`);
+        });
+        
+        // Inicializar
+        applyTheme();
+        checkLoginStatus();
+        aplicarFiltros();
+        atualizarBadgeCarrinho();
+    </script>
+</body>
+</html>
